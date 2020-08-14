@@ -1,0 +1,11 @@
+unit uTypes;
+
+interface
+type
+  tMediaFile = class
+
+  end;
+
+implementation
+
+end.

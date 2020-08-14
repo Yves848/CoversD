@@ -1,0 +1,224 @@
+unit utags;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,system.IOUtils, system.types,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
+  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
+  FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client, tagsLibrary, Vcl.StdCtrls, JvThread, JvThreadDialog,
+  JvComponentBase, sSkinProvider, sSkinManager, Vcl.ComCtrls, sTreeView, uTypes, sMemo, sButton, sDialogs;
+
+
+const
+   sPath = 'e:\MP3';
+
+type
+  TForm2 = class(TForm)
+    thListMP3: TJvThread;
+    JvThreadSimpleDialog1: TJvThreadSimpleDialog;
+    Button1: TButton;
+    pb1: TProgressBar;
+    tv1: TsTreeView;
+    sMemo1: TsMemo;
+    sButton1: TsButton;
+    sOpenDialog1: TsOpenDialog;
+    procedure thListMP3Execute(Sender: TObject; Params: Pointer);
+    procedure Button1Click(Sender: TObject);
+    procedure JvThreadSimpleDialog1ChangeThreadDialogOptions(DialogOptions: TJvThreadBaseDialogOptions);
+    procedure JvThreadSimpleDialog1PressCancel(CurrentThread: TJvThread);
+    procedure tv1Change(Sender: TObject; Node: TTreeNode);
+    procedure tv1Expanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
+    procedure sButton1Click(Sender: TObject);
+  private
+    { Déclarations privées }
+    function findNode(sLabel : String) : tTreeNode;
+  public
+    { Déclarations publiques }
+
+    procedure addfileName;
+    procedure setPBMax;
+    procedure ExpandNode;
+  end;
+
+var
+  Form2: TForm2;
+  iProgress : Integer;
+  iMax      : Integer;
+  sFileName : String;
+  aPath     : String;
+  aNode     : tTreeNode;
+
+implementation
+
+{$R *.dfm}
+uses
+  JvDynControlEngineVcl;
+
+procedure TForm2.addfileName;
+var
+  mediaFile : tMediaFile;
+  aParentNode : tTreeNode;
+  aNode     : tTreeNode;
+  sPAth, sFile : String;
+  isDirectory : boolean;
+begin
+    //
+    isDirectory := TDirectory.Exists(sFileName);
+    if not isDirectory then
+    begin
+      // File to Add .....
+       sPath := tPath.GetDirectoryName(sFileName);
+       sFile := tpath.GetFileNameWithoutExtension(sFileName);
+    end
+    else
+    begin
+      sPath := sFileName;
+      sFile := sFileName;
+    end;
+
+    aParentNode := findNode(sPath);
+    if aParentNode = nil then
+    begin
+       if fileexists(sFileName) then
+       begin
+          mediaFile := tMediaFile.create(sFileName);
+          tv1.Items.AddObject(nil,sFile,mediaFile);
+       end
+       else begin
+         aParentNode := tv1.Items.Add(nil,sFile);
+         if TDirectory.Exists(sFileName) then
+          aParentNode.HasChildren := true;
+       end;
+    end
+    else
+    begin
+       mediaFile := tMediaFile.create(sFileName);
+       aNode := tv1.Items.AddChildObject(aParentNode,sFile,mediaFile);
+       if TDirectory.Exists(sFileName) then
+          aNode.HasChildren := True;
+
+    end;
+
+
+//    mediaFile := tMediaFile.create(sFileName);
+//
+    Application.ProcessMessages;
+    pb1.Position := iProgress;
+end;
+
+procedure TForm2.Button1Click(Sender: TObject);
+begin
+    aPath := sPath;
+    thListMP3.Execute(self);
+end;
+
+procedure TForm2.ExpandNode;
+begin
+    if aNode <> nil then
+    begin
+      aNode.Expand(false);
+      aNode := Nil;
+    end;
+end;
+
+function TForm2.findNode(sLabel: String): tTreeNode;
+var
+  i : Integer;
+  sParent : String;
+begin
+   result := Nil;
+   i := 0;
+
+   while i <= tv1.Items.Count -1 do begin
+      if tv1.Items[i].Text = sLAbel then
+      begin
+        result := tv1.Items[i];
+        i := tv1.Items.Count;
+      end;
+      inc(i);
+   end;
+   if result = nil then
+   begin
+      sParent := tDirectory.GetParent(sLabel);
+      if sParent <> '' then
+         result := findNode(sParent);
+   end;
+
+end;
+
+procedure TForm2.JvThreadSimpleDialog1ChangeThreadDialogOptions(DialogOptions: TJvThreadBaseDialogOptions);
+begin
+  TJvThreadSimpleDialogOptions(DialogOptions).ProgressbarPosition := iProgress;
+  TJvThreadSimpleDialogOptions(DialogOptions).InfoText := sFileName;
+end;
+
+procedure TForm2.JvThreadSimpleDialog1PressCancel(CurrentThread: TJvThread);
+begin
+     currentThread.CancelExecute;
+end;
+
+procedure TForm2.sButton1Click(Sender: TObject);
+begin
+   sOpenDialog1.InitialDir := aPath;
+  if sOpenDialog1.Execute then
+  begin
+     aPAth := sOpenDialog1.FileName;
+     smemo1.lines.add(tDirectory.GetParent(aPath));
+  end;
+end;
+
+procedure TForm2.setPBMax;
+begin
+   pb1.Max := iMax;
+end;
+
+procedure TForm2.thListMP3Execute(Sender: TObject; Params: Pointer);
+var
+  i : Integer;
+  aFiles : TStringDynArray ;
+  aSearchOption : tSearchOption;
+begin
+   aSearchOption := TSearchOption.soTopDirectoryOnly;
+   //aFiles := tDirectory.GetFileSystemEntries(sPAth);
+   aFiles := tDirectory.GetFileSystemEntries(aPAth,aSearchOption,nil);
+
+   i := 0;
+   iMax := Length(aFiles)-1;
+   thListMP3.Synchronize(tForm2(Params).setPBMax);
+  while (i <= iMax) do
+  begin
+      if thListMP3.Terminated then exit;
+      iProgress := i;
+      sFileName := aFiles[i];
+      thListMP3.Synchronize(tForm2(Params).addfileName);
+      inc(i);
+  end;
+  thListMP3.Synchronize(tForm2(Params).ExpandNode);
+end;
+
+procedure TForm2.tv1Change(Sender: TObject; Node: TTreeNode);
+begin
+    sMemo1.Clear;
+    if assigned(node.Data) then
+
+    sMemo1.lines.add(tMediafile(node.Data).tags.filename);
+
+
+end;
+
+procedure TForm2.tv1Expanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
+begin
+     sMemo1.Lines.Add(Node.Text);
+     if Node.Count = 0 then
+     begin
+       sMemo1.Lines.Add('Chercher les enfants');
+       aPath := Node.Text;
+       aNode := Node;
+       thListMP3.Execute(self);
+
+     end;
+end;
+
+end.
+

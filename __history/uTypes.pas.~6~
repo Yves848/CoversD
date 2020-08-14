@@ -1,0 +1,16 @@
+unit uTypes;
+
+interface
+uses
+   TagsLibrary;
+type
+  tMediaFile = class
+      mediaName : string;
+      mediaPath : string;
+      mediaType : integer;
+      tags : TTags;
+  end;
+
+implementation
+
+end.
