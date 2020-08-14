@@ -23,11 +23,6 @@ object fMain: TfMain
     BevelOuter = bvNone
     Caption = 'sILTV'
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitWidth = 1904
-    DesignSize = (
-      1910
-      1041)
     object sSplitter1: TsSplitter
       Left = 345
       Top = 57
@@ -35,6 +30,13 @@ object fMain: TfMain
       ExplicitLeft = 568
       ExplicitTop = 528
       ExplicitHeight = 100
+    end
+    object sImage1: TsImage
+      Left = 408
+      Top = 128
+      Width = 209
+      Height = 209
+      Picture.Data = {07544269746D617000000000}
     end
     object Button1: TButton
       Left = 888
@@ -55,7 +57,6 @@ object fMain: TfMain
       BevelKind = bkFlat
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 1904
     end
     object sRollOutPanel1: TsRollOutPanel
       Left = 0
@@ -80,7 +81,6 @@ object fMain: TfMain
         TabOrder = 0
         OnChange = sTVMediasChange
         OnExpanding = sTVMediasExpanding
-        ExplicitTop = 47
       end
       object pnToolbarTreeView: TsPanel
         Left = 0
@@ -90,7 +90,6 @@ object fMain: TfMain
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitTop = -6
         object sDEFolder: TsDirectoryEdit
           Left = 0
           Top = 0
@@ -103,7 +102,7 @@ object fMain: TfMain
           CheckOnExit = True
           OnAfterDialog = sDEFolderAfterDialog
           Root = 'rfMyComputer'
-          ExplicitTop = -6
+          ExplicitHeight = 21
         end
       end
       object pnStatusTreeView: TsPanel
@@ -113,7 +112,6 @@ object fMain: TfMain
         Height = 41
         Align = alBottom
         TabOrder = 2
-        ExplicitWidth = 243
       end
     end
     object pnStatus: TsPanel
@@ -124,7 +122,6 @@ object fMain: TfMain
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitWidth = 1904
       DesignSize = (
         1910
         41)
@@ -135,20 +132,7 @@ object fMain: TfMain
         Height = 17
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 0
-        ExplicitWidth = 344
       end
-    end
-    object sMemo1: TsMemo
-      Left = 1267
-      Top = 68
-      Width = 633
-      Height = 369
-      Anchors = [akTop, akRight]
-      Lines.Strings = (
-        'sMemo1')
-      TabOrder = 4
-      Text = 'sMemo1'
-      ExplicitLeft = 1261
     end
   end
   object sSkinProvider1: TsSkinProvider

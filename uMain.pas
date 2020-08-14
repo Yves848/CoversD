@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, System.IOUtils, System.Types,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uTypes, utags, Vcl.StdCtrls, sPanel, Vcl.ExtCtrls, sSkinManager, sSkinProvider, sButton, Vcl.ComCtrls,
   sTreeView, acShellCtrls, sListView, sComboBoxes, sSplitter, Vcl.Buttons, sSpeedButton, System.ImageList, Vcl.ImgList, acAlphaImageList,
-  acProgressBar, JvComponentBase, JvThread, sMemo, Vcl.Mask, sMaskEdit, sCustomComboEdit, sToolEdit;
+  acProgressBar, JvComponentBase, JvThread, sMemo, Vcl.Mask, sMaskEdit, sCustomComboEdit, sToolEdit, acImage, JPEG, PNGImage, GIFImg,TagsLibrary;
 
 type
   TfMain = class(TForm)
@@ -24,10 +24,10 @@ type
     sILIcons: TsAlphaImageList;
     pb1: TsProgressBar;
     thListMP3: TJvThread;
-    sMemo1: TsMemo;
     sDEFolder: TsDirectoryEdit;
     sILTV: TsAlphaImageList;
     ImageList1: TImageList;
+    sImage1: TsImage;
     procedure Button1Click(Sender: TObject);
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
@@ -36,6 +36,7 @@ type
   private
     { Déclarations privées }
     function findNode(sLabel: String): TTreeNode;
+    procedure ListCoverArts(Tags : TTags);
   public
     { Déclarations publiques }
     procedure addfileName;
@@ -194,15 +195,77 @@ end;
 
 procedure TfMain.sTVMediasChange(Sender: TObject; Node: TTreeNode);
 begin
-  sMemo1.Clear;
+  //sMemo1.Clear;
   if assigned(Node.Data) then
   begin
-    sMemo1.lines.Add(tMediaFile(Node.Data).tags.filename);
-    sMemo1.lines.Add(tMediaFile(Node.Data).tags.GetTag('ARTIST'));
-    sMemo1.lines.Add(tMediaFile(Node.Data).tags.GetTag('TITLE'));
-    sMemo1.lines.Add(tMediaFile(Node.Data).tags.GetTag('ALBUM'));
+    //sMemo1.lines.Add(tMediaFile(Node.Data).tags.filename);
+    //sMemo1.lines.Add(tMediaFile(Node.Data).tags.GetTag('ARTIST'));
+    //sMemo1.lines.Add(tMediaFile(Node.Data).tags.GetTag('TITLE'));
+    //sMemo1.lines.Add(tMediaFile(Node.Data).tags.GetTag('ALBUM'));
+    ListCoverArts(tMediaFile(Node.Data).tags);
   end;
 
+end;
+
+procedure TfMain.ListCoverArts(Tags : TTags);
+var
+    i: Integer;
+    ImageJPEG: TJPEGImage;
+    ImagePNG: TPNGImage;
+    ImageGIF: TGIFImage;
+    Bitmap: TBitmap;
+begin
+    //* List cover arts
+    for i := 0 to Tags.CoverArtCount - 1 do begin
+        Bitmap := TBitmap.Create;
+        try
+            with Tags.CoverArts[i] do begin
+                Stream.Seek(0, soBeginning);
+                case PictureFormat of
+                    tpfJPEG: begin
+                        ImageJPEG := TJPEGImage.Create;
+                        try
+                            ImageJPEG.LoadFromStream(Stream);
+                            Bitmap.Assign(ImageJPEG);
+                        finally
+                            FreeAndNil(ImageJPEG);
+                        end;
+                    end;
+                    tpfPNG: begin
+                        ImagePNG := TPNGImage.Create;
+                        try
+                            ImagePNG.LoadFromStream(Stream);
+                            Bitmap.Assign(ImagePNG);
+                        finally
+                            FreeAndNil(ImagePNG);
+                        end;
+                    end;
+                    tpfGIF: begin
+                        ImageGIF := TGIFImage.Create;
+                        try
+                            ImageGIF.LoadFromStream(Stream);
+                            Bitmap.Assign(ImageGIF);
+                        finally
+                            FreeAndNil(ImageGIF);
+                        end;
+                    end;
+                    tpfBMP: begin
+                        Bitmap.LoadFromStream(Stream);
+                    end;
+                end;
+                sImage1.Picture.Bitmap.Assign(BitMap);
+                //* This function resizes with nearest-neighbour mode (which is not recommended as it gives the worst quality possible),
+                //* if you need a top-quality lanczos resizer which uses Graphics32, please contact me.
+//                ResizeBitmap(Bitmap, 160, 120, clWhite);
+//                with ListView2.Items.Add do begin
+//                    Caption := Tags.CoverArts[i].Name;
+//                    ImageIndex := ImageListThumbs.Add(Bitmap, nil);
+//                end;
+            end;
+        finally
+            FreeAndNil(Bitmap);
+        end;
+    end;
 end;
 
 procedure TfMain.sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
