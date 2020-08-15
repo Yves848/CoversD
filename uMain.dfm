@@ -2,7 +2,7 @@ object fMain: TfMain
   Left = 0
   Top = 0
   Caption = 'Covers'
-  ClientHeight = 1041
+  ClientHeight = 1148
   ClientWidth = 1910
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -13,29 +13,31 @@ object fMain: TfMain
   KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
+  OnClose = FormClose
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
-  object pnMain: TsPanel
+  object pnBack: TsPanel
     Left = 0
     Top = 0
     Width = 1910
-    Height = 1041
+    Height = 1148
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object sSplitter1: TsSplitter
-      Left = 0
+      Left = 345
       Top = 57
-      Height = 943
-      ExplicitLeft = 568
-      ExplicitTop = 528
-      ExplicitHeight = 100
+      Height = 1050
+      ExplicitLeft = 384
+      ExplicitTop = 73
+      ExplicitHeight = 943
     end
     object sSplitter2: TsSplitter
       Left = 1602
       Top = 57
-      Height = 943
+      Height = 1050
       Align = alRight
       ExplicitLeft = 1384
       ExplicitTop = 696
@@ -51,10 +53,42 @@ object fMain: TfMain
       BevelKind = bkFlat
       BevelOuter = bvNone
       TabOrder = 0
+      DesignSize = (
+        1906
+        53)
+      object sGauge1: TsGauge
+        Left = 1635
+        Top = 15
+        Width = 266
+        Height = 13
+        Anchors = [akTop, akRight]
+        ForeColor = clBlack
+        Animated = False
+        ShowText = False
+        Progress = 65
+        Suffix = '%'
+      end
+      object sGauge2: TsGauge
+        Left = 1634
+        Top = 36
+        Width = 266
+        Height = 13
+        Anchors = [akTop, akRight]
+        ForeColor = clBlack
+        ShowText = False
+        Progress = 0
+        Suffix = '%'
+      end
+      object sSlider1: TsSlider
+        Left = 16
+        Top = 16
+        ParentBackground = False
+        TabOrder = 0
+      end
     end
     object pnStatus: TsPanel
       Left = 0
-      Top = 1000
+      Top = 1107
       Width = 1910
       Height = 41
       Align = alBottom
@@ -76,32 +110,14 @@ object fMain: TfMain
       Left = 1608
       Top = 57
       Width = 302
-      Height = 943
+      Height = 1050
       Align = alRight
       Caption = 'Playlist'
       TabOrder = 2
       Placement = asLeft
-      ExplicitLeft = 1614
-      ExplicitTop = 51
-      object sGauge1: TsGauge
-        Left = 7
-        Top = 872
-        Width = 266
-        Height = 30
-        ForeColor = clBlack
-        Animated = False
-        Progress = 65
-        Suffix = '%'
-      end
-      object sGauge2: TsGauge
-        Left = 7
-        Top = 908
-        Width = 266
-        Height = 30
-        ForeColor = clBlack
-        Progress = 0
-        Suffix = '%'
-      end
+      DesignSize = (
+        280
+        1050)
       object sImage1: TsImage
         Left = 39
         Top = 24
@@ -112,7 +128,7 @@ object fMain: TfMain
       end
       object TrackBar1: TsTrackBar
         Left = 6
-        Top = 256
+        Top = 288
         Width = 267
         Height = 45
         TabOrder = 0
@@ -120,31 +136,56 @@ object fMain: TfMain
       end
       object TrackBar2: TsTrackBar
         Left = 8
-        Top = 307
+        Top = 339
         Width = 265
         Height = 45
         TabOrder = 1
         OnChange = TrackBar2Change
       end
+      object sButton1: TsButton
+        Left = 8
+        Top = 239
+        Width = 75
+        Height = 25
+        Caption = 'Stop'
+        TabOrder = 2
+        OnClick = sButton1Click
+      end
+      object sButton2: TsButton
+        Left = 89
+        Top = 239
+        Width = 75
+        Height = 25
+        Caption = 'Play/Pause'
+        TabOrder = 3
+        OnClick = sButton2Click
+      end
+      object slbPlaylist: TsListBox
+        Left = 8
+        Top = 390
+        Width = 221
+        Height = 654
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        TabOrder = 4
+        OnKeyDown = slbPlaylistKeyDown
+        OnItemIndexChanged = slbPlaylistItemIndexChanged
+      end
     end
     object sROPMedia: TsRollOutPanel
-      Left = 6
+      Left = 0
       Top = 57
       Width = 345
-      Height = 943
+      Height = 1050
       Align = alLeft
       BevelOuter = bvNone
       Caption = 'Medias'
       TabOrder = 3
       Placement = asRight
-      ExplicitLeft = 1
-      ExplicitTop = 1
-      ExplicitHeight = 941
       object sTVMedias: TsTreeView
         Left = 0
         Top = 41
         Width = 323
-        Height = 861
+        Height = 968
         Align = alClient
         Images = sILTV
         Indent = 19
@@ -152,10 +193,9 @@ object fMain: TfMain
         MultiSelectStyle = [msControlSelect, msShiftSelect]
         TabOrder = 0
         OnChange = sTVMediasChange
+        OnCollapsed = sTVMediasCollapsed
         OnExpanding = sTVMediasExpanding
         OnKeyDown = sTVMediasKeyDown
-        ExplicitLeft = 6
-        ExplicitTop = 47
       end
       object pnToolbarTreeView: TsPanel
         Left = 0
@@ -182,12 +222,27 @@ object fMain: TfMain
       end
       object pnStatusTreeView: TsPanel
         Left = 0
-        Top = 902
+        Top = 1009
         Width = 323
         Height = 41
         Align = alBottom
         TabOrder = 2
-        ExplicitTop = 900
+      end
+    end
+    object pnMain: TsPanel
+      Left = 351
+      Top = 57
+      Width = 1251
+      Height = 1050
+      Align = alClient
+      TabOrder = 4
+      object sImage2: TsImage
+        Left = 24
+        Top = 24
+        Width = 305
+        Height = 303
+        Picture.Data = {07544269746D617000000000}
+        Stretch = True
       end
     end
   end
@@ -2261,5 +2316,12 @@ object fMain: TfMain
     OnTimer = Timer1Timer
     Left = 1168
     Top = 288
+  end
+  object SynJSONSyn1: TSynJSONSyn
+    Options.AutoDetectEnabled = False
+    Options.AutoDetectLineLimit = 0
+    Options.Visible = False
+    Left = 1120
+    Top = 616
   end
 end

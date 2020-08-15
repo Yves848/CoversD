@@ -2,7 +2,7 @@ unit uTypes;
 
 interface
 uses
-   TagsLibrary;
+   System.SysUtils, TagsLibrary;
 
 type
   tMediaFile = class
@@ -12,6 +12,7 @@ type
       tags : TTags;
   public
       constructor create (aFileName : string);
+      destructor Destroy; overload;
   end;
 
 implementation
@@ -24,6 +25,13 @@ begin
     tags := ttags.Create;
     tags.ParseCoverArts := true;
     tags.LoadFromFile(aFileNAme);
+end;
+
+destructor tMediaFile.Destroy;
+begin
+    tags.Free;
+    //inherited Free;
+    inherited Destroy;
 end;
 
 end.
