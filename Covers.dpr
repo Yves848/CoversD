@@ -7,7 +7,8 @@ uses
   utags in 'utags.pas' {Form2},
   Vcl.Themes,
   Vcl.Styles,
-  uSelectDirectory in 'uSelectDirectory.pas' {fSelectDirectory};
+  uSelectDirectory in 'uSelectDirectory.pas' {fSelectDirectory},
+  uSearchImage in 'uSearchImage.pas';
 
 {$R *.res}
 

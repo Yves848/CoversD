@@ -8,7 +8,8 @@ uses
   sTreeView, acShellCtrls, sListView, sComboBoxes, sSplitter, Vcl.Buttons, sSpeedButton, System.ImageList, Vcl.ImgList, acAlphaImageList,
   acProgressBar, JvComponentBase, JvThread, sMemo, Vcl.Mask, sMaskEdit, sCustomComboEdit, sToolEdit, acImage, JPEG, PNGImage, GIFImg, TagsLibrary,
   acNoteBook, sTrackBar, acArcControls, sGauge, BASS, xSuperObject, SynEditHighlighter, SynHighlighterJSON, SynEdit, SynMemo, sListBox, JvExControls,
-  JvaScrollText, acSlider;
+  JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw, activeX, acWebBrowser, Vcl.Grids, JvExGrids, JvStringGrid, IdComponent,
+  IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding;
 
 type
   TfMain = class(TForm)
@@ -42,6 +43,13 @@ type
     sImage2: TsImage;
     pnMain: TsPanel;
     sSlider1: TsSlider;
+    sPanel1: TsPanel;
+    sPanel2: TsPanel;
+    sBitBtn1: TsBitBtn;
+    SynMemo1: TSynMemo;
+    Memo1: TMemo;
+    sg1: TJvStringGrid;
+    thGetImages: TJvThread;
     procedure Button1Click(Sender: TObject);
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
@@ -59,6 +67,9 @@ type
     procedure slbPlaylistKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure sTVMediasCollapsed(Sender: TObject; Node: TTreeNode);
+    procedure sBitBtn1Click(Sender: TObject);
+    procedure thGetImagesExecute(Sender: TObject; Params: Pointer);
+    procedure sg1DrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -78,6 +89,9 @@ type
     procedure ResetPB;
     procedure ExpandNode;
     procedure updateTV;
+    function AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): Integer; overload;
+    function AddToPlayList(Tags: TTags): Integer; overload;
+    procedure GetImgLink;
   end;
 
 var
@@ -87,6 +101,8 @@ var
   sFileName: String;
   aPath: String;
   aNode: TTreeNode;
+  iImg: Integer;
+  sLink: String;
 
 implementation
 
@@ -119,6 +135,73 @@ begin
   BASS_ChannelPlay(Channel, True);
 end;
 
+procedure LoadHTML(AWebBrowser: TWebBrowser; const HTMLCode: string);
+var
+  ss: TStringStream;
+  sa: TStreamAdapter;
+begin
+  // Il est nécessaire de réinitialiser la page avec un appel à Navigate
+  AWebBrowser.Navigate('about:blank');
+
+  // Il faut attendre que le navigateur soit prêt
+  while AWebBrowser.ReadyState < READYSTATE_INTERACTIVE do
+    Application.ProcessMessages;
+
+  if Assigned(AWebBrowser.Document) then
+  begin
+    // On crée un flux
+    ss := TStringStream.Create(HTMLCode);
+    try
+      // et un adaptateur IStream
+      sa := TStreamAdapter.Create(ss); // Ne pas libérer
+
+      // On appelle la méthode de chargement du WebBrowser
+      (AWebBrowser.Document as IPersistStreamInit).Load(sa);
+    finally
+      // On libère le flux
+      ss.Free;
+    end;
+  end;
+end;
+
+function TfMain.AddToPlayList(Tags: TTags): Integer;
+var
+  aMediaFile: tMediaFile;
+  sPath, sFile: String;
+  index: Integer;
+begin
+  result := -1;
+  sPath := tPath.GetDirectoryName(Tags.FileName);
+  sFile := tPath.GetFileNameWithoutExtension(Tags.FileName);
+  index := slbPlaylist.Items.IndexOf(sFile);
+  if index = -1 then
+  begin
+    aMediaFile := tMediaFile.Create;
+    aMediaFile.Tags.Assign(Tags);
+    result := slbPlaylist.Items.AddObject(sFile, aMediaFile);
+  end;
+end;
+
+function TfMain.AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): Integer;
+var
+  index: Integer;
+  Tags: TTags;
+  currentNode: TTreeNode;
+begin
+  if aNode.HasChildren then
+    currentNode := aNode.getFirstChild;
+  while currentNode <> nil do
+  begin
+
+    if tMediaFile(currentNode.data) <> nil then
+    begin
+      Tags := tMediaFile(currentNode.data).Tags;
+      AddToPlayList(Tags);
+    end;
+    currentNode := currentNode.getNextSibling;
+  end;
+end;
+
 procedure TfMain.Button1Click(Sender: TObject);
 var
   form2: tForm2;
@@ -133,7 +216,7 @@ var
   mediaFile: tMediaFile;
   aParentNode: TTreeNode;
   aNode: TTreeNode;
-  sPAth, sFile: String;
+  sPath, sFile: String;
   isDirectory: Boolean;
 begin
   //
@@ -141,16 +224,16 @@ begin
   if not isDirectory then
   begin
     // File to Add .....
-    sPAth := tPath.GetDirectoryName(sFileName);
+    sPath := tPath.GetDirectoryName(sFileName);
     sFile := tPath.GetFileNameWithoutExtension(sFileName);
   end
   else
   begin
-    sPAth := sFileName;
+    sPath := sFileName;
     sFile := sFileName;
   end;
 
-  aParentNode := findNode(sPAth);
+  aParentNode := findNode(sPath);
   if aParentNode = nil then
   begin
     if fileexists(sFileName) then
@@ -259,9 +342,86 @@ begin
   end;
 end;
 
+procedure TfMain.GetImgLink;
+begin
+
+end;
+
+procedure TfMain.sg1DrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+  if sg1.Objects[ACol, ARow] <> nil then
+  begin
+   if tMediaImg(sg1.Objects[ACol, ARow]).BitMap <> nil then
+   begin
+      sg1.Canvas.Draw(rect.left,rect.top,tMediaImg(sg1.Objects[ACol, ARow]).BitMap.Graphic);
+   end;
+  end;
+end;
+
 procedure TfMain.ResetPB;
 begin
   pb1.Position := 0;
+end;
+
+procedure TfMain.sBitBtn1Click(Sender: TObject);
+var
+  aNode: TTreeNode;
+  Artist, Title: String;
+  aGoogleSearch: tGoogleSearch;
+  jsResult: ISuperObject;
+  jsArray: IsuperArray;
+  i: Integer;
+  webResult: String;
+  pMediaImg: tMediaImg;
+  col, row: Integer;
+begin
+  aNode := sTVMedias.Selected;
+  Artist := tMediaFile(aNode.data).Tags.GetTag('ARTIST');
+  Title := tMediaFile(aNode.data).Tags.GetTag('TITLE');
+  aGoogleSearch := tGoogleSearch.Create(Artist + ' ' + Title);
+  jsResult := aGoogleSearch.getImages;
+
+  i := 0;
+  jsArray := jsResult.A[GS_ITEMS];
+  webResult := '';
+  row := 0;
+
+  while row <= sg1.RowCount -1 do
+  begin
+    col := 0;
+    while col <= sg1.ColCount -1 do
+    begin
+      if sg1.Objects[col,row] <> nil then
+      begin
+        tMediaImg(sg1.Objects[col,row]).destroy;
+      end;
+      inc(col)
+    end;
+    inc(row);
+  end;
+  sg1.Clear;
+  sg1.RowCount := 1;
+  col := 0;
+  row := 0;
+  while i <= jsArray.Length - 1 do
+  begin
+    if sg1.Objects[col, row] <> nil then
+    begin
+      inc(col);
+      if col > sg1.ColCount - 1 then
+      begin
+        sg1.RowCount := sg1.RowCount + 1;
+        row := sg1.RowCount - 1;
+        col := 0;
+      end;
+    end;
+    pMediaImg := tMediaImg.Create;
+    pMediaImg.TNLink := jsArray.O[i].S[GS_THUMBNAILLINK];
+    pMediaImg.Link := jsArray.O[i].S[GS_LINK];
+    sg1.Objects[col, row] := pMediaImg;
+    inc(i);
+  end;
+  thGetImages.Execute(self);
 end;
 
 procedure TfMain.sButton1Click(Sender: TObject);
@@ -310,7 +470,7 @@ procedure TfMain.slbPlaylistItemIndexChanged(Sender: TObject);
 begin
   //
   if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
-    ListCoverArts(sImage1, tMediaFile(slbPlaylist.Items.objects[slbPlaylist.ItemIndex]).Tags);
+    ListCoverArts(sImage1, tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags);
 end;
 
 procedure TfMain.slbPlaylistKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -322,8 +482,8 @@ begin
     if slbPlaylist.ItemIndex > -1 then
     begin
       BASS_ChannelStop(Channel);
-      ListCoverArts(sImage1, tMediaFile(slbPlaylist.Items.objects[slbPlaylist.ItemIndex]).Tags);
-      PlayStream(tMediaFile(slbPlaylist.Items.objects[slbPlaylist.ItemIndex]).Tags.FileName);
+      ListCoverArts(sImage1, tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags);
+      PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
     end;
     PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
   end;
@@ -332,7 +492,7 @@ end;
 procedure TfMain.sTVMediasChange(Sender: TObject; Node: TTreeNode);
 begin
   // sMemo1.Clear;
-  if assigned(Node.data) then
+  if Assigned(Node.data) then
   begin
     ListCoverArts(sImage2, tMediaFile(Node.data).Tags);
   end;
@@ -343,7 +503,7 @@ procedure TfMain.sTVMediasCollapsed(Sender: TObject; Node: TTreeNode);
 var
   i: Integer;
   aNode: TTreeNode;
-  aMediaFile : tMediaFile;
+  aMediaFile: tMediaFile;
 begin
   if sSlider1.SliderOn then
   begin
@@ -351,14 +511,14 @@ begin
     while Node.HasChildren do
     begin
       aNode := Node.getFirstChild;
-      if assigned(aNode.data) then
+      if Assigned(aNode.data) then
       begin
         aMediaFile := tMediaFile(aNode.data);
         aMediaFile.Destroy;
       end;
       aNode.Free;
     end;
-    Node.HasChildren := true;
+    Node.HasChildren := True;
   end;
 end;
 
@@ -431,13 +591,13 @@ end;
 
 procedure TfMain.OpenConfig;
 var
-  sPAth: String;
+  sPath: String;
 begin
   //
-  sPAth := TDirectory.GetCurrentDirectory;
-  if fileexists(sPAth + '\config.json') then
+  sPath := TDirectory.GetCurrentDirectory;
+  if fileexists(sPath + '\config.json') then
   begin
-    jConfig := TSuperObject.ParseFile(sPAth + '\config.json');
+    jConfig := TSuperObject.ParseFile(sPath + '\config.json');
     // SynMemo1.Lines.Text := jConfig.AsJSON(True);
     aPath := jConfig.S['startFolder'];
   end
@@ -464,30 +624,95 @@ var
   aNode: TTreeNode;
   Mgs: TMsg;
   index: Integer;
+  aMediaFile: tMediaFile;
 begin
   if Key = VK_RETURN then
   begin
     aNode := sTVMedias.Selected;
-    if assigned(aNode.data) then
+    if aNode.HasChildren then // The node is a folder
     begin
-      index := slbPlaylist.Items.AddObject(aNode.Text, tMediaFile(aNode.data));
-      if not(ssCtrl in Shift) then
+      AddToPlayList(aNode, False);
+    end
+    else
+    begin
+      if Assigned(aNode.data) then
       begin
-        if (ssShift in Shift) then
-          BASS_ChannelStop(Channel);
-        if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
+        index := AddToPlayList(tMediaFile(aNode.data).Tags);
+        if not(ssCtrl in Shift) then
         begin
-          slbPlaylist.ItemIndex := index;
+          if (ssShift in Shift) then
+            BASS_ChannelStop(Channel);
+          if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
+          begin
+            slbPlaylist.ItemIndex := index;
+            PlayStream(tMediaFile(slbPlaylist.Items.Objects[index]).Tags.FileName);
+          end;
 
-          PlayStream(tMediaFile(slbPlaylist.Items.objects[index]).Tags.FileName);
-        end;
+        end
 
-      end
-
+      end;
     end;
     PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
   end;
 
+end;
+
+procedure TfMain.thGetImagesExecute(Sender: TObject; Params: Pointer);
+var
+  i: Integer;
+  IdSSL: TIdSSLIOHandlerSocketOpenSSL;
+  IdHTTP1: TIdHTTP;
+  MS: TMemoryStream;
+  jpgImg: TJPEGImage;
+  sg1: TJvStringGrid;
+  col, row: Integer;
+begin
+  //
+  IdSSL := TIdSSLIOHandlerSocketOpenSSL.create(nil);
+  IdHTTP1 := TIdHTTP.Create;
+  IdHTTP1.ReadTimeout := 250;
+  IdHTTP1.IOHandler := IdSSL;
+  IdSSL.SSLOptions.Method := sslvTLSv1_2;
+  IdSSL.SSLOptions.Mode := sslmUnassigned;
+  sg1 := TfMain(Params).sg1;
+  row := 0;
+  while row <= sg1.RowCount - 1 do
+  begin
+    try
+      try
+        col := 0;
+        while col <= sg1.ColCount - 1 do
+        begin
+          if sg1.Objects[col, row] <> nil then
+          begin
+            if tMediaImg(sg1.Objects[col, row]).Bitmap = nil then
+            begin
+              MS := TMemoryStream.Create;
+              jpgImg := TJPEGImage.Create;
+              IdHTTP1.Get(tMediaImg(sg1.Objects[col, row]).TNLink, MS);
+              Application.ProcessMessages;
+              MS.Seek(0, soFromBeginning);
+              jpgImg.LoadFromStream(MS);
+              tMediaImg(sg1.Objects[col, row]).Bitmap := tPicture.Create;
+              tMediaImg(sg1.Objects[col, row]).Bitmap.Assign(jpgImg);
+              sg1.Refresh;
+            end;
+          end;
+          inc(col);
+        end;
+      except
+        on E: Exception do
+        begin
+          //sMemo1.Lines.Add('   EXCEPTION: ' + E.Message);
+        end;
+      end;
+    finally
+      FreeAndNil(jpgImg);
+      FreeAndNil(MS);
+      inc(row)
+    end;
+
+  end;
 end;
 
 procedure TfMain.thListMP3Execute(Sender: TObject; Params: Pointer);

@@ -85,6 +85,15 @@ object fMain: TfMain
         ParentBackground = False
         TabOrder = 0
       end
+      object sBitBtn1: TsBitBtn
+        Left = 104
+        Top = 15
+        Width = 75
+        Height = 25
+        Caption = 'sBitBtn1'
+        TabOrder = 1
+        OnClick = sBitBtn1Click
+      end
     end
     object pnStatus: TsPanel
       Left = 0
@@ -163,7 +172,7 @@ object fMain: TfMain
       object slbPlaylist: TsListBox
         Left = 8
         Top = 390
-        Width = 221
+        Width = 199
         Height = 654
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 4
@@ -236,13 +245,89 @@ object fMain: TfMain
       Height = 1050
       Align = alClient
       TabOrder = 4
-      object sImage2: TsImage
-        Left = 24
-        Top = 24
-        Width = 305
-        Height = 303
-        Picture.Data = {07544269746D617000000000}
-        Stretch = True
+      object sPanel1: TsPanel
+        Left = 1
+        Top = 1
+        Width = 1249
+        Height = 496
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 0
+        object sImage2: TsImage
+          Left = 24
+          Top = 23
+          Width = 305
+          Height = 303
+          Picture.Data = {07544269746D617000000000}
+          Stretch = True
+        end
+        object SynMemo1: TSynMemo
+          Left = 512
+          Top = 207
+          Width = 649
+          Height = 289
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Courier New'
+          Font.Style = []
+          TabOrder = 0
+          CodeFolding.CollapsedLineColor = clGrayText
+          CodeFolding.FolderBarLinesColor = clGrayText
+          CodeFolding.ShowCollapsedLine = True
+          CodeFolding.IndentGuidesColor = clGray
+          CodeFolding.IndentGuides = True
+          UseCodeFolding = False
+          Gutter.Font.Charset = DEFAULT_CHARSET
+          Gutter.Font.Color = clWindowText
+          Gutter.Font.Height = -11
+          Gutter.Font.Name = 'Courier New'
+          Gutter.Font.Style = []
+          Highlighter = SynJSONSyn1
+          Lines.Strings = (
+            'SynMemo1')
+          FontSmoothing = fsmNone
+        end
+        object Memo1: TMemo
+          Left = 512
+          Top = 40
+          Width = 689
+          Height = 145
+          Lines.Strings = (
+            'Memo1')
+          TabOrder = 1
+        end
+      end
+      object sPanel2: TsPanel
+        Left = 1
+        Top = 497
+        Width = 1249
+        Height = 552
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 1
+        ExplicitLeft = 2
+        ExplicitTop = 492
+        object sg1: TJvStringGrid
+          Left = 216
+          Top = 176
+          Width = 825
+          Height = 337
+          ColCount = 3
+          DefaultColWidth = 128
+          DefaultRowHeight = 128
+          FixedCols = 0
+          RowCount = 1
+          FixedRows = 0
+          TabOrder = 0
+          OnDrawCell = sg1DrawCell
+          Alignment = taLeftJustify
+          FixedFont.Charset = DEFAULT_CHARSET
+          FixedFont.Color = clWindowText
+          FixedFont.Height = -11
+          FixedFont.Name = 'Tahoma'
+          FixedFont.Style = []
+        end
       end
     end
   end
@@ -266,7 +351,7 @@ object fMain: TfMain
     AnimEffects.BlendOnMoving.Active = True
     AnimEffects.Buttons.Events = [beMouseEnter, beMouseLeave, beMouseDown, beMouseUp, beLighting]
     AnimEffects.FormShow.Mode = atFading
-    ButtonsOptions.OldGlyphsMode = False
+    ButtonsOptions.OldGlyphsMode = True
     InternalSkins = <
       item
         Name = 'Fluent Night (internal)'
@@ -2323,5 +2408,15 @@ object fMain: TfMain
     Options.Visible = False
     Left = 1120
     Top = 616
+  end
+  object thGetImages: TJvThread
+    Exclusive = True
+    MaxCount = 0
+    RunOnCreate = True
+    FreeOnTerminate = True
+    ThreadName = 'Getimages'
+    OnExecute = thGetImagesExecute
+    Left = 704
+    Top = 584
   end
 end

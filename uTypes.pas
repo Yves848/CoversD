@@ -2,17 +2,28 @@ unit uTypes;
 
 interface
 uses
-   System.SysUtils, TagsLibrary;
+   winApi.windows, System.Classes, System.SysUtils, TagsLibrary, Vcl.Graphics;
 
 type
-  tMediaFile = class
+  tMediaFile = class(tPersistent)
+
+  public
       mediaName : string;
       mediaPath : string;
       mediaType : integer;
       tags : TTags;
-  public
-      constructor create (aFileName : string);
+      constructor create; overload;
+      constructor create (aFileName : string); overload;
       destructor Destroy; overload;
+  end;
+
+  tMediaImg = class(tPersistent)
+    public
+      tnLink : String;
+      Link   : String;
+      BitMap : tPicture;
+      constructor create; overload;
+      destructor destroy; override;
   end;
 
 implementation
@@ -22,9 +33,16 @@ implementation
 constructor tMediaFile.create(aFileName: string);
 begin
     //
+    inherited create;
     tags := ttags.Create;
     tags.ParseCoverArts := true;
     tags.LoadFromFile(aFileNAme);
+end;
+
+constructor tMediaFile.create;
+begin
+    inherited create;
+    tags := ttags.Create;
 end;
 
 destructor tMediaFile.Destroy;
@@ -32,6 +50,21 @@ begin
     tags.Free;
     //inherited Free;
     inherited Destroy;
+end;
+
+{ tMediaImg }
+
+constructor tMediaImg.create;
+begin
+     inherited create;
+     Bitmap := Nil;
+end;
+
+destructor tMediaImg.destroy;
+begin
+    if Bitmap <> nil then
+      FreeAndNil(BitMap);
+    inherited destroy;
 end;
 
 end.

@@ -115,6 +115,7 @@
             <Form>fSelectDirectory</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uSearchImage.pas"/>
         <None Include="ModelSupport_Covers\default.txaPackage"/>
         <None Include="ModelSupport_Covers\default.txvpck"/>
         <None Include="ModelSupport_Covers\uTypes\default.txvpck"/>
@@ -189,13 +190,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_Covers\utags\default.txaPackage" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_Covers\uMain\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_Covers\uMain\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_Covers\utags\default.txaPackage" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
