@@ -172,7 +172,7 @@ object fMain: TfMain
       object slbPlaylist: TsListBox
         Left = 8
         Top = 390
-        Width = 199
+        Width = 177
         Height = 654
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 4
@@ -261,42 +261,6 @@ object fMain: TfMain
           Picture.Data = {07544269746D617000000000}
           Stretch = True
         end
-        object SynMemo1: TSynMemo
-          Left = 512
-          Top = 207
-          Width = 649
-          Height = 289
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Courier New'
-          Font.Style = []
-          TabOrder = 0
-          CodeFolding.CollapsedLineColor = clGrayText
-          CodeFolding.FolderBarLinesColor = clGrayText
-          CodeFolding.ShowCollapsedLine = True
-          CodeFolding.IndentGuidesColor = clGray
-          CodeFolding.IndentGuides = True
-          UseCodeFolding = False
-          Gutter.Font.Charset = DEFAULT_CHARSET
-          Gutter.Font.Color = clWindowText
-          Gutter.Font.Height = -11
-          Gutter.Font.Name = 'Courier New'
-          Gutter.Font.Style = []
-          Highlighter = SynJSONSyn1
-          Lines.Strings = (
-            'SynMemo1')
-          FontSmoothing = fsmNone
-        end
-        object Memo1: TMemo
-          Left = 512
-          Top = 40
-          Width = 689
-          Height = 145
-          Lines.Strings = (
-            'Memo1')
-          TabOrder = 1
-        end
       end
       object sPanel2: TsPanel
         Left = 1
@@ -306,13 +270,18 @@ object fMain: TfMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitLeft = 2
-        ExplicitTop = 492
+        object Image1: TImage
+          Left = 831
+          Top = 6
+          Width = 413
+          Height = 411
+        end
         object sg1: TJvStringGrid
-          Left = 216
-          Top = 176
+          Left = 0
+          Top = 0
           Width = 825
-          Height = 337
+          Height = 552
+          Align = alLeft
           ColCount = 3
           DefaultColWidth = 128
           DefaultRowHeight = 128
@@ -327,6 +296,7 @@ object fMain: TfMain
           FixedFont.Height = -11
           FixedFont.Name = 'Tahoma'
           FixedFont.Style = []
+          ExplicitTop = -5
         end
       end
     end

@@ -3,7 +3,7 @@ unit uMain;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, System.IOUtils, System.Types,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, System.IOUtils, System.Types,vcl.GraphUtil,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uTypes, utags, Vcl.StdCtrls, sPanel, Vcl.ExtCtrls, sSkinManager, sSkinProvider, sButton, Vcl.ComCtrls,
   sTreeView, acShellCtrls, sListView, sComboBoxes, sSplitter, Vcl.Buttons, sSpeedButton, System.ImageList, Vcl.ImgList, acAlphaImageList,
   acProgressBar, JvComponentBase, JvThread, sMemo, Vcl.Mask, sMaskEdit, sCustomComboEdit, sToolEdit, acImage, JPEG, PNGImage, GIFImg, TagsLibrary,
@@ -46,10 +46,9 @@ type
     sPanel1: TsPanel;
     sPanel2: TsPanel;
     sBitBtn1: TsBitBtn;
-    SynMemo1: TSynMemo;
-    Memo1: TMemo;
     sg1: TJvStringGrid;
     thGetImages: TJvThread;
+    Image1: TImage;
     procedure Button1Click(Sender: TObject);
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
@@ -353,7 +352,14 @@ begin
   begin
    if tMediaImg(sg1.Objects[ACol, ARow]).BitMap <> nil then
    begin
-      sg1.Canvas.Draw(rect.left,rect.top,tMediaImg(sg1.Objects[ACol, ARow]).BitMap.Graphic);
+      if gdSelected in State then
+         sg1.Canvas.Brush.Color := clBlue
+      else
+         sg1.Canvas.Brush.Color := clWhite;
+      sg1.Canvas.FillRect(rect);
+      InflateRect(Rect,-5,-5);
+      sg1.Canvas.StretchDraw(rect,tMediaImg(sg1.Objects[ACol, ARow]).BitMap.Graphic)
+      //sg1.Canvas.Draw(rect.left,rect.top,tMediaImg(sg1.Objects[ACol, ARow]).BitMap.Graphic);
    end;
   end;
 end;
@@ -664,6 +670,7 @@ var
   IdHTTP1: TIdHTTP;
   MS: TMemoryStream;
   jpgImg: TJPEGImage;
+  bitmap : tBitmap;
   sg1: TJvStringGrid;
   col, row: Integer;
 begin
@@ -695,6 +702,7 @@ begin
               jpgImg.LoadFromStream(MS);
               tMediaImg(sg1.Objects[col, row]).Bitmap := tPicture.Create;
               tMediaImg(sg1.Objects[col, row]).Bitmap.Assign(jpgImg);
+              //resize img
               sg1.Refresh;
             end;
           end;
