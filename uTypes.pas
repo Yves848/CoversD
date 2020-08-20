@@ -6,11 +6,7 @@ uses
 
 type
   tMediaFile = class(tPersistent)
-
   public
-      mediaName : string;
-      mediaPath : string;
-      mediaType : integer;
       tags : TTags;
       constructor create; overload;
       constructor create (aFileName : string); overload;

@@ -16,6 +16,7 @@ object fMain: TfMain
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnBack: TsPanel
@@ -172,7 +173,7 @@ object fMain: TfMain
       object slbPlaylist: TsListBox
         Left = 8
         Top = 390
-        Width = 177
+        Width = 265
         Height = 654
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 4
@@ -201,6 +202,7 @@ object fMain: TfMain
         MultiSelect = True
         MultiSelectStyle = [msControlSelect, msShiftSelect]
         TabOrder = 0
+        Visible = False
         OnChange = sTVMediasChange
         OnCollapsed = sTVMediasCollapsed
         OnExpanding = sTVMediasExpanding
@@ -237,6 +239,25 @@ object fMain: TfMain
         Align = alBottom
         TabOrder = 2
       end
+      object sShellTreeView1: TsShellTreeView
+        Left = 0
+        Top = 41
+        Width = 323
+        Height = 968
+        Align = alClient
+        BevelInner = bvNone
+        Indent = 19
+        RowSelect = False
+        TabOrder = 3
+        OnKeyPress = sShellTreeView1KeyPress
+        OnAddFolder = sShellTreeView1AddFolder
+        ObjectTypes = [otFolders, otNonFolders]
+        Root = 'rfMyComputer'
+        UseShellImages = True
+        AutoRefresh = False
+        ShowExt = seSystem
+        ExplicitTop = 47
+      end
     end
     object pnMain: TsPanel
       Left = 351
@@ -249,54 +270,190 @@ object fMain: TfMain
         Left = 1
         Top = 1
         Width = 1249
-        Height = 496
+        Height = 648
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        object sImage2: TsImage
-          Left = 24
-          Top = 23
-          Width = 305
-          Height = 303
-          Picture.Data = {07544269746D617000000000}
-          Stretch = True
+        object sgList: TAdvStringGrid
+          Left = 0
+          Top = 0
+          Width = 1249
+          Height = 648
+          Cursor = crDefault
+          Align = alClient
+          DrawingStyle = gdsClassic
+          FixedColor = clWhite
+          FixedCols = 0
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goFixedRowDefAlign]
+          ScrollBars = ssBoth
+          TabOrder = 0
+          OnKeyDown = sgListKeyDown
+          GridLineColor = 13948116
+          GridFixedLineColor = 11250603
+          HoverRowCells = [hcNormal, hcSelected]
+          ActiveCellFont.Charset = DEFAULT_CHARSET
+          ActiveCellFont.Color = 4474440
+          ActiveCellFont.Height = -11
+          ActiveCellFont.Name = 'Tahoma'
+          ActiveCellFont.Style = [fsBold]
+          ActiveCellColor = 11565130
+          ActiveCellColorTo = 11565130
+          BorderColor = 11250603
+          ControlLook.FixedGradientFrom = clWhite
+          ControlLook.FixedGradientTo = clWhite
+          ControlLook.FixedGradientMirrorFrom = clWhite
+          ControlLook.FixedGradientMirrorTo = clWhite
+          ControlLook.FixedGradientHoverFrom = clGray
+          ControlLook.FixedGradientHoverTo = clWhite
+          ControlLook.FixedGradientHoverMirrorFrom = clWhite
+          ControlLook.FixedGradientHoverMirrorTo = clWhite
+          ControlLook.FixedGradientHoverBorder = 11645361
+          ControlLook.FixedGradientDownFrom = clWhite
+          ControlLook.FixedGradientDownTo = clWhite
+          ControlLook.FixedGradientDownMirrorFrom = clWhite
+          ControlLook.FixedGradientDownMirrorTo = clWhite
+          ControlLook.FixedGradientDownBorder = 11250603
+          ControlLook.DropDownHeader.Font.Charset = DEFAULT_CHARSET
+          ControlLook.DropDownHeader.Font.Color = clWindowText
+          ControlLook.DropDownHeader.Font.Height = -11
+          ControlLook.DropDownHeader.Font.Name = 'Tahoma'
+          ControlLook.DropDownHeader.Font.Style = []
+          ControlLook.DropDownHeader.Visible = True
+          ControlLook.DropDownHeader.Buttons = <>
+          ControlLook.DropDownFooter.Font.Charset = DEFAULT_CHARSET
+          ControlLook.DropDownFooter.Font.Color = clWindowText
+          ControlLook.DropDownFooter.Font.Height = -11
+          ControlLook.DropDownFooter.Font.Name = 'Tahoma'
+          ControlLook.DropDownFooter.Font.Style = []
+          ControlLook.DropDownFooter.Visible = True
+          ControlLook.DropDownFooter.Buttons = <>
+          Filter = <>
+          FilterDropDown.Font.Charset = DEFAULT_CHARSET
+          FilterDropDown.Font.Color = clWindowText
+          FilterDropDown.Font.Height = -11
+          FilterDropDown.Font.Name = 'Tahoma'
+          FilterDropDown.Font.Style = []
+          FilterDropDown.TextChecked = 'Checked'
+          FilterDropDown.TextUnChecked = 'Unchecked'
+          FilterDropDownClear = '(All)'
+          FilterEdit.TypeNames.Strings = (
+            'Starts with'
+            'Ends with'
+            'Contains'
+            'Not contains'
+            'Equal'
+            'Not equal'
+            'Larger than'
+            'Smaller than'
+            'Clear')
+          FixedRowHeight = 22
+          FixedFont.Charset = DEFAULT_CHARSET
+          FixedFont.Color = 3881787
+          FixedFont.Height = -11
+          FixedFont.Name = 'Tahoma'
+          FixedFont.Style = [fsBold]
+          FloatFormat = '%.2f'
+          HoverButtons.Buttons = <>
+          HoverButtons.Position = hbLeftFromColumnLeft
+          HTMLSettings.ImageFolder = 'images'
+          HTMLSettings.ImageBaseName = 'img'
+          Look = glCustom
+          PrintSettings.DateFormat = 'dd/mm/yyyy'
+          PrintSettings.Font.Charset = DEFAULT_CHARSET
+          PrintSettings.Font.Color = clWindowText
+          PrintSettings.Font.Height = -11
+          PrintSettings.Font.Name = 'Tahoma'
+          PrintSettings.Font.Style = []
+          PrintSettings.FixedFont.Charset = DEFAULT_CHARSET
+          PrintSettings.FixedFont.Color = clWindowText
+          PrintSettings.FixedFont.Height = -11
+          PrintSettings.FixedFont.Name = 'Tahoma'
+          PrintSettings.FixedFont.Style = []
+          PrintSettings.HeaderFont.Charset = DEFAULT_CHARSET
+          PrintSettings.HeaderFont.Color = clWindowText
+          PrintSettings.HeaderFont.Height = -11
+          PrintSettings.HeaderFont.Name = 'Tahoma'
+          PrintSettings.HeaderFont.Style = []
+          PrintSettings.FooterFont.Charset = DEFAULT_CHARSET
+          PrintSettings.FooterFont.Color = clWindowText
+          PrintSettings.FooterFont.Height = -11
+          PrintSettings.FooterFont.Name = 'Tahoma'
+          PrintSettings.FooterFont.Style = []
+          PrintSettings.PageNumSep = '/'
+          SearchFooter.ColorTo = clWhite
+          SearchFooter.FindNextCaption = 'Find &next'
+          SearchFooter.FindPrevCaption = 'Find &previous'
+          SearchFooter.Font.Charset = DEFAULT_CHARSET
+          SearchFooter.Font.Color = clWindowText
+          SearchFooter.Font.Height = -11
+          SearchFooter.Font.Name = 'Tahoma'
+          SearchFooter.Font.Style = []
+          SearchFooter.HighLightCaption = 'Highlight'
+          SearchFooter.HintClose = 'Close'
+          SearchFooter.HintFindNext = 'Find next occurrence'
+          SearchFooter.HintFindPrev = 'Find previous occurrence'
+          SearchFooter.HintHighlight = 'Highlight occurrences'
+          SearchFooter.MatchCaseCaption = 'Match case'
+          SearchFooter.ResultFormat = '(%d of %d)'
+          SelectionColor = 13744549
+          SortSettings.DefaultFormat = ssAutomatic
+          SortSettings.HeaderColor = clWhite
+          SortSettings.HeaderColorTo = clWhite
+          SortSettings.HeaderMirrorColor = clWhite
+          SortSettings.HeaderMirrorColorTo = clWhite
+          Version = '8.5.5.1'
+          ExplicitLeft = 1
         end
       end
       object sPanel2: TsPanel
         Left = 1
-        Top = 497
+        Top = 649
         Width = 1249
-        Height = 552
+        Height = 400
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
         object Image1: TImage
-          Left = 831
+          Left = 992
           Top = 6
-          Width = 413
-          Height = 411
+          Width = 244
+          Height = 249
+          Stretch = True
         end
         object sg1: TJvStringGrid
           Left = 0
           Top = 0
           Width = 825
-          Height = 552
+          Height = 400
           Align = alLeft
+          Color = 3355443
           ColCount = 3
           DefaultColWidth = 128
           DefaultRowHeight = 128
           FixedCols = 0
           RowCount = 1
           FixedRows = 0
+          Options = [goFixedRowDefAlign]
           TabOrder = 0
           OnDrawCell = sg1DrawCell
+          OnSelectCell = sg1SelectCell
           Alignment = taLeftJustify
           FixedFont.Charset = DEFAULT_CHARSET
           FixedFont.Color = clWindowText
           FixedFont.Height = -11
           FixedFont.Name = 'Tahoma'
           FixedFont.Style = []
-          ExplicitTop = -5
+          ExplicitLeft = -1
+          ExplicitTop = 6
+        end
+        object Memo1: TMemo
+          Left = 840
+          Top = 168
+          Width = 404
+          Height = 209
+          Lines.Strings = (
+            'Memo1')
+          TabOrder = 1
         end
       end
     end
@@ -2276,8 +2433,8 @@ object fMain: TfMain
           4E533C97383736A387676919455114A55D7C0372DB37B781A267B40000000049
           454E44AE426082}
       end>
-    Left = 1384
-    Top = 528
+    Left = 1424
+    Top = 440
     Bitmap = {}
   end
   object thListMP3: TJvThread

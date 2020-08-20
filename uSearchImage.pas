@@ -20,14 +20,14 @@ uses
        IdHTTP1: TIdHTTP;
        function  parseResult(sJson : String) : ISuperObject;
     public
-    constructor create(key : string);
+    constructor create(key : string; start : integer);
     function getImages : iSuperObject;
   end;
 implementation
 
 { googleSearch }
 
-constructor tGoogleSearch.create(key: string);
+constructor tGoogleSearch.create(key: string; start : integer);
 
 begin
   inherited create;
@@ -38,7 +38,7 @@ begin
   parameters := parameters + '&key=' + CSE_ID;
   parameters := parameters + '&imgtype=jpeg';
   parameters := parameters + '&lr=lang_fr';
-  parameters := parameters + '&start=1';
+  parameters := parameters + format('&start=%d',[start]);
   path := 'https://www.googleapis.com/customsearch/v1' + parameters;
 end;
 
