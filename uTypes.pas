@@ -29,7 +29,8 @@ implementation
 constructor tMediaFile.create(aFileName: string);
 begin
     //
-    inherited create;
+    //inherited create;
+    self.create;
     tags := ttags.Create;
     tags.ParseCoverArts := true;
     tags.LoadFromFile(aFileNAme);

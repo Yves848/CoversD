@@ -58,7 +58,7 @@ object fMain: TfMain
         1906
         53)
       object sGauge1: TsGauge
-        Left = 1635
+        Left = 1634
         Top = 15
         Width = 266
         Height = 13
@@ -87,13 +87,22 @@ object fMain: TfMain
         TabOrder = 0
       end
       object sBitBtn1: TsBitBtn
-        Left = 104
+        Left = 115
         Top = 15
         Width = 75
         Height = 25
         Caption = 'sBitBtn1'
         TabOrder = 1
         OnClick = sBitBtn1Click
+      end
+      object sButton3: TsButton
+        Left = 196
+        Top = 15
+        Width = 75
+        Height = 25
+        Caption = 'sButton3'
+        TabOrder = 2
+        OnClick = sButton3Click
       end
     end
     object pnStatus: TsPanel
@@ -174,7 +183,7 @@ object fMain: TfMain
         Left = 8
         Top = 390
         Width = 265
-        Height = 654
+        Height = 611
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 4
         OnKeyDown = slbPlaylistKeyDown
@@ -288,9 +297,12 @@ object fMain: TfMain
           ScrollBars = ssBoth
           TabOrder = 0
           OnKeyDown = sgListKeyDown
+          OnMouseDown = sgListMouseDown
+          OnMouseUp = sgListMouseUp
           GridLineColor = 13948116
           GridFixedLineColor = 11250603
           HoverRowCells = [hcNormal, hcSelected]
+          OnRowChanging = sgListRowChanging
           ActiveCellFont.Charset = DEFAULT_CHARSET
           ActiveCellFont.Color = 4474440
           ActiveCellFont.Height = -11
@@ -403,6 +415,7 @@ object fMain: TfMain
           SortSettings.HeaderMirrorColorTo = clWhite
           Version = '8.5.5.1'
           ExplicitLeft = 1
+          ExplicitTop = 5
         end
       end
       object sPanel2: TsPanel
@@ -413,11 +426,14 @@ object fMain: TfMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
-        object Image1: TImage
-          Left = 992
-          Top = 6
-          Width = 244
-          Height = 249
+        ExplicitLeft = 2
+        ExplicitTop = 644
+        object Image1: TsImage
+          Left = 944
+          Top = 39
+          Width = 273
+          Height = 266
+          Picture.Data = {07544269746D617000000000}
           Stretch = True
         end
         object sg1: TJvStringGrid
@@ -444,16 +460,7 @@ object fMain: TfMain
           FixedFont.Name = 'Tahoma'
           FixedFont.Style = []
           ExplicitLeft = -1
-          ExplicitTop = 6
-        end
-        object Memo1: TMemo
-          Left = 840
-          Top = 168
-          Width = 404
-          Height = 209
-          Lines.Strings = (
-            'Memo1')
-          TabOrder = 1
+          ExplicitTop = -5
         end
       end
     end

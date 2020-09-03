@@ -8,7 +8,8 @@ uses
   Vcl.Themes,
   Vcl.Styles,
   uSelectDirectory in 'uSelectDirectory.pas' {fSelectDirectory},
-  uSearchImage in 'uSearchImage.pas';
+  uSearchImage in 'uSearchImage.pas',
+  uCoverSearch in 'uCoverSearch.pas' {fCoverSearch};
 
 {$R *.res}
 
@@ -16,6 +17,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMain, fMain);
-  Application.CreateForm(TfSelectDirectory, fSelectDirectory);
   Application.Run;
 end.
