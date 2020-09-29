@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, sPanel, Vcl.StdCtrls, sLabel, Vcl.Grids, JvExGrids, JvStringGrid, sEdit, JvComponentBase,
   JvThread,IdComponent, uSearchImage, xSuperObject,
-  IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, JPEG, PNGImage, GIFImg, TagsLibrary, utypes ;
+  IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, JPEG, PNGImage, GIFImg, TagsLibrary, utypes, acImage ;
 
 type
   TfCoverSearch = class(TForm)
@@ -18,8 +18,11 @@ type
     sPanel1: TsPanel;
     sg1: TJvStringGrid;
     thGetImages: TJvThread;
+    sPanel2: TsPanel;
+    Image1: TsImage;
     procedure thGetImagesExecute(Sender: TObject; Params: Pointer);
     procedure sg1DrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+    procedure sg1SelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
   private
     { Déclarations privées }
   public
@@ -27,6 +30,7 @@ type
     artist,
     title : string;
     procedure StartSearch;
+    procedure downloadImage(sUrl: string);
   end;
 
 var
@@ -53,10 +57,53 @@ if sg1.Objects[ACol, ARow] <> nil then
   end;
 end;
 
+procedure TfCoverSearch.sg1SelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
+var
+  aMediaImg: tMediaImg;
+begin
+  // Display the full-size picture
+  if sg1.Objects[ACol, ARow] <> nil then
+  begin
+    aMediaImg := tMediaImg(sg1.Objects[ACol, ARow]);
+    downloadImage(aMediaImg.Link);
+  end;
+
+
+end;
+
+procedure TfCoverSearch.downloadImage(sUrl: string);
+var
+  IdSSL: TIdSSLIOHandlerSocketOpenSSL;
+  IdHTTP1: TIdHTTP;
+  MS: TMemoryStream;
+  jpgImg: TJPEGImage;
+  BitMap: TBitmap;
+begin
+  IdSSL := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+  IdHTTP1 := TIdHTTP.Create;
+  IdHTTP1.ReadTimeout := 5000;
+  IdHTTP1.IOHandler := IdSSL;
+  IdSSL.SSLOptions.Method := sslvTLSv1_2;
+  IdSSL.SSLOptions.Mode := sslmUnassigned;
+  try
+    MS := TMemoryStream.Create;
+    jpgImg := TJPEGImage.Create;
+    IdHTTP1.Get(sUrl, MS);
+    Application.ProcessMessages;
+    MS.Seek(0, soFromBeginning);
+    jpgImg.LoadFromStream(MS);
+    Image1.Picture.Assign(jpgImg)
+  finally
+    FreeAndNil(MS);
+    FreeAndNil(jpgImg);
+    IdHTTP1.Free;
+    IdSSL.Free;
+  end;
+end;
+
+
 procedure TfCoverSearch.StartSearch;
 var
-  // aNode: TTreeNode;
-
   aGoogleSearch: tGoogleSearch;
   jsResult: ISuperObject;
   jsArray: IsuperArray;

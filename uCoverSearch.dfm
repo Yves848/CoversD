@@ -11,6 +11,7 @@ object fCoverSearch: TfCoverSearch
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
   object sRollOutPanel1: TsRollOutPanel
@@ -21,9 +22,6 @@ object fCoverSearch: TfCoverSearch
     Align = alTop
     Caption = 'Infos'
     TabOrder = 0
-    ExplicitLeft = 320
-    ExplicitTop = 136
-    ExplicitWidth = 265
     object sLabel1: TsLabel
       Left = 16
       Top = 16
@@ -63,16 +61,13 @@ object fCoverSearch: TfCoverSearch
     Align = alBottom
     Caption = 'sPanel1'
     TabOrder = 1
-    ExplicitLeft = 344
-    ExplicitTop = 208
-    ExplicitWidth = 185
   end
   object sg1: TJvStringGrid
     Left = 0
     Top = 65
-    Width = 852
+    Width = 609
     Height = 305
-    Align = alClient
+    Align = alLeft
     Color = 3355443
     ColCount = 3
     DefaultColWidth = 128
@@ -83,13 +78,33 @@ object fCoverSearch: TfCoverSearch
     Options = [goFixedRowDefAlign]
     TabOrder = 2
     OnDrawCell = sg1DrawCell
+    OnSelectCell = sg1SelectCell
     Alignment = taLeftJustify
     FixedFont.Charset = DEFAULT_CHARSET
     FixedFont.Color = clWindowText
     FixedFont.Height = -11
     FixedFont.Name = 'Tahoma'
     FixedFont.Style = []
-    ExplicitTop = 71
+  end
+  object sPanel2: TsPanel
+    Left = 609
+    Top = 65
+    Width = 243
+    Height = 305
+    Align = alClient
+    TabOrder = 3
+    ExplicitLeft = 640
+    ExplicitTop = 104
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object Image1: TsImage
+      Left = 18
+      Top = 46
+      Width = 207
+      Height = 203
+      Picture.Data = {07544269746D617000000000}
+      Stretch = True
+    end
   end
   object thGetImages: TJvThread
     Exclusive = True

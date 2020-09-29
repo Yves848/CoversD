@@ -7,13 +7,11 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uTypes, utags, Vcl.StdCtrls, sPanel, Vcl.ExtCtrls, sSkinManager, sSkinProvider, sButton, Vcl.ComCtrls,
   sTreeView, acShellCtrls, sListView, sComboBoxes, sSplitter, Vcl.Buttons, sSpeedButton, System.ImageList, Vcl.ImgList, acAlphaImageList,
   acProgressBar, JvComponentBase, JvThread, sMemo, Vcl.Mask, sMaskEdit, sCustomComboEdit, sToolEdit, acImage, JPEG, PNGImage, GIFImg, TagsLibrary,
-  acNoteBook, sTrackBar, acArcControls, sGauge, BASS,BassFlac, xSuperObject, SynEditHighlighter, SynHighlighterJSON, SynEdit, SynMemo, sListBox, JvExControls,
+  acNoteBook, sTrackBar, acArcControls, sGauge, BASS, BassFlac, xSuperObject, SynEditHighlighter, SynHighlighterJSON, SynEdit, SynMemo, sListBox,
+  JvExControls, clipbrd, Spectrum3DLibraryDefs, bass_aac,
   JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw, activeX, acWebBrowser, Vcl.Grids, JvExGrids, JvStringGrid, IdComponent,
   IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid,
-  ovctable, AdvGrid, dateutils, uCoverSearch;
-
-const
-  sValidExtensions = '.MP3.MP4.FLAC.OGG.WAV';
+  ovctable, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory;
 
 type
   TfMain = class(TForm)
@@ -48,13 +46,24 @@ type
     sSlider1: TsSlider;
     sPanel1: TsPanel;
     sPanel2: TsPanel;
-    sBitBtn1: TsBitBtn;
-    sg1: TJvStringGrid;
-    thGetImages: TJvThread;
     sShellTreeView1: TsShellTreeView;
     sgList: TAdvStringGrid;
     sButton3: TsButton;
     Image1: TsImage;
+    sButton4: TsButton;
+    sButton5: TsButton;
+    sSaveDialog1: TsSaveDialog;
+    sOpenDialog1: TsOpenDialog;
+    sButton6: TsButton;
+    sILButtons: TsAlphaImageList;
+    sButton7: TsButton;
+    sButton8: TsButton;
+    sBevel1: TsBevel;
+    slblArtist: TsLabel;
+    slblTitle: TsLabel;
+    sPanel3: TsPanel;
+    thDisplay: TJvThread;
+    sButton9: TsButton;
     procedure Button1Click(Sender: TObject);
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
@@ -72,10 +81,6 @@ type
     procedure slbPlaylistKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure sTVMediasCollapsed(Sender: TObject; Node: TTreeNode);
-    procedure sBitBtn1Click(Sender: TObject);
-    procedure thGetImagesExecute(Sender: TObject; Params: Pointer);
-    procedure sg1DrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
-    procedure sg1SelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
     procedure FormShow(Sender: TObject);
     procedure sShellTreeView1KeyPress(Sender: TObject; var Key: Char);
     procedure sShellTreeView1AddFolder(Sender: TObject; AFolder: TacShellFolder; var CanAdd: Boolean);
@@ -84,21 +89,29 @@ type
     procedure sgListMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure sButton3Click(Sender: TObject);
     procedure sgListRowChanging(Sender: TObject; OldRow, NewRow: Integer; var Allow: Boolean);
+    procedure sButton4Click(Sender: TObject);
+    procedure sButton5Click(Sender: TObject);
+    procedure sShellTreeView1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormDestroy(Sender: TObject);
+    procedure thDisplayExecute(Sender: TObject; Params: Pointer);
+    procedure sButton9Click(Sender: TObject);
+    procedure FormResize(Sender: TObject);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
     function findNode(sLabel: String): TTreeNode;
-    procedure ListCoverArts(aImage: TsImage; Tags: TTags);
+    procedure ListCoverArts(aImage: TsImage; Tags: TTags); overload;
+    Procedure ListCoverArts(aImage: TsImage; sFileName: String); overload;
     procedure OpenConfig;
     procedure downloadImage(sUrl: string);
   public
     { Déclarations publiques }
     Channel: HStream;
+    ChannelPreview: HStream;
     CurrentPlayingFileName: String;
     AdjustingPlaybackPosition: Boolean;
     delais: Integer;
     momentdown: tDateTime;
-    procedure PlayNext;
     procedure PlayStream(FileName: String);
     procedure addfileName;
     procedure setPBMax;
@@ -107,7 +120,7 @@ type
     procedure ExpandNode;
     procedure updateTV;
     procedure initGrid;
-    // function AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): Integer; overload;
+    procedure removeKeyFromStack;
     function AddToPlayList(ARow: Integer): Integer; overload;
     Procedure AddFolderToGrid(sFolder: String);
     Procedure AddFileToGrid(sFile: String);
@@ -117,10 +130,16 @@ type
     Procedure PlayPrevTrack;
     Procedure showPlayList;
     Procedure showExplorer;
+    procedure savePlaylist;
+    procedure loadPlaylist;
+    procedure playlistRemoveItem(index: Integer);
+    procedure updatePlayingInfos(sFileName: String); overload;
+    procedure updatePlayingInfos(aTags: TTags); overload;
   end;
 
 var
   fMain: TfMain;
+  Sprectrum3D: Pointer;
   iProgress: Integer;
   iMax: Integer;
   sFileName: String;
@@ -129,6 +148,8 @@ var
   aNode: TTreeNode;
   iImg: Integer;
   sLink: String;
+  Params: TSpectrum3D_CreateParams;
+  Settings: TSpectrum3D_Settings;
 
 implementation
 
@@ -140,14 +161,6 @@ uses
 procedure StreamEndCallback(handle: HSYNC; Channel, data: DWORD; user: Pointer); stdcall;
 begin
   fMain.PlayNextTrack(nil);
-end;
-
-procedure TfMain.PlayNext;
-var
-  CurrentIndex: Integer;
-  i: Integer;
-begin
-  // * Decide current playing index
 end;
 
 procedure TfMain.PlayNextTrack(Sender: TObject);
@@ -164,7 +177,6 @@ begin
     slbPlaylist.ItemIndex := index;
 
     BASS_ChannelStop(Channel);
-    ListCoverArts(sImage1, tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags);
     PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
   end;
 
@@ -184,25 +196,42 @@ begin
     slbPlaylist.ItemIndex := index;
 
     BASS_ChannelStop(Channel);
-    ListCoverArts(sImage1, tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags);
     PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
   end;
 
 end;
 
 procedure TfMain.PlayStream(FileName: String);
+
+
 begin
+  BASS_StreamFree(channel);
+
   if uppercase(tpath.GetExtension(FileName)) = '.MP3' then
-     Channel := BASS_StreamCreateFile(False, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE)
+    Channel := BASS_StreamCreateFile(False, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE)
+  else if uppercase(tpath.GetExtension(FileName)) = '.M4A' then
+    Channel := BASS_AAC_StreamCreateFile(False, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE)
   else
-     Channel := BASS_FLAC_StreamCreateFile(False, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE);
+    Channel := BASS_FLAC_StreamCreateFile(False, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE);
 
   // * Set an end sync which will be called when playback reaches end to play the next song
   BASS_ChannelSetSync(Channel, BASS_SYNC_END, 0, @StreamEndCallback, 0);
   CurrentPlayingFileName := FileName;
   TrackBar1.Max := BASS_ChannelGetLength(Channel, BASS_POS_BYTE);
   // * Start playback
-  BASS_ChannelPlay(Channel, True);
+  updatePlayingInfos(FileName);
+
+  Spectrum3D_SetChannel(Sprectrum3D, Channel);
+  // * Start playing and visualising
+  BASS_ChannelPlay(Spectrum3D_GetChannel(Sprectrum3D), True);
+
+end;
+
+procedure TfMain.removeKeyFromStack;
+var
+  Mgs: tMsg;
+begin
+  PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
 end;
 
 procedure LoadHTML(AWebBrowser: TWebBrowser; const HTMLCode: string);
@@ -283,8 +312,8 @@ begin
   i := 0;
   while i <= length(aFiles) - 1 do
   begin
-    sExt := tPath.GetExtension(aFiles[i]);
-    bAdd := (pos(uppercase(sExt), sValidExtensions) > 0);
+    sExt := tpath.GetExtension(aFiles[i]);
+    bAdd := tMediaUtils.isValidExtension(sExt);
     if bAdd then
     begin
       AddFileToGrid(aFiles[i]);
@@ -302,8 +331,8 @@ var
 begin
   result := -1;
   aMediaFile := tMediaFile.Create(sgList.Cells[0, ARow]);
-  sPath := tPath.GetDirectoryName(aMediaFile.Tags.FileName);
-  sFile := tPath.GetFileNameWithoutExtension(aMediaFile.Tags.FileName);
+  sPath := tpath.GetDirectoryName(aMediaFile.Tags.FileName);
+  sFile := tpath.GetFileNameWithoutExtension(aMediaFile.Tags.FileName);
   index := slbPlaylist.Items.IndexOf(sFile);
   if index = -1 then
   begin
@@ -385,8 +414,8 @@ begin
   if not isDirectory then
   begin
     // File to Add .....
-    sPath := tPath.GetDirectoryName(sFileName);
-    sFile := tPath.GetFileNameWithoutExtension(sFileName);
+    sPath := tpath.GetDirectoryName(sFileName);
+    sFile := tpath.GetFileNameWithoutExtension(sFileName);
   end
   else
   begin
@@ -487,6 +516,25 @@ begin
   // * Never forget to init BASS
 
   BASS_Init(-1, 44100, 0, Self.handle, 0);
+
+  ZeroMemory(@Params, SizeOf(TSpectrum3D_CreateParams));
+  // * Set parent control
+  Params.ParentHandle := sPanel3.handle;
+  // * Use antialiasing
+  Params.AntiAliasing := 4;
+  // * Create our spectrum display
+  Sprectrum3D := Spectrum3D_Create(@Params);
+  // * Get all settings
+  Spectrum3D_GetParams(Sprectrum3D, @Settings);
+  // * Set params here eg.:
+  Settings.ShowText := True;
+  // * Apply new settings
+  Spectrum3D_SetParams(Sprectrum3D, @Settings);
+  // * Create a BASS channel (Below Delphi 2009 - ansi)
+  // Channel := BASS_StreamCreateFile(False, PChar(FileName), 0, 0, BASS_STREAM_AUTOFREE);
+  // * Create a BASS channel (Delphi 2009 and above - unicode)
+  // Channel := BASS_StreamCreateFile(False, PChar(FileName), 0, 0, BASS_STREAM_AUTOFREE OR BASS_UNICODE);
+
   // * Set VU max. values
   sGauge1.MaxValue := High(Word) div 2 + 1;
   sGauge2.MaxValue := High(Word) div 2 + 1;
@@ -495,6 +543,13 @@ begin
   TrackBar2.Position := 100 - Round(Volume * 100);
   OpenConfig;
   initGrid;
+end;
+
+procedure TfMain.FormDestroy(Sender: TObject);
+begin
+  Spectrum3D_Free(Sprectrum3D);
+  BASS_Stop;
+  BASS_Free;
 end;
 
 procedure TfMain.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -538,13 +593,16 @@ begin
   end;
 end;
 
+procedure TfMain.FormResize(Sender: TObject);
+begin
+  Spectrum3D_ReInitialize(Sprectrum3D);
+  Spectrum3D_ReAlign(Sprectrum3D,sPanel3.handle);
+end;
+
 procedure TfMain.FormShow(Sender: TObject);
 var
   cols: Integer;
 begin
-  cols := sg1.width div sg1.DefaultColWidth;
-  sg1.ColCount := cols;
-  caption := inttostr(ord('e'));
 end;
 
 procedure TfMain.GetImgLink;
@@ -553,16 +611,18 @@ begin
 end;
 
 procedure TfMain.initGrid;
-procedure cleanObjects;
-var i : Integer;
-begin
-  i := 1;
-  while i <= sgList.RowCount -1  do
+  procedure cleanObjects;
+  var
+    i: Integer;
   begin
+    i := 1;
+    while i <= sgList.RowCount - 1 do
+    begin
 
-    inc(i);
+      inc(i);
+    end;
   end;
-end;
+
 begin
   //
   sgList.Clear;
@@ -581,105 +641,103 @@ begin
 
 end;
 
-procedure TfMain.sg1DrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
-begin
-  if sg1.Objects[ACol, ARow] <> nil then
-  begin
-    if tMediaImg(sg1.Objects[ACol, ARow]).BitMap <> nil then
-    begin
-      if gdSelected in State then
-        sg1.Canvas.Brush.Color := clBlue
-      else
-        sg1.Canvas.Brush.Color := clWhite;
-      sg1.Canvas.FillRect(Rect);
-      InflateRect(Rect, -5, -5);
-      sg1.Canvas.StretchDraw(Rect, tMediaImg(sg1.Objects[ACol, ARow]).BitMap.Graphic)
-    end;
-  end;
-end;
-
-procedure TfMain.sg1SelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
-var
-  aMediaImg: tMediaImg;
-begin
-  // Display the full-size picture
-  if sg1.Objects[ACol, ARow] <> nil then
-  begin
-    aMediaImg := tMediaImg(sg1.Objects[ACol, ARow]);
-    downloadImage(aMediaImg.Link);
-  end;
-end;
-
 procedure TfMain.sgListKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 var
-  Mgs: TMsg;
   index: Integer;
   i: Integer;
 begin
-  if Key = VK_ADD then
+
+  if sgList.EditMode then
   begin
-    i := 0;
-    while i <= sgList.RowSelectCount - 1 do
+    if (Key = VK_NUMPAD1) and (ssCtrl in Shift) then
     begin
-        AddToPlayList(sgList.SelectedRow[i]);
-        inc(i);
+      removeKeyFromStack;
+      sgList.Cells[1, sgList.Row] := sgList.NormalEdit.SelText;
+
     end;
-  end;
+    if (Key = VK_NUMPAD2) and (ssCtrl in Shift) then
+    begin
+      removeKeyFromStack;
+      sgList.Cells[2, sgList.Row] := sgList.NormalEdit.SelText;
 
-  if Key = VK_RETURN then
+    end;
+    if Key = VK_ESCAPE then
+    begin
+      sgList.Options := [goRowSelect, goRangeSelect];
+    end;
+  end
+  else
   begin
-    if Shift = [] then
+    if Key = VK_ADD then
     begin
-      if not(goEditing in sgList.Options) then
-      begin
-        sgList.Options := [goEditing, goTabs];
-        sgList.Col := 1;
-        sgList.EditCell(1, sgList.row);
-      end
-      else
-      begin
-        sgList.EditCell(sgList.Col, sgList.row);
-      end;
-      // sgList.EditMode := True;
-    end
-    else
-    begin
-
-      index := -1;
       i := 0;
       while i <= sgList.RowSelectCount - 1 do
       begin
-        if i = 0 then
-        begin
-          if not(ssCtrl in Shift) then
-          begin
-            if (ssShift in Shift) then
-              index := AddToPlayList(sgList.SelectedRow[i]);
-            BASS_ChannelStop(Channel);
-            if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
-            begin
-              slbPlaylist.ItemIndex := index;
-              PlayStream(tMediaFile(slbPlaylist.Items.Objects[index]).Tags.FileName);
-            end;
-
-          end;
-        end;
+        AddToPlayList(sgList.SelectedRow[i]);
         inc(i);
       end;
     end;
 
-    PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
-  end;
+    if Key = VK_RETURN then
+    begin
+      if Shift = [] then
+      begin
+        if not(goEditing in sgList.Options) then
+        begin
+          sgList.Options := [goEditing, goTabs];
+          sgList.Col := 1;
+          sgList.EditCell(1, sgList.Row);
+        end
+        else
+        begin
+          sgList.EditCell(sgList.Col, sgList.Row);
+        end;
+        // sgList.EditMode := True;
+      end
+      else
+      begin
+        if Shift = [ssCtrl] then
+        begin
+          BASS_ChannelStop(Channel);
+          PlayStream(sgList.Cells[0, sgList.Row]);
+        end
+        else
+        begin
 
-  if Key = VK_ESCAPE then
-  begin
-    sgList.Options := [goRowSelect, goRangeSelect];
-  end;
+          index := -1;
+          i := 0;
+          while i <= sgList.RowSelectCount - 1 do
+          begin
+            if i = 0 then
+            begin
+              if not(ssCtrl in Shift) then
+              begin
+                if (ssShift in Shift) then
+                  index := AddToPlayList(sgList.SelectedRow[i]);
+                BASS_ChannelStop(Channel);
+                if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
+                begin
+                  slbPlaylist.ItemIndex := index;
+                  PlayStream(tMediaFile(slbPlaylist.Items.Objects[index]).Tags.FileName);
+                end;
 
-  if Key = VK_DELETE then
-  begin
-    initGrid;
-    PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
+              end;
+            end;
+            inc(i);
+          end;
+        end;
+      end;
+
+      removeKeyFromStack;
+    end;
+
+    if Key = VK_DELETE then
+    begin
+      if ssShift in Shift then
+        if not sgList.EditMode then
+          initGrid;
+      removeKeyFromStack;
+    end;
   end;
 
 end;
@@ -707,15 +765,15 @@ end;
 
 procedure TfMain.sgListRowChanging(Sender: TObject; OldRow, NewRow: Integer; var Allow: Boolean);
 var
-  pMediaFile : tMediaFile;
+  pMediaFile: tMediaFile;
 begin
-    // Afficher la pochette si elle existe
-    if sgList.Cells[0,NewRow] <> '' then
-    begin
-      pMediaFile := tMediaFile.create(sglist.Cells[0,NewRow]);
-      ListCoverArts(Image1,pMediaFile.tags);
-      pMediaFile.Destroy;
-    end;
+  // Afficher la pochette si elle existe
+  if sgList.Cells[0, NewRow] <> '' then
+  begin
+    pMediaFile := tMediaFile.Create(sgList.Cells[0, NewRow]);
+    ListCoverArts(Image1, pMediaFile.Tags);
+    pMediaFile.Destroy;
+  end;
 end;
 
 procedure TfMain.showExplorer;
@@ -746,77 +804,31 @@ begin
   pb1.Position := 0;
 end;
 
-procedure TfMain.sBitBtn1Click(Sender: TObject);
+procedure TfMain.savePlaylist;
 var
-  // aNode: TTreeNode;
-  Artist, Title: String;
-  aGoogleSearch: tGoogleSearch;
-  jsResult: ISuperObject;
-  jsArray: IsuperArray;
+  Json: ISuperObject;
   i: Integer;
-  webResult: String;
-  pMediaImg: tMediaImg;
-  Col, row: Integer;
-  nbPass: Integer;
-
-  procedure addToGrid;
+  pMediaFile: tMediaFile;
+begin
+  if sSaveDialog1.Execute then
   begin
     i := 0;
-    while i <= jsArray.length - 1 do
+    Json := SO;
+    while i <= slbPlaylist.Items.Count - 1 do
     begin
-      if sg1.Objects[Col, row] <> nil then
+      if slbPlaylist.Items.Objects[i] <> Nil then
       begin
-        inc(Col);
-        if Col > sg1.ColCount - 1 then
+        pMediaFile := tMediaFile(slbPlaylist.Items.Objects[i]);
+        with Json.A['tracks'].O[i] do
         begin
-          sg1.RowCount := sg1.RowCount + 1;
-          row := sg1.RowCount - 1;
-          Col := 0;
+          S['fileName'] := pMediaFile.Tags.FileName;
         end;
       end;
-      pMediaImg := tMediaImg.Create;
-      pMediaImg.TNLink := jsArray.O[i].S[GS_THUMBNAILLINK];
-      pMediaImg.Link := jsArray.O[i].S[GS_LINK];
-      sg1.Objects[Col, row] := pMediaImg;
       inc(i);
     end;
+    Json.SaveTo(sSaveDialog1.FileName);
   end;
 
-begin
-  row := 0;
-  while row <= sg1.RowCount - 1 do
-  begin
-    Col := 0;
-    while Col <= sg1.ColCount - 1 do
-    begin
-      if sg1.Objects[Col, row] <> nil then
-      begin
-        tMediaImg(sg1.Objects[Col, row]).destroy;
-      end;
-      inc(Col)
-    end;
-    inc(row);
-  end;
-
-  sg1.Clear;
-  sg1.RowCount := 1;
-  // aNode := sTVMedias.Selected;
-  Artist := sgList.Cells[1, sgList.row];
-  Title := sgList.Cells[2, sgList.row];
-
-  Col := 0;
-  row := 0;
-
-  nbPass := 0;
-  while nbPass < 2 do
-  begin
-    aGoogleSearch := tGoogleSearch.Create(Artist + ' ' + Title, (nbPass * 10) + 1);
-    jsResult := aGoogleSearch.getImages;
-    jsArray := jsResult.A[GS_ITEMS];
-    addToGrid;
-    inc(nbPass);
-  end;
-  thGetImages.Execute(Self);
 end;
 
 procedure TfMain.sButton1Click(Sender: TObject);
@@ -829,23 +841,44 @@ begin
   if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_PLAYING then
   begin
     BASS_ChannelPause(Channel);
+    sButton2.ImageIndex := 0;
   end
   else
   begin
     BASS_ChannelPlay(Channel, False);
+    sButton2.ImageIndex := 3;
   end;
 end;
 
 procedure TfMain.sButton3Click(Sender: TObject);
 var
-  fCoverSearch : tfCoverSearch;
+  fCoverSearch: tfCoverSearch;
 begin
-  fCoverSearch := tfCoverSearch.Create(self);
-  fCoverSearch.artist := sgList.Cells[1,sgList.Row];
-  fCoverSearch.title := sgList.Cells[2,sgList.Row];
+  fCoverSearch := tfCoverSearch.Create(Self);
+  fCoverSearch.Artist := sgList.Cells[1, sgList.Row];
+  fCoverSearch.Title := sgList.Cells[2, sgList.Row];
   fCoverSearch.Show;
   fCoverSearch.StartSearch;
-//  fCoverSearch.free;
+  // fCoverSearch.free;
+end;
+
+procedure TfMain.sButton4Click(Sender: TObject);
+begin
+  savePlaylist;
+end;
+
+procedure TfMain.sButton5Click(Sender: TObject);
+begin
+  loadPlaylist;
+end;
+
+procedure TfMain.sButton9Click(Sender: TObject);
+var
+  pfSelectDirectory: TfSelectDirectory;
+begin
+  pfSelectDirectory := TfSelectDirectory.Create(Self);
+  pfSelectDirectory.ShowModal;
+  pfSelectDirectory.Free;
 end;
 
 procedure TfMain.sDEFolderAfterDialog(Sender: TObject; var Name: string; var Action: Boolean);
@@ -875,22 +908,28 @@ procedure TfMain.slbPlaylistItemIndexChanged(Sender: TObject);
 begin
   //
   if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
-    ListCoverArts(sImage1, tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags);
+    updatePlayingInfos(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags);
 end;
 
 procedure TfMain.slbPlaylistKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-var
-  Mgs: TMsg;
 begin
   if Key = VK_RETURN then
   begin
     if slbPlaylist.ItemIndex > -1 then
     begin
       BASS_ChannelStop(Channel);
-      ListCoverArts(sImage1, tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags);
       PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
     end;
-    PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
+    removeKeyFromStack;
+  end;
+
+  if Key = VK_DELETE then
+  begin
+    if slbPlaylist.ItemIndex > -1 then
+    begin
+      playlistRemoveItem(slbPlaylist.ItemIndex);
+    end;
+    removeKeyFromStack;
   end;
 end;
 
@@ -901,8 +940,25 @@ begin
   CanAdd := True;
   if not AFolder.IsFileFolder then
   begin
-    sExtension := tPath.GetExtension(AFolder.PathName);
+    sExtension := tpath.GetExtension(AFolder.PathName);
     CanAdd := (pos(uppercase(sExtension), sValidExtensions) > 0);
+  end;
+end;
+
+procedure TfMain.sShellTreeView1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  aNode: TTreeNode;
+begin
+  if Shift = [ssCtrl] then
+  begin
+    aNode := sShellTreeView1.Selected;
+    if not TacShellFolder(aNode.data).IsFileFolder then
+    begin
+      // ListCoverArts(sImage1,TacShellFolder(aNode.data).PathName);
+      BASS_ChannelStop(Channel);
+      PlayStream(TacShellFolder(aNode.data).PathName);
+    end;
+    removeKeyFromStack;
   end;
 end;
 
@@ -953,7 +1009,7 @@ begin
       if Assigned(aNode.data) then
       begin
         aMediaFile := tMediaFile(aNode.data);
-        aMediaFile.destroy;
+        aMediaFile.Destroy;
       end;
       aNode.Free;
     end;
@@ -1021,6 +1077,35 @@ begin
   end;
 end;
 
+procedure TfMain.loadPlaylist;
+var
+  i: Integer;
+  pMediaFile: tMediaFile;
+  Json: ISuperObject;
+begin
+  if sOpenDialog1.Execute then
+  begin
+    slbPlaylist.Clear;
+    i := 0;
+    Json := TSuperObject.ParseFile(sOpenDialog1.FileName);
+    while i <= Json.A['tracks'].length - 1 do
+    begin
+      pMediaFile := tMediaFile.Create(Json.A['tracks'].O[i].S['filename']);
+      slbPlaylist.Items.AddObject(tpath.GetFileNameWithoutExtension(pMediaFile.Tags.FileName), pMediaFile);
+      inc(i);
+    end;
+  end;
+end;
+
+procedure TfMain.ListCoverArts(aImage: TsImage; sFileName: String);
+var
+  pMediaFile: tMediaFile;
+begin
+  pMediaFile := tMediaFile.Create(sFileName);
+  ListCoverArts(aImage, pMediaFile.Tags);
+  pMediaFile.Destroy;
+end;
+
 procedure TfMain.OpenConfig;
 var
   sPath: String;
@@ -1041,6 +1126,20 @@ begin
   // thListMP3.Execute(Self);
 end;
 
+procedure TfMain.playlistRemoveItem(index: Integer);
+begin
+  if index <= slbPlaylist.Items.Count - 1 then
+  begin
+    if slbPlaylist.Items.Objects[index] <> nil then
+    begin
+      tMediaFile(slbPlaylist.Items.Objects[index]).Destroy;
+      slbPlaylist.Items.Delete(index);
+      if index <= slbPlaylist.Items.Count - 1 then
+        slbPlaylist.ItemIndex := index;
+    end;
+  end;
+end;
+
 procedure TfMain.sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
 begin
   if Node.Count = 0 then
@@ -1054,7 +1153,6 @@ end;
 procedure TfMain.sTVMediasKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 var
   aNode: TTreeNode;
-  Mgs: TMsg;
   index: Integer;
   aMediaFile: tMediaFile;
 begin
@@ -1084,136 +1182,12 @@ begin
 
       end;
     end;
-    PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
+    removeKeyFromStack;
   end;
 
 end;
 
-procedure TfMain.thGetImagesExecute(Sender: TObject; Params: Pointer);
-var
-  i: Integer;
-  IdSSL: TIdSSLIOHandlerSocketOpenSSL;
-  IdHTTP1: TIdHTTP;
-  MS: TMemoryStream;
-  jpgImg: TJPEGImage;
-  BitMap: TBitmap;
-  sg1: TJvStringGrid;
-  Col, row: Integer;
-begin
-  //
-  IdSSL := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
-  IdHTTP1 := TIdHTTP.Create;
-  IdHTTP1.ReadTimeout := 250;
-  IdHTTP1.IOHandler := IdSSL;
-  IdSSL.SSLOptions.Method := sslvTLSv1_2;
-  IdSSL.SSLOptions.Mode := sslmUnassigned;
-  sg1 := TfMain(Params).sg1;
-  row := 0;
-  while row <= sg1.RowCount - 1 do
-  begin
-    try
-      try
-        Col := 0;
-        while Col <= sg1.ColCount - 1 do
-        begin
-          if sg1.Objects[Col, row] <> nil then
-          begin
-            if tMediaImg(sg1.Objects[Col, row]).BitMap = nil then
-            begin
-              MS := TMemoryStream.Create;
-              jpgImg := TJPEGImage.Create;
-              IdHTTP1.Get(tMediaImg(sg1.Objects[Col, row]).TNLink, MS);
-              Application.ProcessMessages;
-              MS.Seek(0, soFromBeginning);
-              jpgImg.LoadFromStream(MS);
-              tMediaImg(sg1.Objects[Col, row]).BitMap := tPicture.Create;
-              tMediaImg(sg1.Objects[Col, row]).BitMap.Assign(jpgImg);
-              // resize img
-              sg1.Refresh;
-            end;
-          end;
-          inc(Col);
-        end;
-      except
-        on E: Exception do
-        begin
-          // sMemo1.Lines.Add('   EXCEPTION: ' + E.Message);
-        end;
-      end;
-      inc(row)
-    finally
-      FreeAndNil(jpgImg);
-      FreeAndNil(MS);
-
-    end;
-
-  end;
-end;
-
-procedure TfMain.thListMP3Execute(Sender: TObject; Params: Pointer);
-var
-  i: Integer;
-  aFiles: TStringDynArray;
-  aFileAttributes: tFileAttributes;
-  aSearchOption: tSearchOption;
-  bAdd: Boolean;
-  sExt: String;
-begin
-  // aSearchOption := tSearchOption.soTopDirectoryOnly;
-  // aFiles := TDirectory.GetFileSystemEntries(aPath, aSearchOption, nil);
-  //
-  // i := 0;
-  // iMax := Length(aFiles) - 1;
-  // thListMP3.Synchronize(TfMain(Params).ResetPB);
-  // thListMP3.Synchronize(TfMain(Params).setPBMax);
-  // while (i <= iMax) do
-  // begin
-  // if thListMP3.Terminated then
-  // exit;
-  // iProgress := i;
-  // sFileName := aFiles[i];
-  // bAdd := False;
-  // if TDirectory.Exists(sFileName) then
-  // begin
-  // bAdd := True;
-  // end
-  // else
-  // begin
-  // aFileAttributes := tFile.GetAttributes(sFileName);
-  // if not(tFileAttribute.faReadOnly in aFileAttributes) and not(tFileAttribute.faHidden in aFileAttributes) and
-  // not(tFileAttribute.faSystem in aFileAttributes) then
-  // begin
-  // bAdd := True;
-  // end;
-  // end;
-  //
-  // if bAdd then
-  // thListMP3.Synchronize(TfMain(Params).addfileName);
-  //
-  // inc(i);
-  // end;
-  // thListMP3.Synchronize(TfMain(Params).ExpandNode);
-  // thListMP3.Synchronize(TfMain(Params).ResetPB);
-  // thListMP3.Synchronize(TfMain(Params).updateTV);
-  aSearchOption := tSearchOption.soAllDirectories;
-  aFiles := TDirectory.GetFileSystemEntries(aPath, aSearchOption, nil);
-
-  i := 0;
-  while i <= length(aFiles) - 1 do
-  begin
-    sExt := tPath.GetExtension(aFiles[i]);
-    bAdd := (pos(uppercase(sExt), sValidExtensions) > 0);
-    if bAdd then
-    begin
-      sFile := aFiles[i];
-      thListMP3.Synchronize(TfMain(Params).AddFileToGridTH);
-    end;
-    inc(i);
-  end;
-
-end;
-
-procedure TfMain.Timer1Timer(Sender: TObject);
+procedure TfMain.thDisplayExecute(Sender: TObject; Params: Pointer);
 var
   Level: Cardinal;
   LeftLevel: Word;
@@ -1245,6 +1219,65 @@ begin
 
 end;
 
+procedure TfMain.thListMP3Execute(Sender: TObject; Params: Pointer);
+var
+  i: Integer;
+  aFiles: TStringDynArray;
+  aFileAttributes: tFileAttributes;
+  aSearchOption: tSearchOption;
+  bAdd: Boolean;
+  sExt: String;
+begin
+  aSearchOption := tSearchOption.soAllDirectories;
+  aFiles := TDirectory.GetFileSystemEntries(aPath, aSearchOption, nil);
+
+  i := 0;
+  while i <= length(aFiles) - 1 do
+  begin
+    sExt := tpath.GetExtension(aFiles[i]);
+    bAdd := (pos(uppercase(sExt), sValidExtensions) > 0);
+    if bAdd then
+    begin
+      sFile := aFiles[i];
+      thListMP3.Synchronize(TfMain(Params).AddFileToGridTH);
+    end;
+    inc(i);
+  end;
+
+end;
+
+procedure TfMain.Timer1Timer(Sender: TObject);
+var
+  Level: Cardinal;
+  LeftLevel: Word;
+  RightLevel: Word;
+
+begin
+  Level := BASS_ChannelGetLevel(Channel);
+  // * Separate L & R channel
+  LeftLevel := LoWord(Level);
+  RightLevel := HiWord(Level);
+   //* Set the VUs
+   if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_PLAYING then
+   begin
+   // * Logarithmic
+
+   sGauge1.Progress := LeftLevel;
+   sGauge2.Progress := RightLevel;
+
+   end
+   else
+   begin
+   sGauge1.Progress := sGauge1.Progress - 1000;
+   sGauge2.Progress := sGauge2.Progress - 1000;
+   end;
+   //* Playing position
+  AdjustingPlaybackPosition := True;
+  TrackBar1.Position := BASS_ChannelGetPosition(Channel, BASS_POS_BYTE);
+  AdjustingPlaybackPosition := False;
+  //Application.ProcessMessages;
+end;
+
 procedure TfMain.TrackBar1Change(Sender: TObject);
 begin
   if NOT AdjustingPlaybackPosition then
@@ -1260,6 +1293,22 @@ begin
   Volume := (100 - TrackBar2.Position) / TrackBar2.Max;
   BASS_SetVolume(Volume);
 
+end;
+
+procedure TfMain.updatePlayingInfos(aTags: TTags);
+begin
+  slblArtist.Caption := aTags.GetTag('ARTIST');
+  slblTitle.Caption := aTags.GetTag('TITLE');
+  ListCoverArts(sImage1, aTags);
+end;
+
+procedure TfMain.updatePlayingInfos(sFileName: String);
+var
+  pMediaFile: tMediaFile;
+begin
+  pMediaFile := tMediaFile.Create(sFileName);
+  updatePlayingInfos(pMediaFile.Tags);
+  pMediaFile.Destroy;
 end;
 
 procedure TfMain.updateTV;
