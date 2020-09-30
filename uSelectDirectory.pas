@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
   FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.ComCtrls, sTreeView, acShellCtrls, Vcl.ExtCtrls, sPanel, AdvMemo, Vcl.StdCtrls, sButton,
-  uTypes, TagsLibrary;
+  uTypes, TagsLibrary, acProgressBar;
 
 type
   TfSelectDirectory = class(TForm)
@@ -18,11 +18,17 @@ type
     sPanel1: TsPanel;
     sButton1: TsButton;
     Memo1: TAdvMemo;
+    sButton2: TsButton;
+    qMedias: TFDQuery;
+    qTags: TFDQuery;
+    pb1: TsProgressBar;
     procedure sButton1Click(Sender: TObject);
+    procedure sButton2Click(Sender: TObject);
   private
     { Déclarations privées }
     procedure BrowsePath(sPath: String);
-    Procedure AddToDB(sFile : String);
+    Procedure AddToDB(sFile: String);
+    function loadTags(sFile: String; aTags: tTags): boolean;
   public
     { Déclarations publiques }
   end;
@@ -36,19 +42,17 @@ implementation
 
 procedure TfSelectDirectory.AddToDB(sFile: String);
 var
-  sMediaPath,
-  sMediaName : String;
-  iMediaType : Integer;
+  sMediaPath, sMediaName: String;
+  iMediaType: Integer;
 begin
-   sMediaPath := tPath.GetFullPath(sFile);
-   sMediaName := tPath.GetFileName(sFile);
-   iMediatype := tMediaUtils.isValidExtension2(sFile);
-   tMedias.Append;
-   tMedias.FieldByName('mediaPath').AsString := sMediaPath;
-   tMedias.FieldByName('mediaName').AsString := sMediaName;
-   tMedias.FieldByName('mediaType').AsInteger := iMediaType;
-   tMedias.Post;
-
+  sMediaPath := tPath.GetFullPath(sFile);
+  sMediaName := tPath.GetFileName(sFile);
+  iMediaType := tMediaUtils.isValidExtension(sFile);
+  tMedias.Append;
+  tMedias.FieldByName('mediaPath').AsString := sMediaPath;
+  tMedias.FieldByName('mediaName').AsString := sMediaName;
+  tMedias.FieldByName('mediaType').AsInteger := iMediaType;
+  tMedias.Post;
 
 end;
 
@@ -66,15 +70,27 @@ begin
   tMedias.Open;
   while i <= length(aFiles) - 1 do
   begin
-    if tMediaUtils.isValidExtension(aFiles[i]) then
+    if tMediaUtils.isValidExtension(aFiles[i]) > -1 then
     begin
       AddToDB(aFiles[i]);
-      Memo1.Lines.Add(aFiles[i] +' '+ tMediaUtils.getExtension(aFiles[i]));
     end;
     inc(i);
   end;
   tMedias.Close;
 
+end;
+
+function TfSelectDirectory.loadTags(sFile: String; aTags: tTags): boolean;
+begin
+  aTags.Clear;
+  result := false;
+  try
+    aTags.ParseCoverArts := true;
+    aTags.LoadFromFile(sFile);
+    result := true;
+  except
+
+  end;
 end;
 
 procedure TfSelectDirectory.sButton1Click(Sender: TObject);
@@ -89,6 +105,46 @@ begin
 
   end;
 
+end;
+
+procedure TfSelectDirectory.sButton2Click(Sender: TObject);
+var
+  pMediaFile: tMediaFile;
+  i : Integer;
+  iCount : integer;
+begin
+
+  pMediaFile := tMediaFile.create;
+  
+  with qMedias do
+  begin
+    open; 
+    last;
+    iCount := RecordCount;
+    i := 0;
+    pb1.Position := 0;
+    first;
+    while not eof do
+    begin
+      if loadTags(FieldByName('mediaPAth').AsString, pMediaFile.tags) then
+      begin
+        //Memo1.Lines.Add(pMediaFile.tags.GetTag('ARTIST') + pMediaFile.tags.GetTag('TITLE'));
+        qTags.ParamByName('MediaId').AsInteger := qMedias.FieldByName('id').AsInteger;
+        qTags.ParamByName('ARTIST').AsString := pMediaFile.tags.GetTag('ARTIST');
+        qTags.ParamByName('TITLE').AsString := pMediaFile.tags.GetTag('TITLE');
+        qTags.ParamByName('ALBUM').AsString := pMediaFile.tags.GetTag('ALBUM');
+        qTags.ExecSQL;
+      end;
+      inc(i);
+      if (i div 100 = 0) then
+      begin
+         pb1.Position := round(i / iCount * 100);
+         application.ProcessMessages;
+      end;
+      Next;
+    end;
+    close;
+  end;
 end;
 
 end.

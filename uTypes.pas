@@ -7,7 +7,6 @@ uses
   Generics.Defaults, Generics.collections, XSuperObject;
 
 const
-  sValidExtensions = '.MP3.MP4.FLAC.OGG.WAV.M4A';
   aValidExtensions: TArray<string> = ['.MP3', '.MP4', '.FLAC', '.OGG', '.WAV', '.M4A'];
 
 type
@@ -30,9 +29,8 @@ type
 
   tMediaUtils = class
   public
-    class function isValidExtension(sFile: String): boolean; static;
-    class function isValidExtension2(sFile: String): integer; static;
-    class function getExtension(sFile : String) : string; static;
+    class function isValidExtension(sFile: String): integer; static;
+    class function getExtension(sFile: String): string; static;
   end;
 
 implementation
@@ -41,8 +39,6 @@ implementation
 
 constructor tMediaFile.create(aFileName: string);
 begin
-  //
-  // inherited create;
   self.create;
   tags := TTags.create;
   tags.ParseCoverArts := true;
@@ -58,7 +54,6 @@ end;
 destructor tMediaFile.Destroy;
 begin
   tags.Free;
-  // inherited Free;
   inherited Destroy;
 end;
 
@@ -81,34 +76,26 @@ end;
 
 class function tMediaUtils.getExtension(sFile: String): string;
 var
-  i : Integer;
+  i: integer;
 begin
-    result := 'unknown';
-    i := isValidExtension2(sFile);
-    if i > -1 then
-      result := aValidExtensions[i];
+  result := 'unknown';
+  i := isValidExtension(sFile);
+  if i > -1 then
+    result := aValidExtensions[i];
 
 end;
 
-class function tMediaUtils.isValidExtension(sFile: String): boolean;
-var
-  sExt: String;
-begin
-  sExt := tpath.GetExtension(sFile);
-  result := (pos(uppercase(sExt), sValidExtensions) > 0);
-end;
-
-class function tMediaUtils.isValidExtension2(sFile: String): integer;
+class function tMediaUtils.isValidExtension(sFile: String): integer;
 var
   sExt: String;
   i: integer;
 begin
-  sExt := uppercase(tpath.GetExtension(sFile));
+  sExt := uppercase(tpath.getExtension(sFile));
   i := 0;
   result := -1;
   for i := low(aValidExtensions) to High(aValidExtensions) do
   begin
-    if SameText(aValidExtensions[i],sExt) then
+    if SameText(aValidExtensions[i], sExt) then
     begin
       result := i;
       break;

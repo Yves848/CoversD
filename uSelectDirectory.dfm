@@ -49,9 +49,9 @@ object fSelectDirectory: TfSelectDirectory
     end
     object Memo1: TAdvMemo
       Left = 6
-      Top = 56
+      Top = 96
       Width = 723
-      Height = 417
+      Height = 377
       Cursor = crIBeam
       ActiveLineSettings.ShowActiveLine = False
       ActiveLineSettings.ShowActiveLineIndicator = False
@@ -106,6 +106,7 @@ object fSelectDirectory: TfSelectDirectory
         BFBFBFBFBFB72525FDFD9A9ABFBFBFBFBFB7BFBFB7B72525FDFDFD25BFBFBFBF
         BFBFBFBFBFB72525FDFD9A9ABFBFBFBFBFBFBFBFBFB725FDFDFDFD2525252525
         25252525252525FDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFD}
+      BorderColor = 15987699
       BorderStyle = bsSingle
       ClipboardFormats = [cfText]
       CodeFolding.Enabled = False
@@ -118,6 +119,9 @@ object fSelectDirectory: TfSelectDirectory
       Gutter.Font.Height = -13
       Gutter.Font.Name = 'Courier New'
       Gutter.Font.Style = []
+      Gutter.BorderColor = 15987699
+      Gutter.GutterColor = clWhite
+      Gutter.GutterColorTo = clNone
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -13
@@ -128,7 +132,7 @@ object fSelectDirectory: TfSelectDirectory
         '')
       MarkerList.UseDefaultMarkerImageIndex = False
       MarkerList.DefaultMarkerImageIndex = -1
-      MarkerList.ImageTransparentColor = -1
+      MarkerList.ImageTransparentColor = 33554432
       OleDropTarget = []
       PrintOptions.MarginLeft = 0
       PrintOptions.MarginRight = 0
@@ -138,7 +142,7 @@ object fSelectDirectory: TfSelectDirectory
       PrintOptions.PrintLineNumbers = False
       RightMarginColor = 14869218
       ScrollHint = False
-      SelColor = clWhite
+      SelColor = clBlack
       SelBkColor = clNavy
       ShowRightMargin = True
       SmartTabs = False
@@ -160,6 +164,22 @@ object fSelectDirectory: TfSelectDirectory
       Version = '3.6.6.0'
       WordWrap = wwNone
     end
+    object sButton2: TsButton
+      Left = 111
+      Top = 16
+      Width = 75
+      Height = 25
+      Caption = 'Tags'
+      TabOrder = 2
+      OnClick = sButton2Click
+    end
+    object pb1: TsProgressBar
+      Left = 6
+      Top = 64
+      Width = 723
+      Height = 17
+      TabOrder = 3
+    end
   end
   object FDConnection1: TFDConnection
     ConnectionName = 'postgres'
@@ -168,6 +188,7 @@ object fSelectDirectory: TfSelectDirectory
       'Server=localhost'
       'Database=C:\Git\CoversD\Medias.db'
       'LockingMode=Normal')
+    Connected = True
     LoginPrompt = False
     Left = 832
     Top = 56
@@ -175,9 +196,44 @@ object fSelectDirectory: TfSelectDirectory
   object tMedias: TFDTable
     IndexFieldNames = 'id'
     Connection = FDConnection1
-    UpdateOptions.UpdateTableName = 'Medias'
-    TableName = 'Medias'
+    UpdateOptions.UpdateTableName = 'MediasFiles'
+    TableName = 'MediasFiles'
     Left = 832
     Top = 120
+  end
+  object qMedias: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from MediasFiles')
+    Left = 801
+    Top = 272
+  end
+  object qTags: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      
+        'insert into Tags (MediaId, Artist, Title, Album) values (:MediaI' +
+        'd, :Artist, :Title, :Album)')
+    Left = 849
+    Top = 248
+    ParamData = <
+      item
+        Name = 'MediaId'
+        DataType = ftInteger
+        FDDataType = dtInt16
+        ParamType = ptInput
+      end
+      item
+        Name = 'ARTIST'
+        ParamType = ptInput
+      end
+      item
+        Name = 'TITLE'
+        ParamType = ptInput
+      end
+      item
+        Name = 'ALBUM'
+        ParamType = ptInput
+      end>
   end
 end

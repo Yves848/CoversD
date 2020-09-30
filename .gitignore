@@ -68,7 +68,15 @@ __recovery/
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
 
+Win32/Release/*
+Win32/Debug/*
+
 # End of https://www.toptal.com/developers/gitignore/api/delphi
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
+Win32/Debug/Covers.exe
+Win32/Debug/uMain.dcu
+Win32/Debug/uSelectDirectory.dcu
+Win32/Debug/uTypes.dcu
+Covers.identcache
