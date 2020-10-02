@@ -80,3 +80,7 @@ Win32/Debug/uMain.dcu
 Win32/Debug/uSelectDirectory.dcu
 Win32/Debug/uTypes.dcu
 Covers.identcache
+Medias.db
+Medias.db
+*.db
+Medias.db

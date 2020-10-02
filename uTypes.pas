@@ -3,7 +3,7 @@ unit uTypes;
 interface
 
 uses
-  winApi.windows, System.Classes, System.SysUtils, System.IOUtils, System.Types, TagsLibrary, Vcl.Graphics, strUtils,
+  VCL.ExtCtrls, winApi.windows, System.Classes, System.SysUtils, System.IOUtils, System.Types, TagsLibrary, Vcl.Graphics, strUtils,
   Generics.Defaults, Generics.collections, XSuperObject;
 
 const
@@ -31,6 +31,19 @@ type
   public
     class function isValidExtension(sFile: String): integer; static;
     class function getExtension(sFile: String): string; static;
+  end;
+
+  tGridObject = class(tPersistent)
+  public
+    id : Integer;
+    MediaName : String;
+    Artist : String;
+    Title : String;
+    Album : String;
+    Cover : timage;
+    constructor create; overload;
+    constructor create(aId : Integer; aMediaName, aArtist, aTitle, aAlbum : string); overload;
+    destructor destroy; overload;
   end;
 
 implementation
@@ -101,6 +114,36 @@ begin
       break;
     end;
   end;
+end;
+
+{ tGridObject }
+
+constructor tGridObject.create;
+begin
+    inherited create;
+    id := -1;
+    Artist := '';
+    Title := '';
+    Album := '';
+    MediaName := '';
+    Cover := nil;
+end;
+
+constructor tGridObject.create(aId: Integer; aMediaName, aArtist, aTitle, aAlbum: string);
+begin
+    self.create;
+    Id := aId;
+    MediaName := aMediaName;
+    Artist := aArtist;
+    Title := aTitle;
+    Album := aAlbum;
+end;
+
+destructor tGridObject.destroy;
+begin
+  if cover <> nil then
+     freeAndNil(cover);
+  inherited Destroy;
 end;
 
 end.
