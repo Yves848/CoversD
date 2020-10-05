@@ -11,7 +11,7 @@ uses
   JvExControls, clipbrd, Spectrum3DLibraryDefs, bass_aac,
   JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw, activeX, acWebBrowser, Vcl.Grids, JvExGrids, JvStringGrid, IdComponent,
   IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid,
-  ovctable, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory;
+  ovctable, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory, AdvReflectionLabel, KryptoGlowLabel, AdvMemo, acPNG;
 
 type
   TfMain = class(TForm)
@@ -32,12 +32,10 @@ type
     sILTV: TsAlphaImageList;
     sImage1: TsImage;
     sROPPlaylist: TsRollOutPanel;
-    sSplitter2: TsSplitter;
     TrackBar1: TsTrackBar;
     sGauge1: TsGauge;
     Timer1: TTimer;
     sGauge2: TsGauge;
-    TrackBar2: TsTrackBar;
     sButton1: TsButton;
     sButton2: TsButton;
     SynJSONSyn1: TSynJSONSyn;
@@ -49,7 +47,6 @@ type
     sShellTreeView1: TsShellTreeView;
     sgList: TAdvStringGrid;
     sButton3: TsButton;
-    Image1: TsImage;
     sButton4: TsButton;
     sButton5: TsButton;
     sSaveDialog1: TsSaveDialog;
@@ -58,12 +55,20 @@ type
     sILButtons: TsAlphaImageList;
     sButton7: TsButton;
     sButton8: TsButton;
-    sBevel1: TsBevel;
-    slblArtist: TsLabel;
-    slblTitle: TsLabel;
     sPanel3: TsPanel;
     thDisplay: TJvThread;
-    sButton9: TsButton;
+    sPanel4: TsPanel;
+    sPanel5: TsPanel;
+    Image1: TsImage;
+    sPanel6: TsPanel;
+    sBevel1: TsBevel;
+    sPanel7: TsPanel;
+    sPanel8: TsPanel;
+    sPanel9: TsPanel;
+    tbVolume: TsTrackBar;
+    kglArtist: TKryptoGlowLabel;
+    kglTitle: TKryptoGlowLabel;
+    Image2: TImage;
     procedure Button1Click(Sender: TObject);
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
@@ -72,7 +77,7 @@ type
     procedure sTVMediasKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Timer1Timer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure TrackBar2Change(Sender: TObject);
+    procedure tbVolumeChange(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
     procedure sButton1Click(Sender: TObject);
     procedure sButton2Click(Sender: TObject);
@@ -96,6 +101,7 @@ type
     procedure thDisplayExecute(Sender: TObject; Params: Pointer);
     procedure sButton9Click(Sender: TObject);
     procedure FormResize(Sender: TObject);
+    procedure tbVolumeSkinPaint(Sender: TObject; Canvas: TCanvas);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -135,6 +141,8 @@ type
     procedure playlistRemoveItem(index: Integer);
     procedure updatePlayingInfos(sFileName: String); overload;
     procedure updatePlayingInfos(aTags: TTags); overload;
+    function FormatTextWithEllipse(aText: string): string;
+    procedure DrawTransparentRectangle(Canvas: TCanvas; Rect: TRect; Color: TColor; Transparency: Integer);
   end;
 
 var
@@ -156,7 +164,28 @@ implementation
 {$R *.dfm}
 
 uses
-  JvDynControlEngineVcl;
+  JvDynControlEngineVcl, acntUtils, acgpUtils, sVCLUtils;
+
+function TfMain.FormatTextWithEllipse(aText: string): string;
+const
+  csEllipses = '...';
+var
+  ldTextWidth: Double;
+  lsText: String;
+begin
+
+  Result := aText;
+  lsText := aText;
+
+  ldTextWidth := kglTitle.Canvas.TextWidth(lsText);
+  if (ldTextWidth > kglTitle.Width) then
+    repeat
+      lsText := Copy(lsText, 1, Length(lsText) - 1);
+      Result := lsText + csEllipses;
+      ldTextWidth := kglTitle.Canvas.TextWidth(Result);
+    until (ldTextWidth < kglTitle.Width);
+
+end;
 
 procedure StreamEndCallback(handle: HSYNC; Channel, data: DWORD; user: Pointer); stdcall;
 begin
@@ -169,15 +198,21 @@ var
 begin
   if (BASS_ChannelIsActive(Channel) = BASS_ACTIVE_PLAYING) or (Sender = nil) then
   begin
-    index := slbPlaylist.ItemIndex;
-    inc(index);
-    if index > slbPlaylist.Items.Count - 1 then
-      index := 0;
+    if slbPlaylist.Items.Count > 0 then
+    begin
 
-    slbPlaylist.ItemIndex := index;
+      index := slbPlaylist.ItemIndex;
 
-    BASS_ChannelStop(Channel);
-    PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
+      inc(index);
+      if index > slbPlaylist.Items.Count - 1 then
+        index := 0;
+
+      slbPlaylist.ItemIndex := index;
+
+      BASS_ChannelStop(Channel);
+      updatePlayingInfos(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags);
+      PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
+    end;
   end;
 
 end;
@@ -203,9 +238,8 @@ end;
 
 procedure TfMain.PlayStream(FileName: String);
 
-
 begin
-  BASS_StreamFree(channel);
+  BASS_StreamFree(Channel);
 
   if uppercase(tpath.GetExtension(FileName)) = '.MP3' then
     Channel := BASS_StreamCreateFile(False, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE)
@@ -310,7 +344,7 @@ begin
   aFiles := TDirectory.GetFileSystemEntries(sFolder, aSearchOption, nil);
 
   i := 0;
-  while i <= length(aFiles) - 1 do
+  while i <= Length(aFiles) - 1 do
   begin
     sExt := tpath.GetExtension(aFiles[i]);
     bAdd := tMediaUtils.isValidExtension(sExt);
@@ -329,17 +363,17 @@ var
   sPath, sFile: String;
   index: Integer;
 begin
-  result := -1;
+  Result := -1;
   aMediaFile := tMediaFile.Create(sgList.Cells[0, ARow]);
   sPath := tpath.GetDirectoryName(aMediaFile.Tags.FileName);
   sFile := tpath.GetFileNameWithoutExtension(aMediaFile.Tags.FileName);
   index := slbPlaylist.Items.IndexOf(sFile);
   if index = -1 then
   begin
-    result := slbPlaylist.Items.AddObject(sFile, aMediaFile);
+    Result := slbPlaylist.Items.AddObject(sFile, aMediaFile);
   end
   else
-    result := index;
+    Result := index;
 end;
 
 // function TfMain.AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): Integer;
@@ -475,23 +509,23 @@ var
   i: Integer;
   sParent: String;
 begin
-  result := Nil;
+  Result := Nil;
   i := 0;
 
   while i <= sTVMedias.Items.Count - 1 do
   begin
     if sTVMedias.Items[i].Text = sLabel then
     begin
-      result := sTVMedias.Items[i];
+      Result := sTVMedias.Items[i];
       i := sTVMedias.Items.Count;
     end;
     inc(i);
   end;
-  if result = nil then
+  if Result = nil then
   begin
     sParent := TDirectory.GetParent(sLabel);
     if sParent <> '' then
-      result := findNode(sParent);
+      Result := findNode(sParent);
   end;
 
 end;
@@ -540,7 +574,7 @@ begin
   sGauge2.MaxValue := High(Word) div 2 + 1;
   // * Get current volume
   Volume := BASS_GetVolume;
-  TrackBar2.Position := 100 - Round(Volume * 100);
+  tbVolume.Position := 100 - Round(Volume * 100);
   OpenConfig;
   initGrid;
 end;
@@ -596,7 +630,7 @@ end;
 procedure TfMain.FormResize(Sender: TObject);
 begin
   Spectrum3D_ReInitialize(Sprectrum3D);
-  Spectrum3D_ReAlign(Sprectrum3D,sPanel3.handle);
+  Spectrum3D_ReAlign(Sprectrum3D, sPanel3.handle);
 end;
 
 procedure TfMain.FormShow(Sender: TObject);
@@ -1026,54 +1060,67 @@ var
   BitMap: TBitmap;
 begin
   // * List cover arts
-  for i := 0 to Tags.CoverArtCount - 1 do
+  if Tags.CoverArtCount > 0 then
   begin
-    BitMap := TBitmap.Create;
-    try
-      with Tags.CoverArts[i] do
-      begin
-        Stream.Seek(0, soBeginning);
-        case PictureFormat of
-          tpfJPEG:
-            begin
-              ImageJPEG := TJPEGImage.Create;
-              try
-                ImageJPEG.LoadFromStream(Stream);
-                BitMap.Assign(ImageJPEG);
-              finally
-                FreeAndNil(ImageJPEG);
+    for i := 0 to Tags.CoverArtCount - 1 do
+    begin
+      BitMap := TBitmap.Create;
+      try
+        with Tags.CoverArts[i] do
+        begin
+          Stream.Seek(0, soBeginning);
+          case PictureFormat of
+            tpfJPEG:
+              begin
+                ImageJPEG := TJPEGImage.Create;
+                try
+                  ImageJPEG.LoadFromStream(Stream);
+                  BitMap.Assign(ImageJPEG);
+                finally
+                  FreeAndNil(ImageJPEG);
+                end;
               end;
-            end;
-          tpfPNG:
-            begin
-              ImagePNG := TPNGImage.Create;
-              try
-                ImagePNG.LoadFromStream(Stream);
-                BitMap.Assign(ImagePNG);
-              finally
-                FreeAndNil(ImagePNG);
+            tpfPNG:
+              begin
+                ImagePNG := TPNGImage.Create;
+                try
+                  ImagePNG.LoadFromStream(Stream);
+                  BitMap.Assign(ImagePNG);
+                finally
+                  FreeAndNil(ImagePNG);
+                end;
               end;
-            end;
-          tpfGIF:
-            begin
-              ImageGIF := TGIFImage.Create;
-              try
-                ImageGIF.LoadFromStream(Stream);
-                BitMap.Assign(ImageGIF);
-              finally
-                FreeAndNil(ImageGIF);
+            tpfGIF:
+              begin
+                ImageGIF := TGIFImage.Create;
+                try
+                  ImageGIF.LoadFromStream(Stream);
+                  BitMap.Assign(ImageGIF);
+                finally
+                  FreeAndNil(ImageGIF);
+                end;
               end;
-            end;
-          tpfBMP:
-            begin
-              BitMap.LoadFromStream(Stream);
-            end;
+            tpfBMP:
+              begin
+                BitMap.LoadFromStream(Stream);
+              end;
+          end;
+          if Assigned(BitMap) then
+            aImage.Picture.BitMap.Assign(BitMap)
+          else
+            aImage.Picture.Assign(Nil);
         end;
-        aImage.Picture.BitMap.Assign(BitMap);
+      finally
+        FreeAndNil(BitMap);
       end;
-    finally
-      FreeAndNil(BitMap);
     end;
+  end
+  else
+  begin
+    aImage.Picture.Assign(Nil);
+    aImage.refresh;
+    Application.ProcessMessages;
+    aImage.Picture.Bitmap.Assign(image2.Picture.Bitmap);
   end;
 end;
 
@@ -1088,7 +1135,7 @@ begin
     slbPlaylist.Clear;
     i := 0;
     Json := TSuperObject.ParseFile(sOpenDialog1.FileName);
-    while i <= Json.A['tracks'].length - 1 do
+    while i <= Json.A['tracks'].Length - 1 do
     begin
       pMediaFile := tMediaFile.Create(Json.A['tracks'].O[i].S['filename']);
       slbPlaylist.Items.AddObject(tpath.GetFileNameWithoutExtension(pMediaFile.Tags.FileName), pMediaFile);
@@ -1232,7 +1279,7 @@ begin
   aFiles := TDirectory.GetFileSystemEntries(aPath, aSearchOption, nil);
 
   i := 0;
-  while i <= length(aFiles) - 1 do
+  while i <= Length(aFiles) - 1 do
   begin
     sExt := tpath.GetExtension(aFiles[i]);
     bAdd := (pos(uppercase(sExt), sValidExtensions) > 0);
@@ -1257,25 +1304,24 @@ begin
   // * Separate L & R channel
   LeftLevel := LoWord(Level);
   RightLevel := HiWord(Level);
-   //* Set the VUs
-   if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_PLAYING then
-   begin
-   // * Logarithmic
+  // * Set the VUs
+  if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_PLAYING then
+  begin
+    // * Logarithmic
 
-   sGauge1.Progress := LeftLevel;
-   sGauge2.Progress := RightLevel;
+    sGauge1.Progress := LeftLevel;
+    sGauge2.Progress := RightLevel;
 
-   end
-   else
-   begin
-   sGauge1.Progress := sGauge1.Progress - 1000;
-   sGauge2.Progress := sGauge2.Progress - 1000;
-   end;
-   //* Playing position
+  end
+  else
+  begin
+    sGauge1.Progress := sGauge1.Progress - 1000;
+    sGauge2.Progress := sGauge2.Progress - 1000;
+  end;
+  // * Playing position
   AdjustingPlaybackPosition := True;
   TrackBar1.Position := BASS_ChannelGetPosition(Channel, BASS_POS_BYTE);
   AdjustingPlaybackPosition := False;
-  //Application.ProcessMessages;
 end;
 
 procedure TfMain.TrackBar1Change(Sender: TObject);
@@ -1286,20 +1332,83 @@ begin
   end;
 end;
 
-procedure TfMain.TrackBar2Change(Sender: TObject);
+procedure TfMain.tbVolumeChange(Sender: TObject);
 var
   Volume: Double;
 begin
-  Volume := (100 - TrackBar2.Position) / TrackBar2.Max;
+  Volume := (100 - tbVolume.Position) / tbVolume.Max;
   BASS_SetVolume(Volume);
 
 end;
 
-procedure TfMain.updatePlayingInfos(aTags: TTags);
+procedure TfMain.tbVolumeSkinPaint(Sender: TObject; Canvas: TCanvas);
+var
+  Points: array [0 .. 2] of TPoint;
+  C: TColor;
+  R: TRect;
 begin
-  slblArtist.Caption := aTags.GetTag('ARTIST');
-  slblTitle.Caption := aTags.GetTag('TITLE');
+
+  R := tbVolume.ChannelRect;
+  OffsetRect(R, WidthOf(R), 0);
+  InflateRect(R, 0, -HeightOf(tbVolume.ThumbRect) div 2);
+  Points[1] := R.TopLeft;
+  Points[0] := Point(R.Left, R.Bottom);
+  if not tbVolume.Reversed then
+    Points[2] := Point(R.Right, R.Top)
+  else
+    Points[2] := Point(R.Right, R.Bottom);
+  C := acColorToRGB(clBtnText);
+
+  acgpFillPolygon(Canvas.handle, TColor($44000000 or Cardinal(C)), PPoint(@Points[0]), 3);
+
+end;
+
+procedure TfMain.updatePlayingInfos(aTags: TTags);
+var
+  R: TRect;
+  bm2: TBitmap;
+begin
+  kglArtist.Caption := aTags.GetTag('ARTIST');
+  kglTitle.Caption := FormatTextWithEllipse(aTags.GetTag('TITLE'));
+
   ListCoverArts(sImage1, aTags);
+  with sImage1.Canvas do
+  begin
+    bm2 := TBitmap.Create;
+    bm2.SetSize(cliprect.Width, (cliprect.height div 4));
+    bm2.Canvas.Brush.Color := clTeal;
+    bm2.Canvas.Brush.Style := bsSolid;
+    R := TRect.Create(0, 0, bm2.Width, bm2.height);
+    bm2.Canvas.Fillrect(R);
+    Draw(0, cliprect.height - (cliprect.height div 4), bm2, 200);
+    bm2.Free;
+  end;
+end;
+
+procedure TfMain.DrawTransparentRectangle(Canvas: TCanvas; Rect: TRect; Color: TColor; Transparency: Integer);
+var
+  X: Integer;
+  Y: Integer;
+  C: TColor;
+  R, G, B: Integer;
+  RR, RG, RB: Integer;
+begin
+  RR := GetRValue(Color);
+  RG := GetGValue(Color);
+  RB := GetBValue(Color);
+
+  for Y := Rect.Top to Rect.Bottom - 1 do
+    for X := Rect.Left to Rect.Right - 1 do
+    begin
+      C := Canvas.Pixels[X, Y];
+      R := Round(0.01 * (Transparency * GetRValue(C) + (100 - Transparency) * RR));
+
+      G := Round(0.01 * (Transparency * GetGValue(C) + (100 - Transparency) * RG));
+
+      B := Round(0.01 * (Transparency * GetBValue(C) + (100 - Transparency) * RB));
+
+      Canvas.Pixels[X, Y] := RGB(R, G, B);
+    end;
 end;
 
 procedure TfMain.updatePlayingInfos(sFileName: String);
