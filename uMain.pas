@@ -11,7 +11,8 @@ uses
   JvExControls, clipbrd, Spectrum3DLibraryDefs, bass_aac,
   JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw, activeX, acWebBrowser, Vcl.Grids, JvExGrids, JvStringGrid, IdComponent,
   IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid,
-  ovctable, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory, AdvReflectionLabel, KryptoGlowLabel, AdvMemo, acPNG;
+  ovctable, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory, AdvReflectionLabel, KryptoGlowLabel, AdvMemo, acPNG,
+  JvExComCtrls, JvProgressBar;
 
 type
   TfMain = class(TForm)
@@ -33,9 +34,7 @@ type
     sImage1: TsImage;
     sROPPlaylist: TsRollOutPanel;
     TrackBar1: TsTrackBar;
-    sGauge1: TsGauge;
     Timer1: TTimer;
-    sGauge2: TsGauge;
     sButton1: TsButton;
     sButton2: TsButton;
     SynJSONSyn1: TSynJSONSyn;
@@ -59,7 +58,6 @@ type
     thDisplay: TJvThread;
     sPanel4: TsPanel;
     sPanel5: TsPanel;
-    Image1: TsImage;
     sPanel6: TsPanel;
     sBevel1: TsBevel;
     sPanel7: TsPanel;
@@ -69,6 +67,13 @@ type
     kglArtist: TKryptoGlowLabel;
     kglTitle: TKryptoGlowLabel;
     Image2: TImage;
+    sImage2: TsImage;
+    image1: TsImage;
+    sGauge1: TsGauge;
+    sGauge2: TsGauge;
+    sPanel10: TsPanel;
+    VuR: TsImage;
+    vuL: TsImage;
     procedure Button1Click(Sender: TObject);
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
@@ -102,6 +107,7 @@ type
     procedure sButton9Click(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure tbVolumeSkinPaint(Sender: TObject; Canvas: TCanvas);
+    procedure sShellTreeView1Change(Sender: TObject; Node: TTreeNode);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -143,6 +149,7 @@ type
     procedure updatePlayingInfos(aTags: TTags); overload;
     function FormatTextWithEllipse(aText: string): string;
     procedure DrawTransparentRectangle(Canvas: TCanvas; Rect: TRect; Color: TColor; Transparency: Integer);
+    procedure UpdateVuMetre(LeftLevel, RightLevel: Integer);
   end;
 
 var
@@ -426,7 +433,7 @@ begin
     Application.ProcessMessages;
     MS.Seek(0, soFromBeginning);
     jpgImg.LoadFromStream(MS);
-    Image1.Picture.Assign(jpgImg)
+    image1.Picture.Assign(jpgImg)
   finally
     FreeAndNil(MS);
     FreeAndNil(jpgImg);
@@ -572,6 +579,7 @@ begin
   // * Set VU max. values
   sGauge1.MaxValue := High(Word) div 2 + 1;
   sGauge2.MaxValue := High(Word) div 2 + 1;
+  UpdateVuMetre(0, 0);
   // * Get current volume
   Volume := BASS_GetVolume;
   tbVolume.Position := 100 - Round(Volume * 100);
@@ -805,7 +813,7 @@ begin
   if sgList.Cells[0, NewRow] <> '' then
   begin
     pMediaFile := tMediaFile.Create(sgList.Cells[0, NewRow]);
-    ListCoverArts(Image1, pMediaFile.Tags);
+    ListCoverArts(image1, pMediaFile.Tags);
     pMediaFile.Destroy;
   end;
 end;
@@ -868,19 +876,33 @@ end;
 procedure TfMain.sButton1Click(Sender: TObject);
 begin
   BASS_ChannelStop(Channel);
+  sButton2.ImageIndex := 2;
 end;
 
 procedure TfMain.sButton2Click(Sender: TObject);
 begin
-  if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_PLAYING then
+  if Channel = 0 then
   begin
-    BASS_ChannelPause(Channel);
-    sButton2.ImageIndex := 0;
+    // start playing
+    if slbPlaylist.ItemIndex > -1 then
+    begin
+      BASS_ChannelStop(Channel);
+      PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
+      sButton2.ImageIndex := 3;
+    end;
   end
   else
   begin
-    BASS_ChannelPlay(Channel, False);
-    sButton2.ImageIndex := 3;
+    if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_PLAYING then
+    begin
+      BASS_ChannelPause(Channel);
+      sButton2.ImageIndex := 0;
+    end
+    else
+    begin
+      BASS_ChannelPlay(Channel, False);
+      sButton2.ImageIndex := 3;
+    end;
   end;
 end;
 
@@ -889,8 +911,15 @@ var
   fCoverSearch: tfCoverSearch;
 begin
   fCoverSearch := tfCoverSearch.Create(Self);
-  fCoverSearch.Artist := sgList.Cells[1, sgList.Row];
-  fCoverSearch.Title := sgList.Cells[2, sgList.Row];
+  if trim(sgList.Cells[1, sgList.Row]) + trim(sgList.Cells[2, sgList.Row]) = '' then
+    fCoverSearch.Title := trim(sgList.Cells[0, sgList.Row])
+  else
+
+  begin
+
+    fCoverSearch.Artist := sgList.Cells[1, sgList.Row];
+    fCoverSearch.Title := sgList.Cells[2, sgList.Row];
+  end;
   fCoverSearch.Show;
   fCoverSearch.StartSearch;
   // fCoverSearch.free;
@@ -953,6 +982,7 @@ begin
     begin
       BASS_ChannelStop(Channel);
       PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
+      sButton2.ImageIndex := 3;
     end;
     removeKeyFromStack;
   end;
@@ -976,6 +1006,24 @@ begin
   begin
     sExtension := tpath.GetExtension(AFolder.PathName);
     CanAdd := (pos(uppercase(sExtension), sValidExtensions) > 0);
+  end;
+end;
+
+procedure TfMain.sShellTreeView1Change(Sender: TObject; Node: TTreeNode);
+var
+  aNode: TTreeNode;
+  pMediaFile : tMediaFile;
+begin
+  //
+  aNode := sShellTreeView1.Selected;
+  if not TacShellFolder(aNode.data).IsFileFolder then
+  begin
+     pMediaFile := tMediaFile.create(TacShellFolder(aNode.data).PathName);
+     if pMediaFile.tags.CoverArtCount > 0 then
+     begin
+       ListCoverArts(image1,pMediaFile.tags);
+     end;
+     pMediaFile.Free;
   end;
 end;
 
@@ -1120,7 +1168,7 @@ begin
     aImage.Picture.Assign(Nil);
     aImage.refresh;
     Application.ProcessMessages;
-    aImage.Picture.Bitmap.Assign(image2.Picture.Bitmap);
+    aImage.Picture.BitMap.Assign(Image2.Picture.BitMap);
   end;
 end;
 
@@ -1309,14 +1357,15 @@ begin
   begin
     // * Logarithmic
 
-    sGauge1.Progress := LeftLevel;
-    sGauge2.Progress := RightLevel;
-
+    // sGauge1.Progress := LeftLevel;
+    // sGauge2.Progress := RightLevel;
+    UpdateVuMetre(LeftLevel, RightLevel);
   end
   else
   begin
     sGauge1.Progress := sGauge1.Progress - 1000;
     sGauge2.Progress := sGauge2.Progress - 1000;
+    UpdateVuMetre(0, 0);
   end;
   // * Playing position
   AdjustingPlaybackPosition := True;
@@ -1422,7 +1471,44 @@ end;
 
 procedure TfMain.updateTV;
 begin
-  sTVMedias.Refresh;
+  sTVMedias.refresh;
+end;
+
+procedure TfMain.UpdateVuMetre(LeftLevel, RightLevel: Integer);
+
+  procedure updateMeter(aImage: TsImage; iLevel: Integer; iMax: Integer);
+  var
+    R: TRect;
+    w: Integer;
+    l: Integer;
+    barwidth: Integer;
+    p, p2: Integer;
+    bm2: TBitmap;
+
+  begin
+    aImage.Picture.BitMap.Assign(sImage2.Picture.BitMap);
+    with aImage.Canvas do
+    begin
+      bm2 := TBitmap.Create;
+      w := iMax;
+      p := Round(iLevel / w * 100);
+      p2 := 100 - p;
+      barwidth := cliprect.Width;
+      l := Round(barwidth / 100 * p);
+      bm2.SetSize(Round(cliprect.Width / 100 * p2), cliprect.height);
+      bm2.Canvas.Brush.Color := clGray;
+      bm2.Canvas.Brush.Style := bsSolid;
+      R := TRect.Create(0, 0, bm2.Width, bm2.height);
+      bm2.Canvas.Fillrect(R);
+      Draw(l, 0, bm2, 220);
+      bm2.Free;
+    end;
+  end;
+
+begin
+  //
+  updateMeter(vuL, LeftLevel, sGauge1.MaxValue);
+  updateMeter(VuR, RightLevel, sGauge2.MaxValue);
 end;
 
 end.
