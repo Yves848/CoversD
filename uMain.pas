@@ -11,8 +11,8 @@ uses
   JvExControls, clipbrd, Spectrum3DLibraryDefs, bass_aac,
   JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw, activeX, acWebBrowser, Vcl.Grids, JvExGrids, JvStringGrid, IdComponent,
   IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid,
-  ovctable, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory, AdvReflectionLabel, KryptoGlowLabel, AdvMemo, acPNG,
-  JvExComCtrls, JvProgressBar;
+  ovctable, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory, AdvReflectionLabel, AdvMemo, acPNG,
+  JvExComCtrls, JvProgressBar, KryptoGlowLabel;
 
 type
   TfMain = class(TForm)
@@ -74,6 +74,7 @@ type
     sPanel10: TsPanel;
     VuR: TsImage;
     vuL: TsImage;
+    thAddToPlayList: TJvThread;
     procedure Button1Click(Sender: TObject);
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
@@ -108,6 +109,8 @@ type
     procedure FormResize(Sender: TObject);
     procedure tbVolumeSkinPaint(Sender: TObject; Canvas: TCanvas);
     procedure sShellTreeView1Change(Sender: TObject; Node: TTreeNode);
+    procedure sShellTreeView1GetImageIndex(Sender: TObject; Node: TTreeNode);
+    procedure thAddToPlayListExecute(Sender: TObject; Params: Pointer);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -124,6 +127,7 @@ type
     AdjustingPlaybackPosition: Boolean;
     delais: Integer;
     momentdown: tDateTime;
+    GlobalMediaFile: tMediaFile;
     procedure PlayStream(FileName: String);
     procedure addfileName;
     procedure setPBMax;
@@ -134,9 +138,11 @@ type
     procedure initGrid;
     procedure removeKeyFromStack;
     function AddToPlayList(ARow: Integer): Integer; overload;
+    function AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): Integer; overload;
     Procedure AddFolderToGrid(sFolder: String);
     Procedure AddFileToGrid(sFile: String);
     Procedure AddFileToGridTH;
+    Procedure AddToPlayListTH;
     procedure GetImgLink;
     Procedure PlayNextTrack(Sender: TObject);
     Procedure PlayPrevTrack;
@@ -383,25 +389,43 @@ begin
     Result := index;
 end;
 
-// function TfMain.AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): Integer;
-// var
-// index: Integer;
-// Tags: TTags;
-// currentNode: TTreeNode;
-// begin
-// if aNode.HasChildren then
-// currentNode := aNode.getFirstChild;
-// while currentNode <> nil do
-// begin
-//
-// if tMediaFile(currentNode.data) <> nil then
-// begin
-// Tags := tMediaFile(currentNode.data).Tags;
-// AddToPlayList(Tags);
-// end;
-// currentNode := currentNode.getNextSibling;
-// end;
-// end;
+function TfMain.AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): Integer;
+var
+  aMediaFile: tMediaFile;
+  sPath, sFile: String;
+  index: Integer;
+begin
+  Result := -1;
+  if not TacShellFolder(aNode.data).IsFileFolder then
+  begin
+
+    aMediaFile := tMediaFile.Create(TacShellFolder(aNode.data).PathName);
+    sPath := tpath.GetDirectoryName(aMediaFile.Tags.FileName);
+    sFile := tpath.GetFileNameWithoutExtension(aMediaFile.Tags.FileName);
+    index := slbPlaylist.Items.IndexOf(sFile);
+    if index = -1 then
+    begin
+      Result := slbPlaylist.Items.AddObject(sFile, aMediaFile);
+    end
+    else
+      Result := index;
+  end
+end;
+
+procedure TfMain.AddToPlayListTH;
+var
+  aMediaFile: tMediaFile;
+  sPath : String;
+  index: Integer;
+begin
+    aMediaFile := tMediaFile.Create(sFile);
+    index := slbPlaylist.Items.IndexOf(sFile);
+   if index = -1 then
+    begin
+      slbPlaylist.Items.AddObject(sFile, aMediaFile);
+    end
+
+end;
 
 procedure TfMain.Button1Click(Sender: TObject);
 var
@@ -555,7 +579,7 @@ var
   Volume: Double;
 begin
   // * Never forget to init BASS
-
+  GlobalMediaFile := tMediaFile.Create;
   BASS_Init(-1, 44100, 0, Self.handle, 0);
 
   ZeroMemory(@Params, SizeOf(TSpectrum3D_CreateParams));
@@ -592,6 +616,8 @@ begin
   Spectrum3D_Free(Sprectrum3D);
   BASS_Stop;
   BASS_Free;
+  if GlobalMediaFile <> nil then
+    GlobalMediaFile.Destroy;
 end;
 
 procedure TfMain.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -1012,18 +1038,44 @@ end;
 procedure TfMain.sShellTreeView1Change(Sender: TObject; Node: TTreeNode);
 var
   aNode: TTreeNode;
-  pMediaFile : tMediaFile;
+  pMediaFile: tMediaFile;
 begin
   //
   aNode := sShellTreeView1.Selected;
   if not TacShellFolder(aNode.data).IsFileFolder then
   begin
-     pMediaFile := tMediaFile.create(TacShellFolder(aNode.data).PathName);
-     if pMediaFile.tags.CoverArtCount > 0 then
-     begin
-       ListCoverArts(image1,pMediaFile.tags);
-     end;
-     pMediaFile.Free;
+    pMediaFile := tMediaFile.Create(TacShellFolder(aNode.data).PathName);
+    if pMediaFile.Tags.CoverArtCount > 0 then
+    begin
+      ListCoverArts(image1, pMediaFile.Tags);
+    end;
+    pMediaFile.Free;
+  end;
+end;
+
+procedure TfMain.sShellTreeView1GetImageIndex(Sender: TObject; Node: TTreeNode);
+begin
+  //
+  if (Node <> Nil) then
+  begin
+
+    if tMediaUtils.isValidExtension2(TacShellFolder(Node.data).PathName) > -1 then
+    begin
+      // sMemo1.Lines.add(TacShellFolder(Node.data).PathName);
+      GlobalMediaFile.Tags.Clear;
+      GlobalMediaFile.Tags.ParseCoverArts := True;
+      GlobalMediaFile.Tags.LoadFromFile(TacShellFolder(Node.data).PathName);
+      if GlobalMediaFile.Tags.CoverArtCount > 0 then
+        Node.ImageIndex := 1
+      else
+        Node.ImageIndex := 0;
+    end
+    else
+    begin
+      if TDirectory.Exists(TacShellFolder(Node.data).PathName) then
+        Node.ImageIndex := 2;
+    end;
+
   end;
 end;
 
@@ -1042,6 +1094,20 @@ begin
     end;
     removeKeyFromStack;
   end;
+  if Key = VK_ADD then
+    begin
+      aNode := sShellTreeView1.Selected;
+      if not TacShellFolder(aNode.data).IsFileFolder then
+      begin
+         AddToPlayList(aNode,false);
+      end
+      else
+      begin
+        aPath := TacShellFolder(aNode.data).PathName;
+        thAddToPlayList.execute(self);
+      end;
+      removeKeyFromStack;
+    end;
 end;
 
 procedure TfMain.sShellTreeView1KeyPress(Sender: TObject; var Key: Char);
@@ -1278,6 +1344,33 @@ begin
       end;
     end;
     removeKeyFromStack;
+  end;
+
+end;
+
+procedure TfMain.thAddToPlayListExecute(Sender: TObject; Params: Pointer);
+var
+  i: Integer;
+  aFiles: TStringDynArray;
+  aFileAttributes: tFileAttributes;
+  aSearchOption: tSearchOption;
+  bAdd: Boolean;
+  sExt: String;
+begin
+  aSearchOption := tSearchOption.soAllDirectories;
+  aFiles := TDirectory.GetFileSystemEntries(aPath, aSearchOption, nil);
+
+  i := 0;
+  while i <= Length(aFiles) - 1 do
+  begin
+    sExt := tpath.GetExtension(aFiles[i]);
+    bAdd := (pos(uppercase(sExt), sValidExtensions) > 0);
+    if bAdd then
+    begin
+      sFile := aFiles[i];
+      thAddToPlayList.Synchronize(TfMain(Params).AddToPlayListTH);
+    end;
+    inc(i);
   end;
 
 end;

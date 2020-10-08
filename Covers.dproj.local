@@ -15,7 +15,7 @@
     <Transaction>1899-12-30 00:00:00.000.637,F:\Git\Covers\Unit2.pas=F:\Git\Covers\utags.pas</Transaction>
     <Transaction>1899-12-30 00:00:00.000.190,=F:\Git\Covers\ModelSupport_Covers\default.txvpck</Transaction>
     <Transaction>1899-12-30 00:00:00.000.820,=F:\Git\Covers\Unit1.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.177,=F:\Git\Covers\ModelSupport_Covers\default.txaPackage</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.934,=F:\Git\Covers\ModelSupport_Covers\uMain\default.txvpck</Transaction>
     <Transaction>1899-12-30 00:00:00.000.598,C:\Users\yvesg\Documents\Embarcadero\Studio\Projets\Unit1.pas=F:\Git\Covers\uMain.pas</Transaction>
     <Transaction>1899-12-30 00:00:00.000.257,F:\Git\Covers\Unit1.pas=F:\Git\Covers\uSelectDirectory.pas</Transaction>
     <Transaction>1899-12-30 00:00:00.000.304,=F:\Git\Covers\Unit1.pas</Transaction>
@@ -25,6 +25,6 @@
     <Transaction>1899-12-30 00:00:00.000.433,=F:\Git\Covers\ModelSupport_Covers\utags\default.txaPackage</Transaction>
     <Transaction>1899-12-30 00:00:00.000.049,=C:\Users\yvesg\Documents\Embarcadero\Studio\Projets\Unit1.pas</Transaction>
     <Transaction>1899-12-30 00:00:00.000.087,=F:\Git\Covers\ModelSupport_Covers\uTypes\default.txaPackage</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.934,=F:\Git\Covers\ModelSupport_Covers\uMain\default.txvpck</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.177,=F:\Git\Covers\ModelSupport_Covers\default.txaPackage</Transaction>
   </Transactions>
 </BorlandProject>
