@@ -12,6 +12,8 @@ object fCoverSearch: TfCoverSearch
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object sRollOutPanel1: TsRollOutPanel
@@ -25,32 +27,30 @@ object fCoverSearch: TfCoverSearch
     object sLabel1: TsLabel
       Left = 16
       Top = 16
-      Width = 32
+      Width = 26
       Height = 13
-      Caption = 'Artiste'
+      Caption = 'Artist'
     end
     object sLabel2: TsLabel
-      Left = 336
+      Left = 327
       Top = 16
-      Width = 22
+      Width = 20
       Height = 13
-      Caption = 'Titre'
+      Caption = 'Title'
     end
-    object sEdit1: TsEdit
-      Left = 66
+    object seArtist: TsEdit
+      Left = 50
       Top = 13
       Width = 255
       Height = 21
       TabOrder = 0
-      Text = 'sEdit1'
     end
-    object sEdit2: TsEdit
-      Left = 386
+    object seTitle: TsEdit
+      Left = 354
       Top = 13
       Width = 255
       Height = 21
       TabOrder = 1
-      Text = 'sEdit1'
     end
   end
   object sPanel1: TsPanel
@@ -59,8 +59,16 @@ object fCoverSearch: TfCoverSearch
     Width = 852
     Height = 41
     Align = alBottom
-    Caption = 'sPanel1'
     TabOrder = 1
+    object bsApply: TsButton
+      Left = 1
+      Top = 1
+      Width = 850
+      Height = 39
+      Align = alClient
+      Caption = 'Apply'
+      TabOrder = 0
+    end
   end
   object sg1: TJvStringGrid
     Left = 0
@@ -85,6 +93,7 @@ object fCoverSearch: TfCoverSearch
     FixedFont.Height = -11
     FixedFont.Name = 'Tahoma'
     FixedFont.Style = []
+    ExplicitLeft = -6
   end
   object sPanel2: TsPanel
     Left = 609
@@ -93,10 +102,6 @@ object fCoverSearch: TfCoverSearch
     Height = 305
     Align = alClient
     TabOrder = 3
-    ExplicitLeft = 640
-    ExplicitTop = 104
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object Image1: TsImage
       Left = 18
       Top = 46

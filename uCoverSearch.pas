@@ -6,23 +6,26 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, sPanel, Vcl.StdCtrls, sLabel, Vcl.Grids, JvExGrids, JvStringGrid, sEdit, JvComponentBase,
   JvThread,IdComponent, uSearchImage, xSuperObject,
-  IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, JPEG, PNGImage, GIFImg, TagsLibrary, utypes, acImage ;
+  IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, JPEG, PNGImage, GIFImg, TagsLibrary, utypes, acImage, sButton ;
 
 type
   TfCoverSearch = class(TForm)
     sRollOutPanel1: TsRollOutPanel;
     sLabel1: TsLabel;
-    sEdit1: TsEdit;
-    sEdit2: TsEdit;
+    seArtist: TsEdit;
+    seTitle: TsEdit;
     sLabel2: TsLabel;
     sPanel1: TsPanel;
     sg1: TJvStringGrid;
     thGetImages: TJvThread;
     sPanel2: TsPanel;
     Image1: TsImage;
+    bsApply: TsButton;
     procedure thGetImagesExecute(Sender: TObject; Params: Pointer);
     procedure sg1DrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
     procedure sg1SelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -39,6 +42,22 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfCoverSearch.FormCreate(Sender: TObject);
+begin
+  if not isRegistered then
+  begin
+     bsApply.Enabled := isRegistered;
+     bsApply.Caption := bsApply.Caption + ' (unregistered)';
+  end;
+
+end;
+
+procedure TfCoverSearch.FormShow(Sender: TObject);
+begin
+  seArtist.Text := artist;
+  seTitle.Text := title;
+end;
 
 procedure TfCoverSearch.sg1DrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
 begin

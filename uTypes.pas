@@ -35,6 +35,10 @@ type
     class function getExtension(sFile : String) : string; static;
   end;
 
+
+var
+  isRegistered : boolean;
+
 implementation
 
 { tMediaFile }
@@ -115,5 +119,6 @@ begin
     end;
   end;
 end;
+
 
 end.

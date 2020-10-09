@@ -12,7 +12,7 @@ uses
   JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw, activeX, acWebBrowser, Vcl.Grids, JvExGrids, JvStringGrid, IdComponent,
   IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid,
   ovctable, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory, AdvReflectionLabel, AdvMemo, acPNG,
-  JvExComCtrls, JvProgressBar, KryptoGlowLabel;
+  JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard;
 
 type
   TfMain = class(TForm)
@@ -40,7 +40,6 @@ type
     SynJSONSyn1: TSynJSONSyn;
     slbPlaylist: TsListBox;
     pnMain: TsPanel;
-    sSlider1: TsSlider;
     sPanel1: TsPanel;
     sPanel2: TsPanel;
     sShellTreeView1: TsShellTreeView;
@@ -75,6 +74,7 @@ type
     VuR: TsImage;
     vuL: TsImage;
     thAddToPlayList: TJvThread;
+    bsRegister: TsButton;
     procedure Button1Click(Sender: TObject);
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
@@ -91,7 +91,6 @@ type
     procedure slbPlaylistItemIndexChanged(Sender: TObject);
     procedure slbPlaylistKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure sTVMediasCollapsed(Sender: TObject; Node: TTreeNode);
     procedure FormShow(Sender: TObject);
     procedure sShellTreeView1KeyPress(Sender: TObject; var Key: Char);
     procedure sShellTreeView1AddFolder(Sender: TObject; AFolder: TacShellFolder; var CanAdd: Boolean);
@@ -577,38 +576,43 @@ end;
 procedure TfMain.FormCreate(Sender: TObject);
 var
   Volume: Double;
+  ReleaseCodeString: string;
+  SerialNumber : longint;
 begin
   // * Never forget to init BASS
   GlobalMediaFile := tMediaFile.Create;
   BASS_Init(-1, 44100, 0, Self.handle, 0);
 
   ZeroMemory(@Params, SizeOf(TSpectrum3D_CreateParams));
-  // * Set parent control
   Params.ParentHandle := sPanel3.handle;
-  // * Use antialiasing
   Params.AntiAliasing := 4;
-  // * Create our spectrum display
   Sprectrum3D := Spectrum3D_Create(@Params);
-  // * Get all settings
   Spectrum3D_GetParams(Sprectrum3D, @Settings);
-  // * Set params here eg.:
   Settings.ShowText := True;
-  // * Apply new settings
   Spectrum3D_SetParams(Sprectrum3D, @Settings);
-  // * Create a BASS channel (Below Delphi 2009 - ansi)
-  // Channel := BASS_StreamCreateFile(False, PChar(FileName), 0, 0, BASS_STREAM_AUTOFREE);
-  // * Create a BASS channel (Delphi 2009 and above - unicode)
-  // Channel := BASS_StreamCreateFile(False, PChar(FileName), 0, 0, BASS_STREAM_AUTOFREE OR BASS_UNICODE);
 
-  // * Set VU max. values
   sGauge1.MaxValue := High(Word) div 2 + 1;
   sGauge2.MaxValue := High(Word) div 2 + 1;
   UpdateVuMetre(0, 0);
-  // * Get current volume
+
   Volume := BASS_GetVolume;
   tbVolume.Position := 100 - Round(Volume * 100);
   OpenConfig;
   initGrid;
+
+  GetRegistrationInformation (ReleaseCodeString, SerialNumber);
+  if not IsReleaseCodeValid (ReleaseCodeString, SerialNumber) then
+  begin
+    Caption := Caption + ' Unregistered Demo!';
+    bsRegister.Visible := true;
+    isRegistered := false;
+  end
+  else
+  begin
+    Caption := caption + ' Registered';
+    isRegistered := true;
+  end;
+
 end;
 
 procedure TfMain.FormDestroy(Sender: TObject);
@@ -942,7 +946,6 @@ begin
   else
 
   begin
-
     fCoverSearch.Artist := sgList.Cells[1, sgList.Row];
     fCoverSearch.Title := sgList.Cells[2, sgList.Row];
   end;
@@ -1140,29 +1143,6 @@ begin
     // ListCoverArts(sImage2, tMediaFile(Node.data).Tags);
   end;
 
-end;
-
-procedure TfMain.sTVMediasCollapsed(Sender: TObject; Node: TTreeNode);
-var
-  i: Integer;
-  aNode: TTreeNode;
-  aMediaFile: tMediaFile;
-begin
-  if sSlider1.SliderOn then
-  begin
-    i := 0;
-    while Node.HasChildren do
-    begin
-      aNode := Node.getFirstChild;
-      if Assigned(aNode.data) then
-      begin
-        aMediaFile := tMediaFile(aNode.data);
-        aMediaFile.Destroy;
-      end;
-      aNode.Free;
-    end;
-    Node.HasChildren := True;
-  end;
 end;
 
 procedure TfMain.ListCoverArts(aImage: TsImage; Tags: TTags);
