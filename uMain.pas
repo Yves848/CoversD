@@ -12,7 +12,7 @@ uses
   JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw, activeX, acWebBrowser, Vcl.Grids, JvExGrids, JvStringGrid, IdComponent,
   IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid,
   ovctable, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory, AdvReflectionLabel, AdvMemo, acPNG,
-  JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard;
+  JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister;
 
 type
   TfMain = class(TForm)
@@ -110,6 +110,7 @@ type
     procedure sShellTreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure sShellTreeView1GetImageIndex(Sender: TObject; Node: TTreeNode);
     procedure thAddToPlayListExecute(Sender: TObject; Params: Pointer);
+    procedure bsRegisterClick(Sender: TObject);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -424,6 +425,15 @@ begin
       slbPlaylist.Items.AddObject(sFile, aMediaFile);
     end
 
+end;
+
+procedure TfMain.bsRegisterClick(Sender: TObject);
+var
+  fRegister : tfRegister;
+begin
+  fREgister := tfRegister.Create(self);
+  fRegister.ShowModal;
+  fREgister.Free;
 end;
 
 procedure TfMain.Button1Click(Sender: TObject);

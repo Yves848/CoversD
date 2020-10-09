@@ -133,6 +133,12 @@
         <Icon_MainIcon>Covers_Icon6.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>icons\icon.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>icons\icon.png</UWP_DelphiLogo150>
+        <VerInfo_MajorVer>0</VerInfo_MajorVer>
+        <VerInfo_Release>1</VerInfo_Release>
+        <VerInfo_PreRelease>true</VerInfo_PreRelease>
+        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=0.0.1.1;InternalName=MoP;LegalCopyright=2020 Yves Godart;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.0.1;Comments=</VerInfo_Keys>
+        <VerInfo_Build>1</VerInfo_Build>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -156,6 +162,11 @@
             <Form>fCoverSearch</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uRegister.pas">
+            <Form>fRegister</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="libs\uni_RegCommon.pas"/>
         <None Include="ModelSupport_MyOwnPlayer\default.txaPackage"/>
         <None Include="ModelSupport_MyOwnPlayer\default.txvpck"/>
         <None Include="ModelSupport_MyOwnPlayer\Covers\default.txvpck"/>
@@ -169,6 +180,7 @@
         <None Include="ModelSupport_MyOwnPlayer\MyOwnPlayer\default.txvpck"/>
         <None Include="ModelSupport_MyOwnPlayer\uSelectDirectory\default.txvpck"/>
         <None Include="ModelSupport_MyOwnPlayer\MyOwnPlayer\default.txaPackage"/>
+        <None Include="ModelSupport_MyOwnPlayer\uRegister\default.txaPackage"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -328,6 +340,12 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="ModelSupport_MyOwnPlayer\Covers\default.txvpck" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win64">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_MyOwnPlayer\uRegister\default.txaPackage" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win64">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>

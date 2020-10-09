@@ -9,7 +9,9 @@ uses
   Vcl.Styles,
   uSelectDirectory in 'uSelectDirectory.pas' {fSelectDirectory},
   uSearchImage in 'uSearchImage.pas',
-  uCoverSearch in 'uCoverSearch.pas' {fCoverSearch};
+  uCoverSearch in 'uCoverSearch.pas' {fCoverSearch},
+  uRegister in 'uRegister.pas' {fRegister},
+  uni_RegCommon in 'libs\uni_RegCommon.pas';
 
 {$R *.res}
 

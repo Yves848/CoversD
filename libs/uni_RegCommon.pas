@@ -50,7 +50,7 @@ end;
 
 procedure GetRegistrationInformation (var ReleaseCodeString: string; var SerialNumber : longint);
 begin
-  // Save the information for the application
+  // Read the information for the application
   if FileExists(RegistrationFile) then begin
     RegistrationInfo := TStringList.Create;
     RegistrationInfo.LoadFromFile(RegistrationFile);
@@ -64,7 +64,7 @@ begin
 end;
 
 const
-  Key : TKey = ($3E,$C9,$18,$78,$7D,$AC,$AF,$D3,$64,$E0,$BC,$0A,$43,$68,$2C,$F2);
+  Key : TKey = ($9B,$15,$01,$EA,$70,$43,$DD,$47,$3F,$93,$22,$1B,$4E,$35,$A1,$87);
 initialization
   Expires := 0;
   MachineKey := Key;
