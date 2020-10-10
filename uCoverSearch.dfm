@@ -93,7 +93,6 @@ object fCoverSearch: TfCoverSearch
     FixedFont.Height = -11
     FixedFont.Name = 'Tahoma'
     FixedFont.Style = []
-    ExplicitLeft = -6
   end
   object sPanel2: TsPanel
     Left = 609
