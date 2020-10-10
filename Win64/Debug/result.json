@@ -10,9 +10,9 @@
     "request":    
     [
       {
-        "title":"Google Custom Search - Andrea Bocelli feat. Giorgia Vivo per lei",
-        "totalResults":"43600",
-        "searchTerms":"Andrea Bocelli feat. Giorgia Vivo per lei",
+        "title":"Google Custom Search - Noah Yannick Simon Papa Tara",
+        "totalResults":"114000",
+        "searchTerms":"Noah Yannick Simon Papa Tara",
         "count":        10,
         "startIndex":        1,
         "inputEncoding":"utf8",
@@ -20,15 +20,15 @@
         "safe":"off",
         "cx":"007439388879951561867:3ragl0fkhpm",
         "searchType":"image",
-        "imgSize":"medium"      
+        "imgSize":"large"      
       }    
     ],
     "nextPage":    
     [
       {
-        "title":"Google Custom Search - Andrea Bocelli feat. Giorgia Vivo per lei",
-        "totalResults":"43600",
-        "searchTerms":"Andrea Bocelli feat. Giorgia Vivo per lei",
+        "title":"Google Custom Search - Noah Yannick Simon Papa Tara",
+        "totalResults":"114000",
+        "searchTerms":"Noah Yannick Simon Papa Tara",
         "count":        10,
         "startIndex":        11,
         "inputEncoding":"utf8",
@@ -36,7 +36,7 @@
         "safe":"off",
         "cx":"007439388879951561867:3ragl0fkhpm",
         "searchType":"image",
-        "imgSize":"medium"      
+        "imgSize":"large"      
       }    
     ]  
   },
@@ -46,221 +46,221 @@
   },
   "searchInformation":  
   {
-    "searchTime":0.511963,
-    "formattedSearchTime":"0.51",
-    "totalResults":"43600",
-    "formattedTotalResults":"43,600"  
+    "searchTime":0.73917,
+    "formattedSearchTime":"0.74",
+    "totalResults":"114000",
+    "formattedTotalResults":"114,000"  
   },
   "items":  
   [
     {
       "kind":"customsearch#result",
-      "title":"Vivo per lei - Wikipedia",
-      "htmlTitle":"<b>Vivo per lei</b> - Wikipedia",
-      "link":"https://upload.wikimedia.org/wikipedia/en/thumb/4/4d/Vivo_per_lei.jpg/220px-Vivo_per_lei.jpg",
-      "displayLink":"en.wikipedia.org",
-      "snippet":"Vivo per lei - Wikipedia",
-      "htmlSnippet":"<b>Vivo per lei</b> - Wikipedia",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://en.wikipedia.org/wiki/Vivo_per_lei",
-        "height":        218,
-        "width":        220,
-        "byteSize":        16156,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeDzLWy79MKDvDNgkCPRtcVxkkNMcIgKfonmacRV7Wj1A2zX9_a6J3ag&s",
-        "thumbnailHeight":        106,
-        "thumbnailWidth":        107      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Bocelli* - Vivo Per Lei (1995, Cardboard Sleeve, CD) | Discogs",
-      "htmlTitle":"<b>Bocelli</b>* - <b>Vivo Per Lei</b> (1995, Cardboard Sleeve, CD) | Discogs",
-      "link":"https://img.discogs.com/pMHiub_h31C_ceh7mvfwZ0wTIO0=/fit-in/300x300/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-4343797-1362325262-8538.jpeg.jpg",
+      "title":"Yannick Noah - Simon Papa Tara (2000, CD) | Discogs",
+      "htmlTitle":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (2000, CD) | Discogs",
+      "link":"https://img.discogs.com/DMav1XftRumqkYnVOHqUdzk4ZD0=/fit-in/502x502/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-4243159-1359500498-9051.jpeg.jpg",
       "displayLink":"www.discogs.com",
-      "snippet":"Bocelli* - Vivo Per Lei (1995, Cardboard Sleeve, CD) | Discogs",
-      "htmlSnippet":"<b>Bocelli</b>* - <b>Vivo Per Lei</b> (1995, Cardboard Sleeve, CD) | Discogs",
+      "snippet":"Yannick Noah - Simon Papa Tara (2000, CD) | Discogs",
+      "htmlSnippet":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (2000, CD) | Discogs",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/fr/Bocelli-Vivo-Per-Lei/release/4343797",
-        "height":        276,
-        "width":        280,
-        "byteSize":        8913,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPjKRMC7BmTQqOtFynOB9AJhLKbvixjLoUEgJJ20cxY9TkZ8PqOsLQlA&s",
-        "thumbnailHeight":        112,
-        "thumbnailWidth":        114      
+        "contextLink":"https://www.discogs.com/Yannick-Noah-Simon-Papa-Tara/release/4243159",
+        "height":        502,
+        "width":        502,
+        "byteSize":        116056,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTPOH8bRvyO7TIxuLsJ8tCWTXeG-ocQxEjunZ8SEXZ9lE_1aKpdquVSrY&s",
+        "thumbnailHeight":        130,
+        "thumbnailWidth":        130      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Vivo per lei - Wikipedia",
-      "htmlTitle":"<b>Vivo per lei</b> - Wikipedia",
-      "link":"https://upload.wikimedia.org/wikipedia/en/4/4d/Vivo_per_lei.jpg",
-      "displayLink":"en.wikipedia.org",
-      "snippet":"Vivo per lei - Wikipedia",
-      "htmlSnippet":"<b>Vivo per lei</b> - Wikipedia",
+      "title":"Simon Papa Tara by Yannick Noah on Amazon Music - Amazon.com",
+      "htmlTitle":"<b>Simon Papa Tara</b> by <b>Yannick Noah</b> on Amazon Music - Amazon.com",
+      "link":"https://m.media-amazon.com/images/I/81XpWCYlX-L._SS500_.jpg",
+      "displayLink":"www.amazon.com",
+      "snippet":"Simon Papa Tara by Yannick Noah on Amazon Music - Amazon.com",
+      "htmlSnippet":"<b>Simon Papa Tara</b> by <b>Yannick Noah</b> on Amazon Music - Amazon.com",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://en.wikipedia.org/wiki/Vivo_per_lei",
-        "height":        297,
-        "width":        300,
-        "byteSize":        22679,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0UjrrS22uLTr2xx4N_cZnf8rI8Cm9sgl2VrFJK0RGE4w0BOjuo8OFxQ&s",
-        "thumbnailHeight":        115,
-        "thumbnailWidth":        116      
+        "contextLink":"https://www.amazon.com/Simon-papa-tara/dp/B0046JRORS",
+        "height":        500,
+        "width":        500,
+        "byteSize":        39832,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5bstTv3zgUx_Aju_7dGYHMynAOTb3iocncbgrid8g6A_kimDmepktPI8t&s",
+        "thumbnailHeight":        130,
+        "thumbnailWidth":        130      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Andrea Bocelli feat. Giorgia - Vivo per lei - dutchcharts.nl",
-      "htmlTitle":"<b>Andrea Bocelli feat</b>. <b>Giorgia</b> - <b>Vivo per lei</b> - dutchcharts.nl",
-      "link":"https://media.hitparade.ch/cover/big/andrea_bocelli_feat_giorgia-vivo_per_lei_s.jpg",
-      "displayLink":"dutchcharts.nl",
-      "snippet":"Andrea Bocelli feat. Giorgia - Vivo per lei - dutchcharts.nl",
-      "htmlSnippet":"<b>Andrea Bocelli feat</b>. <b>Giorgia</b> - <b>Vivo per lei</b> - dutchcharts.nl",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://dutchcharts.nl/showitem.asp?interpret=Andrea+Bocelli+feat%2E+Giorgia&titel=Vivo+per+lei&cat=s",
-        "height":        288,
-        "width":        300,
-        "byteSize":        12232,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAxcACtf2-JzJIC_9vVRLtgtOndeh3fha6nCghb9PBw_37f-j_iXzZ&s",
-        "thumbnailHeight":        111,
-        "thumbnailWidth":        116      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Andrea Bocelli \u2013 Vivo per lei Lyrics | Genius Lyrics",
-      "htmlTitle":"<b>Andrea Bocelli</b> \u2013 <b>Vivo per lei</b> Lyrics | Genius Lyrics",
-      "link":"https://images.genius.com/47e58ee056ad368d6caf8b8330c0b107.268x268x1.jpg",
-      "displayLink":"genius.com",
-      "snippet":"Andrea Bocelli \u2013 Vivo per lei Lyrics | Genius Lyrics",
-      "htmlSnippet":"<b>Andrea Bocelli</b> \u2013 <b>Vivo per lei</b> Lyrics | Genius Lyrics",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://genius.com/Andrea-bocelli-vivo-per-lei-lyrics",
-        "height":        268,
-        "width":        268,
-        "byteSize":        6856,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMkletNKwEs4FncLWchyPQsKdlh1luNxci6kgCEviN36k8qbQ3soQh&s",
-        "thumbnailHeight":        113,
-        "thumbnailWidth":        113      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Andrea Bocelli & Judy Weiss - Vivo per lei - Ich lebe f\u00fcr sie ...",
-      "htmlTitle":"<b>Andrea Bocelli</b> &amp; Judy Weiss - <b>Vivo per lei</b> - Ich lebe f\u00fcr sie ...",
-      "link":"https://media.hitparade.ch/cover/big/andrea_bocelli_judy_weiss-vivo_per_lei_-_ich_lebe_fuer_sie_s.jpg",
-      "displayLink":"hitparade.ch",
-      "snippet":"Andrea Bocelli & Judy Weiss - Vivo per lei - Ich lebe f\u00fcr sie ...",
-      "htmlSnippet":"<b>Andrea Bocelli</b> &amp; Judy Weiss - <b>Vivo per lei</b> - Ich lebe f\u00fcr sie ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://hitparade.ch/song/Andrea-Bocelli-&-Judy-Weiss/Vivo-per-lei-Ich-lebe-fuer-sie-3426",
-        "height":        257,
-        "width":        300,
-        "byteSize":        31752,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlpXMsYhD5Ppg-be8rz195RtbphlHvBr4hZMXINENRYmdV4IBjU55W&s",
-        "thumbnailHeight":        99,
-        "thumbnailWidth":        116      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"andrea bocelli feat giorgia vivo per lei testo - wellmoteq",
-      "htmlTitle":"<b>andrea bocelli feat giorgia vivo per lei</b> testo - wellmoteq",
-      "link":"https://img.youtube.com/vi/feqYlNuSTAE/mqdefault.jpg",
-      "displayLink":"wellmoteq.weebly.com",
-      "snippet":"andrea bocelli feat giorgia vivo per lei testo - wellmoteq",
-      "htmlSnippet":"<b>andrea bocelli feat giorgia vivo per lei</b> testo - wellmoteq",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://wellmoteq.weebly.com/blog/andrea-bocelli-feat-giorgia-vivo-per-lei-testo",
-        "height":        180,
-        "width":        320,
-        "byteSize":        7240,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvDHM5kgsDn0aggty6Na5Q3j76DfcZquLHkUaYhQMeVspItcV9OezK&s",
-        "thumbnailHeight":        66,
-        "thumbnailWidth":        118      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Bocelli* - Vivo Per Lei (1995, Cardboard Sleeve, CD) | Discogs",
-      "htmlTitle":"<b>Bocelli</b>* - <b>Vivo Per Lei</b> (1995, Cardboard Sleeve, CD) | Discogs",
-      "link":"https://img.discogs.com/88T54sqENYk1rcNHfVUqVNFhJIs=/fit-in/280x276/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-4343797-1362325262-8538.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Bocelli* - Vivo Per Lei (1995, Cardboard Sleeve, CD) | Discogs",
-      "htmlSnippet":"<b>Bocelli</b>* - <b>Vivo Per Lei</b> (1995, Cardboard Sleeve, CD) | Discogs",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.discogs.com/fr/Bocelli-Vivo-Per-Lei/release/4343797",
-        "height":        276,
-        "width":        280,
-        "byteSize":        24269,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRbzhkAYhp14gsmjJkAachT3rCvOtUMu3wB74xIvsXn12irEWyy9NO&s",
-        "thumbnailHeight":        112,
-        "thumbnailWidth":        114      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Vivo Per Lei (Andrea Bocelli feat. Giorgia) | V. Zelli & M ...",
-      "htmlTitle":"<b>Vivo Per Lei</b> (<b>Andrea Bocelli feat</b>. <b>Giorgia</b>) | V. Zelli &amp; M ...",
-      "link":"https://www.hebu-music.com/thumb.php?name=00313115&path=artikel&publisher=425&height=340",
-      "displayLink":"www.hebu-music.com",
-      "snippet":"Vivo Per Lei (Andrea Bocelli feat. Giorgia) | V. Zelli & M ...",
-      "htmlSnippet":"<b>Vivo Per Lei</b> (<b>Andrea Bocelli feat</b>. <b>Giorgia</b>) | V. Zelli &amp; M ...",
+      "title":"Simon Papa Tara by Yannick Noah (Single): Reviews, Ratings ...",
+      "htmlTitle":"<b>Simon Papa Tara</b> by <b>Yannick Noah</b> (Single): Reviews, Ratings ...",
+      "link":"https://e.snmc.io/i/600/w/9f5bd9589c26447e147d09ab096f2bdd/1835602",
+      "displayLink":"rateyourmusic.com",
+      "snippet":"Simon Papa Tara by Yannick Noah (Single): Reviews, Ratings ...",
+      "htmlSnippet":"<b>Simon Papa Tara</b> by <b>Yannick Noah</b> (Single): Reviews, Ratings ...",
       "mime":"image/",
       "fileFormat":"image/",
       "image":      
       {
-        "contextLink":"https://www.hebu-music.com/en/article/v-zelli-m-mengali-g-panceri/molenaar-edition-bv/vivo-per-lei.175678/",
-        "height":        340,
-        "width":        240,
-        "byteSize":        10722,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnRehfBXWT3zVJC1fI5miMMm6IuYob5ivAlHrpyj7kayThJF8u8Km6&s",
-        "thumbnailHeight":        119,
-        "thumbnailWidth":        84      
+        "contextLink":"https://rateyourmusic.com/release/single/yannick_noah/simon_papa_tara/",
+        "height":        490,
+        "width":        498,
+        "byteSize":        43806,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHqq6ZPdT-_-fLYlLjUi3aatDDPe1v0EXcE-YdrQXv-ATP2HWvFcXUFqfo&s",
+        "thumbnailHeight":        128,
+        "thumbnailWidth":        130      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Andrea Bocelli & Giorgia - Judy Weiss - Sharon Grand - Vivo Per ...",
-      "htmlTitle":"<b>Andrea Bocelli</b> &amp; <b>Giorgia</b> - Judy Weiss - Sharon Grand - <b>Vivo Per</b> ...",
-      "link":"https://img.discogs.com/NDv3kl0Iv31OnS09Is5zjkGRx8o=/fit-in/300x300/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-7347402-1439468298-2767.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Andrea Bocelli & Giorgia - Judy Weiss - Sharon Grand - Vivo Per ...",
-      "htmlSnippet":"<b>Andrea Bocelli</b> &amp; <b>Giorgia</b> - Judy Weiss - Sharon Grand - <b>Vivo Per</b> ...",
+      "title":"Simon Papa Tara by Yannick Noah on Amazon Music - Amazon.com",
+      "htmlTitle":"<b>Simon Papa Tara</b> by <b>Yannick Noah</b> on Amazon Music - Amazon.com",
+      "link":"https://images-na.ssl-images-amazon.com/images/I/51JgrvccLnL._SX342_QL70_ML2_.jpg",
+      "displayLink":"www.amazon.com",
+      "snippet":"Simon Papa Tara by Yannick Noah on Amazon Music - Amazon.com",
+      "htmlSnippet":"<b>Simon Papa Tara</b> by <b>Yannick Noah</b> on Amazon Music - Amazon.com",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/Andrea-Bocelli-Giorgia-Judy-Weiss-Sharon-Grand-Vivo-Per-Lei/release/7347402",
-        "height":        258,
-        "width":        300,
-        "byteSize":        9000,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuY5SE6qLMoTFCWE054p-vp1zl-ds3qnhOB7RkOmqZpj7703B9zjJfxg&s",
-        "thumbnailHeight":        100,
-        "thumbnailWidth":        116      
+        "contextLink":"https://www.amazon.com/Simon-papa-tara/dp/B0046JRORS",
+        "height":        342,
+        "width":        342,
+        "byteSize":        18159,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_1n9yh58CqHUvTd69G1f0LA6V04KpOUCF3gxpr335XrgR87Amcqn1Yg&s",
+        "thumbnailHeight":        120,
+        "thumbnailWidth":        120      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Yannick Noah - Simon Papa Tara (2000, Vinyl) | Discogs",
+      "htmlTitle":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (2000, Vinyl) | Discogs",
+      "link":"https://img.discogs.com/w562zZAu6pVDEd-eaXLkNH5-ffQ=/fit-in/600x604/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-980043-1561057633-7614.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Yannick Noah - Simon Papa Tara (2000, Vinyl) | Discogs",
+      "htmlSnippet":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (2000, Vinyl) | Discogs",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/Yannick-Noah-Simon-Papa-Tara/release/980043",
+        "height":        604,
+        "width":        599,
+        "byteSize":        61644,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwGFpy2E7OaazWripZJZ1iPDU7S0zuPWOr-tt59253di03pVMql7gWBe8&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        134      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Yannick Noah - Simon Papa Tara (2000) | IMVDb",
+      "htmlTitle":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (2000) | IMVDb",
+      "link":"https://s3.amazonaws.com/images.imvdb.com/video/269179340994-yannick-noah-simon-papa-tara_music_video_ov.jpg?v=2",
+      "displayLink":"imvdb.com",
+      "snippet":"Yannick Noah - Simon Papa Tara (2000) | IMVDb",
+      "htmlSnippet":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (2000) | IMVDb",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://imvdb.com/video/yannick-noah/simon-papa-tara",
+        "height":        360,
+        "width":        480,
+        "byteSize":        40593,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrKg7aT2DbRgyEQJ6ENI9uVAX_IHOFKcnAEv4v9iune-WbS4dA6Ml3yw&s",
+        "thumbnailHeight":        97,
+        "thumbnailWidth":        129      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Simon Papa Tara (Live) by Yannick Noah on Amazon Music - Amazon.com",
+      "htmlTitle":"<b>Simon Papa Tara</b> (Live) by <b>Yannick Noah</b> on Amazon Music - Amazon.com",
+      "link":"https://m.media-amazon.com/images/I/81vosSh1nQL._SS500_.jpg",
+      "displayLink":"www.amazon.com",
+      "snippet":"Simon Papa Tara (Live) by Yannick Noah on Amazon Music - Amazon.com",
+      "htmlSnippet":"<b>Simon Papa Tara</b> (Live) by <b>Yannick Noah</b> on Amazon Music - Amazon.com",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.amazon.com/Simon-Papa-Tara-Live/dp/B0046JQ0GO",
+        "height":        500,
+        "width":        500,
+        "byteSize":        25797,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzkuDMt7BW3aMg1Zn80ZCCgwN58NLkceDmdsn91PDzG0hdP-PcGkD3Of8&s",
+        "thumbnailHeight":        130,
+        "thumbnailWidth":        130      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Yannick Noah - Simon Papa Tara (Clip officiel) - YouTube | Yannick ...",
+      "htmlTitle":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (Clip officiel) - YouTube | <b>Yannick</b> ...",
+      "link":"https://i.pinimg.com/originals/76/1a/8a/761a8a52e905b7d9b6d64f1a275cf265.jpg",
+      "displayLink":"www.pinterest.com",
+      "snippet":"Yannick Noah - Simon Papa Tara (Clip officiel) - YouTube | Yannick ...",
+      "htmlSnippet":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (Clip officiel) - YouTube | <b>Yannick</b> ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.pinterest.com/pin/216313588340665428/",
+        "height":        360,
+        "width":        480,
+        "byteSize":        18347,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUZSW6qPVjFNxIgKCjWOvnb2LFgIWw-Ueyj8uEZElnGqce-KgnHP3Km4c&s",
+        "thumbnailHeight":        97,
+        "thumbnailWidth":        129      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"yannick noah - simon papa tara maxi 45t - YouTube",
+      "htmlTitle":"<b>yannick noah</b> - <b>simon papa tara</b> maxi 45t - YouTube",
+      "link":"https://i.ytimg.com/vi/MSxJOtZ7IC0/hqdefault.jpg",
+      "displayLink":"www.youtube.com",
+      "snippet":"yannick noah - simon papa tara maxi 45t - YouTube",
+      "htmlSnippet":"<b>yannick noah</b> - <b>simon papa tara</b> maxi 45t - YouTube",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.youtube.com/watch?v=MSxJOtZ7IC0",
+        "height":        360,
+        "width":        480,
+        "byteSize":        6953,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdqHIrVuEHVyzgis2K0TRLhvH5B7XD5iGWB6TS8RSW6zc7tSRd4pR3fDs&s",
+        "thumbnailHeight":        97,
+        "thumbnailWidth":        129      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Simon Papa Tara (Live au Forest National de Bruxelles 2011) by ...",
+      "htmlTitle":"<b>Simon Papa Tara</b> (Live au Forest National de Bruxelles 2011) by ...",
+      "link":"https://m.media-amazon.com/images/I/811iI6+MrvL._SS500_.jpg",
+      "displayLink":"www.amazon.com",
+      "snippet":"Simon Papa Tara (Live au Forest National de Bruxelles 2011) by ...",
+      "htmlSnippet":"<b>Simon Papa Tara</b> (Live au Forest National de Bruxelles 2011) by ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.amazon.com/Simon-Papa-Forest-National-Bruxelles/dp/B0785MTYHF",
+        "height":        500,
+        "width":        500,
+        "byteSize":        35960,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9EqJAEUOfQ7GEoHDIlHKlFgcA4k2bVhMY4M0svPGfITSkPvfqoLn50-A&s",
+        "thumbnailHeight":        130,
+        "thumbnailWidth":        130      
       }    
     }  
   ]

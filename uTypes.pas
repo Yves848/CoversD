@@ -3,10 +3,11 @@ unit uTypes;
 interface
 
 uses
-  winApi.windows, System.Classes, System.SysUtils, System.IOUtils, System.Types, TagsLibrary, Vcl.Graphics, strUtils,
+  winApi.windows, Winapi.Messages,System.Classes, System.SysUtils, System.IOUtils, System.Types, TagsLibrary, Vcl.Graphics, strUtils,
   Generics.Defaults, Generics.collections, XSuperObject;
 
 const
+  WM_REFRESH_COVER = WM_USER + 2000;
   sValidExtensions = '.MP3.MP4.FLAC.OGG.WAV.M4A';
   aValidExtensions: TArray<string> = ['.MP3', '.MP4', '.FLAC', '.OGG', '.WAV', '.M4A'];
 

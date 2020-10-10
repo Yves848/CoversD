@@ -161,6 +161,7 @@ type
     procedure DrawTransparentRectangle(Canvas: TCanvas; Rect: TRect; Color: TColor; Transparency: Integer);
     procedure UpdateVuMetre(LeftLevel, RightLevel: Integer);
     function ImageCount(aFile: String): Integer;
+    Procedure RefreshCover(var m : Tmsg); Message WM_REFRESH_COVER;
   end;
 
 var
@@ -176,6 +177,7 @@ var
   sLink: String;
   Params: TSpectrum3D_CreateParams;
   Settings: TSpectrum3D_Settings;
+  fCoverSearch: tfCoverSearch;
 
 implementation
 
@@ -277,6 +279,19 @@ begin
   // * Start playing and visualising
   BASS_ChannelPlay(Spectrum3D_GetChannel(Sprectrum3D), True);
 
+end;
+
+procedure TfMain.RefreshCover(var m: Tmsg);
+begin
+  if sgList.Cells[0, sgLisT.Row] <> '' then
+  begin
+    GlobalMediaFile.tags.Clear;
+    GlobalMediaFile.tags.LoadFromFile(sgList.Cells[0, sgList.Row]);
+    ListCoverArts(image1, GlobalMediaFile.Tags);
+    sgList.Cells[4,sgList.Row] := 'O';
+    if fCoverSearch <> nil then fCoverSearch.Close;
+    
+  end;
 end;
 
 procedure TfMain.removeKeyFromStack;
@@ -854,15 +869,15 @@ begin
 end;
 
 procedure TfMain.sgListRowChanging(Sender: TObject; OldRow, NewRow: Integer; var Allow: Boolean);
-var
-  pMediaFile: tMediaFile;
 begin
   // Afficher la pochette si elle existe
   if sgList.Cells[0, NewRow] <> '' then
   begin
-    pMediaFile := tMediaFile.Create(sgList.Cells[0, NewRow]);
-    ListCoverArts(image1, pMediaFile.Tags);
-    pMediaFile.Destroy;
+
+    GlobalMediaFile.tags.Clear;
+    GlobalMediaFile.tags.LoadFromFile(sgList.Cells[0, NewRow]);
+    ListCoverArts(image1, GlobalMediaFile.Tags);
+
   end;
 end;
 
@@ -955,15 +970,19 @@ begin
 end;
 
 procedure TfMain.sButton3Click(Sender: TObject);
-var
-  fCoverSearch: tfCoverSearch;
+
 begin
-  fCoverSearch := tfCoverSearch.Create(self);
+  if fCoverSearch = Nil then
+  begin
+     fCoverSearch := tfCoverSearch.Create(self);
+
+  end;
   if trim(sgList.Cells[1, sgList.Row]) + trim(sgList.Cells[2, sgList.Row]) = '' then
     fCoverSearch.Title := trim(sgList.Cells[0, sgList.Row])
   else
 
   begin
+    fCoverSearch.sFile := trim(sgList.Cells[0, sgList.Row]);
     fCoverSearch.Artist := sgList.Cells[1, sgList.Row];
     fCoverSearch.Title := sgList.Cells[2, sgList.Row];
   end;

@@ -38,7 +38,7 @@ begin
   parameters := parameters + '&key=' + CSE_ID;
   parameters := parameters + '&filetype=png;jpeg';
 //  parameters := parameters + '&lr=lang_fr';
-  parameters := parameters + '&imgSize=medium';
+  //parameters := parameters + '&imgSize=xxlarge';
   parameters := parameters + format('&start=%d',[start]);
   path := 'https://www.googleapis.com/customsearch/v1' + parameters;
 end;
