@@ -113,6 +113,8 @@ object fCoverSearch: TfCoverSearch
       Align = alTop
       Picture.Data = {07544269746D617000000000}
       Stretch = True
+      ExplicitLeft = 6
+      ExplicitTop = 6
     end
     object Memo1: TMemo
       Left = 16
