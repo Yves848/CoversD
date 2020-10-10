@@ -10,8 +10,9 @@ uses
   acNoteBook, sTrackBar, acArcControls, sGauge, BASS, BassFlac, xSuperObject, SynEditHighlighter, SynHighlighterJSON, SynEdit, SynMemo, sListBox,
   JvExControls, clipbrd, Spectrum3DLibraryDefs, bass_aac,
   JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw, activeX, acWebBrowser, Vcl.Grids, JvExGrids, JvStringGrid, IdComponent,
-  IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory, AdvReflectionLabel, AdvMemo, acPNG,
-  JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister;
+  IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid, AdvGrid, dateutils,
+  uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory, AdvReflectionLabel, AdvMemo, acPNG,
+  JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister, Vcl.Menus;
 
 type
   TfMain = class(TForm)
@@ -28,7 +29,6 @@ type
     sILIcons: TsAlphaImageList;
     pb1: TsProgressBar;
     thListMP3: TJvThread;
-    sDEFolder: TsDirectoryEdit;
     sILTV: TsAlphaImageList;
     sImage1: TsImage;
     sROPPlaylist: TsRollOutPanel;
@@ -74,6 +74,10 @@ type
     vuL: TsImage;
     thAddToPlayList: TJvThread;
     bsRegister: TsButton;
+    PopupMenu1: TPopupMenu;
+    A1: TMenuItem;
+    Add1: TMenuItem;
+    slCovers: TsSlider;
     procedure Button1Click(Sender: TObject);
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
@@ -110,6 +114,7 @@ type
     procedure sShellTreeView1GetImageIndex(Sender: TObject; Node: TTreeNode);
     procedure thAddToPlayListExecute(Sender: TObject; Params: Pointer);
     procedure bsRegisterClick(Sender: TObject);
+    procedure slCoversSliderChange(Sender: TObject);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -155,6 +160,7 @@ type
     function FormatTextWithEllipse(aText: string): string;
     procedure DrawTransparentRectangle(Canvas: TCanvas; Rect: TRect; Color: TColor; Transparency: Integer);
     procedure UpdateVuMetre(LeftLevel, RightLevel: Integer);
+    function ImageCount(aFile: String): Integer;
   end;
 
 var
@@ -414,32 +420,32 @@ end;
 procedure TfMain.AddToPlayListTH;
 var
   aMediaFile: tMediaFile;
-  sPath : String;
+  sPath: String;
   index: Integer;
 begin
-    aMediaFile := tMediaFile.Create(sFile);
-    index := slbPlaylist.Items.IndexOf(sFile);
-   if index = -1 then
-    begin
-      slbPlaylist.Items.AddObject(sFile, aMediaFile);
-    end
+  aMediaFile := tMediaFile.Create(sFile);
+  index := slbPlaylist.Items.IndexOf(sFile);
+  if index = -1 then
+  begin
+    slbPlaylist.Items.AddObject(sFile, aMediaFile);
+  end
 
 end;
 
 procedure TfMain.bsRegisterClick(Sender: TObject);
 var
-  fRegister : tfRegister;
+  fRegister: tfRegister;
 begin
-  fREgister := tfRegister.Create(self);
+  fRegister := tfRegister.Create(self);
   fRegister.ShowModal;
-  fREgister.Free;
+  fRegister.Free;
 end;
 
 procedure TfMain.Button1Click(Sender: TObject);
 var
   form2: tForm2;
 begin
-  form2 := tForm2.Create(Self);
+  form2 := tForm2.Create(self);
   form2.ShowModal;
   form2.Free;
 end;
@@ -535,12 +541,7 @@ end;
 
 procedure TfMain.ExpandNode;
 begin
-  if aNode <> nil then
-  begin
-    aNode.Expand(False);
-    aNode := Nil;
-  end;
-  sDEFolder.Enabled := True;
+
 end;
 
 function TfMain.findNode(sLabel: String): TTreeNode;
@@ -586,11 +587,11 @@ procedure TfMain.FormCreate(Sender: TObject);
 var
   Volume: Double;
   ReleaseCodeString: string;
-  SerialNumber : longint;
+  SerialNumber: longint;
 begin
   // * Never forget to init BASS
   GlobalMediaFile := tMediaFile.Create;
-  BASS_Init(-1, 44100, 0, Self.handle, 0);
+  BASS_Init(-1, 44100, 0, self.handle, 0);
 
   ZeroMemory(@Params, SizeOf(TSpectrum3D_CreateParams));
   Params.ParentHandle := sPanel3.handle;
@@ -609,17 +610,17 @@ begin
   OpenConfig;
   initGrid;
 
-  GetRegistrationInformation (ReleaseCodeString, SerialNumber);
-  if not IsReleaseCodeValid (ReleaseCodeString, SerialNumber) then
+  GetRegistrationInformation(ReleaseCodeString, SerialNumber);
+  if not IsReleaseCodeValid(ReleaseCodeString, SerialNumber) then
   begin
     Caption := Caption + ' Unregistered Demo!';
-    bsRegister.Visible := true;
-    isRegistered := false;
+    bsRegister.Visible := True;
+    isRegistered := False;
   end
   else
   begin
-    Caption := caption + ' Registered';
-    isRegistered := true;
+    Caption := Caption + ' Registered';
+    isRegistered := True;
   end;
 
 end;
@@ -689,6 +690,14 @@ end;
 procedure TfMain.GetImgLink;
 begin
 
+end;
+
+function TfMain.ImageCount(aFile: String): Integer;
+begin
+  GlobalMediaFile.Tags.Clear;
+  GlobalMediaFile.tags.ParseCoverArts := true;
+  GlobalMediaFile.Tags.LoadFromFile(aFile);
+  Result := GlobalMediaFile.Tags.CoverArtCount;
 end;
 
 procedure TfMain.initGrid;
@@ -949,7 +958,7 @@ procedure TfMain.sButton3Click(Sender: TObject);
 var
   fCoverSearch: tfCoverSearch;
 begin
-  fCoverSearch := tfCoverSearch.Create(Self);
+  fCoverSearch := tfCoverSearch.Create(self);
   if trim(sgList.Cells[1, sgList.Row]) + trim(sgList.Cells[2, sgList.Row]) = '' then
     fCoverSearch.Title := trim(sgList.Cells[0, sgList.Row])
   else
@@ -977,22 +986,22 @@ procedure TfMain.sButton9Click(Sender: TObject);
 var
   pfSelectDirectory: TfSelectDirectory;
 begin
-  pfSelectDirectory := TfSelectDirectory.Create(Self);
+  pfSelectDirectory := TfSelectDirectory.Create(self);
   pfSelectDirectory.ShowModal;
   pfSelectDirectory.Free;
 end;
 
 procedure TfMain.sDEFolderAfterDialog(Sender: TObject; var Name: string; var Action: Boolean);
 begin
-  if name <> '' then
-    if name <> aPath then
-    begin
-      aPath := Name;
-      jConfig.S['startFolder'] := aPath;
-      sDEFolder.Enabled := False;
-      sTVMedias.Items.Clear;
-      thListMP3.Execute(Self);
-    end;
+  // if name <> '' then
+  // if name <> aPath then
+  // begin
+  // aPath := Name;
+  // jConfig.S['startFolder'] := aPath;
+  // sDEFolder.Enabled := False;
+  // sTVMedias.Items.Clear;
+  // thListMP3.Execute(self);
+  // end;
 end;
 
 procedure TfMain.setPBMax;
@@ -1035,15 +1044,37 @@ begin
   end;
 end;
 
+procedure TfMain.slCoversSliderChange(Sender: TObject);
+var 
+  aNode : ttreeNode;
+begin
+  //
+  if sShellTreeView1.Selected <> nil then
+    aNode := sShellTreeView1.Selected
+  else
+    aNode := sShellTreeView1.Items[0];
+    
+  sShellTreeView1.Refresh(aNode);
+end;
+
 procedure TfMain.sShellTreeView1AddFolder(Sender: TObject; AFolder: TacShellFolder; var CanAdd: Boolean);
 var
   sExtension: string;
+  aFile : String;
+  iCount : Integer;
 begin
   CanAdd := True;
   if not AFolder.IsFileFolder then
   begin
-    sExtension := tpath.GetExtension(AFolder.PathName);
+    aFile := AFolder.PathName;
+    sExtension := tpath.GetExtension(aFile);
     CanAdd := (pos(uppercase(sExtension), sValidExtensions) > 0);
+    if CanAdd then
+      if not slCovers.SliderOn then
+      begin
+        iCount := ImageCount(aFile);
+        CanAdd := CanAdd and (iCount = 0);
+      end;
   end;
 end;
 
@@ -1107,19 +1138,19 @@ begin
     removeKeyFromStack;
   end;
   if Key = VK_ADD then
+  begin
+    aNode := sShellTreeView1.Selected;
+    if not TacShellFolder(aNode.data).IsFileFolder then
     begin
-      aNode := sShellTreeView1.Selected;
-      if not TacShellFolder(aNode.data).IsFileFolder then
-      begin
-         AddToPlayList(aNode,false);
-      end
-      else
-      begin
-        aPath := TacShellFolder(aNode.data).PathName;
-        thAddToPlayList.execute(self);
-      end;
-      removeKeyFromStack;
+      AddToPlayList(aNode, False);
+    end
+    else
+    begin
+      aPath := TacShellFolder(aNode.data).PathName;
+      thAddToPlayList.Execute(self);
     end;
+    removeKeyFromStack;
+  end;
 end;
 
 procedure TfMain.sShellTreeView1KeyPress(Sender: TObject; var Key: Char);
@@ -1138,7 +1169,7 @@ begin
       else
       begin
         aPath := TacShellFolder(aNode.data).PathName;
-        thListMP3.Execute(Self);
+        thListMP3.Execute(self);
       end;
     end;
     Key := #0;
@@ -1296,7 +1327,7 @@ begin
   begin
     aPath := Node.Text;
     aNode := Node;
-    thListMP3.Execute(Self);
+    thListMP3.Execute(self);
   end;
 end;
 
@@ -1404,21 +1435,29 @@ var
   aSearchOption: tSearchOption;
   bAdd: Boolean;
   sExt: String;
+  bConfirm: Boolean;
 begin
   aSearchOption := tSearchOption.soAllDirectories;
   aFiles := TDirectory.GetFileSystemEntries(aPath, aSearchOption, nil);
-
-  i := 0;
-  while i <= Length(aFiles) - 1 do
+  bConfirm := True;
+  if Length(aFiles) > 1000 then
   begin
-    sExt := tpath.GetExtension(aFiles[i]);
-    bAdd := (pos(uppercase(sExt), sValidExtensions) > 0);
-    if bAdd then
+    bConfirm := (MessageDlg(format('Do you confirm adding %d files ?', [Length(aFiles)]), mtConfirmation, [mbYes, mbNo], 0, mbNo) = mrYes);
+  end;
+  if bConfirm then
+  begin
+    i := 0;
+    while i <= Length(aFiles) - 1 do
     begin
-      sFile := aFiles[i];
-      thListMP3.Synchronize(TfMain(Params).AddFileToGridTH);
+      sExt := tpath.GetExtension(aFiles[i]);
+      bAdd := (pos(uppercase(sExt), sValidExtensions) > 0);
+      if bAdd then
+      begin
+        sFile := aFiles[i];
+        thListMP3.Synchronize(TfMain(Params).AddFileToGridTH);
+      end;
+      inc(i);
     end;
-    inc(i);
   end;
 
 end;

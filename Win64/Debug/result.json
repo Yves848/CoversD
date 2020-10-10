@@ -1,0 +1,267 @@
+{
+  "kind":"customsearch#search",
+  "url":  
+  {
+    "type":"application/json",
+    "template":"https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"  
+  },
+  "queries":  
+  {
+    "request":    
+    [
+      {
+        "title":"Google Custom Search - Andrea Bocelli feat. Giorgia Vivo per lei",
+        "totalResults":"43600",
+        "searchTerms":"Andrea Bocelli feat. Giorgia Vivo per lei",
+        "count":        10,
+        "startIndex":        1,
+        "inputEncoding":"utf8",
+        "outputEncoding":"utf8",
+        "safe":"off",
+        "cx":"007439388879951561867:3ragl0fkhpm",
+        "searchType":"image",
+        "imgSize":"medium"      
+      }    
+    ],
+    "nextPage":    
+    [
+      {
+        "title":"Google Custom Search - Andrea Bocelli feat. Giorgia Vivo per lei",
+        "totalResults":"43600",
+        "searchTerms":"Andrea Bocelli feat. Giorgia Vivo per lei",
+        "count":        10,
+        "startIndex":        11,
+        "inputEncoding":"utf8",
+        "outputEncoding":"utf8",
+        "safe":"off",
+        "cx":"007439388879951561867:3ragl0fkhpm",
+        "searchType":"image",
+        "imgSize":"medium"      
+      }    
+    ]  
+  },
+  "context":  
+  {
+    "title":"Google"  
+  },
+  "searchInformation":  
+  {
+    "searchTime":0.511963,
+    "formattedSearchTime":"0.51",
+    "totalResults":"43600",
+    "formattedTotalResults":"43,600"  
+  },
+  "items":  
+  [
+    {
+      "kind":"customsearch#result",
+      "title":"Vivo per lei - Wikipedia",
+      "htmlTitle":"<b>Vivo per lei</b> - Wikipedia",
+      "link":"https://upload.wikimedia.org/wikipedia/en/thumb/4/4d/Vivo_per_lei.jpg/220px-Vivo_per_lei.jpg",
+      "displayLink":"en.wikipedia.org",
+      "snippet":"Vivo per lei - Wikipedia",
+      "htmlSnippet":"<b>Vivo per lei</b> - Wikipedia",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://en.wikipedia.org/wiki/Vivo_per_lei",
+        "height":        218,
+        "width":        220,
+        "byteSize":        16156,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeDzLWy79MKDvDNgkCPRtcVxkkNMcIgKfonmacRV7Wj1A2zX9_a6J3ag&s",
+        "thumbnailHeight":        106,
+        "thumbnailWidth":        107      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Bocelli* - Vivo Per Lei (1995, Cardboard Sleeve, CD) | Discogs",
+      "htmlTitle":"<b>Bocelli</b>* - <b>Vivo Per Lei</b> (1995, Cardboard Sleeve, CD) | Discogs",
+      "link":"https://img.discogs.com/pMHiub_h31C_ceh7mvfwZ0wTIO0=/fit-in/300x300/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-4343797-1362325262-8538.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Bocelli* - Vivo Per Lei (1995, Cardboard Sleeve, CD) | Discogs",
+      "htmlSnippet":"<b>Bocelli</b>* - <b>Vivo Per Lei</b> (1995, Cardboard Sleeve, CD) | Discogs",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/fr/Bocelli-Vivo-Per-Lei/release/4343797",
+        "height":        276,
+        "width":        280,
+        "byteSize":        8913,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPjKRMC7BmTQqOtFynOB9AJhLKbvixjLoUEgJJ20cxY9TkZ8PqOsLQlA&s",
+        "thumbnailHeight":        112,
+        "thumbnailWidth":        114      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Vivo per lei - Wikipedia",
+      "htmlTitle":"<b>Vivo per lei</b> - Wikipedia",
+      "link":"https://upload.wikimedia.org/wikipedia/en/4/4d/Vivo_per_lei.jpg",
+      "displayLink":"en.wikipedia.org",
+      "snippet":"Vivo per lei - Wikipedia",
+      "htmlSnippet":"<b>Vivo per lei</b> - Wikipedia",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://en.wikipedia.org/wiki/Vivo_per_lei",
+        "height":        297,
+        "width":        300,
+        "byteSize":        22679,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0UjrrS22uLTr2xx4N_cZnf8rI8Cm9sgl2VrFJK0RGE4w0BOjuo8OFxQ&s",
+        "thumbnailHeight":        115,
+        "thumbnailWidth":        116      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Andrea Bocelli feat. Giorgia - Vivo per lei - dutchcharts.nl",
+      "htmlTitle":"<b>Andrea Bocelli feat</b>. <b>Giorgia</b> - <b>Vivo per lei</b> - dutchcharts.nl",
+      "link":"https://media.hitparade.ch/cover/big/andrea_bocelli_feat_giorgia-vivo_per_lei_s.jpg",
+      "displayLink":"dutchcharts.nl",
+      "snippet":"Andrea Bocelli feat. Giorgia - Vivo per lei - dutchcharts.nl",
+      "htmlSnippet":"<b>Andrea Bocelli feat</b>. <b>Giorgia</b> - <b>Vivo per lei</b> - dutchcharts.nl",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://dutchcharts.nl/showitem.asp?interpret=Andrea+Bocelli+feat%2E+Giorgia&titel=Vivo+per+lei&cat=s",
+        "height":        288,
+        "width":        300,
+        "byteSize":        12232,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAxcACtf2-JzJIC_9vVRLtgtOndeh3fha6nCghb9PBw_37f-j_iXzZ&s",
+        "thumbnailHeight":        111,
+        "thumbnailWidth":        116      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Andrea Bocelli \u2013 Vivo per lei Lyrics | Genius Lyrics",
+      "htmlTitle":"<b>Andrea Bocelli</b> \u2013 <b>Vivo per lei</b> Lyrics | Genius Lyrics",
+      "link":"https://images.genius.com/47e58ee056ad368d6caf8b8330c0b107.268x268x1.jpg",
+      "displayLink":"genius.com",
+      "snippet":"Andrea Bocelli \u2013 Vivo per lei Lyrics | Genius Lyrics",
+      "htmlSnippet":"<b>Andrea Bocelli</b> \u2013 <b>Vivo per lei</b> Lyrics | Genius Lyrics",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://genius.com/Andrea-bocelli-vivo-per-lei-lyrics",
+        "height":        268,
+        "width":        268,
+        "byteSize":        6856,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMkletNKwEs4FncLWchyPQsKdlh1luNxci6kgCEviN36k8qbQ3soQh&s",
+        "thumbnailHeight":        113,
+        "thumbnailWidth":        113      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Andrea Bocelli & Judy Weiss - Vivo per lei - Ich lebe f\u00fcr sie ...",
+      "htmlTitle":"<b>Andrea Bocelli</b> &amp; Judy Weiss - <b>Vivo per lei</b> - Ich lebe f\u00fcr sie ...",
+      "link":"https://media.hitparade.ch/cover/big/andrea_bocelli_judy_weiss-vivo_per_lei_-_ich_lebe_fuer_sie_s.jpg",
+      "displayLink":"hitparade.ch",
+      "snippet":"Andrea Bocelli & Judy Weiss - Vivo per lei - Ich lebe f\u00fcr sie ...",
+      "htmlSnippet":"<b>Andrea Bocelli</b> &amp; Judy Weiss - <b>Vivo per lei</b> - Ich lebe f\u00fcr sie ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://hitparade.ch/song/Andrea-Bocelli-&-Judy-Weiss/Vivo-per-lei-Ich-lebe-fuer-sie-3426",
+        "height":        257,
+        "width":        300,
+        "byteSize":        31752,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlpXMsYhD5Ppg-be8rz195RtbphlHvBr4hZMXINENRYmdV4IBjU55W&s",
+        "thumbnailHeight":        99,
+        "thumbnailWidth":        116      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"andrea bocelli feat giorgia vivo per lei testo - wellmoteq",
+      "htmlTitle":"<b>andrea bocelli feat giorgia vivo per lei</b> testo - wellmoteq",
+      "link":"https://img.youtube.com/vi/feqYlNuSTAE/mqdefault.jpg",
+      "displayLink":"wellmoteq.weebly.com",
+      "snippet":"andrea bocelli feat giorgia vivo per lei testo - wellmoteq",
+      "htmlSnippet":"<b>andrea bocelli feat giorgia vivo per lei</b> testo - wellmoteq",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://wellmoteq.weebly.com/blog/andrea-bocelli-feat-giorgia-vivo-per-lei-testo",
+        "height":        180,
+        "width":        320,
+        "byteSize":        7240,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvDHM5kgsDn0aggty6Na5Q3j76DfcZquLHkUaYhQMeVspItcV9OezK&s",
+        "thumbnailHeight":        66,
+        "thumbnailWidth":        118      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Bocelli* - Vivo Per Lei (1995, Cardboard Sleeve, CD) | Discogs",
+      "htmlTitle":"<b>Bocelli</b>* - <b>Vivo Per Lei</b> (1995, Cardboard Sleeve, CD) | Discogs",
+      "link":"https://img.discogs.com/88T54sqENYk1rcNHfVUqVNFhJIs=/fit-in/280x276/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-4343797-1362325262-8538.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Bocelli* - Vivo Per Lei (1995, Cardboard Sleeve, CD) | Discogs",
+      "htmlSnippet":"<b>Bocelli</b>* - <b>Vivo Per Lei</b> (1995, Cardboard Sleeve, CD) | Discogs",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/fr/Bocelli-Vivo-Per-Lei/release/4343797",
+        "height":        276,
+        "width":        280,
+        "byteSize":        24269,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRbzhkAYhp14gsmjJkAachT3rCvOtUMu3wB74xIvsXn12irEWyy9NO&s",
+        "thumbnailHeight":        112,
+        "thumbnailWidth":        114      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Vivo Per Lei (Andrea Bocelli feat. Giorgia) | V. Zelli & M ...",
+      "htmlTitle":"<b>Vivo Per Lei</b> (<b>Andrea Bocelli feat</b>. <b>Giorgia</b>) | V. Zelli &amp; M ...",
+      "link":"https://www.hebu-music.com/thumb.php?name=00313115&path=artikel&publisher=425&height=340",
+      "displayLink":"www.hebu-music.com",
+      "snippet":"Vivo Per Lei (Andrea Bocelli feat. Giorgia) | V. Zelli & M ...",
+      "htmlSnippet":"<b>Vivo Per Lei</b> (<b>Andrea Bocelli feat</b>. <b>Giorgia</b>) | V. Zelli &amp; M ...",
+      "mime":"image/",
+      "fileFormat":"image/",
+      "image":      
+      {
+        "contextLink":"https://www.hebu-music.com/en/article/v-zelli-m-mengali-g-panceri/molenaar-edition-bv/vivo-per-lei.175678/",
+        "height":        340,
+        "width":        240,
+        "byteSize":        10722,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnRehfBXWT3zVJC1fI5miMMm6IuYob5ivAlHrpyj7kayThJF8u8Km6&s",
+        "thumbnailHeight":        119,
+        "thumbnailWidth":        84      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Andrea Bocelli & Giorgia - Judy Weiss - Sharon Grand - Vivo Per ...",
+      "htmlTitle":"<b>Andrea Bocelli</b> &amp; <b>Giorgia</b> - Judy Weiss - Sharon Grand - <b>Vivo Per</b> ...",
+      "link":"https://img.discogs.com/NDv3kl0Iv31OnS09Is5zjkGRx8o=/fit-in/300x300/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-7347402-1439468298-2767.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Andrea Bocelli & Giorgia - Judy Weiss - Sharon Grand - Vivo Per ...",
+      "htmlSnippet":"<b>Andrea Bocelli</b> &amp; <b>Giorgia</b> - Judy Weiss - Sharon Grand - <b>Vivo Per</b> ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/Andrea-Bocelli-Giorgia-Judy-Weiss-Sharon-Grand-Vivo-Per-Lei/release/7347402",
+        "height":        258,
+        "width":        300,
+        "byteSize":        9000,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuY5SE6qLMoTFCWE054p-vp1zl-ds3qnhOB7RkOmqZpj7703B9zjJfxg&s",
+        "thumbnailHeight":        100,
+        "thumbnailWidth":        116      
+      }    
+    }  
+  ]
+}

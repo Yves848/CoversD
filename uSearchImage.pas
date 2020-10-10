@@ -36,8 +36,9 @@ begin
   parameters := parameters + '&imgSize=large';
   parameters := parameters + '&searchType=image';
   parameters := parameters + '&key=' + CSE_ID;
-  parameters := parameters + '&imgtype=jpeg';
-  parameters := parameters + '&lr=lang_fr';
+  parameters := parameters + '&filetype=png;jpeg';
+//  parameters := parameters + '&lr=lang_fr';
+  parameters := parameters + '&imgSize=medium';
   parameters := parameters + format('&start=%d',[start]);
   path := 'https://www.googleapis.com/customsearch/v1' + parameters;
 end;
@@ -50,8 +51,9 @@ begin
    IdSSL := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
 
    IdHttp1 := TIdHTTP.Create;
-   idHTTP1.ReadTimeout := 30000;
+   idHTTP1.ReadTimeout := 1500;
    IdHTTP1.IOHandler := idSSL;
+   //IdHttp1.request.AcceptEncoding:= 'gzip,deflate';
    idSSL.SSLOptions.Method:= sslvTLSv1;
    idSSL.SSLOptions.Mode := sslmUnassigned;
    sJson := IdHTTP1.Get(path);
@@ -69,6 +71,7 @@ var
   i : Integer;
 begin
     Json := TSuperObject.Create(sJson);
+    json.SaveTo('result.json',true);
     result := SO;
    // result.I[GS_STARTINDEX] := strtoint(json.S[GS_STARTINDEX]);
    // result.I[GS_COUNT] := strtoint(json.S[GS_COUNT]);

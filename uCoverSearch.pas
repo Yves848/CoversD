@@ -24,6 +24,7 @@ type
     sPanel2: TsPanel;
     Image1: TsImage;
     bsApply: TsButton;
+    Memo1: TMemo;
     procedure thGetImagesExecute(Sender: TObject; Params: Pointer);
     procedure sg1DrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect;
       State: TGridDrawState);
@@ -108,6 +109,7 @@ begin
   IdHTTP1 := TIdHTTP.Create;
   IdHTTP1.ReadTimeout := 5000;
   IdHTTP1.IOHandler := IdSSL;
+  IdHttp1.request.AcceptEncoding:= 'gzip,deflate';
   IdSSL.SSLOptions.Method := sslvTLSv1_2;
   IdSSL.SSLOptions.Mode := sslmUnassigned;
   try
@@ -124,7 +126,6 @@ begin
       begin
          //caption := 'erreur '+e.Message;
       end;
-
     end;
     finally
       FreeAndNil(MS);
@@ -165,6 +166,7 @@ begin
         pMediaImg.Link := jsArray.O[i].S[GS_LINK];
         sg1.Objects[Col, row] := pMediaImg;
         inc(i);
+
       end;
     end;
 
@@ -194,10 +196,13 @@ begin
     nbPass := 0;
     while nbPass < 1 do
     begin
+      Memo1.Clear;
+      Memo1.Lines.Add('Begin : '+formatdatetime('hh:nn:ss:zzz',time));
       aGoogleSearch := tGoogleSearch.Create(artist + ' ' + title,
         (nbPass * 10) + 1);
       jsResult := aGoogleSearch.getImages;
       jsArray := jsResult.A[GS_ITEMS];
+      Memo1.Lines.Add('End : '+formatdatetime('hh:nn:ss:zzz',time));
       addToGrid;
       inc(nbPass);
     end;

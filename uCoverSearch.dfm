@@ -2,8 +2,8 @@ object fCoverSearch: TfCoverSearch
   Left = 0
   Top = 0
   Caption = 'Cover Search'
-  ClientHeight = 411
-  ClientWidth = 852
+  ClientHeight = 735
+  ClientWidth = 1052
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object fCoverSearch: TfCoverSearch
   object sRollOutPanel1: TsRollOutPanel
     Left = 0
     Top = 0
-    Width = 852
+    Width = 1052
     Height = 65
     Align = alTop
     Caption = 'Infos'
@@ -55,15 +55,15 @@ object fCoverSearch: TfCoverSearch
   end
   object sPanel1: TsPanel
     Left = 0
-    Top = 370
-    Width = 852
+    Top = 694
+    Width = 1052
     Height = 41
     Align = alBottom
     TabOrder = 1
     object bsApply: TsButton
       Left = 1
       Top = 1
-      Width = 850
+      Width = 1050
       Height = 39
       Align = alClient
       Caption = 'Apply'
@@ -73,13 +73,13 @@ object fCoverSearch: TfCoverSearch
   object sg1: TJvStringGrid
     Left = 0
     Top = 65
-    Width = 609
-    Height = 305
+    Width = 750
+    Height = 629
     Align = alLeft
     Color = 3355443
     ColCount = 3
-    DefaultColWidth = 128
-    DefaultRowHeight = 128
+    DefaultColWidth = 200
+    DefaultRowHeight = 200
     FixedCols = 0
     RowCount = 1
     FixedRows = 0
@@ -93,21 +93,35 @@ object fCoverSearch: TfCoverSearch
     FixedFont.Height = -11
     FixedFont.Name = 'Tahoma'
     FixedFont.Style = []
+    ExplicitLeft = -5
+    ExplicitTop = 62
   end
   object sPanel2: TsPanel
-    Left = 609
+    Left = 750
     Top = 65
-    Width = 243
-    Height = 305
+    Width = 302
+    Height = 629
     Align = alClient
     TabOrder = 3
+    ExplicitLeft = 756
+    ExplicitTop = 71
     object Image1: TsImage
-      Left = 18
-      Top = 46
-      Width = 207
-      Height = 203
+      Left = 1
+      Top = 1
+      Width = 300
+      Height = 300
+      Align = alTop
       Picture.Data = {07544269746D617000000000}
       Stretch = True
+    end
+    object Memo1: TMemo
+      Left = 16
+      Top = 368
+      Width = 281
+      Height = 241
+      Lines.Strings = (
+        'Memo1')
+      TabOrder = 0
     end
   end
   object thGetImages: TJvThread
