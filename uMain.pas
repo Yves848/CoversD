@@ -87,6 +87,7 @@ type
     Add1: TMenuItem;
     PopupMenu2: TPopupMenu;
     PopupMenu21: TMenuItem;
+    sAlphaImageList1: TsAlphaImageList;
     procedure Button1Click(Sender: TObject);
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
@@ -107,8 +108,6 @@ type
     procedure sShellTreeView1KeyPress(Sender: TObject; var Key: Char);
     procedure sShellTreeView1AddFolder(Sender: TObject; AFolder: TacShellFolder; var CanAdd: Boolean);
     procedure sgListKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure sgListMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure sgListMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure sgListRowChanging(Sender: TObject; OldRow, NewRow: Integer; var Allow: Boolean);
     procedure sButton4Click(Sender: TObject);
     procedure sButton5Click(Sender: TObject);
@@ -324,7 +323,7 @@ begin
     GlobalMediaFile.Tags.Clear;
     GlobalMediaFile.Tags.LoadFromFile(sgList.Cells[0, sgList.Row]);
     ListCoverArts(image1, GlobalMediaFile.Tags);
-    sgList.Cells[4, sgList.Row] := 'O';
+    sgList.ints[5, sgList.Row] := 1;
     if fCoverSearch <> nil then
       fCoverSearch.Close;
 
@@ -375,7 +374,7 @@ var
 begin
   //
   ARow := sgList.RowCount - 1;
-  if sgList.Cells[0, ARow] <> '' then
+  if sgList.Cells[1, ARow] <> '' then
   begin
     sgList.RowCount := sgList.RowCount + 1;
     ARow := sgList.RowCount - 1;
@@ -383,14 +382,14 @@ begin
 
   pMediaFile := tMediaFile.Create(sFile);
   try
-    sgList.Cells[0, ARow] := sFile;
-    sgList.Cells[1, ARow] := pMediaFile.Tags.GetTag('ARTIST');
-    sgList.Cells[2, ARow] := pMediaFile.Tags.GetTag('TITLE');
-    sgList.Cells[3, ARow] := pMediaFile.Tags.GetTag('ALBUM');
+    sgList.Cells[1, ARow] := sFile;
+    sgList.Cells[2, ARow] := pMediaFile.Tags.GetTag('ARTIST');
+    sgList.Cells[3, ARow] := pMediaFile.Tags.GetTag('TITLE');
+    sgList.Cells[4, ARow] := pMediaFile.Tags.GetTag('ALBUM');
     if pMediaFile.Tags.CoverArts.Count > 0 then
-      sgList.Cells[4, ARow] := 'O'
+      sgList.ints[5, ARow] := 1
     else
-      sgList.Cells[4, ARow] := '';
+      sgList.ints[5, ARow] := 0;
   finally
     pMediaFile.Destroy;
   end;
@@ -679,6 +678,7 @@ begin
     isRegistered := True;
   end;
 {$ENDIF}
+
 end;
 
 procedure TfMain.FormDestroy(Sender: TObject);
@@ -804,19 +804,21 @@ begin
   sgList.Cells[3, 0] := 'Album';
   sgList.Cells[4, 0] := 'Cover';
 
+  sgList.InsertCols(0,1);
+  sgList.ColWidths[0] := 20;
+
 end;
 
 procedure TfMain.sgListClickCell(Sender: TObject; ARow, ACol: Integer);
 begin
-    if aRow = 0 then
+    with sgList do
+    if ARow = 0 then
     begin
-      if aCol = 3 then
-      begin
-
-        sgList.Sort(3);
-
-      end;
-
+      Caption := Cells[ACol, 0];
+      if (GroupColumn <> -1) and (ACol >= GroupColumn) then
+        Inc(ACol);
+      if (GroupColumn <> ACol) then
+        GroupColumn := ACol;
     end;
 end;
 
@@ -837,13 +839,13 @@ begin
     if (Key = VK_NUMPAD1) and (ssCtrl in Shift) then
     begin
       removeKeyFromStack;
-      sgList.Cells[1, sgList.Row] := sgList.NormalEdit.SelText;
+      sgList.Cells[2, sgList.Row] := sgList.NormalEdit.SelText;
 
     end;
     if (Key = VK_NUMPAD2) and (ssCtrl in Shift) then
     begin
       removeKeyFromStack;
-      sgList.Cells[2, sgList.Row] := sgList.NormalEdit.SelText;
+      sgList.Cells[3, sgList.Row] := sgList.NormalEdit.SelText;
 
     end;
   end
@@ -867,7 +869,7 @@ begin
         begin
           sgList.Options := [goEditing, goTabs];
           sgList.Col := 1;
-          sgList.EditCell(1, sgList.Row);
+          sgList.EditCell(2, sgList.Row);
         end
         else
         begin
@@ -880,7 +882,7 @@ begin
         if Shift = [ssCtrl] then
         begin
           BASS_ChannelStop(Channel);
-          PlayStream(sgList.Cells[0, sgList.Row]);
+          PlayStream(sgList.Cells[1, sgList.Row]);
         end
         else
         begin
@@ -918,27 +920,6 @@ begin
 
 end;
 
-procedure TfMain.sgListMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  delais := 0;
-  momentdown := time;
-end;
-
-procedure TfMain.sgListMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-var
-  momentup: ttime;
-begin
-  momentup := time;
-  delais := MilliSecondsBetween(momentup, momentdown);
-  if delais >= 100 then
-  begin
-    sgList.Options := [goEditing];
-    sgList.EditMode := True;
-
-  end;
-
-end;
-
 procedure TfMain.sgListRightClickCell(Sender: TObject; ARow, ACol: Integer);
 begin
   if sgList.SelectedRowCount <= 1 then
@@ -957,7 +938,7 @@ begin
   if sgList.Cells[0, NewRow] <> '' then
   begin
     GlobalMediaFile.Tags.Clear;
-    GlobalMediaFile.Tags.LoadFromFile(sgList.Cells[0, NewRow]);
+    GlobalMediaFile.Tags.LoadFromFile(sgList.Cells[1, NewRow]);
     ListCoverArts(image1, GlobalMediaFile.Tags);
   end;
 end;
@@ -1155,7 +1136,7 @@ begin
     aFile := AFolder.PathName;
     sExtension := tpath.GetExtension(aFile);
     CanAdd := (pos(uppercase(sExtension), sValidExtensions) > 0);
-    
+
   end;
 end;
 
