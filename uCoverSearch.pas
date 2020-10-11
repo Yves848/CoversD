@@ -215,7 +215,7 @@ var
 begin
   IdSSL := TIdSSLIOHandlerSocketOpenSSL.create(nil);
   IdHTTP1 := TIdHTTP.create;
-  IdHTTP1.ReadTimeout := 5000;
+  IdHTTP1.ReadTimeout := 15000;
   IdHTTP1.IOHandler := IdSSL;
   IdHTTP1.request.AcceptEncoding := 'gzip,deflate';
   IdHTTP1.onWork := IdHTTP1Work;
@@ -344,7 +344,7 @@ begin
   //
   IdSSL := TIdSSLIOHandlerSocketOpenSSL.create(nil);
   IdHTTP1 := TIdHTTP.create;
-  IdHTTP1.ReadTimeout := 250;
+  IdHTTP1.ReadTimeout := 2500;
   IdHTTP1.IOHandler := IdSSL;
   IdHTTP1.onWorkBegin := onWorkBegin;
   IdHTTP1.onWork := onWork;

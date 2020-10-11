@@ -51,7 +51,7 @@ begin
    IdSSL := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
 
    IdHttp1 := TIdHTTP.Create;
-   idHTTP1.ReadTimeout := 1500;
+   idHTTP1.ReadTimeout := 5000;
    IdHTTP1.IOHandler := idSSL;
    //IdHttp1.request.AcceptEncoding:= 'gzip,deflate';
    idSSL.SSLOptions.Method:= sslvTLSv1;

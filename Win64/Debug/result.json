@@ -10,9 +10,9 @@
     "request":    
     [
       {
-        "title":"Google Custom Search - Noah Yannick Simon Papa Tara",
-        "totalResults":"114000",
-        "searchTerms":"Noah Yannick Simon Papa Tara",
+        "title":"Google Custom Search - Cinderella Hot and Bothered",
+        "totalResults":"1680000",
+        "searchTerms":"Cinderella Hot and Bothered",
         "count":        10,
         "startIndex":        1,
         "inputEncoding":"utf8",
@@ -26,9 +26,9 @@
     "nextPage":    
     [
       {
-        "title":"Google Custom Search - Noah Yannick Simon Papa Tara",
-        "totalResults":"114000",
-        "searchTerms":"Noah Yannick Simon Papa Tara",
+        "title":"Google Custom Search - Cinderella Hot and Bothered",
+        "totalResults":"1680000",
+        "searchTerms":"Cinderella Hot and Bothered",
         "count":        10,
         "startIndex":        11,
         "inputEncoding":"utf8",
@@ -46,221 +46,221 @@
   },
   "searchInformation":  
   {
-    "searchTime":0.73917,
-    "formattedSearchTime":"0.74",
-    "totalResults":"114000",
-    "formattedTotalResults":"114,000"  
+    "searchTime":0.605802,
+    "formattedSearchTime":"0.61",
+    "totalResults":"1680000",
+    "formattedTotalResults":"1,680,000"  
   },
   "items":  
   [
     {
       "kind":"customsearch#result",
-      "title":"Yannick Noah - Simon Papa Tara (2000, CD) | Discogs",
-      "htmlTitle":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (2000, CD) | Discogs",
-      "link":"https://img.discogs.com/DMav1XftRumqkYnVOHqUdzk4ZD0=/fit-in/502x502/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-4243159-1359500498-9051.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Yannick Noah - Simon Papa Tara (2000, CD) | Discogs",
-      "htmlSnippet":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (2000, CD) | Discogs",
+      "title":"Cinderella: Hot and Bothered (1992)",
+      "htmlTitle":"<b>Cinderella</b>: <b>Hot</b> and <b>Bothered</b> (1992)",
+      "link":"https://m.media-amazon.com/images/M/MV5BZWQwYzQzMWItZDQ0ZC00NTYzLWIyZjQtZmMyYjI2NmZjNjI5XkEyXkFqcGdeQXVyMjUyNDk2ODc@._V1_.jpg",
+      "displayLink":"www.imdb.com",
+      "snippet":"Cinderella: Hot and Bothered (1992)",
+      "htmlSnippet":"<b>Cinderella</b>: <b>Hot</b> and <b>Bothered</b> (1992)",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/Yannick-Noah-Simon-Papa-Tara/release/4243159",
-        "height":        502,
-        "width":        502,
-        "byteSize":        116056,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTPOH8bRvyO7TIxuLsJ8tCWTXeG-ocQxEjunZ8SEXZ9lE_1aKpdquVSrY&s",
-        "thumbnailHeight":        130,
-        "thumbnailWidth":        130      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Simon Papa Tara by Yannick Noah on Amazon Music - Amazon.com",
-      "htmlTitle":"<b>Simon Papa Tara</b> by <b>Yannick Noah</b> on Amazon Music - Amazon.com",
-      "link":"https://m.media-amazon.com/images/I/81XpWCYlX-L._SS500_.jpg",
-      "displayLink":"www.amazon.com",
-      "snippet":"Simon Papa Tara by Yannick Noah on Amazon Music - Amazon.com",
-      "htmlSnippet":"<b>Simon Papa Tara</b> by <b>Yannick Noah</b> on Amazon Music - Amazon.com",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.amazon.com/Simon-papa-tara/dp/B0046JRORS",
-        "height":        500,
-        "width":        500,
-        "byteSize":        39832,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5bstTv3zgUx_Aju_7dGYHMynAOTb3iocncbgrid8g6A_kimDmepktPI8t&s",
-        "thumbnailHeight":        130,
-        "thumbnailWidth":        130      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Simon Papa Tara by Yannick Noah (Single): Reviews, Ratings ...",
-      "htmlTitle":"<b>Simon Papa Tara</b> by <b>Yannick Noah</b> (Single): Reviews, Ratings ...",
-      "link":"https://e.snmc.io/i/600/w/9f5bd9589c26447e147d09ab096f2bdd/1835602",
-      "displayLink":"rateyourmusic.com",
-      "snippet":"Simon Papa Tara by Yannick Noah (Single): Reviews, Ratings ...",
-      "htmlSnippet":"<b>Simon Papa Tara</b> by <b>Yannick Noah</b> (Single): Reviews, Ratings ...",
-      "mime":"image/",
-      "fileFormat":"image/",
-      "image":      
-      {
-        "contextLink":"https://rateyourmusic.com/release/single/yannick_noah/simon_papa_tara/",
-        "height":        490,
-        "width":        498,
-        "byteSize":        43806,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHqq6ZPdT-_-fLYlLjUi3aatDDPe1v0EXcE-YdrQXv-ATP2HWvFcXUFqfo&s",
-        "thumbnailHeight":        128,
-        "thumbnailWidth":        130      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Simon Papa Tara by Yannick Noah on Amazon Music - Amazon.com",
-      "htmlTitle":"<b>Simon Papa Tara</b> by <b>Yannick Noah</b> on Amazon Music - Amazon.com",
-      "link":"https://images-na.ssl-images-amazon.com/images/I/51JgrvccLnL._SX342_QL70_ML2_.jpg",
-      "displayLink":"www.amazon.com",
-      "snippet":"Simon Papa Tara by Yannick Noah on Amazon Music - Amazon.com",
-      "htmlSnippet":"<b>Simon Papa Tara</b> by <b>Yannick Noah</b> on Amazon Music - Amazon.com",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.amazon.com/Simon-papa-tara/dp/B0046JRORS",
-        "height":        342,
-        "width":        342,
-        "byteSize":        18159,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_1n9yh58CqHUvTd69G1f0LA6V04KpOUCF3gxpr335XrgR87Amcqn1Yg&s",
-        "thumbnailHeight":        120,
-        "thumbnailWidth":        120      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Yannick Noah - Simon Papa Tara (2000, Vinyl) | Discogs",
-      "htmlTitle":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (2000, Vinyl) | Discogs",
-      "link":"https://img.discogs.com/w562zZAu6pVDEd-eaXLkNH5-ffQ=/fit-in/600x604/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-980043-1561057633-7614.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Yannick Noah - Simon Papa Tara (2000, Vinyl) | Discogs",
-      "htmlSnippet":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (2000, Vinyl) | Discogs",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.discogs.com/Yannick-Noah-Simon-Papa-Tara/release/980043",
-        "height":        604,
-        "width":        599,
-        "byteSize":        61644,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwGFpy2E7OaazWripZJZ1iPDU7S0zuPWOr-tt59253di03pVMql7gWBe8&s",
-        "thumbnailHeight":        135,
+        "contextLink":"https://www.imdb.com/title/tt8698194/mediaviewer/rm2370730496",
+        "height":        444,
+        "width":        576,
+        "byteSize":        79632,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3wA1WWSDc0Zjlc3F1gIQ31wWDOjsT_EP-VgZbGRGaCfLdk5ldmv0N5w&s",
+        "thumbnailHeight":        103,
         "thumbnailWidth":        134      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Yannick Noah - Simon Papa Tara (2000) | IMVDb",
-      "htmlTitle":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (2000) | IMVDb",
-      "link":"https://s3.amazonaws.com/images.imvdb.com/video/269179340994-yannick-noah-simon-papa-tara_music_video_ov.jpg?v=2",
-      "displayLink":"imvdb.com",
-      "snippet":"Yannick Noah - Simon Papa Tara (2000) | IMVDb",
-      "htmlSnippet":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (2000) | IMVDb",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://imvdb.com/video/yannick-noah/simon-papa-tara",
-        "height":        360,
-        "width":        480,
-        "byteSize":        40593,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrKg7aT2DbRgyEQJ6ENI9uVAX_IHOFKcnAEv4v9iune-WbS4dA6Ml3yw&s",
-        "thumbnailHeight":        97,
-        "thumbnailWidth":        129      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Simon Papa Tara (Live) by Yannick Noah on Amazon Music - Amazon.com",
-      "htmlTitle":"<b>Simon Papa Tara</b> (Live) by <b>Yannick Noah</b> on Amazon Music - Amazon.com",
-      "link":"https://m.media-amazon.com/images/I/81vosSh1nQL._SS500_.jpg",
-      "displayLink":"www.amazon.com",
-      "snippet":"Simon Papa Tara (Live) by Yannick Noah on Amazon Music - Amazon.com",
-      "htmlSnippet":"<b>Simon Papa Tara</b> (Live) by <b>Yannick Noah</b> on Amazon Music - Amazon.com",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.amazon.com/Simon-Papa-Tara-Live/dp/B0046JQ0GO",
-        "height":        500,
-        "width":        500,
-        "byteSize":        25797,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzkuDMt7BW3aMg1Zn80ZCCgwN58NLkceDmdsn91PDzG0hdP-PcGkD3Of8&s",
-        "thumbnailHeight":        130,
-        "thumbnailWidth":        130      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Yannick Noah - Simon Papa Tara (Clip officiel) - YouTube | Yannick ...",
-      "htmlTitle":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (Clip officiel) - YouTube | <b>Yannick</b> ...",
-      "link":"https://i.pinimg.com/originals/76/1a/8a/761a8a52e905b7d9b6d64f1a275cf265.jpg",
-      "displayLink":"www.pinterest.com",
-      "snippet":"Yannick Noah - Simon Papa Tara (Clip officiel) - YouTube | Yannick ...",
-      "htmlSnippet":"<b>Yannick Noah</b> - <b>Simon Papa Tara</b> (Clip officiel) - YouTube | <b>Yannick</b> ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.pinterest.com/pin/216313588340665428/",
-        "height":        360,
-        "width":        480,
-        "byteSize":        18347,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUZSW6qPVjFNxIgKCjWOvnb2LFgIWw-Ueyj8uEZElnGqce-KgnHP3Km4c&s",
-        "thumbnailHeight":        97,
-        "thumbnailWidth":        129      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"yannick noah - simon papa tara maxi 45t - YouTube",
-      "htmlTitle":"<b>yannick noah</b> - <b>simon papa tara</b> maxi 45t - YouTube",
-      "link":"https://i.ytimg.com/vi/MSxJOtZ7IC0/hqdefault.jpg",
+      "title":"Cinderella Hot And Bothered - YouTube",
+      "htmlTitle":"<b>Cinderella Hot</b> And <b>Bothered</b> - YouTube",
+      "link":"https://i.ytimg.com/vi/xB92ZGX2YGk/hqdefault.jpg",
       "displayLink":"www.youtube.com",
-      "snippet":"yannick noah - simon papa tara maxi 45t - YouTube",
-      "htmlSnippet":"<b>yannick noah</b> - <b>simon papa tara</b> maxi 45t - YouTube",
+      "snippet":"Cinderella Hot And Bothered - YouTube",
+      "htmlSnippet":"<b>Cinderella Hot</b> And <b>Bothered</b> - YouTube",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.youtube.com/watch?v=MSxJOtZ7IC0",
+        "contextLink":"https://www.youtube.com/watch?v=xB92ZGX2YGk",
         "height":        360,
         "width":        480,
-        "byteSize":        6953,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdqHIrVuEHVyzgis2K0TRLhvH5B7XD5iGWB6TS8RSW6zc7tSRd4pR3fDs&s",
+        "byteSize":        21392,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwXOufngyhW2l1xSiwPwUvt2UQELNGA_gEGIDfGRwr5oM0aqVviSvn_to&s",
         "thumbnailHeight":        97,
         "thumbnailWidth":        129      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Simon Papa Tara (Live au Forest National de Bruxelles 2011) by ...",
-      "htmlTitle":"<b>Simon Papa Tara</b> (Live au Forest National de Bruxelles 2011) by ...",
-      "link":"https://m.media-amazon.com/images/I/811iI6+MrvL._SS500_.jpg",
-      "displayLink":"www.amazon.com",
-      "snippet":"Simon Papa Tara (Live au Forest National de Bruxelles 2011) by ...",
-      "htmlSnippet":"<b>Simon Papa Tara</b> (Live au Forest National de Bruxelles 2011) by ...",
+      "title":"Cinderella - Hot And Bothered (1992, CD) | Discogs",
+      "htmlTitle":"<b>Cinderella</b> - <b>Hot</b> And <b>Bothered</b> (1992, CD) | Discogs",
+      "link":"https://img.discogs.com/sVMQMVYDKQ3c0-93cdNSvBGBIKw=/fit-in/576x444/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-4434015-1364762371-7523.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Cinderella - Hot And Bothered (1992, CD) | Discogs",
+      "htmlSnippet":"<b>Cinderella</b> - <b>Hot</b> And <b>Bothered</b> (1992, CD) | Discogs",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.amazon.com/Simon-Papa-Forest-National-Bruxelles/dp/B0785MTYHF",
+        "contextLink":"https://www.discogs.com/Cinderella-Hot-And-Bothered/release/4434015",
+        "height":        444,
+        "width":        576,
+        "byteSize":        78692,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa_XbHt44fMVXvz3jecq0m4djJzXhALo59MRKR-M0uGxfZXAx9MegJ8i0&s",
+        "thumbnailHeight":        103,
+        "thumbnailWidth":        134      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Cinderella - Hot and Bothered (from Wayne's World OST) - YouTube",
+      "htmlTitle":"<b>Cinderella</b> - <b>Hot</b> and <b>Bothered</b> (from Wayne&#39;s World OST) - YouTube",
+      "link":"https://i.ytimg.com/vi/iqcOxE1ZAs8/hqdefault.jpg",
+      "displayLink":"www.youtube.com",
+      "snippet":"Cinderella - Hot and Bothered (from Wayne's World OST) - YouTube",
+      "htmlSnippet":"<b>Cinderella</b> - <b>Hot</b> and <b>Bothered</b> (from Wayne&#39;s World OST) - YouTube",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.youtube.com/watch?v=iqcOxE1ZAs8",
+        "height":        360,
+        "width":        480,
+        "byteSize":        19754,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMV8fJ8lT8vTCkhn-Aazl7Sv3-aqh2rmekNMas2zwXOQBhanp3mTcMkQ&s",
+        "thumbnailHeight":        97,
+        "thumbnailWidth":        129      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Cinderella - \"Hot & Bothered\" (1992) - Cinderella - 17",
+      "htmlTitle":"<b>Cinderella</b> - &quot;<b>Hot</b> &amp; <b>Bothered</b>&quot; (1992) - <b>Cinderella</b> - 17",
+      "link":"https://s3-us-west-1.amazonaws.com/static-spin-com/files/130717-Cinderella-640x426.jpg",
+      "displayLink":"www.spin.com",
+      "snippet":"Cinderella - \"Hot & Bothered\" (1992) - Cinderella - 17",
+      "htmlSnippet":"<b>Cinderella</b> - &quot;<b>Hot</b> &amp; <b>Bothered</b>&quot; (1992) - <b>Cinderella</b> - 17",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.spin.com/2013/07/best-hard-rock-songs/130717-cinderella/",
+        "height":        426,
+        "width":        640,
+        "byteSize":        77306,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeRu7v354RDfY6XlIPNKOYfU-ycoAkxK-8Qc39tfGMk9AxVhXHP_5B4UM&s",
+        "thumbnailHeight":        91,
+        "thumbnailWidth":        137      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Cinderella - Hot And Bothered OFFICIAL VIDEO (Higher Quality ...",
+      "htmlTitle":"<b>Cinderella</b> - <b>Hot</b> And <b>Bothered</b> OFFICIAL VIDEO (Higher Quality ...",
+      "link":"https://i.ytimg.com/vi/30EpJ1EyjbA/hqdefault.jpg",
+      "displayLink":"www.youtube.com",
+      "snippet":"Cinderella - Hot And Bothered OFFICIAL VIDEO (Higher Quality ...",
+      "htmlSnippet":"<b>Cinderella</b> - <b>Hot</b> And <b>Bothered</b> OFFICIAL VIDEO (Higher Quality ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.youtube.com/watch?v=30EpJ1EyjbA",
+        "height":        360,
+        "width":        480,
+        "byteSize":        19240,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCUm9Vd0xZpzgGlB_GJLVsEcN2N20TUpudHiyiiS2g_TDNvU2dqviIy2k&s",
+        "thumbnailHeight":        97,
+        "thumbnailWidth":        129      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Cinderella - \"Hot & Bothered\" (1992) - Cinderella - 17",
+      "htmlTitle":"<b>Cinderella</b> - &quot;<b>Hot</b> &amp; <b>Bothered</b>&quot; (1992) - <b>Cinderella</b> - 17",
+      "link":"https://s3-us-west-1.amazonaws.com/static-spin-com/files/130717-Cinderella-414x276.jpg",
+      "displayLink":"www.spin.com",
+      "snippet":"Cinderella - \"Hot & Bothered\" (1992) - Cinderella - 17",
+      "htmlSnippet":"<b>Cinderella</b> - &quot;<b>Hot</b> &amp; <b>Bothered</b>&quot; (1992) - <b>Cinderella</b> - 17",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.spin.com/2013/07/best-hard-rock-songs/130717-cinderella/",
+        "height":        276,
+        "width":        414,
+        "byteSize":        35494,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPQqSgkZS6x2CyUEN8JGTHFskC-kpiKnfRVHpZLkkXY2QPSxjQ5lc5&s",
+        "thumbnailHeight":        83,
+        "thumbnailWidth":        125      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Cinderella - Hot And Bothered - YouTube",
+      "htmlTitle":"<b>Cinderella</b> - <b>Hot</b> And <b>Bothered</b> - YouTube",
+      "link":"https://i.ytimg.com/vi/mnBHwWRAqxY/hqdefault.jpg",
+      "displayLink":"www.youtube.com",
+      "snippet":"Cinderella - Hot And Bothered - YouTube",
+      "htmlSnippet":"<b>Cinderella</b> - <b>Hot</b> And <b>Bothered</b> - YouTube",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.youtube.com/watch?v=mnBHwWRAqxY",
+        "height":        360,
+        "width":        480,
+        "byteSize":        12872,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnZt3Sc5Ry3fXCtpK4PgMa5OlEXX4I6whuRRSQtS9rVs1EgTm73HQ9Ag&s",
+        "thumbnailHeight":        97,
+        "thumbnailWidth":        129      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Hot And Bothered by Cinderella on Amazon Music - Amazon.co.uk",
+      "htmlTitle":"<b>Hot</b> And <b>Bothered</b> by <b>Cinderella</b> on Amazon Music - Amazon.co.uk",
+      "link":"https://m.media-amazon.com/images/I/91Vo0YJFdFL._SS500_.jpg",
+      "displayLink":"www.amazon.co.uk",
+      "snippet":"Hot And Bothered by Cinderella on Amazon Music - Amazon.co.uk",
+      "htmlSnippet":"<b>Hot</b> And <b>Bothered</b> by <b>Cinderella</b> on Amazon Music - Amazon.co.uk",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.amazon.co.uk/Hot-And-Bothered/dp/B003U7UZIM",
         "height":        500,
         "width":        500,
-        "byteSize":        35960,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9EqJAEUOfQ7GEoHDIlHKlFgcA4k2bVhMY4M0svPGfITSkPvfqoLn50-A&s",
+        "byteSize":        44647,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD0olDxChepDg9tekW1Re1TJ4CJzrpAD94nRVhaoK2dZ6lTJykvE76QMA&s",
         "thumbnailHeight":        130,
         "thumbnailWidth":        130      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Cinderella Hot And Bothered | Cinderella band, Cinderella rock ...",
+      "htmlTitle":"<b>Cinderella Hot</b> And <b>Bothered</b> | <b>Cinderella</b> band, <b>Cinderella</b> rock ...",
+      "link":"https://i.pinimg.com/originals/b9/5f/d6/b95fd6fc43facb11d04a2af3698a9b6c.jpg",
+      "displayLink":"www.pinterest.com",
+      "snippet":"Cinderella Hot And Bothered | Cinderella band, Cinderella rock ...",
+      "htmlSnippet":"<b>Cinderella Hot</b> And <b>Bothered</b> | <b>Cinderella</b> band, <b>Cinderella</b> rock ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.pinterest.com/pin/562387072196200116/",
+        "height":        360,
+        "width":        480,
+        "byteSize":        25825,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSICqD2ZnILYNZF1GSuZLVNq5IIj2CoD3hlH-WgRfXkr8C1u8hL4T1zOa0&s",
+        "thumbnailHeight":        97,
+        "thumbnailWidth":        129      
       }    
     }  
   ]
