@@ -11,15 +11,15 @@ object fDeleteCover: TfDeleteCover
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
   object sButton1: TsButton
-    Left = 40
-    Top = 48
+    Left = 24
+    Top = 8
     Width = 75
     Height = 25
     Caption = 'sButton1'
     TabOrder = 0
-    OnClick = sButton1Click
   end
 end

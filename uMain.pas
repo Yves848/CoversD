@@ -51,7 +51,7 @@ type
     sPanel2: TsPanel;
     sShellTreeView1: TsShellTreeView;
     sgList: TAdvStringGrid;
-    sButton3: TsButton;
+    btnUtils: TsButton;
     sButton4: TsButton;
     sButton5: TsButton;
     sSaveDialog1: TsSaveDialog;
@@ -122,7 +122,7 @@ type
     procedure bsRegisterClick(Sender: TObject);
     procedure slCoversSliderChange(Sender: TObject);
     procedure PopupMenu21Click(Sender: TObject);
-    procedure sButton3Click(Sender: TObject);
+    procedure btnUtilsClick(Sender: TObject);
     procedure sgListRightClickCell(Sender: TObject; ARow, ACol: Integer);
     procedure sgListClickCell(Sender: TObject; ARow, ACol: Integer);
     procedure sgListSetEditText(Sender: TObject; ACol, ARow: Integer; const Value: string);
@@ -677,6 +677,7 @@ begin
   initGrid;
 {$IFDEF DEBUG}
   isRegistered := True;
+  btnUtils.Visible := true;
 {$ELSE}
   GetRegistrationInformation(ReleaseCodeString, SerialNumber);
   if not IsReleaseCodeValid(ReleaseCodeString, SerialNumber) then
@@ -1100,7 +1101,7 @@ begin
   end;
 end;
 
-procedure TfMain.sButton3Click(Sender: TObject);
+procedure TfMain.btnUtilsClick(Sender: TObject);
 var
   fDeleteCover: tfDeleteCover;
 begin
