@@ -71,7 +71,9 @@ var
   i : Integer;
 begin
     Json := TSuperObject.Create(sJson);
+    {$IFDEF DEBUG}
     json.SaveTo('result.json',true);
+    {$ENDIF}
     result := SO;
    // result.I[GS_STARTINDEX] := strtoint(json.S[GS_STARTINDEX]);
    // result.I[GS_COUNT] := strtoint(json.S[GS_COUNT]);

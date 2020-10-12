@@ -14,10 +14,13 @@ const
 type
   tMediaFile = class(tPersistent)
   public
+    bModified : boolean;
     tags: TTags;
     constructor create; overload;
     constructor create(aFileName: string); overload;
     destructor Destroy; overload;
+    procedure SaveTags;
+    Procedure LoadTags(pFile : String);
   end;
 
   tMediaImg = class(tPersistent)
@@ -49,6 +52,7 @@ begin
   //
   // inherited create;
   self.create;
+  bModified := false;
   tags := TTags.create;
   tags.ParseCoverArts := true;
   tags.LoadFromFile(aFileName);
@@ -57,6 +61,7 @@ end;
 constructor tMediaFile.create;
 begin
   inherited create;
+  bModified := false;
   tags := TTags.create;
 end;
 
@@ -65,6 +70,19 @@ begin
   tags.Free;
   // inherited Free;
   inherited Destroy;
+end;
+
+procedure tMediaFile.LoadTags(pFile: String);
+begin
+  tags.Clear;
+  bModified := False;
+  Tags.LoadFromFile(pFile);
+end;
+
+procedure tMediaFile.SaveTags;
+begin
+  Tags.SaveToFile(tags.FileName);
+  bModified := False;
 end;
 
 { tMediaImg }

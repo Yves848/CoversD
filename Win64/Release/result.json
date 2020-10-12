@@ -1,0 +1,272 @@
+{
+  "kind":"customsearch#search",
+  "url":  
+  {
+    "type":"application/json",
+    "template":"https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"  
+  },
+  "queries":  
+  {
+    "request":    
+    [
+      {
+        "title":"Google Custom Search - Marilyn Manson Come Toghether",
+        "totalResults":"29200000",
+        "searchTerms":"Marilyn Manson Come Toghether",
+        "count":        10,
+        "startIndex":        1,
+        "inputEncoding":"utf8",
+        "outputEncoding":"utf8",
+        "safe":"off",
+        "cx":"007439388879951561867:3ragl0fkhpm",
+        "searchType":"image",
+        "imgSize":"large"      
+      }    
+    ],
+    "nextPage":    
+    [
+      {
+        "title":"Google Custom Search - Marilyn Manson Come Toghether",
+        "totalResults":"29200000",
+        "searchTerms":"Marilyn Manson Come Toghether",
+        "count":        10,
+        "startIndex":        11,
+        "inputEncoding":"utf8",
+        "outputEncoding":"utf8",
+        "safe":"off",
+        "cx":"007439388879951561867:3ragl0fkhpm",
+        "searchType":"image",
+        "imgSize":"large"      
+      }    
+    ]  
+  },
+  "context":  
+  {
+    "title":"Google"  
+  },
+  "searchInformation":  
+  {
+    "searchTime":0.688559,
+    "formattedSearchTime":"0.69",
+    "totalResults":"29200000",
+    "formattedTotalResults":"29,200,000"  
+  },
+  "spelling":  
+  {
+    "correctedQuery":"Marilyn Manson Come Together",
+    "htmlCorrectedQuery":"Marilyn Manson Come <b><i>Together</i></b>"  
+  },
+  "items":  
+  [
+    {
+      "kind":"customsearch#result",
+      "title":"Marilyn Manson: 'Now Is The Time For People To Come Together ...",
+      "htmlTitle":"<b>Marilyn Manson</b>: &#39;Now Is The Time For People To <b>Come Together</b> ...",
+      "link":"https://assets.blabbermouth.net/media/marilynmansonapple2020_638.jpg",
+      "displayLink":"www.blabbermouth.net",
+      "snippet":"Marilyn Manson: 'Now Is The Time For People To Come Together ...",
+      "htmlSnippet":"<b>Marilyn Manson</b>: &#39;Now Is The Time For People To <b>Come Together</b> ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.blabbermouth.net/news/marilyn-manson-now-is-the-time-for-people-to-come-together/",
+        "height":        438,
+        "width":        638,
+        "byteSize":        27832,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxdEgUODvxK_d87R3YQsC1Mzmz-LwbEegrCaN5E4uX0L2rXl318oficQ&s",
+        "thumbnailHeight":        94,
+        "thumbnailWidth":        137      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Marilyn Manson thinks it's time to 'come together as much as possible'",
+      "htmlTitle":"<b>Marilyn Manson</b> thinks it&#39;s time to &#39;<b>come together</b> as much as possible&#39;",
+      "link":"https://tonedeaf.thebrag.com/wp-content/uploads/2020/07/Untitled-design-46-768x435.jpg",
+      "displayLink":"tonedeaf.thebrag.com",
+      "snippet":"Marilyn Manson thinks it's time to 'come together as much as possible'",
+      "htmlSnippet":"<b>Marilyn Manson</b> thinks it&#39;s time to &#39;<b>come together</b> as much as possible&#39;",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://tonedeaf.thebrag.com/marilyn-manson-we-are-chaos-pandemic/",
+        "height":        435,
+        "width":        768,
+        "byteSize":        26130,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMLDh5f06mSUisG8prsjUK_cOqKgmeOgKSd5q7GJnN1MBL8YziH2kPblw&s",
+        "thumbnailHeight":        80,
+        "thumbnailWidth":        142      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Alice Cooper, Steven Tyler, Marilyn Manson, and Johnny Depp sing ...",
+      "htmlTitle":"Alice Cooper, Steven Tyler, <b>Marilyn Manson</b>, and Johnny Depp sing ...",
+      "link":"https://alltop.com/viral/wp-content/uploads/2015/09/x-of-.png",
+      "displayLink":"alltop.com",
+      "snippet":"Alice Cooper, Steven Tyler, Marilyn Manson, and Johnny Depp sing ...",
+      "htmlSnippet":"Alice Cooper, Steven Tyler, <b>Marilyn Manson</b>, and Johnny Depp sing ...",
+      "mime":"image/png",
+      "fileFormat":"image/png",
+      "image":      
+      {
+        "contextLink":"https://alltop.com/viral/alice-cooper-steven-tyler-marilyn-manson-and-johnny-depp-sing-come-together-video",
+        "height":        420,
+        "width":        744,
+        "byteSize":        130936,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi5hVld_jaYPbVFzkrRr6yR_8HeSfB8vzf-Ixt3meMaHx4YQ1bbSDNpw&s",
+        "thumbnailHeight":        80,
+        "thumbnailWidth":        141      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Hear Marilyn Manson And Rob Zombie Cover \u201cCome Together\u201d By The ...",
+      "htmlTitle":"Hear <b>Marilyn Manson</b> And Rob Zombie Cover \u201c<b>Come Together</b>\u201d By The ...",
+      "link":"https://i1.wp.com/ghostcultmag.com/wp-content/uploads/2018/07/Rob-Zombie-and-Marilyn-manson-cover-ghostcultmag.jpg?resize=584%2C329&ssl=1",
+      "displayLink":"www.ghostcultmag.com",
+      "snippet":"Hear Marilyn Manson And Rob Zombie Cover \u201cCome Together\u201d By The ...",
+      "htmlSnippet":"Hear <b>Marilyn Manson</b> And Rob Zombie Cover \u201c<b>Come Together</b>\u201d By The ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.ghostcultmag.com/hear-marilyn-manson-and-rob-zombie-cover-come-together-by-the-beatles/",
+        "height":        329,
+        "width":        584,
+        "byteSize":        22187,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY4G3Xik4CoagnqlIrNf7SWB1zdOtHOJpehE7YYfk8Vn_zkZFK4haYO1s&s",
+        "thumbnailHeight":        76,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Amazon.in: Buy Marilyn Manson Songs (Music Guide): The Beautiful ...",
+      "htmlTitle":"Amazon.in: Buy <b>Marilyn Manson</b> Songs (Music Guide): The Beautiful ...",
+      "link":"https://images-eu.ssl-images-amazon.com/images/I/51JPjP2GxqL._SR600%2C315_PIWhiteStrip%2CBottomLeft%2C0%2C35_SCLZZZZZZZ_.jpg",
+      "displayLink":"www.amazon.in",
+      "snippet":"Amazon.in: Buy Marilyn Manson Songs (Music Guide): The Beautiful ...",
+      "htmlSnippet":"Amazon.in: Buy <b>Marilyn Manson</b> Songs (Music Guide): The Beautiful ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.amazon.in/Marilyn-Manson-Songs-Music-Guide/dp/1155461975",
+        "height":        350,
+        "width":        600,
+        "byteSize":        16669,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKSNJz1X7caIsuhK-z4I10x7q5zyceMXNTdixpmBx6nafzeRMuNrTq6t0&s",
+        "thumbnailHeight":        79,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Amazon.in: Buy Marilyn Manson Songs (Music Guide): The Beautiful ...",
+      "htmlTitle":"Amazon.in: Buy <b>Marilyn Manson</b> Songs (Music Guide): The Beautiful ...",
+      "link":"https://images-na.ssl-images-amazon.com/images/I/51JPjP2GxqL._SX331_BO1,204,203,200_.jpg",
+      "displayLink":"www.amazon.in",
+      "snippet":"Amazon.in: Buy Marilyn Manson Songs (Music Guide): The Beautiful ...",
+      "htmlSnippet":"Amazon.in: Buy <b>Marilyn Manson</b> Songs (Music Guide): The Beautiful ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.amazon.in/Marilyn-Manson-Songs-Music-Guide/dp/1155461975",
+        "height":        499,
+        "width":        333,
+        "byteSize":        35300,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjMWldoU76xJ9kZz9W6_ZAKcxB2d-OOfUyoK-EuL5i9Fy0q2IrjiK-Sw&s",
+        "thumbnailHeight":        130,
+        "thumbnailWidth":        87      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Marilyn Manson and Ozzy Osbourne announce joint US tour together ...",
+      "htmlTitle":"<b>Marilyn Manson</b> and Ozzy Osbourne announce joint US tour <b>together</b> ...",
+      "link":"https://i1.wp.com/metro.co.uk/wp-content/uploads/2019/11/MANSON_X_OZ-b1e3.gif?quality=90&strip=all&zoom=1&resize=644%2C338&ssl=1",
+      "displayLink":"metro.co.uk",
+      "snippet":"Marilyn Manson and Ozzy Osbourne announce joint US tour together ...",
+      "htmlSnippet":"<b>Marilyn Manson</b> and Ozzy Osbourne announce joint US tour <b>together</b> ...",
+      "mime":"image/gif",
+      "fileFormat":"image/gif",
+      "image":      
+      {
+        "contextLink":"https://metro.co.uk/2019/11/15/marilyn-manson-ozzy-osbourne-announce-epic-new-joint-tour-11162694/",
+        "height":        338,
+        "width":        644,
+        "byteSize":        233390,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZqk4T9lP4fSP8JFHPcL4PAF8cfYdpuFptQccAZ-QKB1m6hebIJX9O8Q&s",
+        "thumbnailHeight":        72,
+        "thumbnailWidth":        137      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Best Twitter Reactions to Taylor Swift and Marilyn Manson Posing ...",
+      "htmlTitle":"Best Twitter Reactions to Taylor Swift and <b>Marilyn Manson</b> Posing ...",
+      "link":"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/taylor-swift-marilyn-manson-gettyimages-1153173050.jpg?crop=1xw:1xh;center,top&resize=480:*",
+      "displayLink":"www.elle.com",
+      "snippet":"Best Twitter Reactions to Taylor Swift and Marilyn Manson Posing ...",
+      "htmlSnippet":"Best Twitter Reactions to Taylor Swift and <b>Marilyn Manson</b> Posing ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.elle.com/culture/celebrities/a27721554/taylor-swift-marilyn-manson-photos-twitter-reactions/",
+        "height":        240,
+        "width":        480,
+        "byteSize":        24667,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYBW0BMPateeSsp3p5AZ8Rc-nE0kBUaR6Km2LN_oCm5iuNgaGUOmYPHw&s",
+        "thumbnailHeight":        65,
+        "thumbnailWidth":        129      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Alice Cooper, Marilyn Manson and Steven Tyler sing Come Together ...",
+      "htmlTitle":"Alice Cooper, <b>Marilyn Manson</b> and Steven Tyler sing <b>Come Together</b> ...",
+      "link":"https://i.ytimg.com/vi/YWnPHpsZHXo/hqdefault.jpg",
+      "displayLink":"www.youtube.com",
+      "snippet":"Alice Cooper, Marilyn Manson and Steven Tyler sing Come Together ...",
+      "htmlSnippet":"Alice Cooper, <b>Marilyn Manson</b> and Steven Tyler sing <b>Come Together</b> ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.youtube.com/watch?v=YWnPHpsZHXo",
+        "height":        360,
+        "width":        480,
+        "byteSize":        14433,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSigjoksWaTYzDc1xqQjNltGCHHUkLvFQFgEHdVFEsuRux-lXdFwfWKuw&s",
+        "thumbnailHeight":        97,
+        "thumbnailWidth":        129      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"DOWNLOAD MP3: Marilyn Manson \u2013 Keep My Head Together ...",
+      "htmlTitle":"DOWNLOAD MP3: <b>Marilyn Manson</b> \u2013 Keep My Head <b>Together</b> ...",
+      "link":"https://fastmusicplus.com/wp-content/uploads/2020/09/Marilyn-Manson-%E2%80%93-Keep-My-Head-Together.jpg",
+      "displayLink":"fastmusicplus.com",
+      "snippet":"DOWNLOAD MP3: Marilyn Manson \u2013 Keep My Head Together ...",
+      "htmlSnippet":"DOWNLOAD MP3: <b>Marilyn Manson</b> \u2013 Keep My Head <b>Together</b> ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://fastmusicplus.com/mp3-marilyn-manson-keep-my-head-together/",
+        "height":        600,
+        "width":        600,
+        "byteSize":        87609,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT45Lf1zO_5ObsWVv09RcWPSSY3sW_XCLbb123BMJwzrBg6wqEq2Dk-tjo&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
+      }    
+    }  
+  ]
+}

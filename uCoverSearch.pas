@@ -12,6 +12,9 @@ uses
   JPEG, PNGImage, GIFImg, TagsLibrary, utypes, acImage, sButton, AdvUtil, AdvObj, BaseGrid, AdvGrid, IdBaseComponent;
 
 type
+
+  tREfreshCell0 = procedure(aCol, aRow: Integer) of object;
+
   tDownloadThread = class(TThread)
   private
     fMax: Integer;
@@ -19,6 +22,7 @@ type
     fCol: Integer;
     fRow: Integer;
     fGrid: tAdvStringGrid;
+    fRefreh: tREfreshCell0;
     procedure downloadImage(sUrl: string);
   protected
     procedure Execute; override;
@@ -26,7 +30,7 @@ type
     procedure onWork(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
     procedure onWorkBegin(ASender: TObject; AWorkMode: TWorkMode; AWorkCountMax: Int64);
     procedure onWorkEnd(ASender: TObject; AWorkMode: TWorkMode);
-    constructor create(aCol, aRow: Integer; aGrid: tAdvStringGrid); reintroduce;
+    constructor create(aCol, aRow: Integer; aGrid: tAdvStringGrid; CallBack: tREfreshCell0); reintroduce;
   end;
 
   TfCoverSearch = class(TForm)
@@ -50,21 +54,22 @@ type
     procedure IdHTTP1Work(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
     procedure IdHTTP1WorkBegin(ASender: TObject; AWorkMode: TWorkMode; AWorkCountMax: Int64);
     procedure IdHTTP1WorkEnd(ASender: TObject; AWorkMode: TWorkMode);
-    procedure sg1ClickCell(Sender: TObject; aRow, aCol: Integer);
     procedure sButton1Click(Sender: TObject);
     procedure bsApplyClick(Sender: TObject);
+    procedure sg1CellChanging(Sender: TObject; OldRow, OldCol, NewRow, NewCol: Integer; var Allow: Boolean);
   private
     { Déclarations privées }
   public
     { Déclarations publiques }
     artist, title: string;
-    sFile : String;
-    pHandle : tHandle;
+    sFile: String;
+    pHandle: tHandle;
     procedure StartSearch;
     procedure downloadImage(sUrl: string);
     procedure onWork(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
     procedure onWorkBegin(ASender: TObject; AWorkMode: TWorkMode; AWorkCountMax: Int64);
     procedure SaveTags(Sender: TObject);
+    procedure refreshCell0(aCol, aRow: Integer);
   end;
 
 var
@@ -82,7 +87,9 @@ begin
     bsApply.Enabled := isRegistered;
     bsApply.Caption := bsApply.Caption + ' (unregistered)';
   end;
-
+  {$IFNDEF DEBUG}
+     Memo1.visible := false;
+  {$ENDIF}
 end;
 
 procedure TfCoverSearch.FormShow(Sender: TObject);
@@ -116,21 +123,33 @@ begin
 
 end;
 
+procedure TfCoverSearch.refreshCell0;
+var
+  allow : boolean;
+begin
+  sg1.Col := 0;
+  sg1.Row := 0;
+  sg1.SetFocus;
+  sg1CellChanging(self,0,0,0,0,allow);
+  //sg1ClickCell(Self, 0, 0);
+end;
+
 procedure TfCoverSearch.sButton1Click(Sender: TObject);
 begin
   StartSearch;
 end;
 
-procedure TfCoverSearch.sg1ClickCell(Sender: TObject; aRow, aCol: Integer);
+procedure TfCoverSearch.sg1CellChanging(Sender: TObject; OldRow, OldCol, NewRow, NewCol: Integer; var Allow: Boolean);
 var
   Picture: tPicture;
 begin
-  if sg1.Objects[aCol, aRow] <> nil then
+  if sg1.Objects[NewCol, NewRow] <> nil then
   begin
     // downloadImage(tMediaImg(sg1.Objects[aCol,aRow]).Link);
-    Picture := sg1.GetPicture(aCol, aRow);
+    Picture := sg1.GetPicture(NewCol, NewRow);
     Image1.Picture.Assign(Picture);
   end;
+
 end;
 
 procedure TfCoverSearch.SaveTags(Sender: TObject);
@@ -148,7 +167,7 @@ var
   PictureMagic: Word;
   CoverArtPictureFormat: TTagPictureFormat;
   CoverArt: TCoverArt;
-  pMediaFile : tMediaFile;
+  pMediaFile: tMediaFile;
 begin
   // * Clear the cover art data
   MIMEType := '';
@@ -166,7 +185,7 @@ begin
       CoverArtPictureFormat := tpfJPEG;
       JPEGPicture := TJPEGImage.create;
       try
-        JPEGPicture.Assign(image1.Picture.Bitmap);
+        JPEGPicture.Assign(Image1.Picture.Bitmap);
         Width := JPEGPicture.Width;
         Height := JPEGPicture.Height;
         NoOfColors := 0;
@@ -174,10 +193,10 @@ begin
       finally
         FreeAndNil(JPEGPicture);
       end;
-      PictureStream := tMemorystream.Create;
+      PictureStream := tMemoryStream.create;
       Image1.Picture.Bitmap.SaveToStream(PictureStream);
       PictureStream.Position := 0;
-      pMediaFile := tMediaFile.Create(sFile);
+      pMediaFile := tMediaFile.create(sFile);
       // * Add the cover art
       CoverArt := pMediaFile.Tags.AddCoverArt('cover');
       CoverArt.CoverType := 3; // * ID3v2 cover type (3: front cover)
@@ -189,10 +208,10 @@ begin
       CoverArt.NoOfColors := NoOfColors;
       CoverArt.PictureFormat := CoverArtPictureFormat;
       CoverArt.Stream.CopyFrom(PictureStream, PictureStream.Size);
-      pMediaFile.Tags.SaveToFile(sFile);
+      pMediaFile.SaveTags;
     finally
       FreeAndNil(PictureStream);
-      PostMessage(Application.MainForm.Handle, WM_REFRESH_COVER,0,0);
+      PostMessage(Application.MainForm.Handle, WM_REFRESH_COVER, 0, 0);
       Close;
     end;
   except
@@ -211,7 +230,7 @@ var
   IdHTTP1: TIdHTTP;
   MS: tMemoryStream;
   jpgImg: TJPEGImage;
-  BitMap: TBitmap;
+  Bitmap: TBitmap;
 begin
   IdSSL := TIdSSLIOHandlerSocketOpenSSL.create(nil);
   IdHTTP1 := TIdHTTP.create;
@@ -253,7 +272,7 @@ var
   i: Integer;
   webResult: String;
   pMediaImg: tMediaImg;
-  Col, row: Integer;
+  Col, Row: Integer;
   nbPass: Integer;
 
   procedure addToGrid;
@@ -264,13 +283,13 @@ var
     while i <= jsArray.length - 1 do
     // while i <= 2 do
     begin
-      if sg1.Objects[Col, row] <> nil then
+      if sg1.Objects[Col, Row] <> nil then
       begin
         inc(Col);
         if Col > sg1.ColCount - 1 then
         begin
           sg1.RowCount := sg1.RowCount + 1;
-          row := sg1.RowCount - 1;
+          Row := sg1.RowCount - 1;
           Col := 0;
         end;
       end;
@@ -278,8 +297,8 @@ var
       pMediaImg := tMediaImg.create;
       pMediaImg.TNLink := jsArray.O[i].S[GS_THUMBNAILLINK];
       pMediaImg.Link := jsArray.O[i].S[GS_LINK];
-      sg1.Objects[Col, row] := pMediaImg;
-      thDownload := tDownloadThread.create(Col, row, sg1);
+      sg1.Objects[Col, Row] := pMediaImg;
+      thDownload := tDownloadThread.create(Col, Row, sg1, refreshCell0);
       thDownload.Start;
       inc(i);
 
@@ -287,19 +306,19 @@ var
   end;
 
 begin
-  row := 0;
-  while row <= sg1.RowCount - 1 do
+  Row := 0;
+  while Row <= sg1.RowCount - 1 do
   begin
     Col := 0;
     while Col <= sg1.ColCount - 1 do
     begin
-      if sg1.Objects[Col, row] <> nil then
+      if sg1.Objects[Col, Row] <> nil then
       begin
-        tMediaImg(sg1.Objects[Col, row]).destroy;
+        tMediaImg(sg1.Objects[Col, Row]).destroy;
       end;
       inc(Col)
     end;
-    inc(row);
+    inc(Row);
   end;
 
   sg1.Clear;
@@ -312,7 +331,7 @@ begin
   // aNode := sTVMedias.Selected;
 
   Col := 0;
-  row := 0;
+  Row := 0;
 
   nbPass := 0;
   while nbPass < 1 do
@@ -336,9 +355,9 @@ var
   IdHTTP1: TIdHTTP;
   MS: tMemoryStream;
   jpgImg: TJPEGImage;
-  BitMap: TBitmap;
+  Bitmap: TBitmap;
   sg1: tAdvStringGrid;
-  Col, row: Integer;
+  Col, Row: Integer;
 
 begin
   //
@@ -351,30 +370,30 @@ begin
   IdSSL.SSLOptions.Method := sslvTLSv1_2;
   IdSSL.SSLOptions.Mode := sslmUnassigned;
   sg1 := TfCoverSearch(Params).sg1;
-  row := 0;
-  while row <= sg1.RowCount - 1 do
+  Row := 0;
+  while Row <= sg1.RowCount - 1 do
   begin
     try
       try
         Col := 0;
         while Col <= sg1.ColCount - 1 do
         begin
-          if sg1.Objects[Col, row] <> nil then
+          if sg1.Objects[Col, Row] <> nil then
           begin
-            if tMediaImg(sg1.Objects[Col, row]).BitMap = nil then
+            if tMediaImg(sg1.Objects[Col, Row]).Bitmap = nil then
             begin
               MS := tMemoryStream.create;
               jpgImg := TJPEGImage.create;
-              sg1.AddProgress(Col, row, clGreen, clWhite);
-              IdHTTP1.Get(tMediaImg(sg1.Objects[Col, row]).Link, MS);
+              sg1.AddProgress(Col, Row, clGreen, clWhite);
+              IdHTTP1.Get(tMediaImg(sg1.Objects[Col, Row]).Link, MS);
 
               MS.Seek(0, soFromBeginning);
               jpgImg.LoadFromStream(MS);
 
-              tMediaImg(sg1.Objects[Col, row]).BitMap := tPicture.create;
-              tMediaImg(sg1.Objects[Col, row]).BitMap.Assign(jpgImg);
+              tMediaImg(sg1.Objects[Col, Row]).Bitmap := tPicture.create;
+              tMediaImg(sg1.Objects[Col, Row]).Bitmap.Assign(jpgImg);
               // sg1.AddBitmap(Col, Row,tMediaImg(sg1.Objects[Col, row]).BitMap.Bitmap,false,tCEllHAlign.haCenter, tCellVAlign.vaCenter);
-              sg1.AddPicture(Col, row, tMediaImg(sg1.Objects[Col, row]).BitMap, false, tStretchMode.Shrink, 2, haCenter, vaCenter);
+              sg1.AddPicture(Col, Row, tMediaImg(sg1.Objects[Col, Row]).Bitmap, false, tStretchMode.Shrink, 2, haCenter, vaCenter);
               // resize img
               sg1.Refresh;
               Application.ProcessMessages;
@@ -388,7 +407,7 @@ begin
           // sMemo1.Lines.Add('   EXCEPTION: ' + E.Message);
         end;
       end;
-      inc(row)
+      inc(Row)
     finally
       FreeAndNil(jpgImg);
       FreeAndNil(MS);
@@ -401,13 +420,14 @@ end;
 
 { tDownloadThread }
 
-constructor tDownloadThread.create(aCol, aRow: Integer; aGrid: tAdvStringGrid);
+constructor tDownloadThread.create(aCol, aRow: Integer; aGrid: tAdvStringGrid; CallBack: tREfreshCell0);
 begin
   inherited create(true);
   FreeOnTerminate := true;
   fCol := aCol;
   fRow := aRow;
   fGrid := aGrid;
+  fRefreh := CallBack;
   fGrid.AddProgress(fCol, fRow, clGreen, clWhite);
 end;
 
@@ -438,7 +458,7 @@ begin
       MS.Seek(0, soFromBeginning);
       jpgImg.LoadFromStream(MS);
       Picture := tPicture.create;
-      Picture.BitMap.Assign(jpgImg);
+      Picture.Bitmap.Assign(jpgImg);
       fGrid.AddPicture(fCol, fRow, Picture, false, tStretchMode.Shrink, 2, haCenter, vaCenter);
     except
       on e: exception do
@@ -453,6 +473,10 @@ begin
     FreeAndNil(jpgImg);
     IdHTTP1.Free;
     IdSSL.Free;
+    if (fCol = 0) and (fRow = 0) then
+    begin
+      fRefreh(fCol, fRow);
+    end;
     if not terminated then
       terminate;
   end;

@@ -11,7 +11,8 @@ uses
   uSearchImage in 'uSearchImage.pas',
   uCoverSearch in 'uCoverSearch.pas' {fCoverSearch},
   uRegister in 'uRegister.pas' {fRegister},
-  uni_RegCommon in 'libs\uni_RegCommon.pas';
+  uni_RegCommon in 'libs\uni_RegCommon.pas',
+  udeleteCover in 'udeleteCover.pas' {fDeleteCover};
 
 {$R *.res}
 

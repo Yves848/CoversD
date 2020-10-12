@@ -76,8 +76,12 @@ object fCoverSearch: TfCoverSearch
       Height = 39
       Align = alClient
       Caption = 'Apply'
+      Default = True
+      ModalResult = 1
       TabOrder = 0
       OnClick = bsApplyClick
+      ExplicitLeft = 2
+      ExplicitTop = 6
     end
   end
   object sPanel2: TsPanel
@@ -128,7 +132,7 @@ object fCoverSearch: TfCoverSearch
     GridLineColor = 15987699
     GridFixedLineColor = 15987699
     HoverRowCells = [hcNormal, hcSelected]
-    OnClickCell = sg1ClickCell
+    OnCellChanging = sg1CellChanging
     ActiveCellFont.Charset = DEFAULT_CHARSET
     ActiveCellFont.Color = clWindowText
     ActiveCellFont.Height = -11
@@ -221,6 +225,8 @@ object fCoverSearch: TfCoverSearch
     SearchFooter.ResultFormat = '(%d of %d)'
     SortSettings.DefaultFormat = ssAutomatic
     Version = '8.4.7.0'
+    ExplicitLeft = -5
+    ExplicitTop = 62
   end
   object thGetImages: TJvThread
     Exclusive = True

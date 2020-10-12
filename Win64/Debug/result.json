@@ -10,8 +10,9 @@
     "request":    
     [
       {
-        "title":"Google Custom Search -  ",
-        "searchTerms":" ",
+        "title":"Google Custom Search - ABBA Gimme! Gimme! Gimme! (A Man After Midnight)",
+        "totalResults":"1620000",
+        "searchTerms":"ABBA Gimme! Gimme! Gimme! (A Man After Midnight)",
         "count":        10,
         "startIndex":        1,
         "inputEncoding":"utf8",
@@ -21,13 +22,246 @@
         "searchType":"image",
         "imgSize":"large"      
       }    
+    ],
+    "nextPage":    
+    [
+      {
+        "title":"Google Custom Search - ABBA Gimme! Gimme! Gimme! (A Man After Midnight)",
+        "totalResults":"1620000",
+        "searchTerms":"ABBA Gimme! Gimme! Gimme! (A Man After Midnight)",
+        "count":        10,
+        "startIndex":        11,
+        "inputEncoding":"utf8",
+        "outputEncoding":"utf8",
+        "safe":"off",
+        "cx":"007439388879951561867:3ragl0fkhpm",
+        "searchType":"image",
+        "imgSize":"large"      
+      }    
     ]  
+  },
+  "context":  
+  {
+    "title":"Google"  
   },
   "searchInformation":  
   {
-    "searchTime":0.272495,
-    "formattedSearchTime":"0.27",
-    "totalResults":"0",
-    "formattedTotalResults":"0"  
-  }
+    "searchTime":0.562294,
+    "formattedSearchTime":"0.56",
+    "totalResults":"1620000",
+    "formattedTotalResults":"1,620,000"  
+  },
+  "items":  
+  [
+    {
+      "kind":"customsearch#result",
+      "title":"Gimme! Gimme! Gimme! (A Man After Midnight) - Wikipedia",
+      "htmlTitle":"<b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) - Wikipedia",
+      "link":"https://upload.wikimedia.org/wikipedia/en/4/4c/Gimme_Gimme_Gimme.jpg",
+      "displayLink":"en.wikipedia.org",
+      "snippet":"Gimme! Gimme! Gimme! (A Man After Midnight) - Wikipedia",
+      "htmlSnippet":"<b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) - Wikipedia",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://en.wikipedia.org/wiki/Gimme!_Gimme!_Gimme!_(A_Man_After_Midnight)",
+        "height":        316,
+        "width":        316,
+        "byteSize":        24268,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoKN8n1FUqplbQYJ6dXuKhB0XtP0DBnHEnWRUA2hIhISwS_Dvi9HTM&s",
+        "thumbnailHeight":        117,
+        "thumbnailWidth":        117      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"ABBA - Gimme! Gimme! Gimme! (A Man After Midnight) (1979, Vinyl ...",
+      "htmlTitle":"<b>ABBA</b> - <b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) (1979, Vinyl ...",
+      "link":"https://img.discogs.com/crJEKzBIBTxqD3_pvqfSpOmeuis=/fit-in/600x603/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-415681-1514949854-7725.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"ABBA - Gimme! Gimme! Gimme! (A Man After Midnight) (1979, Vinyl ...",
+      "htmlSnippet":"<b>ABBA</b> - <b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) (1979, Vinyl ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/ABBA-Gimme-Gimme-Gimme-A-Man-After-Midnight/release/415681",
+        "height":        603,
+        "width":        600,
+        "byteSize":        114279,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRekwqA-ZFVoY8m_TnGoN2x1Wb9rirvEktuJHBBSz-9jqJKqqRrm8zT2Ok&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        134      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Abba \u2013 Gimme! Gimme! Gimme! (A Man After Midnight) | Best wedding ...",
+      "htmlTitle":"<b>Abba</b> \u2013 <b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) | Best wedding ...",
+      "link":"https://i.pinimg.com/originals/98/c3/fe/98c3fe5abb00087048710ad8881dffcd.jpg",
+      "displayLink":"www.pinterest.com",
+      "snippet":"Abba \u2013 Gimme! Gimme! Gimme! (A Man After Midnight) | Best wedding ...",
+      "htmlSnippet":"<b>Abba</b> \u2013 <b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) | Best wedding ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.pinterest.com/pin/804033339706011876/",
+        "height":        447,
+        "width":        795,
+        "byteSize":        63302,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI6TeKX8yDZ08jvVAWnVEuoZEjdO-0G8ME5T5MzB0dP8iAu3zz8xBbRvM&s",
+        "thumbnailHeight":        80,
+        "thumbnailWidth":        143      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"ABBA - Gimme! Gimme! Gimme! (A Man After Midnight) (1979, Vinyl ...",
+      "htmlTitle":"<b>ABBA</b> - <b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) (1979, Vinyl ...",
+      "link":"https://img.discogs.com/WrOUjaLsrYzqUyFS91HU5z2K7kg=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-3840393-1360372459-8142.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"ABBA - Gimme! Gimme! Gimme! (A Man After Midnight) (1979, Vinyl ...",
+      "htmlSnippet":"<b>ABBA</b> - <b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) (1979, Vinyl ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/ABBA-Gimme-Gimme-Gimme-A-Man-After-Midnight/release/3840393",
+        "height":        600,
+        "width":        600,
+        "byteSize":        114874,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUcBnqOjJKwBZgufcEeHymmNL96WPY4PhdahTHOXsrx5KpYOw0SADqEdjY&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Abba Gimme! Gimme! Gimme! (A Man After Midnight) French 7\" vinyl ...",
+      "htmlTitle":"<b>Abba Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) French 7&quot; vinyl ...",
+      "link":"https://images.eil.com/large_image/ABBA_GIMME%21%2BGIMME%21%2BGIMME%21%2B%28A%2BMAN%2BAFTER%2BMIDNIGHT%29-46293.jpg",
+      "displayLink":"eil.com",
+      "snippet":"Abba Gimme! Gimme! Gimme! (A Man After Midnight) French 7\" vinyl ...",
+      "htmlSnippet":"<b>Abba Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) French 7&quot; vinyl ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://eil.com/shop/moreinfo.asp?catalogid=46293",
+        "height":        506,
+        "width":        500,
+        "byteSize":        69127,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROVOXBc3kVE5CQGofKfiZGDiiDTjVhbySZYI_zffS3yy3D718LGpy5pkPJ&s",
+        "thumbnailHeight":        131,
+        "thumbnailWidth":        129      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"ABBA - Gimme! Gimme! Gimme! (A Man After Midnight) (1979, Vinyl ...",
+      "htmlTitle":"<b>ABBA</b> - <b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) (1979, Vinyl ...",
+      "link":"https://img.discogs.com/xJIS3dtzRyiLtmVmG-7Ilyw-IG0=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-751003-1401195019-8069.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"ABBA - Gimme! Gimme! Gimme! (A Man After Midnight) (1979, Vinyl ...",
+      "htmlSnippet":"<b>ABBA</b> - <b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) (1979, Vinyl ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/de/ABBA-Gimme-Gimme-Gimme-A-Man-After-Midnight/release/751003",
+        "height":        600,
+        "width":        600,
+        "byteSize":        104129,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBUGb9GSj8xp2_-_uNF3ZFtYlUyq8tTl_ke4Pr0hWbUMCdcK5W9tw0Mxo&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"ABBA - Gimme, Gimme, Gimme! (video) - YouTube",
+      "htmlTitle":"<b>ABBA</b> - <b>Gimme</b>, <b>Gimme</b>, <b>Gimme</b>! (video) - YouTube",
+      "link":"https://i.ytimg.com/vi/ZL93BV9uTAM/hqdefault.jpg",
+      "displayLink":"www.youtube.com",
+      "snippet":"ABBA - Gimme, Gimme, Gimme! (video) - YouTube",
+      "htmlSnippet":"<b>ABBA</b> - <b>Gimme</b>, <b>Gimme</b>, <b>Gimme</b>! (video) - YouTube",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.youtube.com/watch?v=ZL93BV9uTAM",
+        "height":        360,
+        "width":        480,
+        "byteSize":        13535,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiABxb-tGR95AvsjIRtXb9H1_U4taZyB2VZvDdDEmMh3mhPpr9YqeYI78&s",
+        "thumbnailHeight":        97,
+        "thumbnailWidth":        129      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"ABBA - Gimme! Gimme! Gimme! (A Man After Midnight) (1980, Vinyl ...",
+      "htmlTitle":"<b>ABBA</b> - <b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) (1980, Vinyl ...",
+      "link":"https://img.discogs.com/fB5kBz-noGGkEuc669Xm97_NYYo=/fit-in/500x500/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-2397999-1281765530.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"ABBA - Gimme! Gimme! Gimme! (A Man After Midnight) (1980, Vinyl ...",
+      "htmlSnippet":"<b>ABBA</b> - <b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) (1980, Vinyl ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/ABBA-Gimme-Gimme-Gimme-A-Man-After-Midnight/release/2397999",
+        "height":        500,
+        "width":        500,
+        "byteSize":        92368,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjpQAit5XUk9kSJMXPfDx-mW2lZ8iCUnkEDOFIKFNN3o3tmPN3jjnkvn8&s",
+        "thumbnailHeight":        130,
+        "thumbnailWidth":        130      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Gimme! Gimme! Gimme! (A Man After Midnight) | Figure Skating Wikia ...",
+      "htmlTitle":"<b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) | Figure Skating Wikia ...",
+      "link":"https://vignette.wikia.nocookie.net/figure-skating-13/images/4/4c/Gimme_Gimme_Gimme.jpg/revision/latest?cb=20171018182002",
+      "displayLink":"figure-skating.fandom.com",
+      "snippet":"Gimme! Gimme! Gimme! (A Man After Midnight) | Figure Skating Wikia ...",
+      "htmlSnippet":"<b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) | Figure Skating Wikia ...",
+      "mime":"image/",
+      "fileFormat":"image/",
+      "image":      
+      {
+        "contextLink":"https://figure-skating.fandom.com/wiki/Gimme!_Gimme!_Gimme!_(A_Man_After_Midnight)",
+        "height":        400,
+        "width":        400,
+        "byteSize":        51910,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvKb_k_XgfGJAsX1ITZh4w2SQ9YYkhXfUMTaEXcn8FSUo4FqNkoF3wwA&s",
+        "thumbnailHeight":        124,
+        "thumbnailWidth":        124      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"ABBA - Gimme! Gimme! Gimme! (A Man After Midnight) (1979, Vinyl ...",
+      "htmlTitle":"<b>ABBA</b> - <b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) (1979, Vinyl ...",
+      "link":"https://img.discogs.com/l_0F1xPl2-k-XCovhcE5DjRL3YQ=/fit-in/595x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1863569-1341137047-2933.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"ABBA - Gimme! Gimme! Gimme! (A Man After Midnight) (1979, Vinyl ...",
+      "htmlSnippet":"<b>ABBA</b> - <b>Gimme</b>! <b>Gimme</b>! <b>Gimme</b>! (A <b>Man After Midnight</b>) (1979, Vinyl ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/ABBA-Gimme-Gimme-Gimme-A-Man-After-Midnight/release/1863569",
+        "height":        600,
+        "width":        595,
+        "byteSize":        132335,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzk0CFMood4-8CVDM6VsxC6ljT-8qkpR2fWEll32yyIFC_kY6z4ee4Zqw&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        134      
+      }    
+    }  
+  ]
 }
