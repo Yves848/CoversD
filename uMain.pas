@@ -12,7 +12,7 @@ uses
   JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw, activeX, acWebBrowser, Vcl.Grids, JvExGrids, JvStringGrid, IdComponent,
   IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid, AdvGrid, dateutils,
   uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory, AdvReflectionLabel, AdvMemo, acPNG,
-  JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister, Vcl.Menus;
+  JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister, Vcl.Menus, System.RegularExpressions, sEdit;
 
 type
   TVolumeRec = record
@@ -51,6 +51,7 @@ type
     sPanel2: TsPanel;
     sShellTreeView1: TsShellTreeView;
     sgList: TAdvStringGrid;
+
     btnUtils: TsButton;
     sButton4: TsButton;
     sButton5: TsButton;
@@ -88,6 +89,15 @@ type
     PopupMenu2: TPopupMenu;
     PopupMenu21: TMenuItem;
     sAlphaImageList1: TsAlphaImageList;
+    ropRegEx: TsRollOutPanel;
+    sLabelFX1: TsLabelFX;
+    seRegEx: TsEdit;
+    btnRegex: TsButton;
+    sPanel11: TsPanel;
+    sLabelFX2: TsLabelFX;
+    sepArtist: TsEdit;
+    sLabelFX3: TsLabelFX;
+    sepTitle: TsEdit;
     procedure Button1Click(Sender: TObject);
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
@@ -126,6 +136,8 @@ type
     procedure sgListRightClickCell(Sender: TObject; ARow, ACol: Integer);
     procedure sgListClickCell(Sender: TObject; ARow, ACol: Integer);
     procedure sgListSetEditText(Sender: TObject; ACol, ARow: Integer; const Value: string);
+    procedure btnRegexClick(Sender: TObject);
+    procedure sgListKeyPress(Sender: TObject; var Key: Char);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -175,6 +187,8 @@ type
     Procedure RefreshCover(var m: Tmsg); Message WM_REFRESH_COVER;
     function GetwindowsVolume: Integer;
     procedure setGridRow;
+    Procedure ExtractTags(iRow: Integer; bPreview: Boolean = false);
+    Procedure SaveTags(iRow : Integer);
 
   end;
 
@@ -276,11 +290,11 @@ begin
   BASS_StreamFree(Channel);
 
   if uppercase(tpath.GetExtension(FileName)) = '.MP3' then
-    Channel := BASS_StreamCreateFile(False, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE)
+    Channel := BASS_StreamCreateFile(false, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE)
   else if (uppercase(tpath.GetExtension(FileName)) = '.M4A') or (uppercase(tpath.GetExtension(FileName)) = '.MP4') then
-    Channel := BASS_AAC_StreamCreateFile(False, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE)
+    Channel := BASS_AAC_StreamCreateFile(false, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE)
   else
-    Channel := BASS_FLAC_StreamCreateFile(False, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE);
+    Channel := BASS_FLAC_StreamCreateFile(false, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE);
 
   // * Set an end sync which will be called when playback reaches end to play the next song
   BASS_ChannelSetSync(Channel, BASS_SYNC_END, 0, @StreamEndCallback, 0);
@@ -314,7 +328,7 @@ begin
     fCoverSearch.Artist := sgList.Cells[2, sgList.Row];
     fCoverSearch.Title := sgList.Cells[3, sgList.Row];
   end;
-  sgList.EditMode := False;
+  sgList.EditMode := false;
   sgList.Options := [goRowSelect, goRangeSelect];
   fCoverSearch.image1.Picture.Assign(Nil);
   fCoverSearch.Show;
@@ -324,13 +338,13 @@ end;
 
 procedure TfMain.RefreshCover(var m: Tmsg);
 var
-  aFile : String;
+  aFile: String;
 begin
   if sgList.Objects[1, sgList.Row] <> Nil then
   begin
     GlobalMediaFile := tMediaFile(sgList.Objects[1, sgList.Row]);
-    aFile := GlobalMediaFile.tags.FileName;
-    GlobalMediaFile.tags.clear;
+    aFile := GlobalMediaFile.Tags.FileName;
+    GlobalMediaFile.Tags.clear;
     GlobalMediaFile.LoadTags(aFile);
 
     ListCoverArts(image1, GlobalMediaFile.Tags);
@@ -447,7 +461,7 @@ var
   index: Integer;
 begin
   Result := -1;
-  aMediaFile := tMediaFile.Create(sgList.Cells[0, ARow]);
+  aMediaFile := tMediaFile(sgList.Objects[0, ARow]);
   sPath := tpath.GetDirectoryName(aMediaFile.Tags.FileName);
   sFile := tpath.GetFileNameWithoutExtension(aMediaFile.Tags.FileName);
   index := slbPlaylist.Items.IndexOf(sFile);
@@ -609,6 +623,88 @@ begin
 
 end;
 
+procedure TfMain.ExtractTags(iRow: Integer; bPreview: Boolean = false);
+var
+  i: Integer;
+  iGroup: Integer;
+  iMatch: Integer;
+  aFile: String;
+  match: tmatch;
+  regexpr: tREgEx;
+  RO: TRegExOptions;
+  ARow: Integer;
+
+begin
+
+  RO := [roIgnoreCase];
+
+  i := 0;
+  regexpr := tREgEx.Create(seRegEx.Text, [roIgnoreCase]);
+  if bPreview then
+  begin
+    if sgList.Objects[1, iRow] <> Nil then
+    begin
+      aFile := tpath.GetFileNameWithoutExtension(tMediaFile(sgList.Objects[1, iRow]).Tags.FileName);
+    end;
+    match := regexpr.match(aFile);
+    while match.Success do
+    begin
+      if match.Groups.Count > 1 then
+      begin
+        for iGroup := 1 to match.Groups.Count - 1 do
+          case iGroup of
+            1:
+              begin
+                sepArtist.Text := match.Groups.Item[iGroup].Value;
+              end;
+            2:
+              begin
+                sepTitle.Text := match.Groups.Item[iGroup].Value;
+              end;
+          end;
+      end;
+      match := match.NextMatch;
+    end;
+  end
+  else
+    while i <= sgList.SelectedRowCount - 1 do
+    begin
+      ARow := sgList.SelectedRow[i];
+      if sgList.Objects[1, ARow] <> Nil then
+      begin
+        aFile := tpath.GetFileNameWithoutExtension(tMediaFile(sgList.Objects[1, ARow]).Tags.FileName);
+      end;
+
+      match := regexpr.match(aFile);
+      iMatch := 0;
+      while match.Success do
+      begin
+        if match.Groups.Count > 1 then
+        begin
+          for iGroup := 1 to match.Groups.Count - 1 do
+            case iGroup of
+              1:
+                begin
+                    sgList.Cells[2, ARow] := match.Groups.Item[iGroup].Value;
+                end;
+              2:
+                begin
+                    sgList.Cells[3, ARow] := match.Groups.Item[iGroup].Value;
+                end;
+            end;
+        end;
+        match := match.NextMatch;
+      end;
+      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag('ARTIST',sgList.Cells[2, ARow]);
+      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag('TITLE',sgList.Cells[3, ARow]);
+      tMediaFile(sgList.Objects[1, ARow]).bModified := true;
+      SaveTags(aRow);
+      inc(i);
+    end;
+  sgList.SetFocus;
+
+end;
+
 function TfMain.findNode(sLabel: String): TTreeNode;
 var
   i: Integer;
@@ -677,14 +773,15 @@ begin
   initGrid;
 {$IFDEF DEBUG}
   isRegistered := True;
-  btnUtils.Visible := true;
+  btnUtils.Visible := True;
+  btnRegex.Visible := True;
 {$ELSE}
   GetRegistrationInformation(ReleaseCodeString, SerialNumber);
   if not IsReleaseCodeValid(ReleaseCodeString, SerialNumber) then
   begin
     Caption := Caption + ' Unregistered Demo!';
     bsRegister.Visible := True;
-    isRegistered := False;
+    isRegistered := false;
   end
   else
   begin
@@ -703,7 +800,7 @@ begin
     GlobalMediaFile.Destroy;
 
   if fCoverSearch <> Nil then
-     fCoverSearch.Free;
+    fCoverSearch.Free;
 end;
 
 procedure TfMain.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -785,7 +882,7 @@ end;
 
 function TfMain.ImageCount(aFile: String): Integer;
 begin
-  GlobalMediaFile.Tags.Clear;
+  GlobalMediaFile.Tags.clear;
   GlobalMediaFile.Tags.ParseCoverArts := True;
   GlobalMediaFile.Tags.LoadFromFile(aFile);
   Result := GlobalMediaFile.Tags.CoverArtCount;
@@ -808,7 +905,7 @@ procedure TfMain.initGrid;
 begin
   //
   cleanObjects;
-  sgList.Clear;
+  sgList.clear;
   sgList.RowCount := 2;
   sgList.ColWidths[0] := 486;
   sgList.ColWidths[1] := 225;
@@ -850,7 +947,7 @@ begin
   ARow := sgList.Row;
   if Key = VK_ESCAPE then
   begin
-    sgList.EditMode := False;
+    sgList.EditMode := false;
     sgList.Options := [goRowSelect, goRangeSelect];
   end;
 
@@ -879,7 +976,7 @@ begin
             tMediaFile(sgList.Objects[1, sgList.Row]).SaveTags;
           end;
         end;
-        sgList.EditMode := False;
+        sgList.EditMode := false;
         sgList.Options := [goRowSelect, goRangeSelect];
 
       end;
@@ -907,7 +1004,7 @@ begin
       begin
         if sgList.EditMode then
         begin
-          sgList.EditMode := False;
+          sgList.EditMode := false;
           sgList.Options := [goRowSelect, goRangeSelect];
         end
         else if not(goEditing in sgList.Options) then
@@ -933,8 +1030,11 @@ begin
       begin
         if Shift = [ssCtrl] then
         begin
-          BASS_ChannelStop(Channel);
-          PlayStream(sgList.Cells[1, sgList.Row]);
+          if sgList.Objects[1, sgList.Row] <> Nil then
+          begin
+            BASS_ChannelStop(Channel);
+            PlayStream(tMediaFile(sgList.Objects[1, sgList.Row]).Tags.FileName);
+          end;
         end
         else
         begin
@@ -972,12 +1072,23 @@ begin
 
 end;
 
+procedure TfMain.sgListKeyPress(Sender: TObject; var Key: Char);
+begin
+  if key = '?' then
+  begin
+     if not sgList.EditMode then
+     begin
+        ExtractTags(sgList.Row);
+     end;
+  end;
+end;
+
 procedure TfMain.sgListRightClickCell(Sender: TObject; ARow, ACol: Integer);
 begin
   if sgList.SelectedRowCount <= 1 then
   begin
     sgList.Row := ARow;
-    sgList.EditMode := False;
+    sgList.EditMode := false;
     sgList.Options := [goRowSelect, goRangeSelect];
   end;
 end;
@@ -986,11 +1097,16 @@ procedure TfMain.sgListRowChanging(Sender: TObject; OldRow, NewRow: Integer; var
 begin
   // Afficher la pochette si elle existe
   if sgList.EditMode then
-    Allow := False;
+    Allow := false;
   if sgList.Objects[1, NewRow] <> Nil then
   begin
+    if not ropRegEx.Collapsed then
+    begin
+      ExtractTags(NewRow, True);
+    end;
     try
-      ListCoverArts(image1, tMediaFile(sgList.Objects[1, NewRow]).tags);
+      ListCoverArts(image1, tMediaFile(sgList.Objects[1, NewRow]).Tags);
+
     except
 
     end;
@@ -1017,7 +1133,7 @@ procedure TfMain.showExplorer;
 begin
   if sROPMedia.Collapsed then
   begin
-    sROPMedia.ChangeState(False, True);
+    sROPMedia.ChangeState(false, True);
     sShellTreeView1.SetFocus;
   end
   else
@@ -1028,7 +1144,7 @@ procedure TfMain.showPlayList;
 begin
   if sROPPlaylist.Collapsed then
   begin
-    sROPPlaylist.ChangeState(False, True);
+    sROPPlaylist.ChangeState(false, True);
     slbPlaylist.SetFocus;
   end
   else
@@ -1068,6 +1184,19 @@ begin
 
 end;
 
+procedure TfMain.SaveTags(iRow: Integer);
+var
+   pMediaFile : tMediaFile;
+begin
+    if sgList.Objects[1,iRow] <> Nil then
+    begin
+      pMediaFile := tMediaFile(sgList.Objects[1,iRow]);
+      if pMediaFile.bModified then
+         pMediaFile.SaveTags;
+    end;
+
+end;
+
 procedure TfMain.sButton1Click(Sender: TObject);
 begin
   BASS_ChannelStop(Channel);
@@ -1095,10 +1224,15 @@ begin
     end
     else
     begin
-      BASS_ChannelPlay(Channel, False);
+      BASS_ChannelPlay(Channel, false);
       sButton2.ImageIndex := 3;
     end;
   end;
+end;
+
+procedure TfMain.btnRegexClick(Sender: TObject);
+begin
+  ExtractTags(sgList.Row, false);
 end;
 
 procedure TfMain.btnUtilsClick(Sender: TObject);
@@ -1147,7 +1281,7 @@ begin
   sgList.Row := 1;
   if sgList.Objects[1, 1] <> Nil then
   begin
-    ListCoverArts(image1, tMediaFile(sgList.Objects[1, 1]).tags);
+    ListCoverArts(image1, tMediaFile(sgList.Objects[1, 1]).Tags);
   end;
 end;
 
@@ -1253,7 +1387,7 @@ begin
     if tMediaUtils.isValidExtension2(TacShellFolder(Node.data).PathName) > -1 then
     begin
       // sMemo1.Lines.add(TacShellFolder(Node.data).PathName);
-      GlobalMediaFile.Tags.Clear;
+      GlobalMediaFile.Tags.clear;
       GlobalMediaFile.Tags.ParseCoverArts := True;
       GlobalMediaFile.Tags.LoadFromFile(TacShellFolder(Node.data).PathName);
       if GlobalMediaFile.Tags.CoverArtCount > 0 then
@@ -1291,7 +1425,7 @@ begin
     aNode := sShellTreeView1.Selected;
     if not TacShellFolder(aNode.data).IsFileFolder then
     begin
-      AddToPlayList(aNode, False);
+      AddToPlayList(aNode, false);
     end
     else
     begin
@@ -1314,8 +1448,8 @@ begin
         AddFileToGrid(TacShellFolder(aNode.data).PathName);
         if sgList.Objects[1, NewRow] <> Nil then
         begin
-          //GlobalMediaFile.Tags.Clear;
-          //GlobalMediaFile.Tags.LoadFromFile(sgList.Cells[1, NewRow]);
+          // GlobalMediaFile.Tags.Clear;
+          // GlobalMediaFile.Tags.LoadFromFile(sgList.Cells[1, NewRow]);
           ListCoverArts(image1, GlobalMediaFile.Tags);
         end;
       end
@@ -1431,7 +1565,7 @@ var
 begin
   if sOpenDialog1.Execute then
   begin
-    slbPlaylist.Clear;
+    slbPlaylist.clear;
     i := 0;
     Json := TSuperObject.ParseFile(sOpenDialog1.FileName);
     while i <= Json.a['tracks'].Length - 1 do
@@ -1445,7 +1579,7 @@ end;
 
 procedure TfMain.ListCoverArts(aImage: TsImage; sFileName: String);
 begin
-  GlobalMediaFile.Tags.Clear;
+  GlobalMediaFile.Tags.clear;
   ListCoverArts(aImage, GlobalMediaFile.Tags);
 end;
 
@@ -1585,7 +1719,7 @@ begin
   // * Playing position
   AdjustingPlaybackPosition := True;
   TrackBar1.Position := BASS_ChannelGetPosition(Channel, BASS_POS_BYTE);
-  AdjustingPlaybackPosition := False;
+  AdjustingPlaybackPosition := false;
 
 end;
 
@@ -1598,12 +1732,12 @@ var
   bAdd: Boolean;
   sExt: String;
   bConfirm: Boolean;
-  bFirst : Boolean;
+  bFirst: Boolean;
 begin
   aSearchOption := tSearchOption.soAllDirectories;
   aFiles := TDirectory.GetFileSystemEntries(aPath, aSearchOption, nil);
   bConfirm := True;
-  bFirst := true;
+  bFirst := True;
   if Length(aFiles) > 1000 then
   begin
     bConfirm := (MessageDlg(format('Do you confirm adding %d files ?', [Length(aFiles)]), mtConfirmation, [mbYes, mbNo], 0, mbNo) = mrYes);
@@ -1622,7 +1756,7 @@ begin
         if bFirst then
         begin
           thListMP3.Synchronize(TfMain(Params).setGridRow);
-          bFirst := False;
+          bFirst := false;
         end;
       end;
       inc(i);
@@ -1663,7 +1797,7 @@ begin
   TrackBar1.Position := BASS_ChannelGetPosition(Channel, BASS_POS_BYTE);
   Volume := BASS_GetVolume;
   tbVolume.Position := 100 - Round(Volume * 100);
-  AdjustingPlaybackPosition := False;
+  AdjustingPlaybackPosition := false;
 end;
 
 procedure TfMain.TrackBar1Change(Sender: TObject);
