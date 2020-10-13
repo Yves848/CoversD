@@ -61,6 +61,18 @@ object fCoverSearch: TfCoverSearch
       TabOrder = 2
       OnClick = sButton1Click
     end
+    object sButton2: TsButton
+      Left = 952
+      Top = 1
+      Width = 99
+      Height = 41
+      Align = alRight
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 3
+      OnClick = sButton2Click
+    end
   end
   object sPanel1: TsPanel
     Left = 0
@@ -225,8 +237,6 @@ object fCoverSearch: TfCoverSearch
     SearchFooter.ResultFormat = '(%d of %d)'
     SortSettings.DefaultFormat = ssAutomatic
     Version = '8.4.7.0'
-    ExplicitLeft = -5
-    ExplicitTop = 62
   end
   object thGetImages: TJvThread
     Exclusive = True

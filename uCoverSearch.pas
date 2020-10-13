@@ -48,6 +48,7 @@ type
     sg1: tAdvStringGrid;
     IdHTTP1: TIdHTTP;
     sButton1: TsButton;
+    sButton2: TsButton;
     procedure thGetImagesExecute(Sender: TObject; Params: Pointer);
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -57,6 +58,7 @@ type
     procedure sButton1Click(Sender: TObject);
     procedure bsApplyClick(Sender: TObject);
     procedure sg1CellChanging(Sender: TObject; OldRow, OldCol, NewRow, NewCol: Integer; var Allow: Boolean);
+    procedure sButton2Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -137,6 +139,11 @@ end;
 procedure TfCoverSearch.sButton1Click(Sender: TObject);
 begin
   StartSearch;
+end;
+
+procedure TfCoverSearch.sButton2Click(Sender: TObject);
+begin
+  Close;
 end;
 
 procedure TfCoverSearch.sg1CellChanging(Sender: TObject; OldRow, OldCol, NewRow, NewCol: Integer; var Allow: Boolean);

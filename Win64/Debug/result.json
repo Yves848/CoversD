@@ -10,9 +10,9 @@
     "request":    
     [
       {
-        "title":"Google Custom Search - B\u00e9b\u00e9 Charlie  K.K.O.Q.Q",
-        "totalResults":"5580",
-        "searchTerms":"B\u00e9b\u00e9 Charlie  K.K.O.Q.Q",
+        "title":"Google Custom Search - Billy Au temps des surprises parties",
+        "totalResults":"12800000",
+        "searchTerms":"Billy Au temps des surprises parties",
         "count":        10,
         "startIndex":        1,
         "inputEncoding":"utf8",
@@ -26,9 +26,9 @@
     "nextPage":    
     [
       {
-        "title":"Google Custom Search - B\u00e9b\u00e9 Charlie  K.K.O.Q.Q",
-        "totalResults":"5580",
-        "searchTerms":"B\u00e9b\u00e9 Charlie  K.K.O.Q.Q",
+        "title":"Google Custom Search - Billy Au temps des surprises parties",
+        "totalResults":"12800000",
+        "searchTerms":"Billy Au temps des surprises parties",
         "count":        10,
         "startIndex":        11,
         "inputEncoding":"utf8",
@@ -46,224 +46,219 @@
   },
   "searchInformation":  
   {
-    "searchTime":0.320871,
-    "formattedSearchTime":"0.32",
-    "totalResults":"5580",
-    "formattedTotalResults":"5,580"  
-  },
-  "spelling":  
-  {
-    "correctedQuery":"B\u00e9b\u00e9 Charlie K.O.K.O.Q.Q",
-    "htmlCorrectedQuery":"B\u00e9b\u00e9 Charlie <b><i>K.O.K.O.Q.Q</i></b>"  
+    "searchTime":0.475431,
+    "formattedSearchTime":"0.48",
+    "totalResults":"12800000",
+    "formattedTotalResults":"12,800,000"  
   },
   "items":  
   [
     {
       "kind":"customsearch#result",
-      "title":"B\u00e9b\u00e9 Charli - K.K.O.Q.Q (2001, Cardboard Sleeve, CD) | Discogs",
-      "htmlTitle":"<b>B\u00e9b\u00e9 Charli</b> - <b>K.K.O.Q.Q</b> (2001, Cardboard Sleeve, CD) | Discogs",
-      "link":"https://img.discogs.com/ZwZmKh3WKrdjv3jRW20jIE8qNsE=/fit-in/480x482/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1637354-1359668052-5209.jpeg.jpg",
+      "title":"Billy Accompagn\u00e9 Par Les Forbans - Au Temps Des Surprises-Parties ...",
+      "htmlTitle":"<b>Billy</b> Accompagn\u00e9 Par Les Forbans - <b>Au Temps Des Surprises</b>-<b>Parties</b> ...",
+      "link":"https://img.discogs.com/7AmCLA8ioy0m17_pVZ54iy0DXPI=/fit-in/398x398/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-10655653-1501787323-5410.jpeg.jpg",
       "displayLink":"www.discogs.com",
-      "snippet":"B\u00e9b\u00e9 Charli - K.K.O.Q.Q (2001, Cardboard Sleeve, CD) | Discogs",
-      "htmlSnippet":"<b>B\u00e9b\u00e9 Charli</b> - <b>K.K.O.Q.Q</b> (2001, Cardboard Sleeve, CD) | Discogs",
+      "snippet":"Billy Accompagn\u00e9 Par Les Forbans - Au Temps Des Surprises-Parties ...",
+      "htmlSnippet":"<b>Billy</b> Accompagn\u00e9 Par Les Forbans - <b>Au Temps Des Surprises</b>-<b>Parties</b> ...",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/fr/B%C3%A9b%C3%A9-Charli-KKOQQ/release/1637354",
-        "height":        482,
-        "width":        480,
-        "byteSize":        95798,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW7tUci0j4zQu0m8uQtMGsynKuWe0qlJpeW2x4BnrTUxlNAgH2_7xVPSdT&s",
-        "thumbnailHeight":        129,
-        "thumbnailWidth":        128      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"K.K.O.Q.Q (par B\u00e9b\u00e9 Charli) - fiche chanson - B&M",
-      "htmlTitle":"<b>K.K.O.Q.Q</b> (par <b>B\u00e9b\u00e9 Charli</b>) - fiche chanson - B&amp;M",
-      "link":"https://www.bide-et-musique.com/images/pochettes/17295.jpg",
-      "displayLink":"www.bide-et-musique.com",
-      "snippet":"K.K.O.Q.Q (par B\u00e9b\u00e9 Charli) - fiche chanson - B&M",
-      "htmlSnippet":"<b>K.K.O.Q.Q</b> (par <b>B\u00e9b\u00e9 Charli</b>) - fiche chanson - B&amp;M",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.bide-et-musique.com/song/17295.html",
-        "height":        596,
-        "width":        600,
-        "byteSize":        131056,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyuJgfswQTJVNp_RmCl2ArHG0Eo0mBNQwfvM1lbYKXEWYHvtuX0jkjx4I&s",
-        "thumbnailHeight":        134,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"B\u00e9b\u00e9 Charli - K.K.O.Q.Q. (Single 0012011) \u2014 Soundamental",
-      "htmlTitle":"<b>B\u00e9b\u00e9 Charli</b> - <b>K.K.O.Q.Q.</b> (Single 0012011) \u2014 Soundamental",
-      "link":"https://www.soundamental.org/medias/images/6/60/Bebe_Charli_0012011.jpg",
-      "displayLink":"www.soundamental.org",
-      "snippet":"B\u00e9b\u00e9 Charli - K.K.O.Q.Q. (Single 0012011) \u2014 Soundamental",
-      "htmlSnippet":"<b>B\u00e9b\u00e9 Charli</b> - <b>K.K.O.Q.Q.</b> (Single 0012011) \u2014 Soundamental",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.soundamental.org/pressages/B%C3%A9b%C3%A9_Charli_-_K.K.O.Q.Q._(Single_0012011)",
-        "height":        400,
-        "width":        395,
-        "byteSize":        76871,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS91Mme1TGqwIoQgi3jjtJ9PIBsOCkIQFfNxbzCdJePQ4q7u1HcuiWLeA&s",
-        "thumbnailHeight":        124,
-        "thumbnailWidth":        122      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Mon Papa - B\u00e9b\u00e9 Charli | Shazam",
-      "htmlTitle":"Mon Papa - <b>B\u00e9b\u00e9 Charli</b> | Shazam",
-      "link":"https://images.shazam.com/coverart/t69593321_s400.jpg",
-      "displayLink":"www.shazam.com",
-      "snippet":"Mon Papa - B\u00e9b\u00e9 Charli | Shazam",
-      "htmlSnippet":"Mon Papa - <b>B\u00e9b\u00e9 Charli</b> | Shazam",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.shazam.com/track/69593334/mon-papa",
-        "height":        400,
-        "width":        400,
-        "byteSize":        37549,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnY5dprvBKBHX7HcCHT4tiXCuFGWNnbvumZeL3_28VId2OLWI2iF-bOg&s",
+        "contextLink":"https://www.discogs.com/Billy-14-Accompagn%C3%A9-Par-Les-Forbans-Au-Temps-Des-Surprises-Parties-La-Le%C3%A7on-De-Danse/release/10655653",
+        "height":        398,
+        "width":        398,
+        "byteSize":        65932,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-9SGSNBCrHHKdPxc9G8tKuB3Ym0eqw8ewmU5f6gy-ucCV8SksjyNyA&s",
         "thumbnailHeight":        124,
         "thumbnailWidth":        124      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"KKOQQ\" LYRICS by B\u00c9B\u00c9 CHARLI: Des petites billes \u00e0...",
-      "htmlTitle":"<b>KKOQQ</b>&quot; LYRICS by <b>B\u00c9B\u00c9 CHARLI</b>: Des petites billes \u00e0...",
-      "link":"https://www.flashlyrics.com/image/tw/bebe-charli/kkoqq-76",
-      "displayLink":"www.flashlyrics.com",
-      "snippet":"KKOQQ\" LYRICS by B\u00c9B\u00c9 CHARLI: Des petites billes \u00e0...",
-      "htmlSnippet":"<b>KKOQQ</b>&quot; LYRICS by <b>B\u00c9B\u00c9 CHARLI</b>: Des petites billes \u00e0...",
-      "mime":"image/",
-      "fileFormat":"image/",
-      "image":      
-      {
-        "contextLink":"https://www.flashlyrics.com/lyrics/bebe-charli/kkoqq-76",
-        "height":        254,
-        "width":        506,
-        "byteSize":        22444,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDJNfUMq5TCqfPn7d0PWkF3zcTvw66WEP4OSec0IQBc_bjciQuAFLW5Yo&s",
-        "thumbnailHeight":        66,
-        "thumbnailWidth":        131      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"B\u00e9b\u00e9 Charli - K.K.O.Q.Q. (Single 0012012) \u2014 Soundamental",
-      "htmlTitle":"<b>B\u00e9b\u00e9 Charli</b> - <b>K.K.O.Q.Q.</b> (Single 0012012) \u2014 Soundamental",
-      "link":"https://www.soundamental.org/medias/images/f/f7/Bebe_Charli_0012012.jpg",
-      "displayLink":"www.soundamental.org",
-      "snippet":"B\u00e9b\u00e9 Charli - K.K.O.Q.Q. (Single 0012012) \u2014 Soundamental",
-      "htmlSnippet":"<b>B\u00e9b\u00e9 Charli</b> - <b>K.K.O.Q.Q.</b> (Single 0012012) \u2014 Soundamental",
+      "title":"Billy Accompagn\u00e9 Par Les Forbans - Billy Accompagn\u00e9 Par Les ...",
+      "htmlTitle":"<b>Billy</b> Accompagn\u00e9 Par Les Forbans - <b>Billy</b> Accompagn\u00e9 Par Les ...",
+      "link":"https://images-na.ssl-images-amazon.com/images/I/61mA9FBkwwL._SY355_.jpg",
+      "displayLink":"www.amazon.com",
+      "snippet":"Billy Accompagn\u00e9 Par Les Forbans - Billy Accompagn\u00e9 Par Les ...",
+      "htmlSnippet":"<b>Billy</b> Accompagn\u00e9 Par Les Forbans - <b>Billy</b> Accompagn\u00e9 Par Les ...",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.soundamental.org/pressages/B%C3%A9b%C3%A9_Charli_-_K.K.O.Q.Q._(Single_0012012)",
-        "height":        358,
-        "width":        400,
-        "byteSize":        65352,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTjKtVezxeKiMwXtJc6TcYGMmGvy8_s3hoXCoMsqb5JGeSfuLtVZBW9w&s",
-        "thumbnailHeight":        111,
-        "thumbnailWidth":        124      
+        "contextLink":"https://www.amazon.com/Billy-Accompagn%C3%A9-Par-Forbans-Surprises-Parties/dp/B00BRTA5SK",
+        "height":        355,
+        "width":        355,
+        "byteSize":        30511,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvVHl75sXHb8q9mKgBXiOlUWt5G1hfJaYf8Ob3g2uA4Soq4RtQkvYr&s",
+        "thumbnailHeight":        121,
+        "thumbnailWidth":        121      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"B\u00e9b\u00e9 Charli - Qui a du caca coll\u00e9 au cucu - YouTube",
-      "htmlTitle":"<b>B\u00e9b\u00e9 Charli</b> - Qui a du caca coll\u00e9 au cucu - YouTube",
-      "link":"https://i.ytimg.com/vi/Op3isnS_OIk/hqdefault.jpg",
+      "title":"Au temps des surprises-parties by Billy on Amazon Music - Amazon.com",
+      "htmlTitle":"<b>Au temps des surprises</b>-<b>parties</b> by <b>Billy</b> on Amazon Music - Amazon.com",
+      "link":"https://m.media-amazon.com/images/I/91pz8IVLmML._SS500_.jpg",
+      "displayLink":"www.amazon.com",
+      "snippet":"Au temps des surprises-parties by Billy on Amazon Music - Amazon.com",
+      "htmlSnippet":"<b>Au temps des surprises</b>-<b>parties</b> by <b>Billy</b> on Amazon Music - Amazon.com",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.amazon.com/Au-temps-surprises-parties-Billy/dp/B001BVB5WE",
+        "height":        500,
+        "width":        500,
+        "byteSize":        44511,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU5SAsda-Jjk5Ug3_Ss6WgA10hsMXafFUSxDOdqONoCdPrlow2_ZH2b08&s",
+        "thumbnailHeight":        130,
+        "thumbnailWidth":        130      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"billy // la le\u00e7on de danse + au temps des surpr - Buy Vinyl ...",
+      "htmlTitle":"<b>billy</b> // la le\u00e7on de danse + <b>au temps des</b> surpr - Buy Vinyl ...",
+      "link":"https://cloud10.todocoleccion.online/discos-vinilo/tc/2019/10/31/17/181754337.jpg",
+      "displayLink":"en.todocoleccion.net",
+      "snippet":"billy // la le\u00e7on de danse + au temps des surpr - Buy Vinyl ...",
+      "htmlSnippet":"<b>billy</b> // la le\u00e7on de danse + <b>au temps des</b> surpr - Buy Vinyl ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://en.todocoleccion.net/vinyl-records/billy-lecon-danse-au-temps-des-surprises-parties-francia-1983~x181754337",
+        "height":        540,
+        "width":        720,
+        "byteSize":        233017,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlWsk3ht6xo6dyuxHWx6A-yUuUlYOQ59HlRZyqY48UqQUJ_pnySfkK-pE&s",
+        "thumbnailHeight":        105,
+        "thumbnailWidth":        140      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Billy Accompagn\u00e9 Par Les Forbans - Au Temps Des Surprises-Parties ...",
+      "htmlTitle":"<b>Billy</b> Accompagn\u00e9 Par Les Forbans - <b>Au Temps Des Surprises</b>-<b>Parties</b> ...",
+      "link":"https://images-na.ssl-images-amazon.com/images/I/61mA9FBkwwL._AC_SX342_.jpg",
+      "displayLink":"www.amazon.ca",
+      "snippet":"Billy Accompagn\u00e9 Par Les Forbans - Au Temps Des Surprises-Parties ...",
+      "htmlSnippet":"<b>Billy</b> Accompagn\u00e9 Par Les Forbans - <b>Au Temps Des Surprises</b>-<b>Parties</b> ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.amazon.ca/Billy-Accompagn%C3%A9-Par-Forbans-Surprises-Parties/dp/B00BRTA5SK",
+        "height":        342,
+        "width":        342,
+        "byteSize":        31740,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFLkkdm6Xj6oS8IYNv8hRHdVBOUMbKFIx-ppHww4ocU-bfUvJ4zFioAQ&s",
+        "thumbnailHeight":        120,
+        "thumbnailWidth":        120      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Interview \u2013 Qu'est devenu Billy, l'ex-enfant star de la chanson ...",
+      "htmlTitle":"Interview \u2013 Qu&#39;est devenu <b>Billy</b>, l&#39;ex-enfant star de la chanson ...",
+      "link":"https://voi.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fvoi.2Fvar.2Fvoi.2Fstorage.2Fimages.2Fmedia.2Fmultiupload-du-14-avril-2014.2Fbilly.2F8919714-1-fre-FR.2Fbilly.2Ejpg/753x565/cr/wqkgIC8gVm9pY2k%3D/interview-qu-est-devenu-billy-l-ex-enfant-star-de-la-chanson-des-annees-80.jpg",
+      "displayLink":"www.voici.fr",
+      "snippet":"Interview \u2013 Qu'est devenu Billy, l'ex-enfant star de la chanson ...",
+      "htmlSnippet":"Interview \u2013 Qu&#39;est devenu <b>Billy</b>, l&#39;ex-enfant star de la chanson ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.voici.fr/musique/interview-qu-est-devenu-billy-l-ex-enfant-star-de-la-chanson-des-annees-80-528068",
+        "height":        565,
+        "width":        753,
+        "byteSize":        25250,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy9rF7chPS0LdD3OGhQMEmsabvbPhW8ZC_qCxYlG3yxTIYOhw7BeNoIMA&s",
+        "thumbnailHeight":        107,
+        "thumbnailWidth":        142      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Bebo Best & The Super Lounge Orchestra - Sing Sing Sing (Dance ...",
+      "htmlTitle":"Bebo Best &amp; The Super Lounge Orchestra - Sing Sing Sing (Dance ...",
+      "link":"https://i.ytimg.com/vi/8uVc3GaXzcc/hqdefault.jpg",
       "displayLink":"www.youtube.com",
-      "snippet":"B\u00e9b\u00e9 Charli - Qui a du caca coll\u00e9 au cucu - YouTube",
-      "htmlSnippet":"<b>B\u00e9b\u00e9 Charli</b> - Qui a du caca coll\u00e9 au cucu - YouTube",
+      "snippet":"Bebo Best & The Super Lounge Orchestra - Sing Sing Sing (Dance ...",
+      "htmlSnippet":"Bebo Best &amp; The Super Lounge Orchestra - Sing Sing Sing (Dance ...",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.youtube.com/watch?v=Op3isnS_OIk",
+        "contextLink":"https://www.youtube.com/watch?v=qJ0_r1Emui8&list=PLVvt8642e-B2sXjqzP_yu5T_nOL9LgR0o&index=18",
         "height":        360,
         "width":        480,
-        "byteSize":        19487,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2Sp7KXiVM4bryfT3BpYxrDzgQKR1tD2uSkjyl8y-J9RvtK1EjQ50E8M&s",
+        "byteSize":        18871,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEmiXUSKROrXX7td1DiX7EwljQBjO5Gg7Q4_WyV4DX6Rc8xNKkgLqAwA&s",
         "thumbnailHeight":        97,
         "thumbnailWidth":        129      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Kkoqq - B\u00e9b\u00e9 Charli | Shazam",
-      "htmlTitle":"<b>Kkoqq</b> - <b>B\u00e9b\u00e9 Charli</b> | Shazam",
-      "link":"https://images.shazam.com/coverart/t69593325-b1524448826_s400.jpg",
-      "displayLink":"www.shazam.com",
-      "snippet":"Kkoqq - B\u00e9b\u00e9 Charli | Shazam",
-      "htmlSnippet":"<b>Kkoqq</b> - <b>B\u00e9b\u00e9 Charli</b> | Shazam",
+      "title":"Billy Accompagn\u00e9 Par Les Forbans - Au Temps Des Surprises-Parties ...",
+      "htmlTitle":"<b>Billy</b> Accompagn\u00e9 Par Les Forbans - <b>Au Temps Des Surprises</b>-<b>Parties</b> ...",
+      "link":"https://images-na.ssl-images-amazon.com/images/I/61mA9FBkwwL._AC_.jpg",
+      "displayLink":"www.amazon.ca",
+      "snippet":"Billy Accompagn\u00e9 Par Les Forbans - Au Temps Des Surprises-Parties ...",
+      "htmlSnippet":"<b>Billy</b> Accompagn\u00e9 Par Les Forbans - <b>Au Temps Des Surprises</b>-<b>Parties</b> ...",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.shazam.com/track/69593325/kkoqq",
-        "height":        400,
-        "width":        400,
-        "byteSize":        25017,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEUcM_8YvHdrjBceB4H8Z-2GydQTWICL3vtv8Lq14mIxnKJI_A5Uj5OQ&s",
-        "thumbnailHeight":        124,
-        "thumbnailWidth":        124      
+        "contextLink":"https://www.amazon.ca/Billy-Accompagn%C3%A9-Par-Forbans-Surprises-Parties/dp/B00BRTA5SK",
+        "height":        500,
+        "width":        500,
+        "byteSize":        52352,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRdCXBIGNcQeHFzkFR1jzVw0mq2EpJWDLpmRUgKKHIMcWL86VMKoTC9fM&s",
+        "thumbnailHeight":        130,
+        "thumbnailWidth":        130      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"B\u00e9b\u00e9 Charli - K.K.O.Q.Q (2001, Cardboard Sleeve, CD) | Discogs",
-      "htmlTitle":"<b>B\u00e9b\u00e9 Charli</b> - <b>K.K.O.Q.Q</b> (2001, Cardboard Sleeve, CD) | Discogs",
-      "link":"https://img.discogs.com/U-IrKC-vE_p66Igog334EiGM3kI=/fit-in/480x482/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-9042340-1473768963-4387.jpeg.jpg",
+      "title":"Billy Accompagn\u00e9 Par Les Forbans - Au Temps Des Surprises-Parties ...",
+      "htmlTitle":"<b>Billy</b> Accompagn\u00e9 Par Les Forbans - <b>Au Temps Des Surprises</b>-<b>Parties</b> ...",
+      "link":"https://img.discogs.com/P0qr-udLp-10NWOX46FepJ0r_LI=/fit-in/594x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1288123-1420226145-1101.jpeg.jpg",
       "displayLink":"www.discogs.com",
-      "snippet":"B\u00e9b\u00e9 Charli - K.K.O.Q.Q (2001, Cardboard Sleeve, CD) | Discogs",
-      "htmlSnippet":"<b>B\u00e9b\u00e9 Charli</b> - <b>K.K.O.Q.Q</b> (2001, Cardboard Sleeve, CD) | Discogs",
+      "snippet":"Billy Accompagn\u00e9 Par Les Forbans - Au Temps Des Surprises-Parties ...",
+      "htmlSnippet":"<b>Billy</b> Accompagn\u00e9 Par Les Forbans - <b>Au Temps Des Surprises</b>-<b>Parties</b> ...",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/B%C3%A9b%C3%A9-Charli-KKOQQ/release/9042340",
-        "height":        482,
-        "width":        480,
-        "byteSize":        95761,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYMydUVNllbppXgY2EJoqrhgMuKqQs2RAGU1k2UFlERP1zC16EeNntuS-u&s",
-        "thumbnailHeight":        129,
-        "thumbnailWidth":        128      
+        "contextLink":"https://www.discogs.com/Billy-14-Accompagn%C3%A9-Par-Les-Forbans-Au-Temps-Des-Surprises-Parties-La-Le%C3%A7on-De-Danse/release/1288123",
+        "height":        600,
+        "width":        594,
+        "byteSize":        149948,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEFFuNEVmw_3JB0YTll_uVN1T3F54eY_kAlzDspfR9Vu75Vj7KULgBpoWi&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        134      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"K.k.o.q.q de Bebe Charli, Maxi 45T chez bluefunk95 - Ref:2300020529",
-      "htmlTitle":"<b>K.k.o.q.q</b> de <b>Bebe Charli</b>, Maxi 45T chez bluefunk95 - Ref:2300020529",
-      "link":"https://ring.cdandlp.com/bluefunk95/photo_grande/109871421.jpg",
-      "displayLink":"www.cdandlp.com",
-      "snippet":"K.k.o.q.q de Bebe Charli, Maxi 45T chez bluefunk95 - Ref:2300020529",
-      "htmlSnippet":"<b>K.k.o.q.q</b> de <b>Bebe Charli</b>, Maxi 45T chez bluefunk95 - Ref:2300020529",
+      "title":"Billy Accompagn\u00e9 Par Les Forbans - Billy Accompagn\u00e9 Par Les ...",
+      "htmlTitle":"<b>Billy</b> Accompagn\u00e9 Par Les Forbans - <b>Billy</b> Accompagn\u00e9 Par Les ...",
+      "link":"https://images-na.ssl-images-amazon.com/images/I/61mA9FBkwwL.jpg",
+      "displayLink":"www.amazon.com",
+      "snippet":"Billy Accompagn\u00e9 Par Les Forbans - Billy Accompagn\u00e9 Par Les ...",
+      "htmlSnippet":"<b>Billy</b> Accompagn\u00e9 Par Les Forbans - <b>Billy</b> Accompagn\u00e9 Par Les ...",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.cdandlp.com/bebe-charli/k.k.o.q.q/maxi-45t/r2300020529/",
-        "height":        490,
-        "width":        490,
-        "byteSize":        26539,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScFcsqt-8X1NDK_B7RW511_fDjcr4FpUqcfGVdwhCHPyE6GhpyS5RAQIc&s",
+        "contextLink":"https://www.amazon.com/Billy-Accompagn%C3%A9-Par-Forbans-Surprises-Parties/dp/B00BRTA5SK",
+        "height":        500,
+        "width":        500,
+        "byteSize":        66661,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJPRLCrSFTxaM3VF0FEqZhMjFJUlIRfDpD7qEoYBejPXoM7CLzrb0DIKM&s",
         "thumbnailHeight":        130,
         "thumbnailWidth":        130      
       }    

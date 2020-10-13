@@ -138,6 +138,7 @@ type
     procedure sgListSetEditText(Sender: TObject; ACol, ARow: Integer; const Value: string);
     procedure btnRegexClick(Sender: TObject);
     procedure sgListKeyPress(Sender: TObject; var Key: Char);
+    procedure sgListGetCellColor(Sender: TObject; ARow, ACol: Integer; AState: TGridDrawState; ABrush: TBrush; AFont: TFont);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -188,7 +189,7 @@ type
     function GetwindowsVolume: Integer;
     procedure setGridRow;
     Procedure ExtractTags(iRow: Integer; bPreview: Boolean = false);
-    Procedure SaveTags(iRow : Integer);
+    Procedure SaveTags(iRow: Integer);
 
   end;
 
@@ -685,20 +686,20 @@ begin
             case iGroup of
               1:
                 begin
-                    sgList.Cells[2, ARow] := match.Groups.Item[iGroup].Value;
+                  sgList.Cells[2, ARow] := match.Groups.Item[iGroup].Value;
                 end;
               2:
                 begin
-                    sgList.Cells[3, ARow] := match.Groups.Item[iGroup].Value;
+                  sgList.Cells[3, ARow] := match.Groups.Item[iGroup].Value;
                 end;
             end;
         end;
         match := match.NextMatch;
       end;
-      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag('ARTIST',sgList.Cells[2, ARow]);
-      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag('TITLE',sgList.Cells[3, ARow]);
-      tMediaFile(sgList.Objects[1, ARow]).bModified := true;
-      SaveTags(aRow);
+      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag('ARTIST', sgList.Cells[2, ARow]);
+      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag('TITLE', sgList.Cells[3, ARow]);
+      tMediaFile(sgList.Objects[1, ARow]).bModified := True;
+      SaveTags(ARow);
       inc(i);
     end;
   sgList.SetFocus;
@@ -774,7 +775,7 @@ begin
 {$IFDEF DEBUG}
   isRegistered := True;
   btnUtils.Visible := True;
-  btnRegex.Visible := True;
+  //btnRegex.Visible := True;
 {$ELSE}
   GetRegistrationInformation(ReleaseCodeString, SerialNumber);
   if not IsReleaseCodeValid(ReleaseCodeString, SerialNumber) then
@@ -937,6 +938,31 @@ begin
     end;
 end;
 
+procedure TfMain.sgListGetCellColor(Sender: TObject; ARow, ACol: Integer; AState: TGridDrawState; ABrush: TBrush; AFont: TFont);
+var
+    pMediaFile: tMediaFile;
+begin
+    //
+    if sgList.Objects[1, ARow] <> Nil then
+    begin
+       pMediaFile := tMediaFile(sgList.Objects[1, ARow]);
+       if pMediaFile.bModified then
+       begin
+         aBrush.Color := clTeal;
+       end
+       else
+       begin
+         aBrush.Color := clWhite;
+       end;
+
+    end
+    else
+    begin
+      aBrush.Color := clWhite;
+    end;
+
+end;
+
 procedure TfMain.sgListKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 var
   index: Integer;
@@ -1074,12 +1100,12 @@ end;
 
 procedure TfMain.sgListKeyPress(Sender: TObject; var Key: Char);
 begin
-  if key = '?' then
+  if Key = '?' then
   begin
-     if not sgList.EditMode then
-     begin
-        ExtractTags(sgList.Row);
-     end;
+    if not sgList.EditMode then
+    begin
+      ExtractTags(sgList.Row);
+    end;
   end;
 end;
 
@@ -1094,18 +1120,22 @@ begin
 end;
 
 procedure TfMain.sgListRowChanging(Sender: TObject; OldRow, NewRow: Integer; var Allow: Boolean);
+var
+  pMediaFile: tMediaFile;
 begin
   // Afficher la pochette si elle existe
+
   if sgList.EditMode then
     Allow := false;
   if sgList.Objects[1, NewRow] <> Nil then
   begin
+    pMediaFile := tMediaFile(sgList.Objects[1, NewRow]);
     if not ropRegEx.Collapsed then
     begin
       ExtractTags(NewRow, True);
     end;
     try
-      ListCoverArts(image1, tMediaFile(sgList.Objects[1, NewRow]).Tags);
+      ListCoverArts(image1, pMediaFile.Tags);
 
     except
 
@@ -1186,14 +1216,14 @@ end;
 
 procedure TfMain.SaveTags(iRow: Integer);
 var
-   pMediaFile : tMediaFile;
+  pMediaFile: tMediaFile;
 begin
-    if sgList.Objects[1,iRow] <> Nil then
-    begin
-      pMediaFile := tMediaFile(sgList.Objects[1,iRow]);
-      if pMediaFile.bModified then
-         pMediaFile.SaveTags;
-    end;
+  if sgList.Objects[1, iRow] <> Nil then
+  begin
+    pMediaFile := tMediaFile(sgList.Objects[1, iRow]);
+    if pMediaFile.bModified then
+      pMediaFile.SaveTags;
+  end;
 
 end;
 
@@ -1287,12 +1317,12 @@ end;
 
 procedure TfMain.setPBMax;
 begin
-  pb1.Max := iMax;
+  pb1.Max := 100;
 end;
 
 procedure TfMain.SetPBPosition;
 begin
-  pb1.Position := pb1.Position + 1;
+  pb1.Position := round(iProgress / iMax * 100);
 end;
 
 procedure TfMain.slbPlaylistItemIndexChanged(Sender: TObject);
@@ -1744,9 +1774,13 @@ begin
   end;
   if bConfirm then
   begin
+    //
+    iMax := Length(aFiles);
     i := 0;
     while i <= Length(aFiles) - 1 do
     begin
+      iProgress := i;
+      thListMP3.Synchronize(TfMain(Params).SetPBPosition);
       sExt := tpath.GetExtension(aFiles[i]);
       bAdd := (pos(uppercase(sExt), sValidExtensions) > 0);
       if bAdd then
@@ -1760,8 +1794,12 @@ begin
         end;
       end;
       inc(i);
-    end;
 
+    end;
+    iProgress := iMax;
+    thListMP3.Synchronize(TfMain(Params).SetPBPosition);
+    iProgress := 0;
+    thListMP3.Synchronize(TfMain(Params).SetPBPosition);
   end;
 
 end;
