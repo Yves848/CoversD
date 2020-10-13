@@ -12,6 +12,11 @@ const
   aValidExtensions: TArray<string> = ['.MP3', '.MP4', '.FLAC', '.OGG', '.WAV', '.M4A'];
 
 type
+   tTagKey = class
+     sTAG : String;
+     sCol : Integer;
+   end;
+
   tMediaFile = class(tPersistent)
   public
     bModified : boolean;
@@ -42,6 +47,7 @@ type
 
 var
   isRegistered : boolean;
+  dTags:TDictionary<String,tTagKey>;
 
 implementation
 
@@ -137,6 +143,27 @@ begin
       break;
     end;
   end;
+end;
+
+Initialization
+var
+  dTagKey : tTagKey;
+begin
+  dTags := TDictionary<String,tTagKey>.create;
+  dTagKey := tTagKey.create;
+  dTagKey.sTAG := 'ARTIST';
+  dTagKey.sCol := 2;
+  dTags.Add('Artist',dTagKey);
+  dTagKey := tTagKey.create;
+  dTagKey.sTAG := 'TITLE';
+  dTagKey.sCol := 3;
+  dTags.Add('Title',dTagKey);
+end;
+
+Finalization
+begin
+  dTags.Clear;
+  dTags.Free;
 end;
 
 

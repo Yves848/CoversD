@@ -3,16 +3,26 @@ unit uMain;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, System.IOUtils, System.Types, Vcl.GraphUtil,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uTypes, utags, Vcl.StdCtrls, sPanel, Vcl.ExtCtrls, sSkinManager, sSkinProvider, sButton, Vcl.ComCtrls,
-  sTreeView, acShellCtrls, sListView, sComboBoxes, sSplitter, Vcl.Buttons, sSpeedButton, System.ImageList, Vcl.ImgList, acAlphaImageList,
-  acProgressBar, JvComponentBase, JvThread, sMemo, Vcl.Mask, sMaskEdit, sCustomComboEdit, sToolEdit, acImage, JPEG, PNGImage, GIFImg, TagsLibrary,
-  acNoteBook, sTrackBar, acArcControls, sGauge, BASS, BassFlac, xSuperObject, SynEditHighlighter, SynHighlighterJSON, SynEdit, SynMemo, sListBox,
-  JvExControls, clipbrd, Spectrum3DLibraryDefs, bass_aac, MMSystem, uDeleteCover,
-  JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw, activeX, acWebBrowser, Vcl.Grids, JvExGrids, JvStringGrid, IdComponent,
-  IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid, AdvGrid, dateutils,
-  uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory, AdvReflectionLabel, AdvMemo, acPNG,
-  JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister, Vcl.Menus, System.RegularExpressions, sEdit;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, System.IOUtils, System.Types, Vcl.GraphUtil,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uTypes, utags, Vcl.StdCtrls, sPanel,
+  Vcl.ExtCtrls, sSkinManager, sSkinProvider, sButton, Vcl.ComCtrls,
+  sTreeView, acShellCtrls, sListView, sComboBoxes, sSplitter, Vcl.Buttons,
+  sSpeedButton, System.ImageList, Vcl.ImgList, acAlphaImageList,
+  acProgressBar, JvComponentBase, JvThread, sMemo, Vcl.Mask, sMaskEdit,
+  sCustomComboEdit, sToolEdit, acImage, JPEG, PNGImage, GIFImg, TagsLibrary,
+  acNoteBook, sTrackBar, acArcControls, sGauge, BASS, BassFlac, xSuperObject,
+  SynEditHighlighter, SynHighlighterJSON, SynEdit, SynMemo, sListBox,
+  JvExControls, clipbrd, Spectrum3DLibraryDefs, bass_aac, MMSystem,
+  uDeleteCover,
+  JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw,
+  activeX, acWebBrowser, Vcl.Grids, JvExGrids, JvStringGrid, IdComponent,
+  IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding,
+  Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid, AdvGrid, dateutils,
+  uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory, AdvReflectionLabel,
+  AdvMemo, acPNG,
+  JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard,
+  uRegister, Vcl.Menus, System.RegularExpressions, sEdit, sComboBox;
 
 type
   TVolumeRec = record
@@ -94,10 +104,10 @@ type
     seRegEx: TsEdit;
     btnRegex: TsButton;
     sPanel11: TsPanel;
-    sLabelFX2: TsLabelFX;
     sepArtist: TsEdit;
-    sLabelFX3: TsLabelFX;
     sepTitle: TsEdit;
+    sCB2: TsComboBox;
+    sCB1: TsComboBox;
     procedure Button1Click(Sender: TObject);
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
@@ -139,6 +149,7 @@ type
     procedure btnRegexClick(Sender: TObject);
     procedure sgListKeyPress(Sender: TObject; var Key: Char);
     procedure sgListGetCellColor(Sender: TObject; ARow, ACol: Integer; AState: TGridDrawState; ABrush: TBrush; AFont: TFont);
+    procedure seRegExChange(Sender: TObject);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -190,7 +201,7 @@ type
     procedure setGridRow;
     Procedure ExtractTags(iRow: Integer; bPreview: Boolean = false);
     Procedure SaveTags(iRow: Integer);
-
+    Procedure fillTagCombos;
   end;
 
 var
@@ -634,50 +645,22 @@ var
   regexpr: tREgEx;
   RO: TRegExOptions;
   ARow: Integer;
+  iColumn: Integer;
 
 begin
 
   RO := [roIgnoreCase];
 
   i := 0;
-  regexpr := tREgEx.Create(seRegEx.Text, [roIgnoreCase]);
-  if bPreview then
-  begin
-    if sgList.Objects[1, iRow] <> Nil then
+  try
+    regexpr := tREgEx.Create(seRegEx.Text, [roIgnoreCase]);
+    if bPreview then
     begin
-      aFile := tpath.GetFileNameWithoutExtension(tMediaFile(sgList.Objects[1, iRow]).Tags.FileName);
-    end;
-    match := regexpr.match(aFile);
-    while match.Success do
-    begin
-      if match.Groups.Count > 1 then
+      if sgList.Objects[1, iRow] <> Nil then
       begin
-        for iGroup := 1 to match.Groups.Count - 1 do
-          case iGroup of
-            1:
-              begin
-                sepArtist.Text := match.Groups.Item[iGroup].Value;
-              end;
-            2:
-              begin
-                sepTitle.Text := match.Groups.Item[iGroup].Value;
-              end;
-          end;
+        aFile := tpath.GetFileNameWithoutExtension(tMediaFile(sgList.Objects[1, iRow]).Tags.FileName);
       end;
-      match := match.NextMatch;
-    end;
-  end
-  else
-    while i <= sgList.SelectedRowCount - 1 do
-    begin
-      ARow := sgList.SelectedRow[i];
-      if sgList.Objects[1, ARow] <> Nil then
-      begin
-        aFile := tpath.GetFileNameWithoutExtension(tMediaFile(sgList.Objects[1, ARow]).Tags.FileName);
-      end;
-
       match := regexpr.match(aFile);
-      iMatch := 0;
       while match.Success do
       begin
         if match.Groups.Count > 1 then
@@ -686,24 +669,82 @@ begin
             case iGroup of
               1:
                 begin
-                  sgList.Cells[2, ARow] := match.Groups.Item[iGroup].Value;
+                  sepArtist.Text := match.Groups.Item[iGroup].Value;
                 end;
               2:
                 begin
-                  sgList.Cells[3, ARow] := match.Groups.Item[iGroup].Value;
+                  sepTitle.Text := match.Groups.Item[iGroup].Value;
                 end;
             end;
         end;
         match := match.NextMatch;
       end;
-      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag('ARTIST', sgList.Cells[2, ARow]);
-      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag('TITLE', sgList.Cells[3, ARow]);
-      tMediaFile(sgList.Objects[1, ARow]).bModified := True;
-      SaveTags(ARow);
-      inc(i);
-    end;
-  sgList.SetFocus;
+    end
+    else
+    begin
+      while i <= sgList.SelectedRowCount - 1 do
+      begin
+        ARow := sgList.SelectedRow[i];
+        if sgList.Objects[1, ARow] <> Nil then
+        begin
+          aFile := tpath.GetFileNameWithoutExtension(tMediaFile(sgList.Objects[1, ARow]).Tags.FileName);
+        end;
 
+        match := regexpr.match(aFile);
+        iMatch := 0;
+        while match.Success do
+        begin
+          if match.Groups.Count > 1 then
+          begin
+            for iGroup := 1 to match.Groups.Count - 1 do
+              case iGroup of
+                1:
+                  begin
+                    iColumn := tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sCol;
+                    sgList.Cells[iColumn, ARow] := match.Groups.Item[iGroup].Value;
+                  end;
+                2:
+                  begin
+                    iColumn := tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sCol;
+                    sgList.Cells[iColumn, ARow] := match.Groups.Item[iGroup].Value;
+                  end;
+              end;
+          end;
+          match := match.NextMatch;
+        end;
+        tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag('ARTIST', sgList.Cells[2, ARow]);
+        tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag('TITLE', sgList.Cells[3, ARow]);
+        tMediaFile(sgList.Objects[1, ARow]).bModified := True;
+        SaveTags(ARow);
+        inc(i);
+      end;
+      sgList.SetFocus;
+    end;
+
+  except
+
+  end;
+end;
+
+procedure TfMain.fillTagCombos;
+var
+  i: Integer;
+  dTagKey: tTagKey;
+  Key: String;
+begin
+  //
+  i := 0;
+  sCB1.Items.clear;
+  sCB2.Items.clear;
+
+  for Key in dTags.Keys do
+  begin
+    dTags.TryGetValue(Key, dTagKey);
+    sCB1.Items.AddObject(Key, dTagKey);
+    sCB2.Items.AddObject(Key, dTagKey);
+  end;
+  sCB1.ItemIndex := 0;
+  sCB2.ItemIndex := 1;
 end;
 
 function TfMain.findNode(sLabel: String): TTreeNode;
@@ -742,6 +783,8 @@ begin
       Application.ProcessMessages;
   end;
 
+  jConfig.S['startFolder'] := sShellTreeView1.SelectedFolder.PathName;
+
   jConfig.SaveTo(TDirectory.GetCurrentDirectory + '\config.json');
 end;
 
@@ -772,10 +815,11 @@ begin
 
   OpenConfig;
   initGrid;
+  fillTagCombos;
 {$IFDEF DEBUG}
   isRegistered := True;
   btnUtils.Visible := True;
-  //btnRegex.Visible := True;
+  // btnRegex.Visible := True;
 {$ELSE}
   GetRegistrationInformation(ReleaseCodeString, SerialNumber);
   if not IsReleaseCodeValid(ReleaseCodeString, SerialNumber) then
@@ -905,6 +949,8 @@ procedure TfMain.initGrid;
 
 begin
   //
+  GlobalMediaFile.Destroy;
+  GlobalMediaFile := tMediaFile.Create;
   cleanObjects;
   sgList.clear;
   sgList.RowCount := 2;
@@ -940,26 +986,26 @@ end;
 
 procedure TfMain.sgListGetCellColor(Sender: TObject; ARow, ACol: Integer; AState: TGridDrawState; ABrush: TBrush; AFont: TFont);
 var
-    pMediaFile: tMediaFile;
+  pMediaFile: tMediaFile;
 begin
-    //
-    if sgList.Objects[1, ARow] <> Nil then
+  //
+  if sgList.Objects[1, ARow] <> Nil then
+  begin
+    pMediaFile := tMediaFile(sgList.Objects[1, ARow]);
+    if pMediaFile.bModified then
     begin
-       pMediaFile := tMediaFile(sgList.Objects[1, ARow]);
-       if pMediaFile.bModified then
-       begin
-         aBrush.Color := clTeal;
-       end
-       else
-       begin
-         aBrush.Color := clWhite;
-       end;
-
+      ABrush.Color := clTeal;
     end
     else
     begin
-      aBrush.Color := clWhite;
+      ABrush.Color := clWhite;
     end;
+
+  end
+  else
+  begin
+    ABrush.Color := clWhite;
+  end;
 
 end;
 
@@ -1306,6 +1352,11 @@ begin
   // end;
 end;
 
+procedure TfMain.seRegExChange(Sender: TObject);
+begin
+  ExtractTags(sgList.Row, True);
+end;
+
 procedure TfMain.setGridRow;
 begin
   sgList.Row := 1;
@@ -1322,7 +1373,7 @@ end;
 
 procedure TfMain.SetPBPosition;
 begin
-  pb1.Position := round(iProgress / iMax * 100);
+  pb1.Position := Round(iProgress / iMax * 100);
 end;
 
 procedure TfMain.slbPlaylistItemIndexChanged(Sender: TObject);
@@ -1624,6 +1675,12 @@ begin
     jConfig := TSuperObject.ParseFile(sPath + '\config.json');
     // SynMemo1.Lines.Text := jConfig.AsJSON(True);
     aPath := jConfig.S['startFolder'];
+    if aPath <> '' then
+    begin
+      sShellTreeView1.Path := aPath;
+      if sShellTreeView1.Selected <> Nil then
+        sShellTreeView1.Selected.Expand(True);
+    end;
   end
   else
   begin
@@ -1770,7 +1827,8 @@ begin
   bFirst := True;
   if Length(aFiles) > 1000 then
   begin
-    bConfirm := (MessageDlg(format('Do you confirm adding %d files ?', [Length(aFiles)]), mtConfirmation, [mbYes, mbNo], 0, mbNo) = mrYes);
+    bConfirm := (MessageDlg(format('Do you confirm adding %d files ?', [Length(aFiles)]), mtConfirmation, [mbYes, mbNo], 0,
+      mbNo) = mrYes);
   end;
   if bConfirm then
   begin
