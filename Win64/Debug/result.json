@@ -10,9 +10,9 @@
     "request":    
     [
       {
-        "title":"Google Custom Search - Garbage Stupid Girl",
-        "totalResults":"131000000",
-        "searchTerms":"Garbage Stupid Girl",
+        "title":"Google Custom Search - Gossip Music for Men",
+        "totalResults":"451000000",
+        "searchTerms":"Gossip Music for Men",
         "count":        10,
         "startIndex":        1,
         "inputEncoding":"utf8",
@@ -26,9 +26,9 @@
     "nextPage":    
     [
       {
-        "title":"Google Custom Search - Garbage Stupid Girl",
-        "totalResults":"131000000",
-        "searchTerms":"Garbage Stupid Girl",
+        "title":"Google Custom Search - Gossip Music for Men",
+        "totalResults":"451000000",
+        "searchTerms":"Gossip Music for Men",
         "count":        10,
         "startIndex":        11,
         "inputEncoding":"utf8",
@@ -46,221 +46,221 @@
   },
   "searchInformation":  
   {
-    "searchTime":0.513892,
-    "formattedSearchTime":"0.51",
-    "totalResults":"131000000",
-    "formattedTotalResults":"131,000,000"  
+    "searchTime":0.655441,
+    "formattedSearchTime":"0.66",
+    "totalResults":"451000000",
+    "formattedTotalResults":"451,000,000"  
   },
   "items":  
   [
     {
       "kind":"customsearch#result",
-      "title":"Garbage - Stupid Girl (1996, CD1, CD) | Discogs",
-      "htmlTitle":"<b>Garbage</b> - <b>Stupid Girl</b> (1996, CD1, CD) | Discogs",
-      "link":"https://img.discogs.com/mAqCykowV2yFA1BQpYVGfNG-DKY=/fit-in/600x525/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-170764-1460079956-5486.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Garbage - Stupid Girl (1996, CD1, CD) | Discogs",
-      "htmlSnippet":"<b>Garbage</b> - <b>Stupid Girl</b> (1996, CD1, CD) | Discogs",
+      "title":"Gossip: Music For Men Album Review | Pitchfork",
+      "htmlTitle":"<b>Gossip</b>: <b>Music</b> For <b>Men</b> Album Review | Pitchfork",
+      "link":"https://media.pitchfork.com/photos/5929a4829d034d5c69bf30af/1:1/w_320/0426b101.jpg",
+      "displayLink":"pitchfork.com",
+      "snippet":"Gossip: Music For Men Album Review | Pitchfork",
+      "htmlSnippet":"<b>Gossip</b>: <b>Music</b> For <b>Men</b> Album Review | Pitchfork",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/Garbage-Stupid-Girl/release/170764",
-        "height":        525,
-        "width":        600,
-        "byteSize":        45928,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvXMIInMEDFh-odqiTQD-SlM5Edl4Q8C2ehgrK_W2JujGkN_elhlnwtZM&s",
+        "contextLink":"https://pitchfork.com/reviews/albums/13113-music-for-men/",
+        "height":        320,
+        "width":        320,
+        "byteSize":        14501,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwS7WqZHhW2urwQVqeEeWrqGGkhayTIFvNzv5S9wzhWreyVBgeNZzS&s",
         "thumbnailHeight":        118,
-        "thumbnailWidth":        135      
+        "thumbnailWidth":        118      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Garbage - Stupid Girl (Todd Terry mix) - YouTube",
-      "htmlTitle":"<b>Garbage</b> - <b>Stupid Girl</b> (Todd Terry mix) - YouTube",
-      "link":"https://i.ytimg.com/vi/SkzKNAySas8/hqdefault.jpg",
-      "displayLink":"www.youtube.com",
-      "snippet":"Garbage - Stupid Girl (Todd Terry mix) - YouTube",
-      "htmlSnippet":"<b>Garbage</b> - <b>Stupid Girl</b> (Todd Terry mix) - YouTube",
+      "title":"Gossip* - Music For Men (2009, CD) | Discogs",
+      "htmlTitle":"<b>Gossip</b>* - <b>Music</b> For <b>Men</b> (2009, CD) | Discogs",
+      "link":"https://img.discogs.com/TQj0R-jd3o6SUT9WZbWVYeEQjQw=/fit-in/600x599/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1824467-1351182786-2652.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Gossip* - Music For Men (2009, CD) | Discogs",
+      "htmlSnippet":"<b>Gossip</b>* - <b>Music</b> For <b>Men</b> (2009, CD) | Discogs",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.youtube.com/watch?v=SkzKNAySas8",
-        "height":        360,
-        "width":        480,
-        "byteSize":        31488,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUFBjw9z-yh6oPyeINJhGQeIATPIZL6BdzcBJwdcCof5LlUKxne_sslQ&s",
-        "thumbnailHeight":        97,
-        "thumbnailWidth":        129      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Garbage - Stupid Girl \u2705",
-      "htmlTitle":"<b>Garbage</b> - <b>Stupid Girl</b> \u2705",
-      "link":"http://tv90s.com/wp-content/uploads/2018/02/garbage-stupid-girl-official-music-video.jpg",
-      "displayLink":"tv90s.com",
-      "snippet":"Garbage - Stupid Girl \u2705",
-      "htmlSnippet":"<b>Garbage</b> - <b>Stupid Girl</b> \u2705",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"http://tv90s.com/garbage-stupid-girl/",
-        "height":        468,
-        "width":        630,
-        "byteSize":        17627,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIXYu693jCxlXBZwIKntNT87nMsVvqrQa6I9g1z6gmcTcL8VG0W_U4kg&s",
-        "thumbnailHeight":        102,
-        "thumbnailWidth":        137      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Garbage - Stupid Girl (Dreadzone Mix) - YouTube",
-      "htmlTitle":"<b>Garbage</b> - <b>Stupid Girl</b> (Dreadzone Mix) - YouTube",
-      "link":"https://i.ytimg.com/vi/RhEfM2df-Xw/hqdefault.jpg",
-      "displayLink":"www.youtube.com",
-      "snippet":"Garbage - Stupid Girl (Dreadzone Mix) - YouTube",
-      "htmlSnippet":"<b>Garbage</b> - <b>Stupid Girl</b> (Dreadzone Mix) - YouTube",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.youtube.com/watch?v=RhEfM2df-Xw",
-        "height":        360,
-        "width":        480,
-        "byteSize":        10191,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDTlYy6yEImxTcaP2paKmd6GJjJxwfRsMEw3ydTsiFGnGCzIUTEXCT4tk&s",
-        "thumbnailHeight":        97,
-        "thumbnailWidth":        129      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Stupid Girl Garbage GIF - StupidGirl Garbage ShirleyManson ...",
-      "htmlTitle":"<b>Stupid Girl Garbage</b> GIF - StupidGirl <b>Garbage</b> ShirleyManson ...",
-      "link":"https://media1.tenor.com/images/b4083a70cb05cd97af1d1827d4eb6702/tenor.gif?itemid=16260508",
-      "displayLink":"tenor.com",
-      "snippet":"Stupid Girl Garbage GIF - StupidGirl Garbage ShirleyManson ...",
-      "htmlSnippet":"<b>Stupid Girl Garbage</b> GIF - StupidGirl <b>Garbage</b> ShirleyManson ...",
-      "mime":"image/gif",
-      "fileFormat":"image/gif",
-      "image":      
-      {
-        "contextLink":"https://tenor.com/view/stupid-girl-garbage-shirley-manson-90s-music-grunge-gif-16260508",
-        "height":        379,
-        "width":        498,
-        "byteSize":        3262652,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX9BdFK2UuNSzVE1BrbTXM9dib8H52ZU0A363GJyUNnMgxTJYZJQnFOQ&s",
-        "thumbnailHeight":        99,
-        "thumbnailWidth":        130      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Garbage - \"Stupid Girl\" (Official Music Video) - YouTube",
-      "htmlTitle":"<b>Garbage</b> - &quot;<b>Stupid Girl</b>&quot; (Official Music Video) - YouTube",
-      "link":"https://i.ytimg.com/vi/O9eNTgAuMls/hqdefault.jpg",
-      "displayLink":"www.youtube.com",
-      "snippet":"Garbage - \"Stupid Girl\" (Official Music Video) - YouTube",
-      "htmlSnippet":"<b>Garbage</b> - &quot;<b>Stupid Girl</b>&quot; (Official Music Video) - YouTube",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.youtube.com/watch?v=O9eNTgAuMls",
-        "height":        360,
-        "width":        480,
-        "byteSize":        11854,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTebOUJ3QaIY-UdqR7jpDz8QdbR3lODPAxbt6lSQtG2kUYXBdJ6nZREhQ&s",
-        "thumbnailHeight":        97,
-        "thumbnailWidth":        129      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Garbage - Stupid Girl (HQ) - YouTube | Garbage stupid girl, Stupid ...",
-      "htmlTitle":"<b>Garbage</b> - <b>Stupid Girl</b> (HQ) - YouTube | <b>Garbage stupid girl</b>, <b>Stupid</b> ...",
-      "link":"https://i.pinimg.com/564x/54/8a/5e/548a5e259eb35183b2ddceb077ff4d63.jpg",
-      "displayLink":"ar.pinterest.com",
-      "snippet":"Garbage - Stupid Girl (HQ) - YouTube | Garbage stupid girl, Stupid ...",
-      "htmlSnippet":"<b>Garbage</b> - <b>Stupid Girl</b> (HQ) - YouTube | <b>Garbage stupid girl</b>, <b>Stupid</b> ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://ar.pinterest.com/pin/648799890060973129/",
-        "height":        360,
-        "width":        480,
-        "byteSize":        15813,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4furdFcu2K717KyCo84HdsWPzhrzF--1uI09GB-6dZe2LlB9bosYuMA&s",
-        "thumbnailHeight":        97,
-        "thumbnailWidth":        129      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Garbage Stupid Girl GIF - Garbage StupidGirl Alternative ...",
-      "htmlTitle":"<b>Garbage Stupid Girl</b> GIF - <b>Garbage</b> StupidGirl Alternative ...",
-      "link":"https://media1.tenor.com/images/6342dbd20912149b3f16f6a1acbd4547/tenor.gif?itemid=16260501",
-      "displayLink":"tenor.com",
-      "snippet":"Garbage Stupid Girl GIF - Garbage StupidGirl Alternative ...",
-      "htmlSnippet":"<b>Garbage Stupid Girl</b> GIF - <b>Garbage</b> StupidGirl Alternative ...",
-      "mime":"image/gif",
-      "fileFormat":"image/gif",
-      "image":      
-      {
-        "contextLink":"https://tenor.com/view/garbage-stupid-girl-alternative-grunge-90s-music-gif-16260501",
-        "height":        370,
-        "width":        498,
-        "byteSize":        2632028,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNQ494-ZfvzUHo6oEMXJgekq7xKyyR_QU69el8V3y03zNjRQDkilI4Yw&s",
-        "thumbnailHeight":        97,
-        "thumbnailWidth":        130      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Stupid Girl' Singers Garbage Return to San Antonio in May | SA Sound",
-      "htmlTitle":"<b>Stupid Girl</b>&#39; Singers <b>Garbage</b> Return to San Antonio in May | SA Sound",
-      "link":"https://media1.fdncms.com/sacurrent/imager/u/slideshow/19723271/screen_shot_2019-02-04_at_11.55.34_am.png",
-      "displayLink":"www.sacurrent.com",
-      "snippet":"Stupid Girl' Singers Garbage Return to San Antonio in May | SA Sound",
-      "htmlSnippet":"<b>Stupid Girl</b>&#39; Singers <b>Garbage</b> Return to San Antonio in May | SA Sound",
-      "mime":"image/png",
-      "fileFormat":"image/png",
-      "image":      
-      {
-        "contextLink":"https://www.sacurrent.com/sa-sound/archives/2019/02/04/stupid-girl-singers-garbage-return-to-san-antonio-in-may",
-        "height":        336,
+        "contextLink":"https://www.discogs.com/Gossip-Music-For-Men/release/1824467",
+        "height":        599,
         "width":        600,
-        "byteSize":        272461,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtt-fam667g6jljIj_BGwsQViPWHCqLlnCbpunDkMR-uVG2xrD6ysr3so&s",
-        "thumbnailHeight":        76,
+        "byteSize":        71574,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqZydgcS1XI1MhmI_R9AjLXST-01LxvbRfnBhSXpjf5GYmo7rdn-TvJ04&s",
+        "thumbnailHeight":        135,
         "thumbnailWidth":        135      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Garbage - Stupid Girl - YouTube",
-      "htmlTitle":"<b>Garbage</b> - <b>Stupid Girl</b> - YouTube",
-      "link":"https://i.ytimg.com/vi/2GhPUAVgHZc/hqdefault.jpg",
-      "displayLink":"www.youtube.com",
-      "snippet":"Garbage - Stupid Girl - YouTube",
-      "htmlSnippet":"<b>Garbage</b> - <b>Stupid Girl</b> - YouTube",
+      "title":"Music For Men by Gossip on Amazon Music - Amazon.com",
+      "htmlTitle":"<b>Music</b> For <b>Men</b> by <b>Gossip</b> on Amazon <b>Music</b> - Amazon.com",
+      "link":"https://m.media-amazon.com/images/I/71Cxt3GJllL._SS500_.jpg",
+      "displayLink":"www.amazon.com",
+      "snippet":"Music For Men by Gossip on Amazon Music - Amazon.com",
+      "htmlSnippet":"<b>Music</b> For <b>Men</b> by <b>Gossip</b> on Amazon <b>Music</b> - Amazon.com",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.youtube.com/watch?v=2GhPUAVgHZc",
-        "height":        360,
-        "width":        480,
-        "byteSize":        35906,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiUxb9l_eAzcDbBHInd4ZhD9eE_daN8zlKdLJZKJpgbBlhBFdyIJ3voTw&s",
-        "thumbnailHeight":        97,
+        "contextLink":"https://www.amazon.com/Music-Men-Gossip/dp/B002CUKWRC",
+        "height":        500,
+        "width":        500,
+        "byteSize":        21380,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsfM0pkQraKSTWGgB7EHuNfMNSemNdMls9g6VwsSPW2WS6RWY7aPcGEAeg&s",
+        "thumbnailHeight":        130,
+        "thumbnailWidth":        130      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Gossip - Music For Men - Amazon.com Music",
+      "htmlTitle":"<b>Gossip</b> - <b>Music</b> For <b>Men</b> - Amazon.com <b>Music</b>",
+      "link":"https://images-na.ssl-images-amazon.com/images/I/41znSSGdORL._SX355_.jpg",
+      "displayLink":"www.amazon.com",
+      "snippet":"Gossip - Music For Men - Amazon.com Music",
+      "htmlSnippet":"<b>Gossip</b> - <b>Music</b> For <b>Men</b> - Amazon.com <b>Music</b>",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.amazon.com/Music-Men-Gossip/dp/B0027VSTCG",
+        "height":        343,
+        "width":        355,
+        "byteSize":        14102,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8MDc62Dp1NcaqpbGgRUcZp-mIHF-bVCnAV91m5_AiqWRTka2LTxfZGQ&s",
+        "thumbnailHeight":        117,
+        "thumbnailWidth":        121      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Review: MUSIC FOR MEN by Gossip Scores 66% on MusicCritic.com",
+      "htmlTitle":"Review: <b>MUSIC</b> FOR <b>MEN</b> by <b>Gossip</b> Scores 66% on MusicCritic.com",
+      "link":"https://musiccritic.com/albumimages/12472_cover.jpg",
+      "displayLink":"musiccritic.com",
+      "snippet":"Review: MUSIC FOR MEN by Gossip Scores 66% on MusicCritic.com",
+      "htmlSnippet":"Review: <b>MUSIC</b> FOR <b>MEN</b> by <b>Gossip</b> Scores 66% on MusicCritic.com",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://musiccritic.com/gossip/music-for-men",
+        "height":        500,
+        "width":        500,
+        "byteSize":        34904,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFZe78RKLo1plmmB91G1-qBuba1ZOy1hmaTaxdYIkNHfMfS6yN4PV_R1U&s",
+        "thumbnailHeight":        130,
+        "thumbnailWidth":        130      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Gossip - Music for Men [Vinyl] - Amazon.com Music",
+      "htmlTitle":"<b>Gossip</b> - <b>Music</b> for <b>Men</b> [Vinyl] - Amazon.com <b>Music</b>",
+      "link":"https://images-na.ssl-images-amazon.com/images/I/613nphkxiQL._SY355_.jpg",
+      "displayLink":"www.amazon.com",
+      "snippet":"Gossip - Music for Men [Vinyl] - Amazon.com Music",
+      "htmlSnippet":"<b>Gossip</b> - <b>Music</b> for <b>Men</b> [Vinyl] - Amazon.com <b>Music</b>",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.amazon.com/Music-Men-Vinyl-Gossip/dp/B0027ZH0F4",
+        "height":        355,
+        "width":        355,
+        "byteSize":        15333,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFrg_6ePUdlUV4wXQhnn97JGZvqOuKeIZadz2w-pGtWiMgEcexkvO2eA&s",
+        "thumbnailHeight":        121,
+        "thumbnailWidth":        121      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Music for Men - Gossip | Songs, Reviews, Credits | AllMusic",
+      "htmlTitle":"<b>Music</b> for <b>Men</b> - <b>Gossip</b> | Songs, Reviews, Credits | AllMusic",
+      "link":"https://cdn-s3.allmusic.com/release-covers/500/0001/043/0001043913.jpg",
+      "displayLink":"www.allmusic.com",
+      "snippet":"Music for Men - Gossip | Songs, Reviews, Credits | AllMusic",
+      "htmlSnippet":"<b>Music</b> for <b>Men</b> - <b>Gossip</b> | Songs, Reviews, Credits | AllMusic",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.allmusic.com/album/music-for-men-mw0000820701",
+        "height":        500,
+        "width":        498,
+        "byteSize":        55349,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCtmOX4kGO917KEFZCzMTbAkHaPbytLuVxSLDNMyVuTXWkS8U1wBGWpZo&s",
+        "thumbnailHeight":        130,
         "thumbnailWidth":        129      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Music For Men - Album by Gossip | Spotify",
+      "htmlTitle":"<b>Music</b> For <b>Men</b> - Album by <b>Gossip</b> | Spotify",
+      "link":"https://i.scdn.co/image/ab67616d0000b273df4cf17c83fd12112c6cd371",
+      "displayLink":"open.spotify.com",
+      "snippet":"Music For Men - Album by Gossip | Spotify",
+      "htmlSnippet":"<b>Music</b> For <b>Men</b> - Album by <b>Gossip</b> | Spotify",
+      "mime":"image/",
+      "fileFormat":"image/",
+      "image":      
+      {
+        "contextLink":"https://open.spotify.com/album/1GB8gZTSdbiup5FzxNknRo",
+        "height":        640,
+        "width":        629,
+        "byteSize":        73606,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXAGe8CFncZIpce0CMN52yHlLK-rfdjsa23hWpaoNP5QtQQoUuQP_yB6uV&s",
+        "thumbnailHeight":        137,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"The Gossip Music For Men US Promo CD album (CDLP) (479173)",
+      "htmlTitle":"The <b>Gossip Music</b> For <b>Men</b> US Promo CD album (CDLP) (479173)",
+      "link":"https://images.eil.com/large_image/THE_GOSSIP_MUSIC%2BFOR%2BMEN-479173.jpg",
+      "displayLink":"eil.com",
+      "snippet":"The Gossip Music For Men US Promo CD album (CDLP) (479173)",
+      "htmlSnippet":"The <b>Gossip Music</b> For <b>Men</b> US Promo CD album (CDLP) (479173)",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://eil.com/shop/moreinfo.asp?catalogid=479173",
+        "height":        498,
+        "width":        500,
+        "byteSize":        34430,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVietMk5Ee23fZxXXg8qPp7HeX8WgUmdIIgbWEOnL8sBY8JhNaGrLftdY&s",
+        "thumbnailHeight":        129,
+        "thumbnailWidth":        130      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Album Review: The Gossip - Music For Men / Releases / Releases ...",
+      "htmlTitle":"Album Review: The <b>Gossip</b> - <b>Music</b> For <b>Men</b> / Releases / Releases ...",
+      "link":"https://d1gdi8qinx8x49.cloudfront.net/540x540/50065.jpeg",
+      "displayLink":"drownedinsound.com",
+      "snippet":"Album Review: The Gossip - Music For Men / Releases / Releases ...",
+      "htmlSnippet":"Album Review: The <b>Gossip</b> - <b>Music</b> For <b>Men</b> / Releases / Releases ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"http://drownedinsound.com/releases/14469/reviews/4137188-",
+        "height":        540,
+        "width":        540,
+        "byteSize":        26684,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG6vLu27lmwHi_jQKKxDhYX2Z2QY-KvWcKD2JWFyvA6MFVRFDkvYw2YF2r&s",
+        "thumbnailHeight":        132,
+        "thumbnailWidth":        132      
       }    
     }  
   ]

@@ -25,13 +25,6 @@ uses
   uRegister, Vcl.Menus, System.RegularExpressions, sEdit, sComboBox, sCheckBox, sPageControl;
 
 type
-  TVolumeRec = record
-    case Integer of
-      0:
-        (LongVolume: Longint);
-      1:
-        (LeftVolume, RightVolume: Word);
-  end;
 
   TfMain = class(TForm)
     pnBack: TsPanel;
@@ -371,8 +364,7 @@ begin
     end;
   end;
 
-  sgList.EditMode := false;
-  sgList.Options := [goRowSelect, goRangeSelect];
+  
   fCoverSearch.image1.Picture.Assign(Nil);
   fCoverSearch.ShowModal;
   // fCoverSearch.sg1.SetFocus;
@@ -751,6 +743,8 @@ begin
 {$ENDREGION}
     else
     begin
+      pb1.Position := 0;
+      pb1.Max := sgList.SelectedRowCount;
       while i <= sgList.SelectedRowCount - 1 do
       begin
         ARow := sgList.SelectedRow[i];
@@ -838,12 +832,14 @@ begin
           RemoveCovers(tMediaFile(sgList.Objects[1, ARow]).Tags);
           sgList.SetImageIdx(5, ARow, 1);
         end;
-
+        pb1.Position := i;
         SaveTags(ARow);
+
         inc(i);
       end;
       sgList.SetFocus;
     end;
+    pb1.Position := 0;
 
   except
 
@@ -1489,7 +1485,7 @@ begin
     if pMediaFile.bModified then
       pMediaFile.SaveTags;
   end;
-
+  Application.ProcessMessages;
 end;
 
 procedure TfMain.sButton1Click(Sender: TObject);
