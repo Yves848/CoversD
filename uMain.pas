@@ -3,26 +3,16 @@ unit uMain;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics, System.IOUtils, System.Types, Vcl.GraphUtil,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uTypes, utags, Vcl.StdCtrls, sPanel,
-  Vcl.ExtCtrls, sSkinManager, sSkinProvider, sButton, Vcl.ComCtrls,
-  sTreeView, acShellCtrls, sListView, sComboBoxes, sSplitter, Vcl.Buttons,
-  sSpeedButton, System.ImageList, Vcl.ImgList, acAlphaImageList,
-  acProgressBar, JvComponentBase, JvThread, sMemo, Vcl.Mask, sMaskEdit,
-  sCustomComboEdit, sToolEdit, acImage, JPEG, PNGImage, GIFImg, TagsLibrary,
-  acNoteBook, sTrackBar, acArcControls, sGauge, BASS, BassFlac, xSuperObject,
-  SynEditHighlighter, SynHighlighterJSON, SynEdit, SynMemo, sListBox,
-  JvExControls, clipbrd, Spectrum3DLibraryDefs, bass_aac, MMSystem,
-  uDeleteCover,
-  JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw,
-  activeX, acWebBrowser, Vcl.Grids, JvExGrids, JvStringGrid, IdComponent,
-  IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding,
-  Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid, AdvGrid, dateutils,
-  uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory, AdvReflectionLabel,
-  AdvMemo, acPNG,
-  JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard,
-  uRegister, Vcl.Menus, System.RegularExpressions, sEdit, sComboBox, sCheckBox, sPageControl;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,  System.Classes, Vcl.Graphics, System.IOUtils, System.Types, Vcl.GraphUtil,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uTypes,  Vcl.StdCtrls, sPanel,  Vcl.ExtCtrls, sSkinManager, sSkinProvider, sButton, Vcl.ComCtrls,
+    sTreeView, acShellCtrls, sListView, sComboBoxes, sSplitter, Vcl.Buttons,  sSpeedButton, System.ImageList, Vcl.ImgList, acAlphaImageList,
+  acProgressBar, JvComponentBase, JvThread, sMemo, Vcl.Mask, sMaskEdit,  sCustomComboEdit, sToolEdit, acImage, JPEG, PNGImage, GIFImg, TagsLibrary,
+  acNoteBook, sTrackBar, acArcControls, sGauge, BASS, BassFlac, xSuperObject, sListBox, JvExControls, clipbrd, Spectrum3DLibraryDefs, bass_aac,
+  MMSystem,  uDeleteCover,  JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw,  activeX, acWebBrowser, Vcl.Grids, JvExGrids,
+  JvStringGrid, IdComponent,  IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI,
+  NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, AdvMemo, acPNG,
+  JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister, Vcl.Menus, System.RegularExpressions, sEdit, sComboBox,
+  sCheckBox, sPageControl, SynEditHighlighter, SynHighlighterJSON;
 
 type
 
@@ -47,7 +37,6 @@ type
     Timer1: TTimer;
     sButton1: TsButton;
     sButton2: TsButton;
-    SynJSONSyn1: TSynJSONSyn;
     slbPlaylist: TsListBox;
     pnMain: TsPanel;
     sPanel1: TsPanel;
@@ -109,7 +98,6 @@ type
     ckRegEx03: TsCheckBox;
     btnRegex: TsButton;
     ckClearCovers: TsCheckBox;
-    procedure Button1Click(Sender: TObject);
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
     procedure sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
@@ -134,7 +122,6 @@ type
     procedure sShellTreeView1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormDestroy(Sender: TObject);
     procedure thDisplayExecute(Sender: TObject; Params: Pointer);
-    procedure sButton9Click(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure tbVolumeSkinPaint(Sender: TObject; Canvas: TCanvas);
     procedure sShellTreeView1Change(Sender: TObject; Node: TTreeNode);
@@ -385,11 +372,10 @@ begin
     aFile := GlobalMediaFile.Tags.FileName;
     GlobalMediaFile.Tags.clear;
     GlobalMediaFile.LoadTags(aFile);
-
     ListCoverArts(image1, GlobalMediaFile.Tags);
     sgList.AddImageIdx(5, ARow, 0, haCenter, vaCenter);
-
   end;
+  Application.ProcessMessages;
 
 end;
 
@@ -510,7 +496,7 @@ var
   index: Integer;
 begin
   Result := -1;
-  aMediaFile := tMediaFile(sgList.Objects[0, ARow]);
+  aMediaFile := tMediaFile(sgList.Objects[1, ARow]);
   sPath := tpath.GetDirectoryName(aMediaFile.Tags.FileName);
   sFile := tpath.GetFileNameWithoutExtension(aMediaFile.Tags.FileName);
   index := slbPlaylist.Items.IndexOf(sFile);
@@ -555,7 +541,7 @@ begin
   index := slbPlaylist.Items.IndexOf(sFile);
   if index = -1 then
   begin
-    slbPlaylist.Items.AddObject(sFile, aMediaFile);
+    slbPlaylist.Items.AddObject(tpath.GetFileNameWithoutExtension(sFile), aMediaFile);
   end
 
 end;
@@ -567,15 +553,6 @@ begin
   fRegister := tfRegister.Create(self);
   fRegister.ShowModal;
   fRegister.Free;
-end;
-
-procedure TfMain.Button1Click(Sender: TObject);
-var
-  form2: tForm2;
-begin
-  form2 := tForm2.Create(self);
-  form2.ShowModal;
-  form2.Free;
 end;
 
 procedure TfMain.ckRegEx01Click(Sender: TObject);
@@ -1412,6 +1389,8 @@ var
 begin
   // * Clear the cover art data
   i := 0;
+  pb1.Position := 0;
+  pb1.max := sgList.RowSelectCount;
   while i <= sgList.RowSelectCount - 1 do
   begin
     ARow := sgList.SelectedRow[i];
@@ -1467,9 +1446,11 @@ begin
     end;
     if pMediaFile.bModified then
       pMediaFile.SaveTags;
+    pb1.Position := i;
     RefreshCover(ARow);
     inc(i);
   end;
+  pb1.Position := 0;
   // if fCoverSearch <> nil then
   // fCoverSearch.Close;
 
@@ -1543,15 +1524,6 @@ end;
 procedure TfMain.sButton5Click(Sender: TObject);
 begin
   loadPlaylist;
-end;
-
-procedure TfMain.sButton9Click(Sender: TObject);
-var
-  pfSelectDirectory: TfSelectDirectory;
-begin
-  pfSelectDirectory := TfSelectDirectory.Create(self);
-  pfSelectDirectory.ShowModal;
-  pfSelectDirectory.Free;
 end;
 
 procedure TfMain.sDEFolderAfterDialog(Sender: TObject; var Name: string; var Action: Boolean);
