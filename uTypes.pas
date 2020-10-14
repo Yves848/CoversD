@@ -158,6 +158,14 @@ begin
   dTagKey.sTAG := 'TITLE';
   dTagKey.sCol := 3;
   dTags.Add('Title',dTagKey);
+  dTagKey := tTagKey.create;
+  dTagKey.sTAG := 'ALBUM';
+  dTagKey.sCol := 4;
+  dTags.Add('Album',dTagKey);
+  dTagKey := tTagKey.create;
+  dTagKey.sTAG := 'NONE';
+  dTagKey.sCol := -1;
+  dTags.Add('N/A',dTagKey);
 end;
 
 Finalization

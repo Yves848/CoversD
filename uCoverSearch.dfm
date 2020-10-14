@@ -24,33 +24,24 @@ object fCoverSearch: TfCoverSearch
     Align = alTop
     Caption = 'Infos'
     TabOrder = 0
-    object sLabel1: TsLabel
-      Left = 16
-      Top = 16
-      Width = 26
-      Height = 13
-      Caption = 'Artist'
-    end
-    object sLabel2: TsLabel
-      Left = 327
-      Top = 16
-      Width = 20
-      Height = 13
-      Caption = 'Title'
-    end
+    ExplicitTop = -5
     object seArtist: TsEdit
-      Left = 50
-      Top = 13
+      Left = 49
+      Top = 16
       Width = 255
       Height = 21
       TabOrder = 0
+      BoundLabel.Active = True
+      BoundLabel.Caption = 'Artist'
     end
     object seTitle: TsEdit
-      Left = 354
-      Top = 13
+      Left = 359
+      Top = 16
       Width = 255
       Height = 21
       TabOrder = 1
+      BoundLabel.Active = True
+      BoundLabel.Caption = 'Title'
     end
     object sButton1: TsButton
       Left = 620
@@ -92,7 +83,7 @@ object fCoverSearch: TfCoverSearch
       ModalResult = 1
       TabOrder = 0
       OnClick = bsApplyClick
-      ExplicitLeft = 2
+      ExplicitLeft = 0
       ExplicitTop = 6
     end
   end

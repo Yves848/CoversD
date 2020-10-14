@@ -35,10 +35,8 @@ type
 
   TfCoverSearch = class(TForm)
     sRollOutPanel1: TsRollOutPanel;
-    sLabel1: TsLabel;
     seArtist: TsEdit;
     seTitle: TsEdit;
-    sLabel2: TsLabel;
     sPanel1: TsPanel;
     thGetImages: TJvThread;
     sPanel2: TsPanel;
@@ -98,6 +96,8 @@ procedure TfCoverSearch.FormShow(Sender: TObject);
 begin
   seArtist.Text := artist;
   seTitle.Text := title;
+  sg1.SetFocus;
+  StartSearch;
 end;
 
 procedure TfCoverSearch.IdHTTP1Work(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
@@ -228,7 +228,9 @@ end;
 
 procedure TfCoverSearch.bsApplyClick(Sender: TObject);
 begin
-  SaveTags(Sender);
+  //SaveTags(Sender);
+  PostMessage(Application.MainForm.Handle, WM_REFRESH_COVER, 0, 0);
+  Close;
 end;
 
 procedure TfCoverSearch.downloadImage(sUrl: string);

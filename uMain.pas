@@ -22,7 +22,7 @@ uses
   uCoverSearch, sDialogs, sLabel, sBevel, uSelectDirectory, AdvReflectionLabel,
   AdvMemo, acPNG,
   JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard,
-  uRegister, Vcl.Menus, System.RegularExpressions, sEdit, sComboBox;
+  uRegister, Vcl.Menus, System.RegularExpressions, sEdit, sComboBox, sCheckBox, sPageControl;
 
 type
   TVolumeRec = record
@@ -100,14 +100,22 @@ type
     PopupMenu21: TMenuItem;
     sAlphaImageList1: TsAlphaImageList;
     ropRegEx: TsRollOutPanel;
-    sLabelFX1: TsLabelFX;
+    sPageControl1: TsPageControl;
+    sTabSheet1: TsTabSheet;
+    sTabSheet2: TsTabSheet;
+    sLabelFX2: TsLabelFX;
     seRegEx: TsEdit;
-    btnRegex: TsButton;
-    sPanel11: TsPanel;
-    sepArtist: TsEdit;
-    sepTitle: TsEdit;
-    sCB2: TsComboBox;
     sCB1: TsComboBox;
+    sCB2: TsComboBox;
+    sCB3: TsComboBox;
+    sep01: TsEdit;
+    sep02: TsEdit;
+    ckRegEx01: TsCheckBox;
+    ckRegEx02: TsCheckBox;
+    sep03: TsEdit;
+    ckRegEx03: TsCheckBox;
+    btnRegex: TsButton;
+    ckClearCovers: TsCheckBox;
     procedure Button1Click(Sender: TObject);
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
@@ -150,6 +158,9 @@ type
     procedure sgListKeyPress(Sender: TObject; var Key: Char);
     procedure sgListGetCellColor(Sender: TObject; ARow, ACol: Integer; AState: TGridDrawState; ABrush: TBrush; AFont: TFont);
     procedure seRegExChange(Sender: TObject);
+    procedure ckRegEx01Click(Sender: TObject);
+    procedure ckRegEx02Click(Sender: TObject);
+    procedure ckRegEx03Click(Sender: TObject);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -166,7 +177,7 @@ type
     AdjustingPlaybackPosition: Boolean;
     delais: Integer;
     momentdown: tDateTime;
-    GlobalMediaFile: tMediaFile;
+
     procedure PlayStream(FileName: String);
     procedure addfileName;
     procedure setPBMax;
@@ -196,12 +207,14 @@ type
     procedure DrawTransparentRectangle(Canvas: TCanvas; Rect: TRect; Color: TColor; Transparency: Integer);
     procedure UpdateVuMetre(LeftLevel, RightLevel: Integer);
     function ImageCount(aFile: String): Integer;
-    Procedure RefreshCover(var m: Tmsg); Message WM_REFRESH_COVER;
+    Procedure RefreshCover(ARow: Integer);
     function GetwindowsVolume: Integer;
     procedure setGridRow;
     Procedure ExtractTags(iRow: Integer; bPreview: Boolean = false);
     Procedure SaveTags(iRow: Integer);
+    procedure SaveCover(var m: Tmsg); Message WM_REFRESH_COVER;
     Procedure fillTagCombos;
+    procedure RemoveCovers(aTags: TTags);
   end;
 
 var
@@ -218,6 +231,7 @@ var
   Params: TSpectrum3D_CreateParams;
   Settings: TSpectrum3D_Settings;
   fCoverSearch: tfCoverSearch;
+  // GlobalMediaFile: tMediaFile;
 
 implementation
 
@@ -322,49 +336,80 @@ begin
 end;
 
 procedure TfMain.PopupMenu21Click(Sender: TObject);
+var
+  GlobalMediaFile: tMediaFile;
 begin
+  // test if multiple lines selected.....
+
   if sgList.Objects[1, sgList.Row] <> Nil then
     GlobalMediaFile := tMediaFile(sgList.Objects[1, sgList.Row]);
 
-  if fCoverSearch = Nil then
+  if sgList.RowSelectCount > 1 then
   begin
-    fCoverSearch := tfCoverSearch.Create(self);
+    fCoverSearch.seTitle.BoundLabel.Caption := 'Album';
+    if trim(sgList.Cells[2, sgList.Row]) + trim(sgList.Cells[4, sgList.Row]) = '' then
+      fCoverSearch.Title := GlobalMediaFile.Tags.FileName
+    else
 
-  end;
-  if trim(sgList.Cells[2, sgList.Row]) + trim(sgList.Cells[3, sgList.Row]) = '' then
-    fCoverSearch.Title := GlobalMediaFile.Tags.FileName
+    begin
+      fCoverSearch.sFile := GlobalMediaFile.Tags.FileName;
+      fCoverSearch.Artist := sgList.Cells[2, sgList.Row];
+      fCoverSearch.Title := sgList.Cells[4, sgList.Row];
+    end;
+  end
   else
-
   begin
-    fCoverSearch.sFile := GlobalMediaFile.Tags.FileName;
-    fCoverSearch.Artist := sgList.Cells[2, sgList.Row];
-    fCoverSearch.Title := sgList.Cells[3, sgList.Row];
+    fCoverSearch.seTitle.BoundLabel.Caption := 'Title';
+    if trim(sgList.Cells[2, sgList.Row]) + trim(sgList.Cells[3, sgList.Row]) = '' then
+      fCoverSearch.Title := GlobalMediaFile.Tags.FileName
+    else
+
+    begin
+      fCoverSearch.sFile := GlobalMediaFile.Tags.FileName;
+      fCoverSearch.Artist := sgList.Cells[2, sgList.Row];
+      fCoverSearch.Title := sgList.Cells[3, sgList.Row];
+    end;
   end;
+
   sgList.EditMode := false;
   sgList.Options := [goRowSelect, goRangeSelect];
   fCoverSearch.image1.Picture.Assign(Nil);
-  fCoverSearch.Show;
-  fCoverSearch.sg1.SetFocus;
-  fCoverSearch.StartSearch;
+  fCoverSearch.ShowModal;
+  // fCoverSearch.sg1.SetFocus;
+  // fCoverSearch.StartSearch;
 end;
 
-procedure TfMain.RefreshCover(var m: Tmsg);
+procedure TfMain.RefreshCover(ARow: Integer);
 var
   aFile: String;
+  i: Integer;
+  GlobalMediaFile: tMediaFile;
 begin
-  if sgList.Objects[1, sgList.Row] <> Nil then
+  // SaveCover;
+  i := 0;
+  if sgList.Objects[1, ARow] <> Nil then
   begin
-    GlobalMediaFile := tMediaFile(sgList.Objects[1, sgList.Row]);
+    GlobalMediaFile := tMediaFile(sgList.Objects[1, ARow]);
     aFile := GlobalMediaFile.Tags.FileName;
     GlobalMediaFile.Tags.clear;
     GlobalMediaFile.LoadTags(aFile);
 
     ListCoverArts(image1, GlobalMediaFile.Tags);
-    sgList.AddImageIdx(5, sgList.Row, 0, haCenter, vaCenter);
-    if fCoverSearch <> nil then
-      fCoverSearch.Close;
+    sgList.AddImageIdx(5, ARow, 0, haCenter, vaCenter);
 
   end;
+
+end;
+
+procedure TfMain.RemoveCovers(aTags: TTags);
+var
+  i: Integer;
+begin
+  while aTags.CoverArtCount > 0 do
+  begin
+    aTags.DeleteCoverArt(0);
+  end;
+
 end;
 
 procedure TfMain.removeKeyFromStack;
@@ -541,6 +586,21 @@ begin
   form2.Free;
 end;
 
+procedure TfMain.ckRegEx01Click(Sender: TObject);
+begin
+  sep01.ReadOnly := ckRegEx01.Checked;
+end;
+
+procedure TfMain.ckRegEx02Click(Sender: TObject);
+begin
+  sep02.ReadOnly := ckRegEx02.Checked;
+end;
+
+procedure TfMain.ckRegEx03Click(Sender: TObject);
+begin
+  sep03.ReadOnly := ckRegEx03.Checked;
+end;
+
 procedure TfMain.downloadImage(sUrl: string);
 var
   IdSSL: TIdSSLIOHandlerSocketOpenSSL;
@@ -654,6 +714,7 @@ begin
   i := 0;
   try
     regexpr := tREgEx.Create(seRegEx.Text, [roIgnoreCase]);
+{$REGION}
     if bPreview then
     begin
       if sgList.Objects[1, iRow] <> Nil then
@@ -669,17 +730,25 @@ begin
             case iGroup of
               1:
                 begin
-                  sepArtist.Text := match.Groups.Item[iGroup].Value;
+                  if ckRegEx01.Checked then
+                    sep01.Text := match.Groups.Item[iGroup].Value;
                 end;
               2:
                 begin
-                  sepTitle.Text := match.Groups.Item[iGroup].Value;
+                  if ckRegEx02.Checked then
+                    sep02.Text := match.Groups.Item[iGroup].Value;
+                end;
+              3:
+                begin
+                  if ckRegEx03.Checked then
+                    sep03.Text := match.Groups.Item[iGroup].Value;
                 end;
             end;
         end;
         match := match.NextMatch;
       end;
     end
+{$ENDREGION}
     else
     begin
       while i <= sgList.SelectedRowCount - 1 do
@@ -701,20 +770,75 @@ begin
                 1:
                   begin
                     iColumn := tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sCol;
-                    sgList.Cells[iColumn, ARow] := match.Groups.Item[iGroup].Value;
+                    if (iColumn > -1) and (ckRegEx01.Checked) then
+                    begin
+                      sgList.Cells[iColumn, ARow] := match.Groups.Item[iGroup].Value;
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTAG, sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).bModified := True;
+                    end;
                   end;
                 2:
                   begin
                     iColumn := tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sCol;
-                    sgList.Cells[iColumn, ARow] := match.Groups.Item[iGroup].Value;
+                    if (iColumn > -1) and (ckRegEx02.Checked) then
+                    begin
+                      sgList.Cells[iColumn, ARow] := match.Groups.Item[iGroup].Value;
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTAG, sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).bModified := True;
+                    end;
+                  end;
+                3:
+                  begin
+                    iColumn := tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sCol;
+                    if (iColumn > -1) and (ckRegEx03.Checked) then
+                    begin
+                      sgList.Cells[iColumn, ARow] := match.Groups.Item[iGroup].Value;
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTAG, sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).bModified := True;
+                    end;
                   end;
               end;
           end;
           match := match.NextMatch;
         end;
-        tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag('ARTIST', sgList.Cells[2, ARow]);
-        tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag('TITLE', sgList.Cells[3, ARow]);
-        tMediaFile(sgList.Objects[1, ARow]).bModified := True;
+
+        if (not ckRegEx01.Checked) then
+        begin
+          iColumn := tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sCol;
+          if iColumn > -1 then
+          begin
+            sgList.Cells[iColumn, ARow] := sep01.Text;
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTAG, sgList.Cells[iColumn, ARow]);
+            tMediaFile(sgList.Objects[1, ARow]).bModified := True;
+          end;
+        end;
+        if (not ckRegEx02.Checked) then
+        begin
+          iColumn := tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sCol;
+          if iColumn > -1 then
+          begin
+            sgList.Cells[iColumn, ARow] := sep02.Text;
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTAG, sgList.Cells[iColumn, ARow]);
+            tMediaFile(sgList.Objects[1, ARow]).bModified := True;
+          end;
+        end;
+        if (not ckRegEx03.Checked) then
+        begin
+          iColumn := tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sCol;
+          if iColumn > -1 then
+          begin
+            sgList.Cells[iColumn, ARow] := sep03.Text;
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTAG, sgList.Cells[iColumn, ARow]);
+            tMediaFile(sgList.Objects[1, ARow]).bModified := True;
+          end;
+        end;
+
+        if ckClearCovers.Checked then
+        begin
+          RemoveCovers(tMediaFile(sgList.Objects[1, ARow]).Tags);
+          sgList.SetImageIdx(5, ARow, 1);
+        end;
+
         SaveTags(ARow);
         inc(i);
       end;
@@ -731,20 +855,29 @@ var
   i: Integer;
   dTagKey: tTagKey;
   Key: String;
+  function SetIndex(aList: tStrings; aKey: String): Integer;
+  begin
+    Result := aList.IndexOf(aKey);
+  end;
+
 begin
   //
   i := 0;
   sCB1.Items.clear;
   sCB2.Items.clear;
+  sCB3.Items.clear;
 
   for Key in dTags.Keys do
   begin
     dTags.TryGetValue(Key, dTagKey);
     sCB1.Items.AddObject(Key, dTagKey);
     sCB2.Items.AddObject(Key, dTagKey);
+    sCB3.Items.AddObject(Key, dTagKey);
   end;
-  sCB1.ItemIndex := 0;
-  sCB2.ItemIndex := 1;
+
+  sCB1.ItemIndex := SetIndex(sCB1.Items, 'Artist');
+  sCB2.ItemIndex := SetIndex(sCB2.Items, 'Title');
+  sCB3.ItemIndex := SetIndex(sCB3.Items, 'N/A');
 end;
 
 function TfMain.findNode(sLabel: String): TTreeNode;
@@ -795,7 +928,7 @@ var
   SerialNumber: Longint;
 begin
   // * Never forget to init BASS
-  GlobalMediaFile := tMediaFile.Create;
+  // GlobalMediaFile := tMediaFile.Create;
   BASS_Init(-1, 44100, 0, self.handle, 0);
 
   ZeroMemory(@Params, SizeOf(TSpectrum3D_CreateParams));
@@ -816,6 +949,7 @@ begin
   OpenConfig;
   initGrid;
   fillTagCombos;
+
 {$IFDEF DEBUG}
   isRegistered := True;
   btnUtils.Visible := True;
@@ -834,6 +968,7 @@ begin
     isRegistered := True;
   end;
 {$ENDIF}
+  fCoverSearch := tfCoverSearch.Create(self);
 end;
 
 procedure TfMain.FormDestroy(Sender: TObject);
@@ -841,8 +976,8 @@ begin
   Spectrum3D_Free(Sprectrum3D);
   BASS_Stop;
   BASS_Free;
-  if GlobalMediaFile <> nil then
-    GlobalMediaFile.Destroy;
+  // if GlobalMediaFile <> nil then
+  // GlobalMediaFile.Destroy;
 
   if fCoverSearch <> Nil then
     fCoverSearch.Free;
@@ -926,14 +1061,16 @@ begin
 end;
 
 function TfMain.ImageCount(aFile: String): Integer;
+var
+  GlobalMediaFile: tMediaFile;
 begin
-  GlobalMediaFile.Tags.clear;
-  GlobalMediaFile.Tags.ParseCoverArts := True;
-  GlobalMediaFile.Tags.LoadFromFile(aFile);
+  GlobalMediaFile := tMediaFile.Create(sFile);
   Result := GlobalMediaFile.Tags.CoverArtCount;
+  GlobalMediaFile.Destroy;
 end;
 
 procedure TfMain.initGrid;
+
   procedure cleanObjects;
   var
     i: Integer;
@@ -949,8 +1086,7 @@ procedure TfMain.initGrid;
 
 begin
   //
-  GlobalMediaFile.Destroy;
-  GlobalMediaFile := tMediaFile.Create;
+
   cleanObjects;
   sgList.clear;
   sgList.RowCount := 2;
@@ -973,15 +1109,15 @@ end;
 
 procedure TfMain.sgListClickCell(Sender: TObject; ARow, ACol: Integer);
 begin
-  with sgList do
-    if ARow = 0 then
-    begin
-      Caption := Cells[ACol, 0];
-      if (GroupColumn <> -1) and (ACol >= GroupColumn) then
-        inc(ACol);
-      if (GroupColumn <> ACol) then
-        GroupColumn := ACol;
-    end;
+  // with sgList do
+  // if ARow = 0 then
+  // begin
+  // Caption := Cells[ACol, 0];
+  // if (GroupColumn <> -1) and (ACol >= GroupColumn) then
+  // inc(ACol);
+  // if (GroupColumn <> ACol) then
+  // GroupColumn := ACol;
+  // end;
 end;
 
 procedure TfMain.sgListGetCellColor(Sender: TObject; ARow, ACol: Integer; AState: TGridDrawState; ABrush: TBrush; AFont: TFont);
@@ -1260,6 +1396,89 @@ begin
 
 end;
 
+procedure TfMain.SaveCover(var m: Tmsg);
+var
+  PictureStream: TMemoryStream;
+  Description: String;
+  MIMEType: String;
+  JPEGPicture: TJPEGImage;
+  PNGPicture: TPNGImage;
+  GIFPicture: TGIFImage;
+  BMPPicture: TBitmap;
+  Width, Height: Integer;
+  NoOfColors: Integer;
+  ColorDepth: Integer;
+  PictureMagic: Word;
+  CoverArtPictureFormat: TTagPictureFormat;
+  CoverArt: TCoverArt;
+  pMediaFile: tMediaFile;
+  i, ARow: Integer;
+begin
+  // * Clear the cover art data
+  i := 0;
+  while i <= sgList.RowSelectCount - 1 do
+  begin
+    ARow := sgList.SelectedRow[i];
+    if sgList.Objects[1, ARow] <> Nil then
+    begin
+      pMediaFile := tMediaFile(sgList.Objects[1, ARow]);
+
+      MIMEType := '';
+      Description := '';
+      Width := 0;
+      Height := 0;
+      ColorDepth := 0;
+      NoOfColors := 0;
+      CoverArtPictureFormat := TTagPictureFormat.tpfUnknown;
+      try
+
+        try
+          MIMEType := 'image/jpeg';
+          CoverArtPictureFormat := tpfJPEG;
+          JPEGPicture := TJPEGImage.Create;
+          try
+            JPEGPicture.Assign(fCoverSearch.image1.Picture.BitMap);
+            Width := JPEGPicture.Width;
+            Height := JPEGPicture.Height;
+            NoOfColors := 0;
+            ColorDepth := 24;
+          finally
+            FreeAndNil(JPEGPicture);
+          end;
+          PictureStream := TMemoryStream.Create;
+          fCoverSearch.image1.Picture.BitMap.SaveToStream(PictureStream);
+          PictureStream.Position := 0;
+          // pMediaFile := tMediaFile.Create(sFile);
+          // * Add the cover art
+          CoverArt := pMediaFile.Tags.AddCoverArt('cover');
+          CoverArt.CoverType := 3; // * ID3v2 cover type (3: front cover)
+          CoverArt.MIMEType := MIMEType;
+          CoverArt.Description := Description;
+          CoverArt.Width := Width;
+          CoverArt.Height := Height;
+          CoverArt.ColorDepth := ColorDepth;
+          CoverArt.NoOfColors := NoOfColors;
+          CoverArt.PictureFormat := CoverArtPictureFormat;
+          CoverArt.Stream.CopyFrom(PictureStream, PictureStream.Size);
+          // pMediaFile.SaveTags;
+          pMediaFile.bModified := True;
+        finally
+          FreeAndNil(PictureStream);
+        end;
+      except
+
+      end;
+    end;
+    if pMediaFile.bModified then
+      pMediaFile.SaveTags;
+    RefreshCover(ARow);
+    inc(i);
+  end;
+  // if fCoverSearch <> nil then
+  // fCoverSearch.Close;
+
+end;
+
 procedure TfMain.SaveTags(iRow: Integer);
 var
   pMediaFile: tMediaFile;
@@ -1460,6 +1679,8 @@ begin
 end;
 
 procedure TfMain.sShellTreeView1GetImageIndex(Sender: TObject; Node: TTreeNode);
+var
+  GlobalMediaFile: tMediaFile;
 begin
   //
   if (Node <> Nil) then
@@ -1468,13 +1689,12 @@ begin
     if tMediaUtils.isValidExtension2(TacShellFolder(Node.data).PathName) > -1 then
     begin
       // sMemo1.Lines.add(TacShellFolder(Node.data).PathName);
-      GlobalMediaFile.Tags.clear;
-      GlobalMediaFile.Tags.ParseCoverArts := True;
-      GlobalMediaFile.Tags.LoadFromFile(TacShellFolder(Node.data).PathName);
+      GlobalMediaFile := tMediaFile.Create(TacShellFolder(Node.data).PathName);
       if GlobalMediaFile.Tags.CoverArtCount > 0 then
         Node.ImageIndex := 1
       else
         Node.ImageIndex := 0;
+      GlobalMediaFile.Destroy;
     end
     else
     begin
@@ -1489,6 +1709,7 @@ procedure TfMain.sShellTreeView1KeyDown(Sender: TObject; var Key: Word; Shift: T
 var
   aNode: TTreeNode;
   NewRow: Integer;
+  GlobalMediaFile: tMediaFile;
 begin
   if Shift = [ssCtrl] then
   begin
@@ -1529,9 +1750,9 @@ begin
         AddFileToGrid(TacShellFolder(aNode.data).PathName);
         if sgList.Objects[1, NewRow] <> Nil then
         begin
-          // GlobalMediaFile.Tags.Clear;
-          // GlobalMediaFile.Tags.LoadFromFile(sgList.Cells[1, NewRow]);
+          GlobalMediaFile := tMediaFile.Create(TacShellFolder(aNode.data).PathName);
           ListCoverArts(image1, GlobalMediaFile.Tags);
+          GlobalMediaFile.Destroy;
         end;
       end
       else
@@ -1660,8 +1881,8 @@ end;
 
 procedure TfMain.ListCoverArts(aImage: TsImage; sFileName: String);
 begin
-  GlobalMediaFile.Tags.clear;
-  ListCoverArts(aImage, GlobalMediaFile.Tags);
+  // GlobalMediaFile.Tags.clear;
+  // ListCoverArts(aImage, GlobalMediaFile.Tags);
 end;
 
 procedure TfMain.OpenConfig;
@@ -1679,7 +1900,7 @@ begin
     begin
       sShellTreeView1.Path := aPath;
       if sShellTreeView1.Selected <> Nil then
-        sShellTreeView1.Selected.Expand(True);
+        sShellTreeView1.Selected.Expand(false);
     end;
   end
   else
@@ -1827,8 +2048,7 @@ begin
   bFirst := True;
   if Length(aFiles) > 1000 then
   begin
-    bConfirm := (MessageDlg(format('Do you confirm adding %d files ?', [Length(aFiles)]), mtConfirmation, [mbYes, mbNo], 0,
-      mbNo) = mrYes);
+    bConfirm := (MessageDlg(format('Do you confirm adding %d files ?', [Length(aFiles)]), mtConfirmation, [mbYes, mbNo], 0, mbNo) = mrYes);
   end;
   if bConfirm then
   begin
@@ -1947,12 +2167,12 @@ begin
   with sImage1.Canvas do
   begin
     bm2 := TBitmap.Create;
-    bm2.SetSize(cliprect.Width, (cliprect.height div 4));
+    bm2.SetSize(cliprect.Width, (cliprect.Height div 4));
     bm2.Canvas.Brush.Color := clTeal;
     bm2.Canvas.Brush.Style := bsSolid;
-    R := TRect.Create(0, 0, bm2.Width, bm2.height);
+    R := TRect.Create(0, 0, bm2.Width, bm2.Height);
     bm2.Canvas.Fillrect(R);
-    Draw(0, cliprect.height - (cliprect.height div 4), bm2, 200);
+    Draw(0, cliprect.Height - (cliprect.Height div 4), bm2, 200);
     bm2.Free;
   end;
 end;
@@ -2018,10 +2238,10 @@ procedure TfMain.UpdateVuMetre(LeftLevel, RightLevel: Integer);
       p2 := 100 - p;
       barwidth := cliprect.Width;
       l := Round(barwidth / 100 * p);
-      bm2.SetSize(Round(cliprect.Width / 100 * p2), cliprect.height);
+      bm2.SetSize(Round(cliprect.Width / 100 * p2), cliprect.Height);
       bm2.Canvas.Brush.Color := clGray;
       bm2.Canvas.Brush.Style := bsSolid;
-      R := TRect.Create(0, 0, bm2.Width, bm2.height);
+      R := TRect.Create(0, 0, bm2.Width, bm2.Height);
       bm2.Canvas.Fillrect(R);
       Draw(l, 0, bm2, 220);
       bm2.Free;
