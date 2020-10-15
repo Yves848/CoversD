@@ -3,16 +3,16 @@ unit uMain;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,  System.Classes, Vcl.Graphics, System.IOUtils, System.Types, Vcl.GraphUtil,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uTypes,  Vcl.StdCtrls, sPanel,  Vcl.ExtCtrls, sSkinManager, sSkinProvider, sButton, Vcl.ComCtrls,
-    sTreeView, acShellCtrls, sListView, sComboBoxes, sSplitter, Vcl.Buttons,  sSpeedButton, System.ImageList, Vcl.ImgList, acAlphaImageList,
-  acProgressBar, JvComponentBase, JvThread, sMemo, Vcl.Mask, sMaskEdit,  sCustomComboEdit, sToolEdit, acImage, JPEG, PNGImage, GIFImg, TagsLibrary,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, System.IOUtils, System.Types, Vcl.GraphUtil,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uTypes, Vcl.StdCtrls, sPanel, Vcl.ExtCtrls, sSkinManager, sSkinProvider, sButton, Vcl.ComCtrls,
+  sTreeView, acShellCtrls, sListView, sComboBoxes, sSplitter, Vcl.Buttons, sSpeedButton, System.ImageList, Vcl.ImgList, acAlphaImageList,
+  acProgressBar, JvComponentBase, JvThread, sMemo, Vcl.Mask, sMaskEdit, sCustomComboEdit, sToolEdit, acImage, JPEG, PNGImage, GIFImg, TagsLibrary,
   acNoteBook, sTrackBar, acArcControls, sGauge, BASS, BassFlac, xSuperObject, sListBox, JvExControls, clipbrd, Spectrum3DLibraryDefs, bass_aac,
-  MMSystem,  uDeleteCover,  JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw,  activeX, acWebBrowser, Vcl.Grids, JvExGrids,
-  JvStringGrid, IdComponent,  IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI,
+  MMSystem, uDeleteCover, JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw, activeX, acWebBrowser, Vcl.Grids, JvExGrids,
+  JvStringGrid, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, Generics.collections,
   NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, AdvMemo, acPNG,
   JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister, Vcl.Menus, System.RegularExpressions, sEdit, sComboBox,
-  sCheckBox, sPageControl, SynEditHighlighter, SynHighlighterJSON;
+  sCheckBox, sPageControl, SynEditHighlighter, SynHighlighterJSON, System.StrUtils, sComboEdit, acPopupCtrls;
 
 type
 
@@ -90,18 +90,18 @@ type
     sCB1: TsComboBox;
     sCB2: TsComboBox;
     sCB3: TsComboBox;
-    sep01: TsEdit;
-    sep02: TsEdit;
     ckRegEx01: TsCheckBox;
     ckRegEx02: TsCheckBox;
-    sep03: TsEdit;
     ckRegEx03: TsCheckBox;
     btnRegex: TsButton;
     ckClearCovers: TsCheckBox;
+    sEP03: TsComboBox;
+    sEP01: TsComboBox;
+    sEP02: TsComboBox;
+    ropVisual: TsRollOutPanel;
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
     procedure sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
-    procedure sDEFolderAfterDialog(Sender: TObject; var Name: string; var Action: Boolean);
     procedure sTVMediasKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Timer1Timer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -113,7 +113,6 @@ type
     procedure slbPlaylistItemIndexChanged(Sender: TObject);
     procedure slbPlaylistKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure FormShow(Sender: TObject);
     procedure sShellTreeView1AddFolder(Sender: TObject; AFolder: TacShellFolder; var CanAdd: Boolean);
     procedure sgListKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure sgListRowChanging(Sender: TObject; OldRow, NewRow: Integer; var Allow: Boolean);
@@ -141,6 +140,11 @@ type
     procedure ckRegEx01Click(Sender: TObject);
     procedure ckRegEx02Click(Sender: TObject);
     procedure ckRegEx03Click(Sender: TObject);
+    procedure sCB3Change(Sender: TObject);
+    procedure sCB1Change(Sender: TObject);
+    procedure sCB2Change(Sender: TObject);
+    procedure ropRegExBeforeExpand(Sender: TObject);
+    procedure ropRegExAfterCollapse(Sender: TObject);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -157,7 +161,7 @@ type
     AdjustingPlaybackPosition: Boolean;
     delais: Integer;
     momentdown: tDateTime;
-
+    dMultiChoices: tDictionary<String, TStrings>;
     procedure PlayStream(FileName: String);
     procedure addfileName;
     procedure setPBMax;
@@ -195,6 +199,12 @@ type
     procedure SaveCover(var m: Tmsg); Message WM_REFRESH_COVER;
     Procedure fillTagCombos;
     procedure RemoveCovers(aTags: TTags);
+    procedure InitDictionaries;
+    procedure AddToDictionary(cKey: string; sValue: string);
+    procedure AssignMultiChoice(sCBTAg: TsComboBox; sCBChoice: TsComboBox);
+    Procedure RefreshTagsCombos;
+    Procedure FillTagLists;
+    Procedure UpdateTagLists(iCol: Integer; sValue: String);
   end;
 
 var
@@ -351,7 +361,6 @@ begin
     end;
   end;
 
-  
   fCoverSearch.image1.Picture.Assign(Nil);
   fCoverSearch.ShowModal;
   // fCoverSearch.sg1.SetFocus;
@@ -377,6 +386,16 @@ begin
   end;
   Application.ProcessMessages;
 
+end;
+
+procedure TfMain.RefreshTagsCombos;
+begin
+  sCB1Change(Nil);
+  sCB2Change(Nil);
+  sCB3Change(Nil);
+  sEP01.Text := '';
+  sEP02.Text := '';
+  sEP03.Text := '';
 end;
 
 procedure TfMain.RemoveCovers(aTags: TTags);
@@ -446,6 +465,10 @@ begin
     sgList.Cells[2, ARow] := pMediaFile.Tags.GetTag('ARTIST');
     sgList.Cells[3, ARow] := pMediaFile.Tags.GetTag('TITLE');
     sgList.Cells[4, ARow] := pMediaFile.Tags.GetTag('ALBUM');
+
+    AddToDictionary('ARTIST', pMediaFile.Tags.GetTag('ARTIST'));
+    AddToDictionary('ALBUM', pMediaFile.Tags.GetTag('ALBUM'));
+
     Result := ARow;
     if pMediaFile.Tags.CoverArts.Count > 0 then
       sgList.AddImageIdx(5, ARow, 0, haCenter, vaCenter)
@@ -508,6 +531,18 @@ begin
     Result := index;
 end;
 
+procedure TfMain.AddToDictionary(cKey, sValue: string);
+var
+  aList: TStrings;
+begin
+  if dMultiChoices.TryGetValue(cKey, aList) then
+  begin
+    //
+    if aList.IndexOf(sValue) = -1 then
+      aList.Add(sValue);
+  end;
+end;
+
 function TfMain.AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): Integer;
 var
   aMediaFile: tMediaFile;
@@ -546,6 +581,35 @@ begin
 
 end;
 
+procedure TfMain.AssignMultiChoice(sCBTAg, sCBChoice: TsComboBox);
+const
+  arTags: tArray<String> = ['ALBUM', 'ARTIST'];
+var
+  sTag: String;
+  sList: TStrings;
+  iColumn: Integer;
+begin
+  //
+  sTag := tTagKey(sCBTAg.Items.Objects[sCBTAg.ItemIndex]).sTag;
+  if MAtchStr(sTag, arTags) then
+  begin
+    iColumn := tTagKey(sCBTAg.Items.Objects[sCBTAg.ItemIndex]).sCol;
+    if iColumn > -1 then
+    begin
+      if dMultiChoices.TryGetValue(sTag, sList) then
+        sCBChoice.Items.Assign(sList);
+    end
+    else
+    begin
+      sCBChoice.Items.clear;
+    end;
+
+  end
+  else
+    sCBChoice.Items.clear;
+
+end;
+
 procedure TfMain.bsRegisterClick(Sender: TObject);
 var
   fRegister: tfRegister;
@@ -557,17 +621,20 @@ end;
 
 procedure TfMain.ckRegEx01Click(Sender: TObject);
 begin
-  sep01.ReadOnly := ckRegEx01.Checked;
+  sEP01.ReadOnly := ckRegEx01.Checked;
+  ExtractTags(sgList.Row, True);
 end;
 
 procedure TfMain.ckRegEx02Click(Sender: TObject);
 begin
-  sep02.ReadOnly := ckRegEx02.Checked;
+  sEP02.ReadOnly := ckRegEx02.Checked;
+  ExtractTags(sgList.Row, True);
 end;
 
 procedure TfMain.ckRegEx03Click(Sender: TObject);
 begin
-  sep03.ReadOnly := ckRegEx03.Checked;
+  sEP03.ReadOnly := ckRegEx03.Checked;
+  ExtractTags(sgList.Row, True);
 end;
 
 procedure TfMain.downloadImage(sUrl: string);
@@ -683,7 +750,7 @@ begin
   i := 0;
   try
     regexpr := tREgEx.Create(seRegEx.Text, [roIgnoreCase]);
-{$REGION}
+{$REGION 'Tags Preview'}
     if bPreview then
     begin
       if sgList.Objects[1, iRow] <> Nil then
@@ -700,17 +767,17 @@ begin
               1:
                 begin
                   if ckRegEx01.Checked then
-                    sep01.Text := match.Groups.Item[iGroup].Value;
+                    sEP01.Text := match.Groups.Item[iGroup].Value;
                 end;
               2:
                 begin
                   if ckRegEx02.Checked then
-                    sep02.Text := match.Groups.Item[iGroup].Value;
+                    sEP02.Text := match.Groups.Item[iGroup].Value;
                 end;
               3:
                 begin
                   if ckRegEx03.Checked then
-                    sep03.Text := match.Groups.Item[iGroup].Value;
+                    sEP03.Text := match.Groups.Item[iGroup].Value;
                 end;
             end;
         end;
@@ -718,6 +785,7 @@ begin
       end;
     end
 {$ENDREGION}
+{$REGION 'Replace Tags'}
     else
     begin
       pb1.Position := 0;
@@ -744,7 +812,7 @@ begin
                     if (iColumn > -1) and (ckRegEx01.Checked) then
                     begin
                       sgList.Cells[iColumn, ARow] := match.Groups.Item[iGroup].Value;
-                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTAG, sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
                   end;
@@ -754,7 +822,7 @@ begin
                     if (iColumn > -1) and (ckRegEx02.Checked) then
                     begin
                       sgList.Cells[iColumn, ARow] := match.Groups.Item[iGroup].Value;
-                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTAG, sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
                   end;
@@ -764,7 +832,7 @@ begin
                     if (iColumn > -1) and (ckRegEx03.Checked) then
                     begin
                       sgList.Cells[iColumn, ARow] := match.Groups.Item[iGroup].Value;
-                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTAG, sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
                   end;
@@ -778,28 +846,30 @@ begin
           iColumn := tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sCol;
           if iColumn > -1 then
           begin
-            sgList.Cells[iColumn, ARow] := sep01.Text;
-            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTAG, sgList.Cells[iColumn, ARow]);
+            sgList.Cells[iColumn, ARow] := sEP01.Text;
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
             tMediaFile(sgList.Objects[1, ARow]).bModified := True;
           end;
         end;
+
         if (not ckRegEx02.Checked) then
         begin
           iColumn := tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sCol;
           if iColumn > -1 then
           begin
-            sgList.Cells[iColumn, ARow] := sep02.Text;
-            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTAG, sgList.Cells[iColumn, ARow]);
+            sgList.Cells[iColumn, ARow] := sEP02.Text;
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
             tMediaFile(sgList.Objects[1, ARow]).bModified := True;
           end;
         end;
+
         if (not ckRegEx03.Checked) then
         begin
           iColumn := tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sCol;
           if iColumn > -1 then
           begin
-            sgList.Cells[iColumn, ARow] := sep03.Text;
-            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTAG, sgList.Cells[iColumn, ARow]);
+            sgList.Cells[iColumn, ARow] := sEP03.Text;
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
             tMediaFile(sgList.Objects[1, ARow]).bModified := True;
           end;
         end;
@@ -816,8 +886,10 @@ begin
       end;
       sgList.SetFocus;
     end;
+{$ENDREGION}
     pb1.Position := 0;
-
+    FillTagLists;
+    // RefreshTagsCombos;
   except
 
   end;
@@ -828,7 +900,8 @@ var
   i: Integer;
   dTagKey: tTagKey;
   Key: String;
-  function SetIndex(aList: tStrings; aKey: String): Integer;
+
+  function SetIndex(aList: TStrings; aKey: String): Integer;
   begin
     Result := aList.IndexOf(aKey);
   end;
@@ -851,6 +924,25 @@ begin
   sCB1.ItemIndex := SetIndex(sCB1.Items, 'Artist');
   sCB2.ItemIndex := SetIndex(sCB2.Items, 'Title');
   sCB3.ItemIndex := SetIndex(sCB3.Items, 'N/A');
+
+  sEP01.Text := '';
+  sEP02.Text := '';
+  sEP03.Text := '';
+
+end;
+
+procedure TfMain.FillTagLists;
+var
+  ARow: Integer;
+begin
+  InitDictionaries;
+  ARow := 1;
+  while ARow <= sgList.RowCount - 1 do
+  begin
+    AddToDictionary('ARTIST', sgList.Cells[2, ARow]);
+    AddToDictionary('ALBUM', sgList.Cells[4, ARow]);
+    inc(ARow);
+  end;
 end;
 
 function TfMain.findNode(sLabel: String): TTreeNode;
@@ -921,6 +1013,7 @@ begin
 
   OpenConfig;
   initGrid;
+  InitDictionaries;
   fillTagCombos;
 
 {$IFDEF DEBUG}
@@ -1003,12 +1096,6 @@ begin
   Spectrum3D_ReAlign(Sprectrum3D, sPanel3.handle);
 end;
 
-procedure TfMain.FormShow(Sender: TObject);
-var
-  cols: Integer;
-begin
-end;
-
 procedure TfMain.GetImgLink;
 begin
 
@@ -1040,6 +1127,23 @@ begin
   GlobalMediaFile := tMediaFile.Create(sFile);
   Result := GlobalMediaFile.Tags.CoverArtCount;
   GlobalMediaFile.Destroy;
+end;
+
+procedure TfMain.InitDictionaries;
+var
+  pList: TStrings;
+begin
+  if dMultiChoices <> Nil then
+  begin
+    dMultiChoices.clear;
+    dMultiChoices.Free;
+  end;
+
+  dMultiChoices := tDictionary<String, TStrings>.Create;
+  pList := tStringList.Create;
+  dMultiChoices.Add('ARTIST', pList);
+  pList := tStringList.Create;
+  dMultiChoices.Add('ALBUM', pList);
 end;
 
 procedure TfMain.initGrid;
@@ -1077,7 +1181,7 @@ begin
 
   sgList.InsertCols(0, 1);
   sgList.ColWidths[0] := 20;
-
+  InitDictionaries;
 end;
 
 procedure TfMain.sgListClickCell(Sender: TObject; ARow, ACol: Integer);
@@ -1310,8 +1414,10 @@ begin
     pMediaFile.Tags.SetTag('TITLE', sgList.Cells[3, ARow]);
     pMediaFile.Tags.SetTag('ALBUM', sgList.Cells[4, ARow]);
     pMediaFile.bModified := True;
+    pMediaFile.SaveTags;
+    UpdateTagLists(ACol, Value);
   end;
-  pMediaFile.SaveTags;
+
 end;
 
 procedure TfMain.showExplorer;
@@ -1340,6 +1446,18 @@ end;
 procedure TfMain.ResetPB;
 begin
   pb1.Position := 0;
+end;
+
+procedure TfMain.ropRegExAfterCollapse(Sender: TObject);
+begin
+  if ropVisual <> Nil then
+    ropVisual.Collapsed := false;
+end;
+
+procedure TfMain.ropRegExBeforeExpand(Sender: TObject);
+begin
+  if ropVisual <> Nil then
+    ropVisual.Collapsed := True;
 end;
 
 procedure TfMain.savePlaylist;
@@ -1390,7 +1508,7 @@ begin
   // * Clear the cover art data
   i := 0;
   pb1.Position := 0;
-  pb1.max := sgList.RowSelectCount;
+  pb1.Max := sgList.RowSelectCount;
   while i <= sgList.RowSelectCount - 1 do
   begin
     ARow := sgList.SelectedRow[i];
@@ -1526,17 +1644,19 @@ begin
   loadPlaylist;
 end;
 
-procedure TfMain.sDEFolderAfterDialog(Sender: TObject; var Name: string; var Action: Boolean);
+procedure TfMain.sCB1Change(Sender: TObject);
 begin
-  // if name <> '' then
-  // if name <> aPath then
-  // begin
-  // aPath := Name;
-  // jConfig.S['startFolder'] := aPath;
-  // sDEFolder.Enabled := False;
-  // sTVMedias.Items.Clear;
-  // thListMP3.Execute(self);
-  // end;
+  AssignMultiChoice(sCB1, sEP01);
+end;
+
+procedure TfMain.sCB2Change(Sender: TObject);
+begin
+  AssignMultiChoice(sCB2, sEP02);
+end;
+
+procedure TfMain.sCB3Change(Sender: TObject);
+begin
+  AssignMultiChoice(sCB3, sEP03);
 end;
 
 procedure TfMain.seRegExChange(Sender: TObject);
@@ -1618,7 +1738,6 @@ begin
     aFile := AFolder.PathName;
     sExtension := tpath.GetExtension(aFile);
     CanAdd := (pos(uppercase(sExtension), sValidExtensions) > 0);
-
   end;
 end;
 
@@ -1800,7 +1919,11 @@ begin
               end;
             tpfBMP:
               begin
-                BitMap.LoadFromStream(Stream);
+                try
+                  BitMap.LoadFromStream(Stream);
+                except
+                  FreeAndNil(BitMap);
+                end;
               end;
           end;
           if Assigned(BitMap) then
@@ -2046,6 +2169,8 @@ begin
     thListMP3.Synchronize(TfMain(Params).SetPBPosition);
     iProgress := 0;
     thListMP3.Synchronize(TfMain(Params).SetPBPosition);
+    thListMP3.Synchronize(TfMain(Params).RefreshTagsCombos);
+
   end;
 
 end;
@@ -2143,6 +2268,15 @@ begin
     Draw(0, cliprect.Height - (cliprect.Height div 4), bm2, 200);
     bm2.Free;
   end;
+end;
+
+procedure TfMain.UpdateTagLists(iCol: Integer; sValue: String);
+var
+  sTag: String;
+begin
+  sTag := FindTag(iCol);
+  if sTag <> '' then
+    AddToDictionary(sTag, sValue);
 end;
 
 procedure TfMain.DrawTransparentRectangle(Canvas: TCanvas; Rect: TRect; Color: TColor; Transparency: Integer);

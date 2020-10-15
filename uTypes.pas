@@ -10,7 +10,10 @@ const
   WM_REFRESH_COVER = WM_USER + 2000;
   sValidExtensions = '.MP3.MP4.FLAC.OGG.WAV.M4A';
   aValidExtensions: TArray<string> = ['.MP3', '.MP4', '.FLAC', '.OGG', '.WAV', '.M4A'];
-
+  cArtist = 'Artist';
+  cTitle = 'Title';
+  cAlbum = 'Album';
+  cFileName = 'Filename';
 type
    tTagKey = class
      sTAG : String;
@@ -44,6 +47,7 @@ type
     class function getExtension(sFile : String) : string; static;
   end;
 
+  function FindTag(iCol : Integer) : String;
 
 var
   isRegistered : boolean;
@@ -51,6 +55,21 @@ var
 
 implementation
 
+function FindTag(iCol : Integer) : String;
+var
+    value : tTagKey;
+begin
+    result := '';
+    for value in dTags.Values do
+      begin
+          if value.sCol = iCol then
+          begin
+            result := value.sTAG;
+            break;
+          end;
+      end;
+
+end;
 { tMediaFile }
 
 constructor tMediaFile.create(aFileName: string);
@@ -153,15 +172,15 @@ begin
   dTagKey := tTagKey.create;
   dTagKey.sTAG := 'ARTIST';
   dTagKey.sCol := 2;
-  dTags.Add('Artist',dTagKey);
+  dTags.Add(cArtist,dTagKey);
   dTagKey := tTagKey.create;
   dTagKey.sTAG := 'TITLE';
   dTagKey.sCol := 3;
-  dTags.Add('Title',dTagKey);
+  dTags.Add(cTitle,dTagKey);
   dTagKey := tTagKey.create;
   dTagKey.sTAG := 'ALBUM';
   dTagKey.sCol := 4;
-  dTags.Add('Album',dTagKey);
+  dTags.Add(cAlbum,dTagKey);
   dTagKey := tTagKey.create;
   dTagKey.sTAG := 'NONE';
   dTagKey.sCol := -1;

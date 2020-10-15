@@ -24,7 +24,6 @@ object fCoverSearch: TfCoverSearch
     Align = alTop
     Caption = 'Infos'
     TabOrder = 0
-    ExplicitTop = -5
     object seArtist: TsEdit
       Left = 49
       Top = 16
@@ -83,8 +82,6 @@ object fCoverSearch: TfCoverSearch
       ModalResult = 1
       TabOrder = 0
       OnClick = bsApplyClick
-      ExplicitLeft = 0
-      ExplicitTop = 6
     end
   end
   object sPanel2: TsPanel

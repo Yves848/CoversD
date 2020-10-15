@@ -283,6 +283,7 @@ var
   pMediaImg: tMediaImg;
   Col, Row: Integer;
   nbPass: Integer;
+  Key2 : String;
 
   procedure addToGrid;
   var
@@ -347,7 +348,11 @@ begin
   begin
     Memo1.Clear;
     Memo1.Lines.Add('Begin : ' + formatdatetime('hh:nn:ss:zzz', time));
-    aGoogleSearch := tGoogleSearch.create(seArtist.Text + ' ' + seTitle.Text, (nbPass * 10) + 1);
+    key2 := seTitle.Text;
+    if seTitle.BoundLabel.Caption = 'Title' then
+       key2 := Key2 + ' cover';
+
+    aGoogleSearch := tGoogleSearch.create(seArtist.Text + ' ' + key2, (nbPass * 10) + 1);
     jsResult := aGoogleSearch.getImages;
     jsArray := jsResult.A[GS_ITEMS];
     Memo1.Lines.Add('End : ' + formatdatetime('hh:nn:ss:zzz', time));
