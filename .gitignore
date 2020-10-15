@@ -73,3 +73,29 @@ modules/
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
 *.mp4
+Win32/Debug/acntTypes.dcu
+Win32/Debug/acShellCtrls.dcu
+Win32/Debug/APEv2Library.dcu
+Win32/Debug/BufferedStream.dcu
+Win32/Debug/config.json
+Win32/Debug/Covers.exe
+Win32/Debug/FlacTagLibrary.dcu
+Win32/Debug/ID3v1Library.dcu
+Win32/Debug/ID3v2Library.dcu
+Win32/Debug/MP4TagLibrary.dcu
+Win32/Debug/Musepack.dcu
+Win32/Debug/OggVorbisAndOpusTagLibrary.dcu
+Win32/Debug/ReadMemoryStream.dcu
+Win32/Debug/result.json
+Win32/Debug/sConst.dcu
+Win32/Debug/sDefaults.dcu
+Win32/Debug/sMessages.dcu
+Win32/Debug/sSkinProps.dcu
+Win32/Debug/sStrings.dcu
+Win32/Debug/sThirdParty.dcu
+Win32/Debug/TagsLibrary.dcu
+Win32/Debug/uMain.dcu
+Win32/Debug/uTypes.dcu
+Win32/Debug/WAVPackfile.dcu
+Win32/Debug/WAVTagLibrary.dcu
+Win32/Debug/WMATagLibrary.dcu

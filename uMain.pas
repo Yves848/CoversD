@@ -86,7 +86,6 @@ type
     sTabSheet1: TsTabSheet;
     sTabSheet2: TsTabSheet;
     sLabelFX2: TsLabelFX;
-    seRegEx: TsEdit;
     sCB1: TsComboBox;
     sCB2: TsComboBox;
     sCB3: TsComboBox;
@@ -99,6 +98,7 @@ type
     sEP01: TsComboBox;
     sEP02: TsComboBox;
     ropVisual: TsRollOutPanel;
+    seRegEx: TsPopupBox;
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
     procedure sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
@@ -228,7 +228,7 @@ implementation
 {$R *.dfm}
 
 uses
-  JvDynControlEngineVcl, acntUtils, acgpUtils, sVCLUtils;
+  JvDynControlEngineVcl, acntUtils, acgpUtils, sVCLUtils, uRegEx;
 
 function TfMain.FormatTextWithEllipse(aText: string): string;
 const

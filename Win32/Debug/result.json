@@ -10,9 +10,9 @@
     "request":    
     [
       {
-        "title":"Google Custom Search - The Bee Gees Greatest (Special Edition)",
-        "totalResults":"9720000",
-        "searchTerms":"The Bee Gees Greatest (Special Edition)",
+        "title":"Google Custom Search - Daft Punk Around the world cover",
+        "totalResults":"68100000",
+        "searchTerms":"Daft Punk Around the world cover",
         "count":        10,
         "startIndex":        1,
         "inputEncoding":"utf8",
@@ -26,9 +26,9 @@
     "nextPage":    
     [
       {
-        "title":"Google Custom Search - The Bee Gees Greatest (Special Edition)",
-        "totalResults":"9720000",
-        "searchTerms":"The Bee Gees Greatest (Special Edition)",
+        "title":"Google Custom Search - Daft Punk Around the world cover",
+        "totalResults":"68100000",
+        "searchTerms":"Daft Punk Around the world cover",
         "count":        10,
         "startIndex":        11,
         "inputEncoding":"utf8",
@@ -46,221 +46,221 @@
   },
   "searchInformation":  
   {
-    "searchTime":0.536964,
-    "formattedSearchTime":"0.54",
-    "totalResults":"9720000",
-    "formattedTotalResults":"9,720,000"  
+    "searchTime":0.458037,
+    "formattedSearchTime":"0.46",
+    "totalResults":"68100000",
+    "formattedTotalResults":"68,100,000"  
   },
   "items":  
   [
     {
       "kind":"customsearch#result",
-      "title":"Bee Gees - Greatest (2007, CD) | Discogs",
-      "htmlTitle":"<b>Bee Gees</b> - <b>Greatest</b> (2007, CD) | Discogs",
-      "link":"https://img.discogs.com/Y4LU-3PMDSXHP5l3lANYLzJC5FY=/fit-in/600x535/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1866171-1333149835.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Bee Gees - Greatest (2007, CD) | Discogs",
-      "htmlSnippet":"<b>Bee Gees</b> - <b>Greatest</b> (2007, CD) | Discogs",
+      "title":"Around the World (Daft Punk song) - Wikipedia",
+      "htmlTitle":"<b>Around</b> the <b>World</b> (<b>Daft Punk</b> song) - Wikipedia",
+      "link":"https://upload.wikimedia.org/wikipedia/en/c/cd/Aroundtheworld_DaftPunk.jpg",
+      "displayLink":"en.wikipedia.org",
+      "snippet":"Around the World (Daft Punk song) - Wikipedia",
+      "htmlSnippet":"<b>Around</b> the <b>World</b> (<b>Daft Punk</b> song) - Wikipedia",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/Bee-Gees-Greatest/release/1866171",
-        "height":        535,
+        "contextLink":"https://en.wikipedia.org/wiki/Around_the_World_(Daft_Punk_song)",
+        "height":        307,
+        "width":        300,
+        "byteSize":        179275,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3GFu6yGhyZ1S8sfnWx-zx9FHPusaqafnnRU4XVfOYcEuwKeyh0KVK&s",
+        "thumbnailHeight":        117,
+        "thumbnailWidth":        114      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Daft Punk - Around The World (1997, Vinyl) | Discogs",
+      "htmlTitle":"<b>Daft Punk</b> - <b>Around</b> The <b>World</b> (1997, Vinyl) | Discogs",
+      "link":"https://img.discogs.com/DsP_Sn5FEwBPLhVyiVUaWjUvNwU=/fit-in/600x572/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-116856-1431448347-1970.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Daft Punk - Around The World (1997, Vinyl) | Discogs",
+      "htmlSnippet":"<b>Daft Punk</b> - <b>Around</b> The <b>World</b> (1997, Vinyl) | Discogs",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/Daft-Punk-Around-The-World/release/116856",
+        "height":        572,
         "width":        600,
-        "byteSize":        86199,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvN7nD8ZmpUbMr7AY4v3HvZ1Yd171qSg4a1DdN2fWQ_7N41J2ulFPzhj4&s",
-        "thumbnailHeight":        120,
+        "byteSize":        90987,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_yeP0JhR2qXsKTBj4yVmXCUDFy2Lc6-jdQjCGCcfgiNsqyfcUTo5x-E_6&s",
+        "thumbnailHeight":        129,
         "thumbnailWidth":        135      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"BEE GEES - Bee Gees Greatest - Amazon.com Music",
-      "htmlTitle":"<b>BEE GEES</b> - <b>Bee Gees Greatest</b> - Amazon.com Music",
-      "link":"https://images-na.ssl-images-amazon.com/images/I/51kacSuW8EL.jpg",
+      "title":"Daft Punk - Around the World - Amazon.com Music",
+      "htmlTitle":"<b>Daft Punk</b> - <b>Around</b> the <b>World</b> - Amazon.com Music",
+      "link":"https://images-na.ssl-images-amazon.com/images/I/51E-NwdsWEL._SY355_.jpg",
       "displayLink":"www.amazon.com",
-      "snippet":"BEE GEES - Bee Gees Greatest - Amazon.com Music",
-      "htmlSnippet":"<b>BEE GEES</b> - <b>Bee Gees Greatest</b> - Amazon.com Music",
+      "snippet":"Daft Punk - Around the World - Amazon.com Music",
+      "htmlSnippet":"<b>Daft Punk</b> - <b>Around</b> the <b>World</b> - Amazon.com Music",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.amazon.com/Bee-Gees-Greatest/dp/B000TQZ7NA",
-        "height":        443,
-        "width":        500,
-        "byteSize":        43968,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKr0CuVr1XG_BRiSlWbNJTfBQMpVhHEBkc1Y0u6NmI48PIHubCKGsiPVs&s",
-        "thumbnailHeight":        115,
-        "thumbnailWidth":        130      
+        "contextLink":"https://www.amazon.com/Around-World-Daft-Punk/dp/B000006MTG",
+        "height":        355,
+        "width":        355,
+        "byteSize":        36476,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKxywHLU4_YhGvbuCHyxW4vNB0eAprLg0Pgo9czKv-uVK_LL6KIHMaCg&s",
+        "thumbnailHeight":        121,
+        "thumbnailWidth":        121      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Bee Gees - Greatest (1979, Vinyl) | Discogs",
-      "htmlTitle":"<b>Bee Gees</b> - <b>Greatest</b> (1979, Vinyl) | Discogs",
-      "link":"https://img.discogs.com/7oqQfttxeplO8chWnlllFpZgX5Y=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-712178-1166130356.jpeg.jpg",
+      "title":"Daft Punk - Around The World (1997, EMI Pressing, Vinyl) | Discogs",
+      "htmlTitle":"<b>Daft Punk</b> - <b>Around</b> The <b>World</b> (1997, EMI Pressing, Vinyl) | Discogs",
+      "link":"https://img.discogs.com/mUGayoTJEYVK_0nwVeYgPTc9nrQ=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-5370601-1391712269-1697.jpeg.jpg",
       "displayLink":"www.discogs.com",
-      "snippet":"Bee Gees - Greatest (1979, Vinyl) | Discogs",
-      "htmlSnippet":"<b>Bee Gees</b> - <b>Greatest</b> (1979, Vinyl) | Discogs",
+      "snippet":"Daft Punk - Around The World (1997, EMI Pressing, Vinyl) | Discogs",
+      "htmlSnippet":"<b>Daft Punk</b> - <b>Around</b> The <b>World</b> (1997, EMI Pressing, Vinyl) | Discogs",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/Bee-Gees-Greatest/release/712178",
+        "contextLink":"https://www.discogs.com/Daft-Punk-Around-The-World/release/5370601",
         "height":        600,
         "width":        600,
-        "byteSize":        68312,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQCxRUW-eMH3RFMUTpWOQhQkZmMCdTJHVxxZV49ltb_IUt2zM11t0Zrps7&s",
+        "byteSize":        125024,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCbxUoef8BLMrRIeeod30cgzbLK5UUTGVjabAwK4JSrUrTJ7Rni1Mhk4B_&s",
         "thumbnailHeight":        135,
         "thumbnailWidth":        135      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Greatest Hits [Special Edition] CD1 \u2014 Bee Gees | Last.fm",
-      "htmlTitle":"<b>Greatest</b> Hits [<b>Special Edition</b>] CD1 \u2014 <b>Bee Gees</b> | Last.fm",
-      "link":"https://lastfm.freetls.fastly.net/i/u/ar0/d251ba87a9da43fc8409c0275975d3ba.jpg",
-      "displayLink":"www.last.fm",
-      "snippet":"Greatest Hits [Special Edition] CD1 \u2014 Bee Gees | Last.fm",
-      "htmlSnippet":"<b>Greatest</b> Hits [<b>Special Edition</b>] CD1 \u2014 <b>Bee Gees</b> | Last.fm",
+      "title":"Daft Punk: Around the World (Video 1997) - IMDb",
+      "htmlTitle":"<b>Daft Punk</b>: <b>Around</b> the <b>World</b> (Video 1997) - IMDb",
+      "link":"https://m.media-amazon.com/images/M/MV5BN2JlNWY5N2UtYWNjMS00YWJhLTg1ODEtMDEwZmUzZjRlYTk1XkEyXkFqcGdeQXVyNDE4OTY5NzI@._V1_.jpg",
+      "displayLink":"www.imdb.com",
+      "snippet":"Daft Punk: Around the World (Video 1997) - IMDb",
+      "htmlSnippet":"<b>Daft Punk</b>: <b>Around</b> the <b>World</b> (Video 1997) - IMDb",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.last.fm/music/Bee+Gees/Greatest+Hits+%5BSpecial+Edition%5D+CD1",
+        "contextLink":"https://www.imdb.com/title/tt6692892/",
+        "height":        361,
+        "width":        380,
+        "byteSize":        49371,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMnIFi9PX73d8YCS4bsNqH0O4Rrgo0U55Tq8eIgkdcG1YrjL8Zx9KU&s",
+        "thumbnailHeight":        117,
+        "thumbnailWidth":        123      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Daft Punk - Around The World (1996, CD) | Discogs",
+      "htmlTitle":"<b>Daft Punk</b> - <b>Around</b> The <b>World</b> (1996, CD) | Discogs",
+      "link":"https://img.discogs.com/MEv79p0GIUMBC0GHPF75nD07IGg=/fit-in/593x599/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1187376-1203374532.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Daft Punk - Around The World (1996, CD) | Discogs",
+      "htmlSnippet":"<b>Daft Punk</b> - <b>Around</b> The <b>World</b> (1996, CD) | Discogs",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/Daft-Punk-Around-The-World/release/1187376",
+        "height":        599,
+        "width":        593,
+        "byteSize":        112641,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTmsvfWTwFI0USSHf9FokM1K1qnyxkqCQ5G-sZKf1kOheMunNO3R7fwbM&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        134      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Around The World - Daft Punk mp3 buy, full tracklist",
+      "htmlTitle":"<b>Around</b> The <b>World</b> - <b>Daft Punk</b> mp3 buy, full tracklist",
+      "link":"https://www.music-bazaar.com/album-images/vol1/71/71917/550825-big/Around-The-World-cover.jpg",
+      "displayLink":"www.music-bazaar.com",
+      "snippet":"Around The World - Daft Punk mp3 buy, full tracklist",
+      "htmlSnippet":"<b>Around</b> The <b>World</b> - <b>Daft Punk</b> mp3 buy, full tracklist",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.music-bazaar.com/world-music/album/71917/Around-The-World/",
+        "height":        599,
+        "width":        599,
+        "byteSize":        88260,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGmLa1n6YVtUIFTYYovRsEn50hWIVm4H-NANm9vrpkFiRu2v3yqLbyF98&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Daft Punk - Around The World (1997, Vinyl) | Discogs",
+      "htmlTitle":"<b>Daft Punk</b> - <b>Around</b> The <b>World</b> (1997, Vinyl) | Discogs",
+      "link":"https://img.discogs.com/A4wZDlMx-ETP8W-aIzzxiW-h5sI=/fit-in/600x613/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-44542-1228261100.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Daft Punk - Around The World (1997, Vinyl) | Discogs",
+      "htmlSnippet":"<b>Daft Punk</b> - <b>Around</b> The <b>World</b> (1997, Vinyl) | Discogs",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/Daft-Punk-Around-The-World/release/44542",
+        "height":        613,
+        "width":        600,
+        "byteSize":        170865,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHyhQdjuWgY5DXTMokw1zvsvNNd-LGaBvi9-jOlMU-CWNeynkvc3FZ36xI&s",
+        "thumbnailHeight":        136,
+        "thumbnailWidth":        133      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Daft Punk - Around The World (Sunday Noise &amp; Mathias D. Remix ...",
+      "htmlTitle":"<b>Daft Punk</b> - <b>Around</b> The <b>World</b> (Sunday Noise &amp;amp; Mathias D. Remix ...",
+      "link":"https://i1.sndcdn.com/artworks-000405384642-xq7rmf-t500x500.jpg",
+      "displayLink":"soundcloud.com",
+      "snippet":"Daft Punk - Around The World (Sunday Noise &amp; Mathias D. Remix ...",
+      "htmlSnippet":"<b>Daft Punk</b> - <b>Around</b> The <b>World</b> (Sunday Noise &amp;amp; Mathias D. Remix ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://soundcloud.com/discoveryteam/daft-punk-around-the-world-remix",
         "height":        500,
         "width":        500,
-        "byteSize":        44414,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXx7y7hjc4rwBVIZNSPp-Lxfq30Cl9s5a-lE3WJb6m1P09PbE5wROe27Uo&s",
+        "byteSize":        61414,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHjON7SKDgtTAb8bBtdJaBTb3vcJ6IG2M1JdDFWgD9WX5c3g4bEbNjDFE&s",
         "thumbnailHeight":        130,
         "thumbnailWidth":        130      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Bee Gees - Greatest (2007, CD) | Discogs",
-      "htmlTitle":"<b>Bee Gees</b> - <b>Greatest</b> (2007, CD) | Discogs",
-      "link":"https://img.discogs.com/UFVgXPsbSzf1FPyCvSf1EXBQqmA=/fit-in/600x537/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-12892675-1543996206-2635.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Bee Gees - Greatest (2007, CD) | Discogs",
-      "htmlSnippet":"<b>Bee Gees</b> - <b>Greatest</b> (2007, CD) | Discogs",
+      "title":"AROUND THE WORLD DAFT PUNK Michel Gondry\" by Federico Mancosu ...",
+      "htmlTitle":"<b>AROUND</b> THE <b>WORLD DAFT PUNK</b> Michel Gondry&quot; by Federico Mancosu ...",
+      "link":"https://i.pinimg.com/originals/31/00/c9/3100c9e4741599eb97f65511711a7d21.jpg",
+      "displayLink":"www.pinterest.com",
+      "snippet":"AROUND THE WORLD DAFT PUNK Michel Gondry\" by Federico Mancosu ...",
+      "htmlSnippet":"<b>AROUND</b> THE <b>WORLD DAFT PUNK</b> Michel Gondry&quot; by Federico Mancosu ...",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/Bee-Gees-Greatest/release/12892675",
-        "height":        537,
-        "width":        600,
-        "byteSize":        91737,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNeeuuV6I_88xJfFRW8qTznwaylRJYkTLHrVkhrqw95KvZ3aYw7QHR9qU&s",
-        "thumbnailHeight":        121,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"The Bee Gees CD: Greatest - Special Edition 2-CD - Bear Family Records",
-      "htmlTitle":"<b>The Bee Gees</b> CD: <b>Greatest</b> - <b>Special Edition</b> 2-CD - Bear Family Records",
-      "link":"https://www.bear-family.com/media/image/25/01/74/79966_600x600.jpg",
-      "displayLink":"www.bear-family.com",
-      "snippet":"The Bee Gees CD: Greatest - Special Edition 2-CD - Bear Family Records",
-      "htmlSnippet":"<b>The Bee Gees</b> CD: <b>Greatest</b> - <b>Special Edition</b> 2-CD - Bear Family Records",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.bear-family.com/bee-gees-greatest-special-edition-2-cd.html",
-        "height":        591,
-        "width":        591,
-        "byteSize":        53726,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW-7liYc6Vc_kjoNyZx84tWnQiXUnD7Pri2jNduzqadl7RAD1Hf91Uu2f0&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Bee Gees - Greatest (Special Edition) (2007, Radio Sampler, CDr ...",
-      "htmlTitle":"<b>Bee Gees</b> - <b>Greatest</b> (<b>Special Edition</b>) (2007, Radio Sampler, CDr ...",
-      "link":"https://img.discogs.com/F_1Gfe3jAU9bGY01wFMLzmuF5gs=/fit-in/600x597/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-7823517-1462303075-4486.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Bee Gees - Greatest (Special Edition) (2007, Radio Sampler, CDr ...",
-      "htmlSnippet":"<b>Bee Gees</b> - <b>Greatest</b> (<b>Special Edition</b>) (2007, Radio Sampler, CDr ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.discogs.com/Bee-Gees-Greatest-Special-Edition/release/7823517",
-        "height":        597,
-        "width":        600,
-        "byteSize":        146552,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAEIk-aRUBcf0JjdJVL34couum9uLEu2jRPuuIe5vIDL3CwstWYYViuke&s",
-        "thumbnailHeight":        134,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Greatest [Special Edition]: Bee Gees: Amazon.ca: Music",
-      "htmlTitle":"<b>Greatest</b> [<b>Special Edition</b>]: <b>Bee Gees</b>: Amazon.ca: Music",
-      "link":"https://images-na.ssl-images-amazon.com/images/I/710yFVt1uyL._AC_SX342_.jpg",
-      "displayLink":"www.amazon.ca",
-      "snippet":"Greatest [Special Edition]: Bee Gees: Amazon.ca: Music",
-      "htmlSnippet":"<b>Greatest</b> [<b>Special Edition</b>]: <b>Bee Gees</b>: Amazon.ca: Music",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.amazon.ca/Greatest-Bee-Gees/dp/B000TQZ7NA",
-        "height":        318,
-        "width":        342,
-        "byteSize":        20111,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQia7vxDjHnbCHsXG9CZgUvnbiVjy1Te_0F1ZGoiRP-_FDMXIROSDCAJg&s",
-        "thumbnailHeight":        112,
-        "thumbnailWidth":        120      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Bee Gees - Greatest (2007, CD) | Discogs",
-      "htmlTitle":"<b>Bee Gees</b> - <b>Greatest</b> (2007, CD) | Discogs",
-      "link":"https://img.discogs.com/Buzo-jQkcY1Iuwt1eW81WwADg1Y=/fit-in/600x586/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-10784431-1504273638-4451.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Bee Gees - Greatest (2007, CD) | Discogs",
-      "htmlSnippet":"<b>Bee Gees</b> - <b>Greatest</b> (2007, CD) | Discogs",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.discogs.com/Bee-Gees-Greatest/release/10784431",
-        "height":        586,
-        "width":        600,
-        "byteSize":        139692,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXy0zMm8A3WdS3X4xMA5T8nhZBhZ5x1qiOHiLZUKDw-3DBXfBX9q8K0LH3&s",
-        "thumbnailHeight":        132,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Bee Gees Greatest Legendary Hits 2007 Malaysia Special Edition ...",
-      "htmlTitle":"<b>Bee Gees Greatest</b> Legendary Hits 2007 Malaysia <b>Special Edition</b> ...",
-      "link":"https://i.ebayimg.com/images/g/2t0AAOSw4cFeTtsc/s-l640.jpg",
-      "displayLink":"www.ebay.com",
-      "snippet":"Bee Gees Greatest Legendary Hits 2007 Malaysia Special Edition ...",
-      "htmlSnippet":"<b>Bee Gees Greatest</b> Legendary Hits 2007 Malaysia <b>Special Edition</b> ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.ebay.com/p/1700227736",
-        "height":        568,
-        "width":        640,
-        "byteSize":        60061,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUOum2HTFmCB92MyjyGZD78zKcMJ0EN_NER9222Jf3e8vFK88dP_J_aw&s",
-        "thumbnailHeight":        122,
-        "thumbnailWidth":        137      
+        "contextLink":"https://www.pinterest.com/pin/91901648616649551/",
+        "height":        650,
+        "width":        464,
+        "byteSize":        29777,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_KlsCOCxG2vqDuyAaVF_mo4d6UZ5nkq_-Xhz8GPAHLQcASNeBIqGv-aQ&s",
+        "thumbnailHeight":        137,
+        "thumbnailWidth":        98      
       }    
     }  
   ]

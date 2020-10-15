@@ -8,7 +8,8 @@ uses
   uCoverSearch in 'uCoverSearch.pas' {fCoverSearch},
   uRegister in 'uRegister.pas' {fRegister},
   uni_RegCommon in 'libs\uni_RegCommon.pas',
-  udeleteCover in 'udeleteCover.pas' {fDeleteCover};
+  udeleteCover in 'udeleteCover.pas' {fDeleteCover},
+  uREgEx in 'uREgEx.pas' {fRegEx};
 
 {$R *.res}
 
