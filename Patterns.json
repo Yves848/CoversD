@@ -1,0 +1,33 @@
+{
+  "Fields": [
+    {
+      "Name": "[ARTIST]",
+      "RegEx": "(.+)"
+    },
+    {
+      "Name": "[TITLE]",
+      "RegEx": "(.+)"
+    },
+    {
+      "Name": "[ALBUM]",
+      "RegEx": "(.+)"
+    }
+  ],
+  "Separators": [
+    {
+      "Name": "[-]",
+      "RegEx": "\\s?\\-\\s?"
+    }
+  ],
+  "Counters": [
+    {
+      "Name": "[0]",
+      "RegEx": "\\d{1,3}"
+    }
+  ],
+  "CommonPatterns": [
+      "[0][ARTIST][-][TITLE]",
+      ""
+      ]
+
+}

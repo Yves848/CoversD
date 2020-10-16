@@ -10,9 +10,9 @@
     "request":    
     [
       {
-        "title":"Google Custom Search - Noir d\u00e9sir Des visages et figures",
-        "totalResults":"34700000",
-        "searchTerms":"Noir d\u00e9sir Des visages et figures",
+        "title":"Google Custom Search - Phil Collins In The Air Tonight cover",
+        "totalResults":"67900000",
+        "searchTerms":"Phil Collins In The Air Tonight cover",
         "count":        10,
         "startIndex":        1,
         "inputEncoding":"utf8",
@@ -26,9 +26,9 @@
     "nextPage":    
     [
       {
-        "title":"Google Custom Search - Noir d\u00e9sir Des visages et figures",
-        "totalResults":"34700000",
-        "searchTerms":"Noir d\u00e9sir Des visages et figures",
+        "title":"Google Custom Search - Phil Collins In The Air Tonight cover",
+        "totalResults":"67900000",
+        "searchTerms":"Phil Collins In The Air Tonight cover",
         "count":        10,
         "startIndex":        11,
         "inputEncoding":"utf8",
@@ -46,221 +46,221 @@
   },
   "searchInformation":  
   {
-    "searchTime":0.733569,
-    "formattedSearchTime":"0.73",
-    "totalResults":"34700000",
-    "formattedTotalResults":"34,700,000"  
+    "searchTime":0.803806,
+    "formattedSearchTime":"0.80",
+    "totalResults":"67900000",
+    "formattedTotalResults":"67,900,000"  
   },
   "items":  
   [
     {
       "kind":"customsearch#result",
-      "title":"Noir D\u00e9sir - Des Visages Des Figures (2001, Gatefold, Vinyl) | Discogs",
-      "htmlTitle":"<b>Noir D\u00e9sir</b> - Des <b>Visages</b> Des <b>Figures</b> (2001, Gatefold, Vinyl) | Discogs",
-      "link":"https://img.discogs.com/yNT-sM2pxM0oInxGNsON3_6XAiA=/fit-in/600x594/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-910428-1512912086-2376.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Noir D\u00e9sir - Des Visages Des Figures (2001, Gatefold, Vinyl) | Discogs",
-      "htmlSnippet":"<b>Noir D\u00e9sir</b> - Des <b>Visages</b> Des <b>Figures</b> (2001, Gatefold, Vinyl) | Discogs",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
+      "title":"In the Air Tonight - Wikipedia",
+      "htmlTitle":"<b>In</b> the <b>Air Tonight</b> - Wikipedia",
+      "link":"https://upload.wikimedia.org/wikipedia/en/4/4f/In_the_Air_Tonight_by_Phil_Collins_handwriting_font.png",
+      "displayLink":"en.wikipedia.org",
+      "snippet":"In the Air Tonight - Wikipedia",
+      "htmlSnippet":"<b>In</b> the <b>Air Tonight</b> - Wikipedia",
+      "mime":"image/png",
+      "fileFormat":"image/png",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/de/Noir-D%C3%A9sir-Des-Visages-Des-Figures/release/910428",
-        "height":        594,
-        "width":        599,
-        "byteSize":        184990,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGIbduV5AkUCkS7gcjpR6jQA0V1OaIuVsmwbatFLW8ajHr4y2aCx-Jafse&s",
-        "thumbnailHeight":        134,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Noir D\u00e9sir - des Visages des Figures Lyrics and Tracklist | Genius",
-      "htmlTitle":"<b>Noir D\u00e9sir</b> - des <b>Visages</b> des <b>Figures</b> Lyrics and Tracklist | Genius",
-      "link":"http://images.genius.com/7fe33fac622af1e5f10e855a28dc2941.600x600x1.jpg",
-      "displayLink":"genius.com",
-      "snippet":"Noir D\u00e9sir - des Visages des Figures Lyrics and Tracklist | Genius",
-      "htmlSnippet":"<b>Noir D\u00e9sir</b> - des <b>Visages</b> des <b>Figures</b> Lyrics and Tracklist | Genius",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://genius.com/albums/Noir-desir/Des-visages-des-figures",
-        "height":        600,
-        "width":        600,
-        "byteSize":        294139,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0g5AFka6LyrQyDbRE8uDqH299Wo3fpfrL-LDBJer2sSnqsav7UCUe8OwK&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Noir D\u00e9sir - Des Visages Des Figures (2014, 180g, Vinyl) | Discogs",
-      "htmlTitle":"<b>Noir D\u00e9sir</b> - Des <b>Visages</b> Des <b>Figures</b> (2014, 180g, Vinyl) | Discogs",
-      "link":"https://img.discogs.com/6LirqL3y280GOxSu9M7tuqx3CIg=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-6211491-1418265994-3891.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Noir D\u00e9sir - Des Visages Des Figures (2014, 180g, Vinyl) | Discogs",
-      "htmlSnippet":"<b>Noir D\u00e9sir</b> - Des <b>Visages</b> Des <b>Figures</b> (2014, 180g, Vinyl) | Discogs",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.discogs.com/es/Noir-D%C3%A9sir-Des-Visages-Des-Figures/release/6211491",
-        "height":        600,
-        "width":        600,
-        "byteSize":        106989,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8RvZN_gSo9j2L_GDXqb17wAufc_Xvn25TCA4uc9sob3IhjQD-L_YNZ8M&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"NOIR DESIR - Des Visages Des Figures - Amazon.com Music",
-      "htmlTitle":"<b>NOIR DESIR</b> - Des <b>Visages</b> Des <b>Figures</b> - Amazon.com Music",
-      "link":"https://images-na.ssl-images-amazon.com/images/I/91xqpowVC5L._SX425_.jpg",
-      "displayLink":"www.amazon.com",
-      "snippet":"NOIR DESIR - Des Visages Des Figures - Amazon.com Music",
-      "htmlSnippet":"<b>NOIR DESIR</b> - Des <b>Visages</b> Des <b>Figures</b> - Amazon.com Music",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.amazon.com/Visages-Figures-NOIR-DESIR/dp/B00005NVAP",
-        "height":        382,
-        "width":        425,
-        "byteSize":        38054,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoj7_cnNVyvRVbIbOhq4pUFpd4HZYUbCq14gfJe6ZlLGBD8WrEezFs&s",
-        "thumbnailHeight":        113,
-        "thumbnailWidth":        126      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Des Visages Des Figures\" - Noir D\u00e9sir - Rock Fever",
-      "htmlTitle":"Des <b>Visages</b> Des <b>Figures</b>&quot; - <b>Noir D\u00e9sir</b> - Rock Fever",
-      "link":"https://p1.storage.canalblog.com/22/05/636073/120372632.jpg",
-      "displayLink":"clashdohertyrock.canalblog.com",
-      "snippet":"Des Visages Des Figures\" - Noir D\u00e9sir - Rock Fever",
-      "htmlSnippet":"Des <b>Visages</b> Des <b>Figures</b>&quot; - <b>Noir D\u00e9sir</b> - Rock Fever",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"http://clashdohertyrock.canalblog.com/archives/2012/01/31/17275766.html",
-        "height":        600,
-        "width":        600,
-        "byteSize":        287719,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2mt9iirAJfBwOsA_EOjbq7LqPwc_vkR5xNLBNt-Gy5lNQ4Xr3UlOGxHRL&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Des Visages Des Figures - Noir D\u00e9sir mp3 buy, full tracklist",
-      "htmlTitle":"Des <b>Visages</b> Des <b>Figures</b> - <b>Noir D\u00e9sir</b> mp3 buy, full tracklist",
-      "link":"https://www.music-bazaar.mobi/album-images/vol12/550/550520/2388618-big/Des-Visages-Des-Figures-cover.jpg",
-      "displayLink":"www.music-bazaar.mobi",
-      "snippet":"Des Visages Des Figures - Noir D\u00e9sir mp3 buy, full tracklist",
-      "htmlSnippet":"Des <b>Visages</b> Des <b>Figures</b> - <b>Noir D\u00e9sir</b> mp3 buy, full tracklist",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.music-bazaar.mobi/world-music/album/550520/Des-Visages-Des-Figures/",
-        "height":        600,
-        "width":        600,
-        "byteSize":        112672,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLjpAQZGKiDKrhOAY6RT2lPfgq-MCdVkzh3lxIdX8Zm1ybWJUjaqN-eAs&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Noir D\u00e9sir - Des Visages Des Figures (2019, Red, Vinyl) | Discogs",
-      "htmlTitle":"<b>Noir D\u00e9sir</b> - Des <b>Visages</b> Des <b>Figures</b> (2019, Red, Vinyl) | Discogs",
-      "link":"https://img.discogs.com/mY8nvBJv-Cb03g1fZb-PnKAbAPs=/fit-in/600x597/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-14454983-1574862909-4203.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Noir D\u00e9sir - Des Visages Des Figures (2019, Red, Vinyl) | Discogs",
-      "htmlSnippet":"<b>Noir D\u00e9sir</b> - Des <b>Visages</b> Des <b>Figures</b> (2019, Red, Vinyl) | Discogs",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.discogs.com/Noir-D%C3%A9sir-Des-Visages-Des-Figures/release/14454983",
-        "height":        597,
-        "width":        600,
-        "byteSize":        147159,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiLKI1MBOeOh8M08xc-9Uj3VLgvX1Pjp0oO0ahIlTxgX2Lc5CdkWBS6a8&s",
-        "thumbnailHeight":        134,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"10% sur Des visages des figures Vinyle couleur - Noir D\u00e9sir ...",
-      "htmlTitle":"10% sur Des <b>visages</b> des <b>figures</b> Vinyle couleur - <b>Noir D\u00e9sir</b> ...",
-      "link":"https://static.fnac-static.com/multimedia/Images/FR/NR/e0/d8/ac/11327712/1540-1/tsp20191118151231/Des-visages-des-figures-Vinyle-couleur.jpg",
-      "displayLink":"www.fnac.com",
-      "snippet":"10% sur Des visages des figures Vinyle couleur - Noir D\u00e9sir ...",
-      "htmlSnippet":"10% sur Des <b>visages</b> des <b>figures</b> Vinyle couleur - <b>Noir D\u00e9sir</b> ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.fnac.com/a13731588/Noir-Desir-Des-visages-des-figures-Vinyle-couleur-Vinyle-album",
-        "height":        340,
-        "width":        340,
-        "byteSize":        22736,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQm1CGiM9vTULEyBrTphH567SGb6mxn3hNNisxjddcrPkUzRv-ZBy&s",
-        "thumbnailHeight":        119,
-        "thumbnailWidth":        119      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Noir D\u00e9sir - Des Visages Des Figures (CD) | Discogs",
-      "htmlTitle":"<b>Noir D\u00e9sir</b> - Des <b>Visages</b> Des <b>Figures</b> (CD) | Discogs",
-      "link":"https://img.discogs.com/QqXS7OsVdR7bFXntX1A8GRMqi3k=/fit-in/600x526/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-400223-1488524850-5489.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Noir D\u00e9sir - Des Visages Des Figures (CD) | Discogs",
-      "htmlSnippet":"<b>Noir D\u00e9sir</b> - Des <b>Visages</b> Des <b>Figures</b> (CD) | Discogs",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.discogs.com/Noir-D%C3%A9sir-Des-Visages-Des-Figures/release/400223",
-        "height":        526,
-        "width":        600,
-        "byteSize":        136672,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQRa7kxNm16vyyQSAssv0ell8ZR8ph9Osr9gFLyBYafJM2kkyjR30qEg&s",
+        "contextLink":"https://en.wikipedia.org/wiki/In_the_Air_Tonight",
+        "height":        317,
+        "width":        317,
+        "byteSize":        137352,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScvodEH3rmNxNgjXkm2phdd7SYu5GKpLzvksaLMm35YUeSV1yiUwbu&s",
         "thumbnailHeight":        118,
-        "thumbnailWidth":        135      
+        "thumbnailWidth":        118      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"noir desir / lost ( des visages des figures ) - YouTube",
-      "htmlTitle":"<b>noir desir</b> / lost ( des <b>visages</b> des <b>figures</b> ) - YouTube",
-      "link":"https://i.ytimg.com/vi/ZCRTnQabeYM/hqdefault.jpg",
-      "displayLink":"www.youtube.com",
-      "snippet":"noir desir / lost ( des visages des figures ) - YouTube",
-      "htmlSnippet":"<b>noir desir</b> / lost ( des <b>visages</b> des <b>figures</b> ) - YouTube",
+      "title":"Phil Collins - In The Air Tonight (1981, CBS Pressing, Vinyl ...",
+      "htmlTitle":"<b>Phil Collins</b> - <b>In</b> The <b>Air Tonight</b> (1981, CBS Pressing, Vinyl ...",
+      "link":"https://img.discogs.com/lU8udTx9Hsp0olm7i0ZbCk2ospU=/fit-in/594x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1218014-1265595576.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Phil Collins - In The Air Tonight (1981, CBS Pressing, Vinyl ...",
+      "htmlSnippet":"<b>Phil Collins</b> - <b>In</b> The <b>Air Tonight</b> (1981, CBS Pressing, Vinyl ...",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.youtube.com/watch?v=eN9NFeOUoZg",
+        "contextLink":"https://www.discogs.com/Phil-Collins-In-The-Air-Tonight/release/1218014",
+        "height":        600,
+        "width":        594,
+        "byteSize":        86988,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBirfWJEiUx9n7xQschpfYQtIB3-ubfiSBgPddFKsMR2G3xdSAP8BxJAs&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        134      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Cover versions of In the Air Tonight by Phil Collins | SecondHandSongs",
+      "htmlTitle":"<b>Cover</b> versions of <b>In</b> the <b>Air Tonight</b> by <b>Phil Collins</b> | SecondHandSongs",
+      "link":"https://img.youtube.com/vi/YkADj0TPrJA/hqdefault.jpg",
+      "displayLink":"secondhandsongs.com",
+      "snippet":"Cover versions of In the Air Tonight by Phil Collins | SecondHandSongs",
+      "htmlSnippet":"<b>Cover</b> versions of <b>In</b> the <b>Air Tonight</b> by <b>Phil Collins</b> | SecondHandSongs",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://secondhandsongs.com/performance/4158",
         "height":        360,
         "width":        480,
-        "byteSize":        12860,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3Y6Bct7L-Ne22QzsylWxOmk57AW3g3O4cqF9GNG43EGSp5uc7A-jayCk&s",
+        "byteSize":        15579,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTShfxQYL5JFcxbz2q87jU8U-vWATrt3G3y24Pez4M93K3irziaC_bg6s&s",
         "thumbnailHeight":        97,
         "thumbnailWidth":        129      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Phil Collins - In The Air Tonight (88' Remix) And (Extended ...",
+      "htmlTitle":"<b>Phil Collins</b> - <b>In</b> The <b>Air Tonight</b> (88&#39; Remix) And (Extended ...",
+      "link":"https://img.discogs.com/_g0XxDjN635kF8SF2udd4J5RcUw=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-213406-1509725887-3533.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Phil Collins - In The Air Tonight (88' Remix) And (Extended ...",
+      "htmlSnippet":"<b>Phil Collins</b> - <b>In</b> The <b>Air Tonight</b> (88&#39; Remix) And (Extended ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/Phil-Collins-In-The-Air-Tonight-88-Remix-And-Extended-Version/release/213406",
+        "height":        600,
+        "width":        600,
+        "byteSize":        109715,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoP1G8FEidshI_pgoG4854_mNXqwOVeiTnyQKfLqqM50tHlaJN47Qf5yg&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"In the Air Tonight | Miami Vice Wiki | Fandom",
+      "htmlTitle":"<b>In</b> the <b>Air Tonight</b> | Miami Vice Wiki | Fandom",
+      "link":"https://static.wikia.nocookie.net/miamivice/images/6/64/Intheairtonight.jpg/revision/latest/scale-to-width-down/340?cb=20181207104231",
+      "displayLink":"miamivice.fandom.com",
+      "snippet":"In the Air Tonight | Miami Vice Wiki | Fandom",
+      "htmlSnippet":"<b>In</b> the <b>Air Tonight</b> | Miami Vice Wiki | Fandom",
+      "mime":"image/",
+      "fileFormat":"image/",
+      "image":      
+      {
+        "contextLink":"https://miamivice.fandom.com/wiki/In_the_Air_Tonight",
+        "height":        315,
+        "width":        316,
+        "byteSize":        20204,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyIjy12Xg43QA4iUMK83MdyeHLa7QfTEqXaS5cmmzUGHVumrXpwQLh&s",
+        "thumbnailHeight":        117,
+        "thumbnailWidth":        117      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Who Sang \"In the Air Tonight\"? Phil Collins",
+      "htmlTitle":"Who Sang &quot;<b>In</b> the <b>Air Tonight</b>&quot;? <b>Phil Collins</b>",
+      "link":"https://www.lyrics007.com/images/cover_art/34/107/214.jpg",
+      "displayLink":"www.lyrics007.com",
+      "snippet":"Who Sang \"In the Air Tonight\"? Phil Collins",
+      "htmlSnippet":"Who Sang &quot;<b>In</b> the <b>Air Tonight</b>&quot;? <b>Phil Collins</b>",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.lyrics007.com/Phil%20Collins%20Lyrics/In%20The%20Air%20Tonight%20Lyrics.html",
+        "height":        600,
+        "width":        600,
+        "byteSize":        274381,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1jPZxzotfCsgk3oerJPdaJ4VHkzVc3Ee3H8Z5Y5HnYNlbm94bHnm0lgIR&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Phil Collins: In the Air Tonight (Video 1981) - IMDb",
+      "htmlTitle":"<b>Phil Collins</b>: <b>In</b> the <b>Air Tonight</b> (Video 1981) - IMDb",
+      "link":"https://m.media-amazon.com/images/M/MV5BYzZlNGNiNTktZmVmZi00MDI3LWJhYmMtMDczYTgzMzEwNmJhXkEyXkFqcGdeQXVyNDE4OTY5NzI@._V1_.jpg",
+      "displayLink":"www.imdb.com",
+      "snippet":"Phil Collins: In the Air Tonight (Video 1981) - IMDb",
+      "htmlSnippet":"<b>Phil Collins</b>: <b>In</b> the <b>Air Tonight</b> (Video 1981) - IMDb",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.imdb.com/title/tt6666816/",
+        "height":        540,
+        "width":        718,
+        "byteSize":        48575,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4nv-TxnSBGyNKSaUuDMT3_ROPaZ99dajRIgK_641K2QXL9iubNteGLSU&s",
+        "thumbnailHeight":        105,
+        "thumbnailWidth":        140      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Phil Collins - In The Air Tonight (2015, Vinyl) | Discogs",
+      "htmlTitle":"<b>Phil Collins</b> - <b>In</b> The <b>Air Tonight</b> (2015, Vinyl) | Discogs",
+      "link":"https://img.discogs.com/59PenlRxQvu4avVH-nycBCobHpw=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-7781242-1448677728-2632.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Phil Collins - In The Air Tonight (2015, Vinyl) | Discogs",
+      "htmlSnippet":"<b>Phil Collins</b> - <b>In</b> The <b>Air Tonight</b> (2015, Vinyl) | Discogs",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/Phil-Collins-In-The-Air-Tonight/release/7781242",
+        "height":        600,
+        "width":        600,
+        "byteSize":        72717,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOnHWbWbVs_RRlTYM4H3dFKtKtKFLFqWauwgfj2hQcLzszudnVik1HXS0&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"How do you recreate the famous \"In the Air Tonight\" drum fill ...",
+      "htmlTitle":"How do you recreate the famous &quot;<b>In</b> the <b>Air Tonight</b>&quot; drum fill ...",
+      "link":"https://www.ajournalofmusicalthings.com/wp-content/uploads/Phil_Collins_InTheAirTonight-1.jpg",
+      "displayLink":"www.ajournalofmusicalthings.com",
+      "snippet":"How do you recreate the famous \"In the Air Tonight\" drum fill ...",
+      "htmlSnippet":"How do you recreate the famous &quot;<b>In</b> the <b>Air Tonight</b>&quot; drum fill ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.ajournalofmusicalthings.com/how-can-you-create-the-famous-in-the-air-tonight-drum-fill/",
+        "height":        315,
+        "width":        316,
+        "byteSize":        20126,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVUSzTe-C6Ry-z3RdNxRUgO5vrowLrmqM-CIJO_j5PL-zEFg5TdPDr&s",
+        "thumbnailHeight":        117,
+        "thumbnailWidth":        117      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Line(s) of the Day #InTheAirTonight | Alex Raphael",
+      "htmlTitle":"Line(s) of the Day #InTheAirTonight | Alex Raphael",
+      "link":"https://alexraphael.files.wordpress.com/2017/10/in-the-air-tonight-cover.jpg",
+      "displayLink":"alexraphael.wordpress.com",
+      "snippet":"Line(s) of the Day #InTheAirTonight | Alex Raphael",
+      "htmlSnippet":"Line(s) of the Day #InTheAirTonight | Alex Raphael",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://alexraphael.wordpress.com/2017/10/30/lines-of-the-day-intheairtonight/",
+        "height":        600,
+        "width":        600,
+        "byteSize":        72459,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWpH5Zml0V64n9-jXjVav7R9oCAYNdMCPAmmxzm1jlIPIJICJIC_aPpbG-&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
       }    
     }  
   ]

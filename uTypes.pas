@@ -8,6 +8,7 @@ uses
 
 const
   WM_REFRESH_COVER = WM_USER + 2000;
+  WM_OPEN_ROLLOUTS = WM_USER + 2001;
   sValidExtensions = '.MP3.MP4.FLAC.OGG.WAV.M4A';
   aValidExtensions: TArray<string> = ['.MP3', '.MP4', '.FLAC', '.OGG', '.WAV', '.M4A'];
   cArtist = 'Artist';

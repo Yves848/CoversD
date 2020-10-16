@@ -9,7 +9,8 @@ uses
   uRegister in 'uRegister.pas' {fRegister},
   uni_RegCommon in 'libs\uni_RegCommon.pas',
   udeleteCover in 'udeleteCover.pas' {fDeleteCover},
-  uREgEx in 'uREgEx.pas' {fRegEx};
+  uREgEx in 'uREgEx.pas' {fRegEx},
+  uDM1 in 'uDM1.pas' {DM1: TDataModule};
 
 {$R *.res}
 
@@ -17,5 +18,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMain, fMain);
+  Application.CreateForm(TfRegEx, fRegEx);
+  Application.CreateForm(TDM1, DM1);
   Application.Run;
 end.

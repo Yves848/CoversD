@@ -12,7 +12,7 @@ uses
   JvStringGrid, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, Generics.collections,
   NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, AdvMemo, acPNG,
   JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister, Vcl.Menus, System.RegularExpressions, sEdit, sComboBox,
-  sCheckBox, sPageControl, SynEditHighlighter, SynHighlighterJSON, System.StrUtils, sComboEdit, acPopupCtrls;
+  sCheckBox, sPageControl, SynEditHighlighter, SynHighlighterJSON, System.StrUtils, sComboEdit, acPopupCtrls, uDM1;
 
 type
 
@@ -21,16 +21,12 @@ type
     sSkinProvider1: TsSkinProvider;
     sSkinManager1: TsSkinManager;
     pnToolbar: TsPanel;
-    sROPMedia: TsRollOutPanel;
-    sSplitter1: TsSplitter;
     sTVMedias: TsTreeView;
     pnToolbarTreeView: TsPanel;
     pnStatus: TsPanel;
-    pnStatusTreeView: TsPanel;
     sILIcons: TsAlphaImageList;
     pb1: TsProgressBar;
     thListMP3: TJvThread;
-    sILTV: TsAlphaImageList;
     sImage1: TsImage;
     sROPPlaylist: TsRollOutPanel;
     TrackBar1: TsTrackBar;
@@ -81,7 +77,6 @@ type
     PopupMenu2: TPopupMenu;
     PopupMenu21: TMenuItem;
     sAlphaImageList1: TsAlphaImageList;
-    ropRegEx: TsRollOutPanel;
     sPageControl1: TsPageControl;
     sTabSheet1: TsTabSheet;
     sTabSheet2: TsTabSheet;
@@ -99,6 +94,35 @@ type
     sEP02: TsComboBox;
     ropVisual: TsRollOutPanel;
     seRegEx: TsPopupBox;
+    sBB1: TsBadgeBtn;
+    sPageControl2: TsPageControl;
+    tsVisual: TsTabSheet;
+    tsEdit: TsTabSheet;
+    sILTV: TsAlphaImageList;
+    sBB2: TsBadgeBtn;
+    sBB3: TsBadgeBtn;
+    sEFROM02: tsEdit;
+    sCKReplace02: TsCheckBox;
+    sLabel1: TsLabel;
+    sETO02: tsEdit;
+    sComboBox1: TsComboBox;
+    sPnReplace02: TsPanel;
+    sCKReplace01: TsCheckBox;
+    sCKReplace03: TsCheckBox;
+    sLabel3: TsLabel;
+    sPNReplace01: TsPanel;
+    sLabel2: TsLabel;
+    sETO01: tsEdit;
+    sEFROM01: tsEdit;
+    sComboBox2: TsComboBox;
+    sPNReplace03: TsPanel;
+    sLabel4: TsLabel;
+    sETO03: tsEdit;
+    sEFROM03: tsEdit;
+    sComboBox4: TsComboBox;
+    sSplitView1: TsSplitView;
+    sBitBtn1: TsBitBtn;
+    sILBtns: TsAlphaImageList;
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
     procedure sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
@@ -129,22 +153,29 @@ type
     procedure bsRegisterClick(Sender: TObject);
     procedure slCoversSliderChange(Sender: TObject);
     procedure PopupMenu21Click(Sender: TObject);
-    procedure btnUtilsClick(Sender: TObject);
     procedure sgListRightClickCell(Sender: TObject; ARow, ACol: Integer);
     procedure sgListClickCell(Sender: TObject; ARow, ACol: Integer);
     procedure sgListSetEditText(Sender: TObject; ACol, ARow: Integer; const Value: string);
     procedure btnRegexClick(Sender: TObject);
     procedure sgListKeyPress(Sender: TObject; var Key: Char);
     procedure sgListGetCellColor(Sender: TObject; ARow, ACol: Integer; AState: TGridDrawState; ABrush: TBrush; AFont: TFont);
-    procedure seRegExChange(Sender: TObject);
     procedure ckRegEx01Click(Sender: TObject);
     procedure ckRegEx02Click(Sender: TObject);
     procedure ckRegEx03Click(Sender: TObject);
     procedure sCB3Change(Sender: TObject);
     procedure sCB1Change(Sender: TObject);
     procedure sCB2Change(Sender: TObject);
-    procedure ropRegExBeforeExpand(Sender: TObject);
-    procedure ropRegExAfterCollapse(Sender: TObject);
+    procedure seRegExChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure sROPPlaylistAfterCollapse(Sender: TObject);
+    procedure sROPPlaylistAfterExpand(Sender: TObject);
+    procedure sROPMediaAfterCollapse(Sender: TObject);
+    procedure sROPMediaAfterExpand(Sender: TObject);
+    procedure sCKReplace02Click(Sender: TObject);
+    procedure sCKReplace01Click(Sender: TObject);
+    procedure sCKReplace03Click(Sender: TObject);
+    procedure sSplitView1Opened(Sender: TObject);
+    procedure sBitBtn1Click(Sender: TObject);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -205,6 +236,9 @@ type
     Procedure RefreshTagsCombos;
     Procedure FillTagLists;
     Procedure UpdateTagLists(iCol: Integer; sValue: String);
+    procedure OpenRollOuts(var m: Tmsg); Message WM_OPEN_ROLLOUTS;
+    procedure RefreshVisuals;
+    function RxReplace(const Match: tMatch): String;
   end;
 
 var
@@ -396,6 +430,14 @@ begin
   sEP01.Text := '';
   sEP02.Text := '';
   sEP03.Text := '';
+end;
+
+procedure TfMain.RefreshVisuals;
+begin
+  Spectrum3D_ReInitialize(Sprectrum3D);
+  Spectrum3D_ReAlign(Sprectrum3D, sPanel3.handle);
+  image1.Repaint;
+  Application.ProcessMessages;
 end;
 
 procedure TfMain.RemoveCovers(aTags: TTags);
@@ -737,8 +779,9 @@ var
   iGroup: Integer;
   iMatch: Integer;
   aFile: String;
-  match: tmatch;
+  Match: tMatch;
   regexpr: tREgEx;
+  RegExReplace: tREgEx;
   RO: TRegExOptions;
   ARow: Integer;
   iColumn: Integer;
@@ -757,31 +800,53 @@ begin
       begin
         aFile := tpath.GetFileNameWithoutExtension(tMediaFile(sgList.Objects[1, iRow]).Tags.FileName);
       end;
-      match := regexpr.match(aFile);
-      while match.Success do
+      Match := regexpr.Match(aFile);
+      sBB1.Visible := false;
+      sBB2.Visible := false;
+      sBB3.Visible := false;
+
+      while Match.Success do
       begin
-        if match.Groups.Count > 1 then
+        if Match.Groups.Count > 1 then
         begin
-          for iGroup := 1 to match.Groups.Count - 1 do
+          for iGroup := 1 to Match.Groups.Count - 1 do
             case iGroup of
               1:
                 begin
+                  sBB1.Visible := True;
                   if ckRegEx01.Checked then
-                    sEP01.Text := match.Groups.Item[iGroup].Value;
+                    sEP01.Text := Match.Groups.Item[iGroup].Value;
+                  if sCKReplace01.Checked then
+                  begin
+                    RegExReplace.Create(sEFROM01.Text);
+                    sEP01.Text := RegExReplace.Replace(sEP01.Text, sETO01.Text);
+                  end;
                 end;
               2:
                 begin
+                  sBB2.Visible := True;
                   if ckRegEx02.Checked then
-                    sEP02.Text := match.Groups.Item[iGroup].Value;
+                    sEP02.Text := Match.Groups.Item[iGroup].Value;
+                  if sCKReplace02.Checked then
+                  begin
+                    RegExReplace.Create(sEFROM02.Text);
+                    sEP02.Text := RegExReplace.Replace(sEP02.Text, sETO02.Text);
+                  end;
                 end;
               3:
                 begin
+                  sBB3.Visible := True;
                   if ckRegEx03.Checked then
-                    sEP03.Text := match.Groups.Item[iGroup].Value;
+                    sEP03.Text := Match.Groups.Item[iGroup].Value;
+                  if sCKReplace03.Checked then
+                  begin
+                    RegExReplace.Create(sEFROM03.Text);
+                    sEP03.Text := RegExReplace.Replace(sEP03.Text, sETO03.Text);
+                  end;
                 end;
             end;
         end;
-        match := match.NextMatch;
+        Match := Match.NextMatch;
       end;
     end
 {$ENDREGION}
@@ -798,20 +863,25 @@ begin
           aFile := tpath.GetFileNameWithoutExtension(tMediaFile(sgList.Objects[1, ARow]).Tags.FileName);
         end;
 
-        match := regexpr.match(aFile);
+        Match := regexpr.Match(aFile);
         iMatch := 0;
-        while match.Success do
+        while Match.Success do
         begin
-          if match.Groups.Count > 1 then
+          if Match.Groups.Count > 1 then
           begin
-            for iGroup := 1 to match.Groups.Count - 1 do
+            for iGroup := 1 to Match.Groups.Count - 1 do
               case iGroup of
                 1:
                   begin
                     iColumn := tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sCol;
                     if (iColumn > -1) and (ckRegEx01.Checked) then
                     begin
-                      sgList.Cells[iColumn, ARow] := match.Groups.Item[iGroup].Value;
+                      sgList.Cells[iColumn, ARow] := Match.Groups.Item[iGroup].Value;
+                      if sCKReplace01.Checked then
+                      begin
+                        RegExReplace.Create(sEFROM01.Text);
+                        sgList.Cells[iColumn, ARow] := RegExReplace.Replace(sgList.Cells[iColumn, ARow], sETO01.Text);
+                      end;
                       tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
@@ -821,7 +891,12 @@ begin
                     iColumn := tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sCol;
                     if (iColumn > -1) and (ckRegEx02.Checked) then
                     begin
-                      sgList.Cells[iColumn, ARow] := match.Groups.Item[iGroup].Value;
+                      sgList.Cells[iColumn, ARow] := Match.Groups.Item[iGroup].Value;
+                      if sCKReplace02.Checked then
+                      begin
+                        RegExReplace.Create(sEFROM02.Text);
+                        sgList.Cells[iColumn, ARow] := RegExReplace.Replace(sgList.Cells[iColumn, ARow], sETO02.Text);
+                      end;
                       tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
@@ -831,14 +906,19 @@ begin
                     iColumn := tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sCol;
                     if (iColumn > -1) and (ckRegEx03.Checked) then
                     begin
-                      sgList.Cells[iColumn, ARow] := match.Groups.Item[iGroup].Value;
+                      sgList.Cells[iColumn, ARow] := Match.Groups.Item[iGroup].Value;
+                      if sCKReplace03.Checked then
+                      begin
+                        RegExReplace.Create(sEFROM03.Text);
+                        sgList.Cells[iColumn, ARow] := RegExReplace.Replace(sgList.Cells[iColumn, ARow], sETO03.Text);
+                      end;
                       tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
                   end;
               end;
           end;
-          match := match.NextMatch;
+          Match := Match.NextMatch;
         end;
 
         if (not ckRegEx01.Checked) then
@@ -1096,6 +1176,11 @@ begin
   Spectrum3D_ReAlign(Sprectrum3D, sPanel3.handle);
 end;
 
+procedure TfMain.FormShow(Sender: TObject);
+begin
+  PostMessage(self.handle, WM_OPEN_ROLLOUTS, 0, 0);
+end;
+
 procedure TfMain.GetImgLink;
 begin
 
@@ -1182,6 +1267,7 @@ begin
   sgList.InsertCols(0, 1);
   sgList.ColWidths[0] := 20;
   InitDictionaries;
+  ExtractTags(1, True);
 end;
 
 procedure TfMain.sgListClickCell(Sender: TObject; ARow, ACol: Integer);
@@ -1389,10 +1475,9 @@ begin
   if sgList.Objects[1, NewRow] <> Nil then
   begin
     pMediaFile := tMediaFile(sgList.Objects[1, NewRow]);
-    if not ropRegEx.Collapsed then
-    begin
-      ExtractTags(NewRow, True);
-    end;
+
+    ExtractTags(NewRow, True);
+
     try
       ListCoverArts(image1, pMediaFile.Tags);
 
@@ -1422,13 +1507,12 @@ end;
 
 procedure TfMain.showExplorer;
 begin
-  if sROPMedia.Collapsed then
-  begin
-    sROPMedia.ChangeState(false, True);
-    sShellTreeView1.SetFocus;
-  end
+  sSplitView1.Opened := not sSplitView1.Opened;
+  if sSplitView1.Opened then
+     sShellTreeView1.SetFocus
   else
-    sROPMedia.ChangeState(True, True);
+     SGList.SetFocus;
+
 end;
 
 procedure TfMain.showPlayList;
@@ -1440,7 +1524,6 @@ begin
   end
   else
     sROPPlaylist.ChangeState(True, True);
-
 end;
 
 procedure TfMain.ResetPB;
@@ -1448,16 +1531,9 @@ begin
   pb1.Position := 0;
 end;
 
-procedure TfMain.ropRegExAfterCollapse(Sender: TObject);
+function TfMain.RxReplace(const Match: tMatch): String;
 begin
-  if ropVisual <> Nil then
-    ropVisual.Collapsed := false;
-end;
-
-procedure TfMain.ropRegExBeforeExpand(Sender: TObject);
-begin
-  if ropVisual <> Nil then
-    ropVisual.Collapsed := True;
+  Result := '';
 end;
 
 procedure TfMain.savePlaylist;
@@ -1587,6 +1663,11 @@ begin
   Application.ProcessMessages;
 end;
 
+procedure TfMain.sBitBtn1Click(Sender: TObject);
+begin
+  showExplorer;
+end;
+
 procedure TfMain.sButton1Click(Sender: TObject);
 begin
   BASS_ChannelStop(Channel);
@@ -1625,15 +1706,6 @@ begin
   ExtractTags(sgList.Row, false);
 end;
 
-procedure TfMain.btnUtilsClick(Sender: TObject);
-var
-  fDeleteCover: tfDeleteCover;
-begin
-  fDeleteCover := tfDeleteCover.Create(self);
-  fDeleteCover.ShowModal;
-  fDeleteCover.Free;
-end;
-
 procedure TfMain.sButton4Click(Sender: TObject);
 begin
   savePlaylist;
@@ -1659,6 +1731,21 @@ begin
   AssignMultiChoice(sCB3, sEP03);
 end;
 
+procedure TfMain.sCKReplace03Click(Sender: TObject);
+begin
+  sPNReplace03.Visible := sCKReplace03.Checked;
+end;
+
+procedure TfMain.sCKReplace01Click(Sender: TObject);
+begin
+  sPNReplace01.Visible := sCKReplace01.Checked;
+end;
+
+procedure TfMain.sCKReplace02Click(Sender: TObject);
+begin
+  sPnReplace02.Visible := sCKReplace02.Checked;
+end;
+
 procedure TfMain.seRegExChange(Sender: TObject);
 begin
   ExtractTags(sgList.Row, True);
@@ -1670,6 +1757,7 @@ begin
   if sgList.Objects[1, 1] <> Nil then
   begin
     ListCoverArts(image1, tMediaFile(sgList.Objects[1, 1]).Tags);
+    ExtractTags(1, True);
   end;
 end;
 
@@ -1724,6 +1812,26 @@ begin
     aNode := sShellTreeView1.Items[0];
 
   sShellTreeView1.Refresh(aNode);
+end;
+
+procedure TfMain.sROPMediaAfterCollapse(Sender: TObject);
+begin
+  RefreshVisuals;
+end;
+
+procedure TfMain.sROPMediaAfterExpand(Sender: TObject);
+begin
+  RefreshVisuals;
+end;
+
+procedure TfMain.sROPPlaylistAfterCollapse(Sender: TObject);
+begin
+  RefreshVisuals;
+end;
+
+procedure TfMain.sROPPlaylistAfterExpand(Sender: TObject);
+begin
+  RefreshVisuals;
 end;
 
 procedure TfMain.sShellTreeView1AddFolder(Sender: TObject; AFolder: TacShellFolder; var CanAdd: Boolean);
@@ -1852,6 +1960,11 @@ begin
   end;
 end;
 
+procedure TfMain.sSplitView1Opened(Sender: TObject);
+begin
+     sShellTreeView1.SetFocus;
+end;
+
 procedure TfMain.sTVMediasChange(Sender: TObject; Node: TTreeNode);
 begin
   if Assigned(Node.data) then
@@ -1972,8 +2085,6 @@ end;
 
 procedure TfMain.ListCoverArts(aImage: TsImage; sFileName: String);
 begin
-  // GlobalMediaFile.Tags.clear;
-  // ListCoverArts(aImage, GlobalMediaFile.Tags);
 end;
 
 procedure TfMain.OpenConfig;
@@ -1985,7 +2096,6 @@ begin
   if fileexists(sPath + '\config.json') then
   begin
     jConfig := TSuperObject.ParseFile(sPath + '\config.json');
-    // SynMemo1.Lines.Text := jConfig.AsJSON(True);
     aPath := jConfig.S['startFolder'];
     if aPath <> '' then
     begin
@@ -1999,7 +2109,17 @@ begin
     jConfig := SO;
     aPath := 'c:\';
   end;
-  // thListMP3.Execute(Self);
+end;
+
+procedure TfMain.OpenRollOuts(var m: Tmsg);
+begin
+  sROPPlaylist.ChangeState(false, True);
+  //sROPMedia.ChangeState(false, True);
+  image1.Picture.Assign(Nil);
+  image1.Refresh;
+  Application.ProcessMessages;
+  image1.Picture.BitMap.Assign(Image2.Picture.BitMap);
+  Application.ProcessMessages;
 end;
 
 procedure TfMain.playlistRemoveItem(index: Integer);
