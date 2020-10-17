@@ -12,7 +12,7 @@ uses
   JvStringGrid, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, Generics.collections,
   NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, AdvMemo, acPNG,
   JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister, Vcl.Menus, System.RegularExpressions, sEdit, sComboBox,
-  sCheckBox, sPageControl, SynEditHighlighter, SynHighlighterJSON, System.StrUtils, sComboEdit, acPopupCtrls, uDM1;
+  sCheckBox, sPageControl, SynEditHighlighter, SynHighlighterJSON, System.StrUtils, sComboEdit, acPopupCtrls, uDM1, acAlphaHints, BtnListB;
 
 type
 
@@ -123,6 +123,7 @@ type
     sSplitView1: TsSplitView;
     sBitBtn1: TsBitBtn;
     sILBtns: TsAlphaImageList;
+    sAlphaHints1: TsAlphaHints;
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
     procedure sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
@@ -176,6 +177,7 @@ type
     procedure sCKReplace03Click(Sender: TObject);
     procedure sSplitView1Opened(Sender: TObject);
     procedure sBitBtn1Click(Sender: TObject);
+    procedure sAlphaHints1ShowHint(var HintStr: string; var CanShow: Boolean; var HintInfo: THintInfo; var Frame: TFrame);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -1534,6 +1536,15 @@ end;
 function TfMain.RxReplace(const Match: tMatch): String;
 begin
   Result := '';
+end;
+
+procedure TfMain.sAlphaHints1ShowHint(var HintStr: string; var CanShow: Boolean; var HintInfo: THintInfo; var Frame: TFrame);
+begin
+  if HintInfo.HintControl = sBitBtn1 then
+  begin
+     HintStr := 'Open Explorer Alt-E';
+  end;
+
 end;
 
 procedure TfMain.savePlaylist;
