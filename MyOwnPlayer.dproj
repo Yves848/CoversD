@@ -173,6 +173,16 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="uRegExFrame.pas">
+            <Form>Frame1</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uFileFrame.pas">
+            <Form>Frame2</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
         <None Include="ModelSupport_MyOwnPlayer\default.txaPackage"/>
         <None Include="ModelSupport_MyOwnPlayer\default.txvpck"/>
         <None Include="ModelSupport_MyOwnPlayer\Covers\default.txvpck"/>
@@ -327,9 +337,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win64\Debug\MyOwnPlayer.rsm" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName="ModelSupport_MyOwnPlayer\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win64">
-                        <RemoteName>MyOwnPlayer.rsm</RemoteName>
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -339,7 +349,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_MyOwnPlayer\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_MyOwnPlayer\uSearchImage\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win64">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -359,12 +369,6 @@
                 </DeployFile>
                 <DeployFile LocalName="ModelSupport_Covers\utags\default.txaPackage" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="ModelSupport_MyOwnPlayer\uSearchImage\default.txvpck" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win64">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>

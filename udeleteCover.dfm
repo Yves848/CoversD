@@ -12,6 +12,7 @@ object fDeleteCover: TfDeleteCover
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object sButton1: TsButton
@@ -21,5 +22,18 @@ object fDeleteCover: TfDeleteCover
     Height = 25
     Caption = 'sButton1'
     TabOrder = 0
+    OnClick = sButton1Click
+  end
+  object sSB1: TsScrollBox
+    Left = 105
+    Top = 8
+    Width = 865
+    Height = 485
+    HorzScrollBar.Tracking = True
+    VertScrollBar.Smooth = True
+    VertScrollBar.Style = ssHotTrack
+    VertScrollBar.Tracking = True
+    AutoMouseWheel = True
+    TabOrder = 1
   end
 end

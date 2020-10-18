@@ -10,7 +10,9 @@ uses
   uni_RegCommon in 'libs\uni_RegCommon.pas',
   udeleteCover in 'udeleteCover.pas' {fDeleteCover},
   uREgEx in 'uREgEx.pas' {fRegEx},
-  uDM1 in 'uDM1.pas' {DM1: TDataModule};
+  uDM1 in 'uDM1.pas' {DM1: TDataModule},
+  uRegExFrame in 'uRegExFrame.pas' {Frame1: TFrame},
+  uFileFrame in 'uFileFrame.pas' {Frame2: TFrame};
 
 {$R *.res}
 

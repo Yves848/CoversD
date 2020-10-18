@@ -39,7 +39,6 @@ type
     sPanel2: TsPanel;
     sShellTreeView1: TsShellTreeView;
     sgList: TAdvStringGrid;
-
     btnUtils: TsButton;
     sButton4: TsButton;
     sButton5: TsButton;
@@ -61,7 +60,6 @@ type
     tbVolume: TsTrackBar;
     kglArtist: TKryptoGlowLabel;
     kglTitle: TKryptoGlowLabel;
-    Image2: TImage;
     sImage2: TsImage;
     image1: TsImage;
     sGauge1: TsGauge;
@@ -124,6 +122,7 @@ type
     sBitBtn1: TsBitBtn;
     sILBtns: TsAlphaImageList;
     sAlphaHints1: TsAlphaHints;
+    sILNoCover: TsAlphaImageList;
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
     procedure sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
@@ -178,6 +177,7 @@ type
     procedure sSplitView1Opened(Sender: TObject);
     procedure sBitBtn1Click(Sender: TObject);
     procedure sAlphaHints1ShowHint(var HintStr: string; var CanShow: Boolean; var HintInfo: THintInfo; var Frame: TFrame);
+    procedure btnUtilsClick(Sender: TObject);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -241,6 +241,7 @@ type
     procedure OpenRollOuts(var m: Tmsg); Message WM_OPEN_ROLLOUTS;
     procedure RefreshVisuals;
     function RxReplace(const Match: tMatch): String;
+    Procedure GetNoCoverImage(aPicture : tPicture);
   end;
 
 var
@@ -300,15 +301,11 @@ begin
   begin
     if slbPlaylist.Items.Count > 0 then
     begin
-
       index := slbPlaylist.ItemIndex;
-
       inc(index);
       if index > slbPlaylist.Items.Count - 1 then
         index := 0;
-
       slbPlaylist.ItemIndex := index;
-
       BASS_ChannelStop(Channel);
       updatePlayingInfos(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags);
       PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
@@ -1511,9 +1508,9 @@ procedure TfMain.showExplorer;
 begin
   sSplitView1.Opened := not sSplitView1.Opened;
   if sSplitView1.Opened then
-     sShellTreeView1.SetFocus
+    sShellTreeView1.SetFocus
   else
-     SGList.SetFocus;
+    sgList.SetFocus;
 
 end;
 
@@ -1542,7 +1539,7 @@ procedure TfMain.sAlphaHints1ShowHint(var HintStr: string; var CanShow: Boolean;
 begin
   if HintInfo.HintControl = sBitBtn1 then
   begin
-     HintStr := 'Open Explorer Alt-E';
+    HintStr := 'Open Explorer Alt-E';
   end;
 
 end;
@@ -1717,6 +1714,15 @@ begin
   ExtractTags(sgList.Row, false);
 end;
 
+procedure TfMain.btnUtilsClick(Sender: TObject);
+var
+   fDeleteCover : tfDeleteCover;
+begin
+   fDeleteCover := TfDeleteCover.Create(Self);
+   fDeleteCover.ShowModal;
+   fDEleteCover.Free;
+end;
+
 procedure TfMain.sButton4Click(Sender: TObject);
 begin
   savePlaylist;
@@ -1860,6 +1866,12 @@ begin
   end;
 end;
 
+Procedure TfMain.GetNoCoverImage(aPicture : tPicture);
+begin
+   //sILNoCover.GetBitmap(0,);
+   aPicture.Bitmap.assign(sILNoCover.CreateBitmap32(0,256,256));
+end;
+
 procedure TfMain.sShellTreeView1Change(Sender: TObject; Node: TTreeNode);
 var
   aNode: TTreeNode;
@@ -1876,9 +1888,11 @@ begin
     end
     else
     begin
-      image1.Picture.Assign(Nil);
-      Application.ProcessMessages;
-      image1.Picture.BitMap.Assign(Image2.Picture.BitMap);
+      // Use DM1
+       image1.Picture.Assign(Nil);
+       Application.ProcessMessages;
+       //image1.Picture.BitMap.Assign(GetNoCoverImage);
+       GetNoCoverImage(image1.Picture);
     end;
     pMediaFile.Free;
   end;
@@ -1973,7 +1987,7 @@ end;
 
 procedure TfMain.sSplitView1Opened(Sender: TObject);
 begin
-     sShellTreeView1.SetFocus;
+  sShellTreeView1.SetFocus;
 end;
 
 procedure TfMain.sTVMediasChange(Sender: TObject; Node: TTreeNode);
@@ -2070,7 +2084,8 @@ begin
     aImage.Picture.Assign(Nil);
     aImage.Refresh;
     Application.ProcessMessages;
-    aImage.Picture.BitMap.Assign(Image2.Picture.BitMap);
+    //aImage.Picture.BitMap.Assign(GetNoCoverImage);
+    GetNoCoverImage(aImage.Picture);
   end;
 end;
 
@@ -2125,11 +2140,12 @@ end;
 procedure TfMain.OpenRollOuts(var m: Tmsg);
 begin
   sROPPlaylist.ChangeState(false, True);
-  //sROPMedia.ChangeState(false, True);
+  // sROPMedia.ChangeState(false, True);
   image1.Picture.Assign(Nil);
   image1.Refresh;
   Application.ProcessMessages;
-  image1.Picture.BitMap.Assign(Image2.Picture.BitMap);
+  //image1.Picture.BitMap.Assign(GetNoCoverImage);
+  GetNoCoverImage(image1.Picture);
   Application.ProcessMessages;
 end;
 
