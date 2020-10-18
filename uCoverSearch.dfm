@@ -24,6 +24,8 @@ object fCoverSearch: TfCoverSearch
     Align = alTop
     Caption = 'Infos'
     TabOrder = 0
+    ExplicitLeft = -1
+    ExplicitTop = -5
     object seArtist: TsEdit
       Left = 49
       Top = 16
@@ -100,8 +102,7 @@ object fCoverSearch: TfCoverSearch
       Picture.Data = {07544269746D617000000000}
       Stretch = True
       ExplicitLeft = 6
-      ExplicitTop = 6
-      ExplicitWidth = 300
+      ExplicitTop = 5
     end
     object Memo1: TMemo
       Left = 16

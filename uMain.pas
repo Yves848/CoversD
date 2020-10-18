@@ -22,7 +22,6 @@ type
     sSkinProvider1: TsSkinProvider;
     sSkinManager1: TsSkinManager;
     pnToolbar: TsPanel;
-    sTVMedias: TsTreeView;
     pnToolbarTreeView: TsPanel;
     pnStatus: TsPanel;
     sILIcons: TsAlphaImageList;
@@ -124,7 +123,7 @@ type
     sILBtns: TsAlphaImageList;
     sAlphaHints1: TsAlphaHints;
     sILNoCover: TsAlphaImageList;
-    sSBFiles: TsScrollBox;
+    sButton3: TsButton;
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
     procedure sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
@@ -180,6 +179,7 @@ type
     procedure sBitBtn1Click(Sender: TObject);
     procedure sAlphaHints1ShowHint(var HintStr: string; var CanShow: Boolean; var HintInfo: THintInfo; var Frame: TFrame);
     procedure btnUtilsClick(Sender: TObject);
+    procedure sButton3Click(Sender: TObject);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -212,7 +212,6 @@ type
     function AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): Integer; overload;
     Procedure AddFolderToGrid(sFolder: String);
     function AddFileToGrid(sFile: String): Integer;
-    function AddFileToScrollBox(sFile : String): Integer;
     Procedure AddFileToGridTH;
     Procedure AddToPlayListTH;
     procedure GetImgLink;
@@ -529,23 +528,10 @@ end;
 
 procedure TfMain.AddFileToGridTH;
 begin
-  //AddFileToGrid(sFile);
-  AddFileToScrollBox(sFile);
+  AddFileToGrid(sFile);
+  //AddFileToScrollBox(sFile);
 end;
 
-function TfMain.AddFileToScrollBox(sFile: String): Integer;
-var
-   aFrame : tFrame2;
-begin
-
-    aFrame := tFrame2.Create(self);
-    aFrame.Name := format('FrameFile%d',[dFileFrames.Count +1]);
-    inc(i);
-    aFrame.Top := 64000;
-    aFrame.Parent := sSBFiles;
-    dFileFrames.Add(aFrame.Name,aFrame);
-    
-end;
 
 
 procedure TfMain.AddFolderToGrid(sFolder: String);
@@ -730,61 +716,61 @@ begin
 end;
 
 procedure TfMain.addfileName;
-var
-  mediaFile: tMediaFile;
-  aParentNode: TTreeNode;
-  aNode: TTreeNode;
-  sPath, sFile: String;
-  isDirectory: Boolean;
+//var
+//  mediaFile: tMediaFile;
+//  aParentNode: TTreeNode;
+//  aNode: TTreeNode;
+//  sPath, sFile: String;
+//  isDirectory: Boolean;
 begin
-  //
-  isDirectory := TDirectory.Exists(sFileName);
-  if not isDirectory then
-  begin
-    // File to Add .....
-    sPath := tpath.GetDirectoryName(sFileName);
-    sFile := tpath.GetFileNameWithoutExtension(sFileName);
-  end
-  else
-  begin
-    sPath := sFileName;
-    sFile := sFileName;
-  end;
-
-  aParentNode := findNode(sPath);
-  if aParentNode = nil then
-  begin
-    if fileexists(sFileName) then
-    begin
-      mediaFile := tMediaFile.Create(sFileName);
-      aNode := sTVMedias.Items.AddObject(nil, sFile, mediaFile);
-      aNode.ImageIndex := 0;
-    end
-    else
-    begin
-      aParentNode := sTVMedias.Items.Add(nil, sFile);
-      if TDirectory.Exists(sFileName) then
-      begin
-        aParentNode.HasChildren := True;
-        aParentNode.ImageIndex := 2;
-      end;
-    end;
-  end
-  else
-  begin
-    mediaFile := tMediaFile.Create(sFileName);
-    aNode := sTVMedias.Items.AddChildObject(aParentNode, sFile, mediaFile);
-    aNode.ImageIndex := 0;
-    if mediaFile.Tags.CoverArts.Count > 0 then
-      aNode.ImageIndex := 1;
-    if TDirectory.Exists(sFileName) then
-    begin
-      aNode.HasChildren := True;
-      aNode.ImageIndex := 2;
-    end;
-  end;
-  SetPBPosition;
-  Application.ProcessMessages;
+//  //
+//  isDirectory := TDirectory.Exists(sFileName);
+//  if not isDirectory then
+//  begin
+//    // File to Add .....
+//    sPath := tpath.GetDirectoryName(sFileName);
+//    sFile := tpath.GetFileNameWithoutExtension(sFileName);
+//  end
+//  else
+//  begin
+//    sPath := sFileName;
+//    sFile := sFileName;
+//  end;
+//
+//  aParentNode := findNode(sPath);
+//  if aParentNode = nil then
+//  begin
+//    if fileexists(sFileName) then
+//    begin
+//      mediaFile := tMediaFile.Create(sFileName);
+//      aNode := sTVMedias.Items.AddObject(nil, sFile, mediaFile);
+//      aNode.ImageIndex := 0;
+//    end
+//    else
+//    begin
+//      aParentNode := sTVMedias.Items.Add(nil, sFile);
+//      if TDirectory.Exists(sFileName) then
+//      begin
+//        aParentNode.HasChildren := True;
+//        aParentNode.ImageIndex := 2;
+//      end;
+//    end;
+//  end
+//  else
+//  begin
+//    mediaFile := tMediaFile.Create(sFileName);
+//    aNode := sTVMedias.Items.AddChildObject(aParentNode, sFile, mediaFile);
+//    aNode.ImageIndex := 0;
+//    if mediaFile.Tags.CoverArts.Count > 0 then
+//      aNode.ImageIndex := 1;
+//    if TDirectory.Exists(sFileName) then
+//    begin
+//      aNode.HasChildren := True;
+//      aNode.ImageIndex := 2;
+//    end;
+//  end;
+//  SetPBPosition;
+//  Application.ProcessMessages;
 
 end;
 
@@ -1053,21 +1039,21 @@ begin
   Result := Nil;
   i := 0;
 
-  while i <= sTVMedias.Items.Count - 1 do
-  begin
-    if sTVMedias.Items[i].Text = sLabel then
-    begin
-      Result := sTVMedias.Items[i];
-      i := sTVMedias.Items.Count;
-    end;
-    inc(i);
-  end;
-  if Result = nil then
-  begin
-    sParent := TDirectory.GetParent(sLabel);
-    if sParent <> '' then
-      Result := findNode(sParent);
-  end;
+//  while i <= sTVMedias.Items.Count - 1 do
+//  begin
+//    if sTVMedias.Items[i].Text = sLabel then
+//    begin
+//      Result := sTVMedias.Items[i];
+//      i := sTVMedias.Items.Count;
+//    end;
+//    inc(i);
+//  end;
+//  if Result = nil then
+//  begin
+//    sParent := TDirectory.GetParent(sLabel);
+//    if sParent <> '' then
+//      Result := findNode(sParent);
+//  end;
 
 end;
 
@@ -1730,6 +1716,14 @@ begin
   end;
 end;
 
+procedure TfMain.sButton3Click(Sender: TObject);
+begin
+  if (sPanel1.FindChildControl('FrameFile01') <> Nil) then
+    begin
+      tFrame2(sPanel1.FindChildControl('FrameFile01')).width := 500;
+    end;
+end;
+
 procedure TfMain.btnRegexClick(Sender: TObject);
 begin
   ExtractTags(sgList.Row, false);
@@ -1737,11 +1731,15 @@ end;
 
 procedure TfMain.btnUtilsClick(Sender: TObject);
 var
-   fDeleteCover : tfDeleteCover;
+   fRegExFrame : tFrame2;
 begin
-   fDeleteCover := TfDeleteCover.Create(Self);
-   fDeleteCover.ShowModal;
-   fDEleteCover.Free;
+    //sSB1.SkinData.BeginUpdate;
+    fRegExFrame := tFrame2.Create(self);
+    fREgExFrame.Name := 'FrameFile01';
+    fREgExFrame.Top := 64000;
+    fRegExFrame.align := alright;
+    fRegExFrame.Parent := sPanel1;
+    //sSb1.SkinData.EndUpdate(True);
 end;
 
 procedure TfMain.sButton4Click(Sender: TObject);
@@ -2200,34 +2198,34 @@ var
   index: Integer;
   aMediaFile: tMediaFile;
 begin
-  if Key = VK_RETURN then
-  begin
-    aNode := sTVMedias.Selected;
-    if aNode.HasChildren then // The node is a folder
-    begin
-      // AddToPlayList(aNode, False);
-    end
-    else
-    begin
-      if Assigned(aNode.data) then
-      begin
-        // index := AddToPlayList(tMediaFile(aNode.data).Tags);
-        if not(ssCtrl in Shift) then
-        begin
-          if (ssShift in Shift) then
-            BASS_ChannelStop(Channel);
-          if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
-          begin
-            slbPlaylist.ItemIndex := index;
-            PlayStream(tMediaFile(slbPlaylist.Items.Objects[index]).Tags.FileName);
-          end;
-
-        end
-
-      end;
-    end;
-    removeKeyFromStack;
-  end;
+//  if Key = VK_RETURN then
+//  begin
+//    aNode := sTVMedias.Selected;
+//    if aNode.HasChildren then // The node is a folder
+//    begin
+//      // AddToPlayList(aNode, False);
+//    end
+//    else
+//    begin
+//      if Assigned(aNode.data) then
+//      begin
+//        // index := AddToPlayList(tMediaFile(aNode.data).Tags);
+//        if not(ssCtrl in Shift) then
+//        begin
+//          if (ssShift in Shift) then
+//            BASS_ChannelStop(Channel);
+//          if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
+//          begin
+//            slbPlaylist.ItemIndex := index;
+//            PlayStream(tMediaFile(slbPlaylist.Items.Objects[index]).Tags.FileName);
+//          end;
+//
+//        end
+//
+//      end;
+//    end;
+//    removeKeyFromStack;
+//  end;
 
 end;
 
@@ -2311,8 +2309,7 @@ begin
   end;
   if bConfirm then
   begin
-    //
-    sSBFiles.SkinData.BeginUpdate;
+    sgList.BeginUpdate;
     iMax := Length(aFiles);
     i := 0;
     while i <= Length(aFiles) - 1 do
@@ -2332,15 +2329,13 @@ begin
         end;
       end;
       inc(i);
-
     end;
     iProgress := iMax;
     thListMP3.Synchronize(TfMain(Params).SetPBPosition);
-    sSBFiles.SkinData.EndUpdate(true);
     iProgress := 0;
     thListMP3.Synchronize(TfMain(Params).SetPBPosition);
     thListMP3.Synchronize(TfMain(Params).RefreshTagsCombos);
-
+    sgList.EndUpdate;
   end;
 
 end;
@@ -2487,7 +2482,7 @@ end;
 
 procedure TfMain.updateTV;
 begin
-  sTVMedias.Refresh;
+  //sTVMedias.Refresh;
 end;
 
 procedure TfMain.UpdateVuMetre(LeftLevel, RightLevel: Integer);

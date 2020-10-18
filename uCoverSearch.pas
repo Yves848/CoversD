@@ -9,7 +9,7 @@ uses
   sLabel, Vcl.Grids, JvExGrids, JvStringGrid, sEdit, JvComponentBase,
   JvThread, IdComponent, uSearchImage, xSuperObject,
   IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding,
-  JPEG, PNGImage, GIFImg, TagsLibrary, utypes, acImage, sButton, AdvUtil, AdvObj, BaseGrid, AdvGrid, IdBaseComponent;
+  JPEG, PNGImage, GIFImg, TagsLibrary, utypes, acImage, sButton, AdvUtil, AdvObj, BaseGrid, AdvGrid, IdBaseComponent, sScrollBox;
 
 type
 

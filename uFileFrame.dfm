@@ -34,6 +34,7 @@ object Frame2: TFrame2
     Align = alLeft
     TabOrder = 0
     Text = 'sEdit1'
+    ExplicitHeight = 21
   end
   object sEdit2: TsEdit
     Left = 295
@@ -43,7 +44,7 @@ object Frame2: TFrame2
     Align = alLeft
     TabOrder = 1
     Text = 'sEdit1'
-    ExplicitLeft = 335
+    ExplicitHeight = 21
   end
   object sPopupBox1: TsPopupBox
     Left = 943
@@ -55,7 +56,6 @@ object Frame2: TFrame2
     Text = ''
     CheckOnExit = True
     PopupForm = fRegEx.Owner
-    ExplicitLeft = 750
     ExplicitHeight = 21
   end
   object sEdit3: TsEdit
@@ -66,6 +66,7 @@ object Frame2: TFrame2
     Align = alLeft
     TabOrder = 3
     Text = 'sEdit1'
+    ExplicitHeight = 21
   end
   object sFrameAdapter1: TsFrameAdapter
     Left = 1024

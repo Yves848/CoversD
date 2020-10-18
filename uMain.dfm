@@ -75,6 +75,8 @@ object fMain: TfMain
         Caption = 'Utils'
         TabOrder = 0
         OnClick = btnUtilsClick
+        ExplicitLeft = 103
+        ExplicitTop = 3
       end
       object bsRegister: TsButton
         Left = 1768
@@ -101,6 +103,19 @@ object fMain: TfMain
         ShowHint = True
         TabOrder = 2
         OnClick = sBitBtn1Click
+      end
+      object sButton3: TsButton
+        Left = 225
+        Top = 1
+        Width = 75
+        Height = 51
+        Align = alLeft
+        Caption = 'sButton3'
+        TabOrder = 3
+        OnClick = sButton3Click
+        ExplicitLeft = 336
+        ExplicitTop = 16
+        ExplicitHeight = 25
       end
     end
     object pnStatus: TsPanel
@@ -2637,21 +2652,8 @@ object fMain: TfMain
           SortSettings.HeaderMirrorColor = clWhite
           SortSettings.HeaderMirrorColorTo = clWhite
           Version = '8.4.7.0'
-        end
-        object sSBFiles: TsScrollBox
-          Left = 0
-          Top = 0
-          Width = 1446
-          Height = 576
-          HorzScrollBar.Tracking = True
-          VertScrollBar.Tracking = True
-          Align = alClient
-          AutoMouseWheel = True
-          TabOrder = 1
-          ExplicitLeft = 128
-          ExplicitTop = 168
-          ExplicitWidth = 185
-          ExplicitHeight = 41
+          ExplicitLeft = 5
+          ExplicitTop = 1
         end
       end
       object ropVisual: TsRollOutPanel
@@ -3776,6 +3778,8 @@ object fMain: TfMain
                 Font.Name = 'Tahoma'
                 Font.Style = [fsBold]
                 ParentFont = False
+                ExplicitLeft = 6
+                ExplicitTop = 27
                 object sLabelFX2: TsLabelFX
                   Left = 103
                   Top = 6
@@ -4259,21 +4263,6 @@ object fMain: TfMain
           UseShellImages = False
           AutoRefresh = False
           ShowExt = seSystem
-        end
-        object sTVMedias: TsTreeView
-          Left = 5
-          Top = 54
-          Width = 479
-          Height = 884
-          Align = alClient
-          Indent = 19
-          MultiSelect = True
-          MultiSelectStyle = [msControlSelect, msShiftSelect]
-          TabOrder = 2
-          Visible = False
-          OnChange = sTVMediasChange
-          OnExpanding = sTVMediasExpanding
-          OnKeyDown = sTVMediasKeyDown
         end
       end
     end
@@ -7220,7 +7209,6 @@ object fMain: TfMain
           8C848484843DFE5F8001007FF21F23217044340000000049454E44AE426082}
         OriginName = 'FM.asz'
       end>
-    Options.ScaleMode = smCustomPPI
     SkinDirectory = 
       'C:\Users\yvesg\Documents\Embarcadero\Studio\21.0\CatalogReposito' +
       'ry\acnt_regdx10sydney\Skins'
