@@ -24,6 +24,8 @@ type
     seTo: TsEdit;
     sButton1: TsButton;
     procedure sButton1Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -40,6 +42,16 @@ implementation
 {$R *.dfm}
 
 
+
+procedure TfRegEx.FormActivate(Sender: TObject);
+begin
+  sButton1.Caption := 'Activate';
+end;
+
+procedure TfRegEx.FormShow(Sender: TObject);
+begin
+   sButton1.caption := 'Show';
+end;
 
 function TfRegEx.replace(const Match: tMatch; sRes : String): string;
 begin

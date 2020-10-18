@@ -3,7 +3,7 @@ object Frame1: TFrame1
   Top = 0
   Width = 687
   Height = 82
-  Align = alTop
+  Align = alBottom
   AutoScroll = True
   DoubleBuffered = True
   ParentDoubleBuffered = False

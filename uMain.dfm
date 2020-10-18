@@ -75,8 +75,6 @@ object fMain: TfMain
         Caption = 'Utils'
         TabOrder = 0
         OnClick = btnUtilsClick
-        ExplicitLeft = 103
-        ExplicitTop = 3
       end
       object bsRegister: TsButton
         Left = 1768
@@ -2639,6 +2637,21 @@ object fMain: TfMain
           SortSettings.HeaderMirrorColor = clWhite
           SortSettings.HeaderMirrorColorTo = clWhite
           Version = '8.4.7.0'
+        end
+        object sSBFiles: TsScrollBox
+          Left = 0
+          Top = 0
+          Width = 1446
+          Height = 576
+          HorzScrollBar.Tracking = True
+          VertScrollBar.Tracking = True
+          Align = alClient
+          AutoMouseWheel = True
+          TabOrder = 1
+          ExplicitLeft = 128
+          ExplicitTop = 168
+          ExplicitWidth = 185
+          ExplicitHeight = 41
         end
       end
       object ropVisual: TsRollOutPanel

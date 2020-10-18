@@ -15,6 +15,8 @@ type
     sEdit2: TsEdit;
     sPopupBox1: TsPopupBox;
     sSplitter2: TsSplitter;
+    sEdit3: TsEdit;
+    sSplitter3: TsSplitter;
   private
     { Déclarations privées }
   public

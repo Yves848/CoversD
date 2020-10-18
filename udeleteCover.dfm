@@ -36,4 +36,13 @@ object fDeleteCover: TfDeleteCover
     AutoMouseWheel = True
     TabOrder = 1
   end
+  object sButton2: TsButton
+    Left = 24
+    Top = 39
+    Width = 75
+    Height = 25
+    Caption = 'sButton2'
+    TabOrder = 2
+    OnClick = sButton2Click
+  end
 end

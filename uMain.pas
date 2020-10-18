@@ -12,7 +12,8 @@ uses
   JvStringGrid, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, Generics.collections,
   NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, AdvMemo, acPNG,
   JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister, Vcl.Menus, System.RegularExpressions, sEdit, sComboBox,
-  sCheckBox, sPageControl, SynEditHighlighter, SynHighlighterJSON, System.StrUtils, sComboEdit, acPopupCtrls, uDM1, acAlphaHints, BtnListB;
+  sCheckBox, sPageControl, SynEditHighlighter, SynHighlighterJSON, System.StrUtils, sComboEdit, acPopupCtrls, uDM1, acAlphaHints, BtnListB,
+  sScrollBox;
 
 type
 
@@ -123,6 +124,7 @@ type
     sILBtns: TsAlphaImageList;
     sAlphaHints1: TsAlphaHints;
     sILNoCover: TsAlphaImageList;
+    sSBFiles: TsScrollBox;
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
     procedure sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
@@ -186,6 +188,7 @@ type
     Procedure ListCoverArts(aImage: TsImage; sFileName: String); overload;
     procedure OpenConfig;
     procedure downloadImage(sUrl: string);
+
   public
     { Déclarations publiques }
     Channel: HStream;
@@ -195,6 +198,7 @@ type
     delais: Integer;
     momentdown: tDateTime;
     dMultiChoices: tDictionary<String, TStrings>;
+    dFileFrames : tDictionary<String, tFrame>;
     procedure PlayStream(FileName: String);
     procedure addfileName;
     procedure setPBMax;
@@ -208,6 +212,7 @@ type
     function AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): Integer; overload;
     Procedure AddFolderToGrid(sFolder: String);
     function AddFileToGrid(sFile: String): Integer;
+    function AddFileToScrollBox(sFile : String): Integer;
     Procedure AddFileToGridTH;
     Procedure AddToPlayListTH;
     procedure GetImgLink;
@@ -265,7 +270,7 @@ implementation
 {$R *.dfm}
 
 uses
-  JvDynControlEngineVcl, acntUtils, acgpUtils, sVCLUtils, uRegEx;
+  JvDynControlEngineVcl, acntUtils, acgpUtils, sVCLUtils, uRegEx, uFileFrame;
 
 function TfMain.FormatTextWithEllipse(aText: string): string;
 const
@@ -524,8 +529,24 @@ end;
 
 procedure TfMain.AddFileToGridTH;
 begin
-  AddFileToGrid(sFile);
+  //AddFileToGrid(sFile);
+  AddFileToScrollBox(sFile);
 end;
+
+function TfMain.AddFileToScrollBox(sFile: String): Integer;
+var
+   aFrame : tFrame2;
+begin
+
+    aFrame := tFrame2.Create(self);
+    aFrame.Name := format('FrameFile%d',[dFileFrames.Count +1]);
+    inc(i);
+    aFrame.Top := 64000;
+    aFrame.Parent := sSBFiles;
+    dFileFrames.Add(aFrame.Name,aFrame);
+    
+end;
+
 
 procedure TfMain.AddFolderToGrid(sFolder: String);
 var
@@ -1133,8 +1154,8 @@ begin
   if ssAlt in Shift then
   begin
     case Key of
-      69:
-        showExplorer;
+//      69:
+//        showExplorer;
       80:
         showPlayList;
       VK_F1:
@@ -1222,7 +1243,7 @@ begin
     dMultiChoices.clear;
     dMultiChoices.Free;
   end;
-
+  dFileFrames := tDictionary<String, tFrame>.create;
   dMultiChoices := tDictionary<String, TStrings>.Create;
   pList := tStringList.Create;
   dMultiChoices.Add('ARTIST', pList);
@@ -2291,6 +2312,7 @@ begin
   if bConfirm then
   begin
     //
+    sSBFiles.SkinData.BeginUpdate;
     iMax := Length(aFiles);
     i := 0;
     while i <= Length(aFiles) - 1 do
@@ -2314,6 +2336,7 @@ begin
     end;
     iProgress := iMax;
     thListMP3.Synchronize(TfMain(Params).SetPBPosition);
+    sSBFiles.SkinData.EndUpdate(true);
     iProgress := 0;
     thListMP3.Synchronize(TfMain(Params).SetPBPosition);
     thListMP3.Synchronize(TfMain(Params).RefreshTagsCombos);
@@ -2460,6 +2483,7 @@ begin
   updatePlayingInfos(pMediaFile.Tags);
   pMediaFile.Destroy;
 end;
+
 
 procedure TfMain.updateTV;
 begin
