@@ -17,12 +17,24 @@
     {
       "Name": "[-]",
       "RegEx": "\\s?\\-\\s?"
+    },
+    {
+      "Name": "[S]",
+      "RegEx": "\\s?"
+    },
+    {
+      "Name": "[.]",
+      "RegEx": "\\.?"
     }
   ],
   "Counters": [
     {
       "Name": "[0]",
       "RegEx": "\\d{1,3}"
+    },
+    {
+      "Name": "[0].",
+      "RegEx": "\\d{1,3}."
     }
   ],
   "CommonPatterns": [
