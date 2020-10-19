@@ -4,8 +4,8 @@ object fRegEx: TfRegEx
   AlphaBlendValue = 0
   BorderStyle = bsNone
   Caption = 'RegEx'
-  ClientHeight = 498
-  ClientWidth = 961
+  ClientHeight = 166
+  ClientWidth = 370
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,41 +13,44 @@ object fRegEx: TfRegEx
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnActivate = FormActivate
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object sPanel1: TsPanel
     Left = 0
     Top = 0
-    Width = 961
-    Height = 498
+    Width = 370
+    Height = 166
     Align = alClient
     DoubleBuffered = True
     ParentDoubleBuffered = False
     SideShadow.Mode = ssmInternal
     SideShadow.Side = asBottom
     TabOrder = 0
+    ExplicitWidth = 387
+    ExplicitHeight = 171
     object sSpeedButton1: TsSpeedButton
       Left = 327
-      Top = 32
+      Top = 33
       Width = 23
       Height = 22
       Caption = '+'
+      OnClick = sSpeedButton1Click
     end
     object sSpeedButton2: TsSpeedButton
       Left = 327
-      Top = 63
+      Top = 65
       Width = 23
       Height = 22
       Caption = '+'
+      OnClick = sSpeedButton2Click
     end
     object sSpeedButton3: TsSpeedButton
-      Left = 326
+      Left = 327
       Top = 93
       Width = 23
       Height = 22
       Caption = '+'
+      OnClick = sSpeedButton3Click
     end
     object sSpeedButton4: TsSpeedButton
       Left = 326
@@ -56,20 +59,9 @@ object fRegEx: TfRegEx
       Height = 22
       Caption = '+'
     end
-    object sLResult: TsLabelFX
-      Left = 71
-      Top = 190
-      Width = 402
-      Height = 15
-      AutoSize = False
-      Caption = 'sLResult'
-      Angle = 0
-      Shadow.OffsetKeeper.LeftTop = 0
-      Shadow.OffsetKeeper.RightBottom = 2
-    end
     object sComboBox1: TsComboBox
       Left = 72
-      Top = 32
+      Top = 33
       Width = 249
       Height = 21
       BoundLabel.Active = True
@@ -96,7 +88,7 @@ object fRegEx: TfRegEx
         '[-]')
     end
     object sComboBox3: TsComboBox
-      Left = 71
+      Left = 72
       Top = 93
       Width = 249
       Height = 21
@@ -118,41 +110,6 @@ object fRegEx: TfRegEx
       BoundLabel.Caption = 'Free : '
       ItemIndex = -1
       TabOrder = 3
-    end
-    object seSource: TsEdit
-      Left = 71
-      Top = 163
-      Width = 402
-      Height = 21
-      TabOrder = 4
-      Text = 
-        '208-george_michael_and_elton_john-dont_let_the_sun_go_down_on_me' +
-        '.mp3'
-    end
-    object seFrom: TsEdit
-      Left = 72
-      Top = 211
-      Width = 130
-      Height = 21
-      TabOrder = 5
-      Text = '_'
-    end
-    object seTo: TsEdit
-      Left = 219
-      Top = 211
-      Width = 130
-      Height = 21
-      TabOrder = 6
-      Text = '*'
-    end
-    object sButton1: TsButton
-      Left = 72
-      Top = 248
-      Width = 75
-      Height = 25
-      Caption = 'sButton1'
-      TabOrder = 7
-      OnClick = sButton1Click
     end
   end
 end

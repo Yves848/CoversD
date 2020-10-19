@@ -74,9 +74,8 @@ object fMain: TfMain
         Align = alLeft
         Caption = 'Utils'
         TabOrder = 0
+        Visible = False
         OnClick = btnUtilsClick
-        ExplicitLeft = 103
-        ExplicitTop = 3
       end
       object bsRegister: TsButton
         Left = 1768
@@ -112,10 +111,8 @@ object fMain: TfMain
         Align = alLeft
         Caption = 'sButton3'
         TabOrder = 3
+        Visible = False
         OnClick = sButton3Click
-        ExplicitLeft = 336
-        ExplicitTop = 16
-        ExplicitHeight = 25
       end
     end
     object pnStatus: TsPanel
@@ -2652,8 +2649,6 @@ object fMain: TfMain
           SortSettings.HeaderMirrorColor = clWhite
           SortSettings.HeaderMirrorColorTo = clWhite
           Version = '8.4.7.0'
-          ExplicitLeft = 5
-          ExplicitTop = 1
         end
       end
       object ropVisual: TsRollOutPanel
@@ -2671,7 +2666,7 @@ object fMain: TfMain
           Align = alRight
           Picture.Data = {07544269746D617000000000}
           Stretch = True
-          ExplicitLeft = 1107
+          ExplicitLeft = 1111
           ExplicitTop = -4
         end
         object sPageControl2: TsPageControl
@@ -3778,8 +3773,6 @@ object fMain: TfMain
                 Font.Name = 'Tahoma'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitLeft = 6
-                ExplicitTop = 27
                 object sLabelFX2: TsLabelFX
                   Left = 103
                   Top = 6
@@ -3948,6 +3941,7 @@ object fMain: TfMain
                   TabOrder = 11
                   Text = '(.+)\s\-\s\d{1,3}\s\-\s(.+)'
                   OnChange = seRegExChange
+                  OnKeyUp = seRegExKeyUp
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = 15724527
                   Font.Height = -16
@@ -3956,6 +3950,7 @@ object fMain: TfMain
                   ParentFont = False
                   CheckOnExit = True
                   PopupForm = fRegEx.Owner
+                  OnBeforePopup = seRegExBeforePopup
                 end
                 object sCKReplace02: TsCheckBox
                   Left = 182
@@ -7237,8 +7232,8 @@ object fMain: TfMain
     ThirdParty.ThirdScrollBar = ' '
     ThirdParty.ThirdStaticText = ' '
     ThirdParty.ThirdNativePaint = ' '
-    Left = 480
-    Top = 65528
+    Left = 488
+    Top = 8
   end
   object sILIcons: TsAlphaImageList
     Items = <
@@ -7261,7 +7256,7 @@ object fMain: TfMain
           454E44AE426082}
       end>
     Left = 1040
-    Top = 24
+    Top = 8
     Bitmap = {}
   end
   object thListMP3: TJvThread
@@ -7271,20 +7266,22 @@ object fMain: TfMain
     FreeOnTerminate = True
     ThreadName = 'listMP3'
     OnExecute = thListMP3Execute
-    Left = 184
+    Left = 880
     Top = 8
   end
   object Timer1: TTimer
     Interval = 33
     OnTimer = Timer1Timer
-    Left = 648
-    Top = 65528
+    Left = 656
+    Top = 8
   end
   object sSaveDialog1: TsSaveDialog
-    Left = 592
+    Left = 600
+    Top = 8
   end
   object sOpenDialog1: TsOpenDialog
-    Left = 536
+    Left = 544
+    Top = 8
   end
   object sILButtons: TsAlphaImageList
     Height = 18
@@ -52305,7 +52302,8 @@ object fMain: TfMain
           0000F8000000E0000000E0000000800000008000000000000000000000000000
           000080000000C0000000E0000000F0000000F8000000FC300000FFFF0000}
       end>
-    Left = 432
+    Left = 440
+    Top = 8
     Bitmap = {}
   end
   object thDisplay: TJvThread
@@ -52314,7 +52312,8 @@ object fMain: TfMain
     RunOnCreate = True
     FreeOnTerminate = True
     OnExecute = thDisplayExecute
-    Left = 224
+    Left = 936
+    Top = 8
   end
   object thAddToPlayList: TJvThread
     Exclusive = True
@@ -52322,11 +52321,11 @@ object fMain: TfMain
     RunOnCreate = True
     FreeOnTerminate = True
     OnExecute = thAddToPlayListExecute
-    Left = 776
-    Top = 16
+    Left = 768
+    Top = 8
   end
   object PopupMenu1: TPopupMenu
-    Left = 288
+    Left = 344
     Top = 8
     object A1: TMenuItem
       Caption = 'Add......'
@@ -52336,7 +52335,8 @@ object fMain: TfMain
     end
   end
   object PopupMenu2: TPopupMenu
-    Left = 848
+    Left = 824
+    Top = 8
     object PopupMenu21: TMenuItem
       Caption = 'Search Cover'
       OnClick = PopupMenu21Click
@@ -52440,8 +52440,8 @@ object fMain: TfMain
           4C997D98DD292965059E17FE71DAD31A3EED3F3573F357015225AF0000000049
           454E44AE426082}
       end>
-    Left = 944
-    Top = 24
+    Left = 984
+    Top = 8
     Bitmap = {}
   end
   object sILTV: TsAlphaImageList
@@ -52516,7 +52516,7 @@ object fMain: TfMain
           4E533C97383736A387676919455114A55D7C0372DB37B781A267B40000000049
           454E44AE426082}
       end>
-    Left = 376
+    Left = 392
     Top = 8
     Bitmap = {}
   end

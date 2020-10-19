@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, sButton, Vcl.ExtCtrls, sPanel, Vcl.Buttons, sBitBtn, Vcl.Mask, sMaskEdit, sCustomComboEdit,
-  sComboEdit, sComboBox, sSpeedButton,System.RegularExpressions, sLabel, sEdit;
+  sComboEdit, sComboBox, sSpeedButton,System.RegularExpressions, sLabel, sEdit,acPopupCtrls;
 
 type
   TfRegEx = class(TForm)
@@ -18,18 +18,14 @@ type
     sSpeedButton3: TsSpeedButton;
     sComboBox4: TsComboBox;
     sSpeedButton4: TsSpeedButton;
-    seSource: TsEdit;
-    seFrom: TsEdit;
-    sLResult: TsLabelFX;
-    seTo: TsEdit;
-    sButton1: TsButton;
-    procedure sButton1Click(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
+    procedure sSpeedButton1Click(Sender: TObject);
+    procedure sSpeedButton2Click(Sender: TObject);
+    procedure sSpeedButton3Click(Sender: TObject);
   private
     { Déclarations privées }
   public
     { Déclarations publiques }
+    sEdit : TsPopupBox;
     function replace(const Match : tMatch; sRes : String): string;
   end;
 
@@ -43,31 +39,56 @@ implementation
 
 
 
-procedure TfRegEx.FormActivate(Sender: TObject);
-begin
-  sButton1.Caption := 'Activate';
-end;
-
-procedure TfRegEx.FormShow(Sender: TObject);
-begin
-   sButton1.caption := 'Show';
-end;
-
 function TfRegEx.replace(const Match: tMatch; sRes : String): string;
 begin
     result := sRes;
 end;
 
-procedure TfRegEx.sButton1Click(Sender: TObject);
+procedure TfRegEx.sSpeedButton1Click(Sender: TObject);
 var
-   regex : tRegEX;
-   sSource : String;
-   myEval : TMatchEvaluator;
+  iCaret : Integer;
+  sString : String;
 begin
-   sSource := seSource.text;
-   regex.Create(seFrom.Text);
-   //myEval := replace;
-   sLResult.caption := regEx.Replace(sSource,seTo.text);
+  iCaret := sEdit.SelStart;
+  sString := sEdit.Text;
+  if iCaret =  length(sEdit.Text) then
+    sString := sString +sCombobox1.Text
+  else
+     insert(sCombobox1.Text,sString,iCaret+1);
+  sEdit.Text := sString;
+  sEdit.SelStart := iCaret + length(sCombobox1.Text);
+end;
+
+procedure TfRegEx.sSpeedButton2Click(Sender: TObject);
+var
+  iCaret : Integer;
+  sString : String;
+begin
+  iCaret := sEdit.SelStart;
+  sString := sEdit.Text;
+  if iCaret =  length(sEdit.Text) then
+    sString := sString +sCombobox2.Text
+  else
+     insert(sCombobox2.Text,sString,iCaret+1);
+  sEdit.Text := sString;
+  sEdit.SelStart := iCaret + length(sCombobox2.Text);
+
+end;
+
+procedure TfRegEx.sSpeedButton3Click(Sender: TObject);
+var
+  iCaret : Integer;
+  sString : String;
+begin
+  iCaret := sEdit.SelStart;
+  sString := sEdit.Text;
+  if iCaret =  length(sEdit.Text) then
+    sString := sString +sCombobox3.Text
+  else
+     insert(sCombobox3.Text,sString,iCaret+1);
+  sEdit.Text := sString;
+  sEdit.SelStart := iCaret + length(sCombobox3.Text);
+
 end;
 
 end.

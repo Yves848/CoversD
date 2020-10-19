@@ -43,10 +43,15 @@ type
     Image1: TsImage;
     bsApply: TsButton;
     Memo1: TMemo;
-    sg1: tAdvStringGrid;
     IdHTTP1: TIdHTTP;
     sButton1: TsButton;
     sButton2: TsButton;
+    sSBCovers: TsScrollBox;
+    sPNRow0: TsPanel;
+    sPnRow1: TsPanel;
+    sPnRow2: TsPanel;
+    sBtnNext: TsButton;
+    sBtnPrev: TsButton;
     procedure thGetImagesExecute(Sender: TObject; Params: Pointer);
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -55,21 +60,29 @@ type
     procedure IdHTTP1WorkEnd(ASender: TObject; AWorkMode: TWorkMode);
     procedure sButton1Click(Sender: TObject);
     procedure bsApplyClick(Sender: TObject);
-    procedure sg1CellChanging(Sender: TObject; OldRow, OldCol, NewRow, NewCol: Integer; var Allow: Boolean);
     procedure sButton2Click(Sender: TObject);
+    procedure sBtnNextClick(Sender: TObject);
+    procedure sBtnPrevClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
+
     { Déclarations privées }
   public
     { Déclarations publiques }
     artist, title: string;
     sFile: String;
     pHandle: tHandle;
-    procedure StartSearch;
+    iStart: Integer;
+    procedure StartSearch(const start: Integer = 1);
     procedure downloadImage(sUrl: string);
     procedure onWork(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
     procedure onWorkBegin(ASender: TObject; AWorkMode: TWorkMode; AWorkCountMax: Int64);
     procedure SaveTags(Sender: TObject);
     procedure refreshCell0(aCol, aRow: Integer);
+    procedure removeFrames;
+    procedure ImageClick(Sender: TObject);
+    procedure GetImage(sNum: String);
   end;
 
 var
@@ -78,6 +91,8 @@ var
 
 implementation
 
+uses
+  uFrameCover;
 {$R *.dfm}
 
 procedure TfCoverSearch.FormCreate(Sender: TObject);
@@ -87,17 +102,58 @@ begin
     bsApply.Enabled := isRegistered;
     bsApply.Caption := bsApply.Caption + ' (unregistered)';
   end;
-  {$IFNDEF DEBUG}
-     Memo1.visible := false;
-  {$ENDIF}
+{$IFNDEF DEBUG}
+  Memo1.visible := false;
+{$ENDIF}
+  iStart := 1;
+end;
+
+procedure TfCoverSearch.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if not(seTitle.Focused or seArtist.Focused) then
+  begin
+    if Key = VK_RIGHT then
+      sBtnNextClick(nil);
+    if Key = VK_LEFT then
+      sBtnPrevClick(nil);
+  end;
+end;
+
+procedure TfCoverSearch.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not(seTitle.Focused or seArtist.Focused) then
+  begin
+    case Key of
+      '1' .. '9':
+        begin
+          GetImage(Key);
+        end;
+    end;
+  end;
 end;
 
 procedure TfCoverSearch.FormShow(Sender: TObject);
 begin
   seArtist.Text := artist;
   seTitle.Text := title;
-  sg1.SetFocus;
+  sSBCovers.SetFocus;
+{$IFDEF DEBUG}
+  Memo1.Clear;
+{$ENDIF}
   StartSearch;
+end;
+
+procedure TfCoverSearch.GetImage(sNum: String);
+var
+  aComponent: tComponent;
+  aFrame: tFrameCover;
+begin
+  aComponent := sSBCovers.FindComponent('aFrameCover' + sNum);
+  if aComponent <> Nil then
+  begin
+    aFrame := tFrameCover(aComponent);
+    ImageClick(aFrame.sImage1);
+  end;
 end;
 
 procedure TfCoverSearch.IdHTTP1Work(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
@@ -115,6 +171,18 @@ begin
   Memo1.Lines.Add('WorkEnd');
 end;
 
+procedure TfCoverSearch.ImageClick(Sender: TObject);
+var
+  aFrame: tFrame;
+begin
+  if TsImage(Sender).Owner.ClassName = 'tFrameCover' then
+  begin
+    aFrame := tFrameCover(TsImage(Sender).Owner);
+    Memo1.Lines.Add(aFrame.Name);
+    Image1.Picture.Assign(TsImage(Sender).Picture);
+  end;
+end;
+
 procedure TfCoverSearch.onWork(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
 begin
 
@@ -126,19 +194,36 @@ begin
 end;
 
 procedure TfCoverSearch.refreshCell0;
-var
-  allow : boolean;
 begin
-  sg1.Col := 0;
-  sg1.Row := 0;
-  sg1.SetFocus;
-  sg1CellChanging(self,0,0,0,0,allow);
-  //sg1ClickCell(Self, 0, 0);
+end;
+
+procedure TfCoverSearch.removeFrames;
+var
+  aFrame: tFrameCover;
+  procedure remove(aPanel: TsPanel);
+  begin
+    while sSBCovers.ComponentCount > 0 do
+    begin
+      if sSBCovers.Components[0].ClassNameIs('tFrameCover') then
+      begin
+        aFrame := tFrameCover(sSBCovers.Components[0]);
+        aFrame.Free;
+      end;
+    end;
+  end;
+
+begin
+  sSBCovers.SkinData.BeginUpdate;
+  remove(sPNRow0);
+  // remove(sPnRow1);
+  // remove(sPnRow2);
+  sSBCovers.SkinData.EndUpdate(true);
+
 end;
 
 procedure TfCoverSearch.sButton1Click(Sender: TObject);
 begin
-  StartSearch;
+  StartSearch(iStart);
 end;
 
 procedure TfCoverSearch.sButton2Click(Sender: TObject);
@@ -146,17 +231,18 @@ begin
   Close;
 end;
 
-procedure TfCoverSearch.sg1CellChanging(Sender: TObject; OldRow, OldCol, NewRow, NewCol: Integer; var Allow: Boolean);
-var
-  Picture: tPicture;
+procedure TfCoverSearch.sBtnNextClick(Sender: TObject);
 begin
-  if sg1.Objects[NewCol, NewRow] <> nil then
-  begin
-    // downloadImage(tMediaImg(sg1.Objects[aCol,aRow]).Link);
-    Picture := sg1.GetPicture(NewCol, NewRow);
-    Image1.Picture.Assign(Picture);
-  end;
+  Inc(iStart, 10);
+  StartSearch(iStart);
+end;
 
+procedure TfCoverSearch.sBtnPrevClick(Sender: TObject);
+begin
+  Dec(iStart, 10);
+  if iStart < 1 then
+    iStart := 1;
+  StartSearch(iStart);
 end;
 
 procedure TfCoverSearch.SaveTags(Sender: TObject);
@@ -228,7 +314,7 @@ end;
 
 procedure TfCoverSearch.bsApplyClick(Sender: TObject);
 begin
-  //SaveTags(Sender);
+  // SaveTags(Sender);
   PostMessage(Application.MainForm.Handle, WM_REFRESH_COVER, 0, 0);
   Close;
 end;
@@ -273,7 +359,7 @@ begin
   end;
 end;
 
-procedure TfCoverSearch.StartSearch;
+procedure TfCoverSearch.StartSearch(const start: Integer);
 var
   aGoogleSearch: tGoogleSearch;
   jsResult: ISuperObject;
@@ -283,83 +369,69 @@ var
   pMediaImg: tMediaImg;
   Col, Row: Integer;
   nbPass: Integer;
-  Key2 : String;
+  Key2: String;
+  aFrameCover: tFrameCover;
+  aParentPanel: TsPanel;
+  iPanelNumber: Integer;
 
   procedure addToGrid;
+  const
+    sPanelName = 'sPnRow%d';
   var
     thDownload: tDownloadThread;
   begin
     i := 0;
+    Memo1.Lines.Add('addToGrid ' + inttostr(i));
+    sSBCovers.SkinData.BeginUpdate;
     while i <= jsArray.length - 1 do
     // while i <= 2 do
     begin
-      if sg1.Objects[Col, Row] <> nil then
-      begin
-        inc(Col);
-        if Col > sg1.ColCount - 1 then
-        begin
-          sg1.RowCount := sg1.RowCount + 1;
-          Row := sg1.RowCount - 1;
-          Col := 0;
-        end;
-      end;
 
       pMediaImg := tMediaImg.create;
       pMediaImg.TNLink := jsArray.O[i].S[GS_THUMBNAILLINK];
       pMediaImg.Link := jsArray.O[i].S[GS_LINK];
-      sg1.Objects[Col, Row] := pMediaImg;
-      thDownload := tDownloadThread.create(Col, Row, sg1, refreshCell0);
-      thDownload.Start;
-      inc(i);
 
+
+      iPanelNumber := round(i div 3);
+      aParentPanel := TsPanel(self.FindComponent(format(sPanelName, [iPanelNumber])));
+      aFrameCover := tFrameCover.create(sSBCovers);
+      aFrameCover.Name := 'aFrameCover' + inttostr(i + 1);
+      aFrameCover.sUrl := jsArray.O[i].S[GS_LINK];
+      aFrameCover.sLabel1.Caption := inttostr(i + 1);
+      aFrameCover.sImage1.OnClick := ImageClick;
+      aFrameCover.Left := 1000;
+      aFrameCover.parent := aParentPanel;
+
+      aFrameCover.StartDownload;
+      Inc(i);
     end;
+    sSBCovers.SkinData.EndUpdate(true);
   end;
 
 begin
-  Row := 0;
-  while Row <= sg1.RowCount - 1 do
-  begin
-    Col := 0;
-    while Col <= sg1.ColCount - 1 do
-    begin
-      if sg1.Objects[Col, Row] <> nil then
-      begin
-        tMediaImg(sg1.Objects[Col, Row]).destroy;
-      end;
-      inc(Col)
-    end;
-    inc(Row);
-  end;
 
-  sg1.Clear;
-  sg1.RowCount := 1;
-  sg1.ColCount := 3;
-  sg1.FixedCols := 0;
-  sg1.DefaultColWidth := 250;
-  sg1.DefaultRowHeight := 250;
-  sg1.ScrollBars := TScrollStyle.ssNone;
-  // aNode := sTVMedias.Selected;
-
+  removeFrames;
+  sBtnPrev.Enabled := (start > 1);
   Col := 0;
   Row := 0;
 
   nbPass := 0;
-  while nbPass < 1 do
-  begin
-    Memo1.Clear;
-    Memo1.Lines.Add('Begin : ' + formatdatetime('hh:nn:ss:zzz', time));
-    key2 := seTitle.Text;
-    if seTitle.BoundLabel.Caption = 'Title' then
-       key2 := Key2 + ' cover';
+{$IFDEF DEBUG}
+  Memo1.Lines.Add(inttostr(nbPass) + ' Begin : ' + formatdatetime('hh:nn:ss:zzz', time));
+{$ENDIF}
+  Key2 := seTitle.Text;
+  if seTitle.BoundLabel.Caption = 'Title' then
+    Key2 := Key2 + ' cover';
 
-    aGoogleSearch := tGoogleSearch.create(seArtist.Text + ' ' + key2, (nbPass * 10) + 1);
-    jsResult := aGoogleSearch.getImages;
-    jsArray := jsResult.A[GS_ITEMS];
-    Memo1.Lines.Add('End : ' + formatdatetime('hh:nn:ss:zzz', time));
-    addToGrid;
-    inc(nbPass);
-  end;
-  // thGetImages.Execute(self);
+  aGoogleSearch := tGoogleSearch.create(seArtist.Text + ' ' + Key2, start);
+  jsResult := aGoogleSearch.getImages;
+  jsArray := jsResult.A[GS_ITEMS];
+
+{$IFDEF DEBUG}
+  Memo1.Lines.Add(inttostr(nbPass) + 'End : ' + formatdatetime('hh:nn:ss:zzz', time));
+{$ENDIF}
+  addToGrid;
+
 end;
 
 procedure TfCoverSearch.thGetImagesExecute(Sender: TObject; Params: Pointer);
@@ -383,7 +455,6 @@ begin
   IdHTTP1.onWork := onWork;
   IdSSL.SSLOptions.Method := sslvTLSv1_2;
   IdSSL.SSLOptions.Mode := sslmUnassigned;
-  sg1 := TfCoverSearch(Params).sg1;
   Row := 0;
   while Row <= sg1.RowCount - 1 do
   begin
@@ -406,14 +477,12 @@ begin
 
               tMediaImg(sg1.Objects[Col, Row]).Bitmap := tPicture.create;
               tMediaImg(sg1.Objects[Col, Row]).Bitmap.Assign(jpgImg);
-              // sg1.AddBitmap(Col, Row,tMediaImg(sg1.Objects[Col, row]).BitMap.Bitmap,false,tCEllHAlign.haCenter, tCellVAlign.vaCenter);
-              sg1.AddPicture(Col, Row, tMediaImg(sg1.Objects[Col, Row]).Bitmap, false, tStretchMode.Shrink, 2, haCenter, vaCenter);
-              // resize img
+             // resize img
               sg1.Refresh;
               Application.ProcessMessages;
             end;
           end;
-          inc(Col);
+          Inc(Col);
         end;
       except
         on e: exception do
@@ -421,7 +490,7 @@ begin
           // sMemo1.Lines.Add('   EXCEPTION: ' + E.Message);
         end;
       end;
-      inc(Row)
+      Inc(Row)
     finally
       FreeAndNil(jpgImg);
       FreeAndNil(MS);
@@ -529,6 +598,7 @@ procedure tDownloadThread.onWorkEnd(ASender: TObject; AWorkMode: TWorkMode);
 begin
   // Download finished
   fGrid.Ints[fCol, fRow] := 0;
+
 end;
 
 end.

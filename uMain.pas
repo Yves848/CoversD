@@ -180,6 +180,8 @@ type
     procedure sAlphaHints1ShowHint(var HintStr: string; var CanShow: Boolean; var HintInfo: THintInfo; var Frame: TFrame);
     procedure btnUtilsClick(Sender: TObject);
     procedure sButton3Click(Sender: TObject);
+    procedure seRegExBeforePopup(Sender: TObject);
+    procedure seRegExKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -198,13 +200,10 @@ type
     delais: Integer;
     momentdown: tDateTime;
     dMultiChoices: tDictionary<String, TStrings>;
-    dFileFrames : tDictionary<String, tFrame>;
     procedure PlayStream(FileName: String);
-    procedure addfileName;
     procedure setPBMax;
     procedure SetPBPosition;
     procedure ResetPB;
-    procedure ExpandNode;
     procedure updateTV;
     procedure initGrid;
     procedure removeKeyFromStack;
@@ -245,7 +244,7 @@ type
     procedure OpenRollOuts(var m: Tmsg); Message WM_OPEN_ROLLOUTS;
     procedure RefreshVisuals;
     function RxReplace(const Match: tMatch): String;
-    Procedure GetNoCoverImage(aPicture : tPicture);
+    Procedure GetNoCoverImage(aPicture: tPicture);
   end;
 
 var
@@ -262,7 +261,6 @@ var
   Params: TSpectrum3D_CreateParams;
   Settings: TSpectrum3D_Settings;
   fCoverSearch: tfCoverSearch;
-  // GlobalMediaFile: tMediaFile;
 
 implementation
 
@@ -400,8 +398,6 @@ begin
 
   fCoverSearch.image1.Picture.Assign(Nil);
   fCoverSearch.ShowModal;
-  // fCoverSearch.sg1.SetFocus;
-  // fCoverSearch.StartSearch;
 end;
 
 procedure TfMain.RefreshCover(ARow: Integer);
@@ -520,7 +516,6 @@ begin
     else
       sgList.AddImageIdx(5, ARow, 1, haCenter, vaCenter);
   finally
-    // pMediaFile.Destroy;
   end;
 
   Application.ProcessMessages;
@@ -529,10 +524,7 @@ end;
 procedure TfMain.AddFileToGridTH;
 begin
   AddFileToGrid(sFile);
-  //AddFileToScrollBox(sFile);
 end;
-
-
 
 procedure TfMain.AddFolderToGrid(sFolder: String);
 var
@@ -715,69 +707,6 @@ begin
   end;
 end;
 
-procedure TfMain.addfileName;
-//var
-//  mediaFile: tMediaFile;
-//  aParentNode: TTreeNode;
-//  aNode: TTreeNode;
-//  sPath, sFile: String;
-//  isDirectory: Boolean;
-begin
-//  //
-//  isDirectory := TDirectory.Exists(sFileName);
-//  if not isDirectory then
-//  begin
-//    // File to Add .....
-//    sPath := tpath.GetDirectoryName(sFileName);
-//    sFile := tpath.GetFileNameWithoutExtension(sFileName);
-//  end
-//  else
-//  begin
-//    sPath := sFileName;
-//    sFile := sFileName;
-//  end;
-//
-//  aParentNode := findNode(sPath);
-//  if aParentNode = nil then
-//  begin
-//    if fileexists(sFileName) then
-//    begin
-//      mediaFile := tMediaFile.Create(sFileName);
-//      aNode := sTVMedias.Items.AddObject(nil, sFile, mediaFile);
-//      aNode.ImageIndex := 0;
-//    end
-//    else
-//    begin
-//      aParentNode := sTVMedias.Items.Add(nil, sFile);
-//      if TDirectory.Exists(sFileName) then
-//      begin
-//        aParentNode.HasChildren := True;
-//        aParentNode.ImageIndex := 2;
-//      end;
-//    end;
-//  end
-//  else
-//  begin
-//    mediaFile := tMediaFile.Create(sFileName);
-//    aNode := sTVMedias.Items.AddChildObject(aParentNode, sFile, mediaFile);
-//    aNode.ImageIndex := 0;
-//    if mediaFile.Tags.CoverArts.Count > 0 then
-//      aNode.ImageIndex := 1;
-//    if TDirectory.Exists(sFileName) then
-//    begin
-//      aNode.HasChildren := True;
-//      aNode.ImageIndex := 2;
-//    end;
-//  end;
-//  SetPBPosition;
-//  Application.ProcessMessages;
-
-end;
-
-procedure TfMain.ExpandNode;
-begin
-
-end;
 
 procedure TfMain.ExtractTags(iRow: Integer; bPreview: Boolean = false);
 var
@@ -1032,29 +961,7 @@ begin
 end;
 
 function TfMain.findNode(sLabel: String): TTreeNode;
-var
-  i: Integer;
-  sParent: String;
 begin
-  Result := Nil;
-  i := 0;
-
-//  while i <= sTVMedias.Items.Count - 1 do
-//  begin
-//    if sTVMedias.Items[i].Text = sLabel then
-//    begin
-//      Result := sTVMedias.Items[i];
-//      i := sTVMedias.Items.Count;
-//    end;
-//    inc(i);
-//  end;
-//  if Result = nil then
-//  begin
-//    sParent := TDirectory.GetParent(sLabel);
-//    if sParent <> '' then
-//      Result := findNode(sParent);
-//  end;
-
 end;
 
 procedure TfMain.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -1105,7 +1012,7 @@ begin
 {$IFDEF DEBUG}
   isRegistered := True;
   btnUtils.Visible := True;
-  // btnRegex.Visible := True;
+  sButton3.Visible := True;
 {$ELSE}
   GetRegistrationInformation(ReleaseCodeString, SerialNumber);
   if not IsReleaseCodeValid(ReleaseCodeString, SerialNumber) then
@@ -1128,8 +1035,6 @@ begin
   Spectrum3D_Free(Sprectrum3D);
   BASS_Stop;
   BASS_Free;
-  // if GlobalMediaFile <> nil then
-  // GlobalMediaFile.Destroy;
 
   if fCoverSearch <> Nil then
     fCoverSearch.Free;
@@ -1140,8 +1045,8 @@ begin
   if ssAlt in Shift then
   begin
     case Key of
-//      69:
-//        showExplorer;
+      // 69:
+      // showExplorer;
       80:
         showPlayList;
       VK_F1:
@@ -1207,7 +1112,6 @@ begin
   end;
   iErr := auxGetVolume(i, Addr(vol));
   Result := vol;
-  // if (iErr <> 0) then ShowMessage('No audio devices are available!');
 
 end;
 
@@ -1229,7 +1133,6 @@ begin
     dMultiChoices.clear;
     dMultiChoices.Free;
   end;
-  dFileFrames := tDictionary<String, tFrame>.create;
   dMultiChoices := tDictionary<String, TStrings>.Create;
   pList := tStringList.Create;
   dMultiChoices.Add('ARTIST', pList);
@@ -1666,14 +1569,11 @@ begin
 end;
 
 procedure TfMain.SaveTags(iRow: Integer);
-var
-  pMediaFile: tMediaFile;
 begin
   if sgList.Objects[1, iRow] <> Nil then
   begin
-    pMediaFile := tMediaFile(sgList.Objects[1, iRow]);
-    if pMediaFile.bModified then
-      pMediaFile.SaveTags;
+    if tMediaFile(sgList.Objects[1, iRow]).bModified then
+      tMediaFile(sgList.Objects[1, iRow]).SaveTags;
   end;
   Application.ProcessMessages;
 end;
@@ -1719,9 +1619,9 @@ end;
 procedure TfMain.sButton3Click(Sender: TObject);
 begin
   if (sPanel1.FindChildControl('FrameFile01') <> Nil) then
-    begin
-      tFrame2(sPanel1.FindChildControl('FrameFile01')).width := 500;
-    end;
+  begin
+    tFrame2(sPanel1.FindChildControl('FrameFile01')).Parent := ropVisual;
+  end;
 end;
 
 procedure TfMain.btnRegexClick(Sender: TObject);
@@ -1731,15 +1631,13 @@ end;
 
 procedure TfMain.btnUtilsClick(Sender: TObject);
 var
-   fRegExFrame : tFrame2;
+  fRegExFrame: tFrame2;
 begin
-    //sSB1.SkinData.BeginUpdate;
-    fRegExFrame := tFrame2.Create(self);
-    fREgExFrame.Name := 'FrameFile01';
-    fREgExFrame.Top := 64000;
-    fRegExFrame.align := alright;
-    fRegExFrame.Parent := sPanel1;
-    //sSb1.SkinData.EndUpdate(True);
+  fRegExFrame := tFrame2.Create(self);
+  fRegExFrame.Name := 'FrameFile01';
+  fRegExFrame.Top := 64000;
+  fRegExFrame.align := alright;
+  fRegExFrame.Parent := sPanel1;
 end;
 
 procedure TfMain.sButton4Click(Sender: TObject);
@@ -1782,9 +1680,24 @@ begin
   sPnReplace02.Visible := sCKReplace02.Checked;
 end;
 
+procedure TfMain.seRegExBeforePopup(Sender: TObject);
+begin
+   //
+   fRegEx.sEdit := seRegEx;
+end;
+
 procedure TfMain.seRegExChange(Sender: TObject);
 begin
   ExtractTags(sgList.Row, True);
+end;
+
+procedure TfMain.seRegExKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+   iCaret : integer;
+   sString : String;
+begin
+   iCaret := TsPopupBox(sender).SelStart;
+
 end;
 
 procedure TfMain.setGridRow;
@@ -1885,10 +1798,10 @@ begin
   end;
 end;
 
-Procedure TfMain.GetNoCoverImage(aPicture : tPicture);
+Procedure TfMain.GetNoCoverImage(aPicture: tPicture);
 begin
-   //sILNoCover.GetBitmap(0,);
-   aPicture.Bitmap.assign(sILNoCover.CreateBitmap32(0,256,256));
+  // sILNoCover.GetBitmap(0,);
+  aPicture.BitMap.Assign(sILNoCover.CreateBitmap32(0, 256, 256));
 end;
 
 procedure TfMain.sShellTreeView1Change(Sender: TObject; Node: TTreeNode);
@@ -1908,10 +1821,10 @@ begin
     else
     begin
       // Use DM1
-       image1.Picture.Assign(Nil);
-       Application.ProcessMessages;
-       //image1.Picture.BitMap.Assign(GetNoCoverImage);
-       GetNoCoverImage(image1.Picture);
+      image1.Picture.Assign(Nil);
+      Application.ProcessMessages;
+      // image1.Picture.BitMap.Assign(GetNoCoverImage);
+      GetNoCoverImage(image1.Picture);
     end;
     pMediaFile.Free;
   end;
@@ -2103,7 +2016,7 @@ begin
     aImage.Picture.Assign(Nil);
     aImage.Refresh;
     Application.ProcessMessages;
-    //aImage.Picture.BitMap.Assign(GetNoCoverImage);
+    // aImage.Picture.BitMap.Assign(GetNoCoverImage);
     GetNoCoverImage(aImage.Picture);
   end;
 end;
@@ -2163,7 +2076,7 @@ begin
   image1.Picture.Assign(Nil);
   image1.Refresh;
   Application.ProcessMessages;
-  //image1.Picture.BitMap.Assign(GetNoCoverImage);
+  // image1.Picture.BitMap.Assign(GetNoCoverImage);
   GetNoCoverImage(image1.Picture);
   Application.ProcessMessages;
 end;
@@ -2198,34 +2111,34 @@ var
   index: Integer;
   aMediaFile: tMediaFile;
 begin
-//  if Key = VK_RETURN then
-//  begin
-//    aNode := sTVMedias.Selected;
-//    if aNode.HasChildren then // The node is a folder
-//    begin
-//      // AddToPlayList(aNode, False);
-//    end
-//    else
-//    begin
-//      if Assigned(aNode.data) then
-//      begin
-//        // index := AddToPlayList(tMediaFile(aNode.data).Tags);
-//        if not(ssCtrl in Shift) then
-//        begin
-//          if (ssShift in Shift) then
-//            BASS_ChannelStop(Channel);
-//          if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
-//          begin
-//            slbPlaylist.ItemIndex := index;
-//            PlayStream(tMediaFile(slbPlaylist.Items.Objects[index]).Tags.FileName);
-//          end;
-//
-//        end
-//
-//      end;
-//    end;
-//    removeKeyFromStack;
-//  end;
+  // if Key = VK_RETURN then
+  // begin
+  // aNode := sTVMedias.Selected;
+  // if aNode.HasChildren then // The node is a folder
+  // begin
+  // // AddToPlayList(aNode, False);
+  // end
+  // else
+  // begin
+  // if Assigned(aNode.data) then
+  // begin
+  // // index := AddToPlayList(tMediaFile(aNode.data).Tags);
+  // if not(ssCtrl in Shift) then
+  // begin
+  // if (ssShift in Shift) then
+  // BASS_ChannelStop(Channel);
+  // if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
+  // begin
+  // slbPlaylist.ItemIndex := index;
+  // PlayStream(tMediaFile(slbPlaylist.Items.Objects[index]).Tags.FileName);
+  // end;
+  //
+  // end
+  //
+  // end;
+  // end;
+  // removeKeyFromStack;
+  // end;
 
 end;
 
@@ -2479,10 +2392,9 @@ begin
   pMediaFile.Destroy;
 end;
 
-
 procedure TfMain.updateTV;
 begin
-  //sTVMedias.Refresh;
+  // sTVMedias.Refresh;
 end;
 
 procedure TfMain.UpdateVuMetre(LeftLevel, RightLevel: Integer);

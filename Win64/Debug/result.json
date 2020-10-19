@@ -10,9 +10,9 @@
     "request":    
     [
       {
-        "title":"Google Custom Search - Phil Collins In The Air Tonight cover",
-        "totalResults":"67900000",
-        "searchTerms":"Phil Collins In The Air Tonight cover",
+        "title":"Google Custom Search - DFC Un autre monde cover",
+        "totalResults":"377000",
+        "searchTerms":"DFC Un autre monde cover",
         "count":        10,
         "startIndex":        1,
         "inputEncoding":"utf8",
@@ -26,9 +26,9 @@
     "nextPage":    
     [
       {
-        "title":"Google Custom Search - Phil Collins In The Air Tonight cover",
-        "totalResults":"67900000",
-        "searchTerms":"Phil Collins In The Air Tonight cover",
+        "title":"Google Custom Search - DFC Un autre monde cover",
+        "totalResults":"377000",
+        "searchTerms":"DFC Un autre monde cover",
         "count":        10,
         "startIndex":        11,
         "inputEncoding":"utf8",
@@ -46,221 +46,221 @@
   },
   "searchInformation":  
   {
-    "searchTime":0.803806,
-    "formattedSearchTime":"0.80",
-    "totalResults":"67900000",
-    "formattedTotalResults":"67,900,000"  
+    "searchTime":0.895982,
+    "formattedSearchTime":"0.90",
+    "totalResults":"377000",
+    "formattedTotalResults":"377,000"  
   },
   "items":  
   [
     {
       "kind":"customsearch#result",
-      "title":"In the Air Tonight - Wikipedia",
-      "htmlTitle":"<b>In</b> the <b>Air Tonight</b> - Wikipedia",
-      "link":"https://upload.wikimedia.org/wikipedia/en/4/4f/In_the_Air_Tonight_by_Phil_Collins_handwriting_font.png",
-      "displayLink":"en.wikipedia.org",
-      "snippet":"In the Air Tonight - Wikipedia",
-      "htmlSnippet":"<b>In</b> the <b>Air Tonight</b> - Wikipedia",
-      "mime":"image/png",
-      "fileFormat":"image/png",
-      "image":      
-      {
-        "contextLink":"https://en.wikipedia.org/wiki/In_the_Air_Tonight",
-        "height":        317,
-        "width":        317,
-        "byteSize":        137352,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScvodEH3rmNxNgjXkm2phdd7SYu5GKpLzvksaLMm35YUeSV1yiUwbu&s",
-        "thumbnailHeight":        118,
-        "thumbnailWidth":        118      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Phil Collins - In The Air Tonight (1981, CBS Pressing, Vinyl ...",
-      "htmlTitle":"<b>Phil Collins</b> - <b>In</b> The <b>Air Tonight</b> (1981, CBS Pressing, Vinyl ...",
-      "link":"https://img.discogs.com/lU8udTx9Hsp0olm7i0ZbCk2ospU=/fit-in/594x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1218014-1265595576.jpeg.jpg",
+      "title":"DFC / Vicky & Elkhaly - Prise 2 Son : Un Autre Monde / L\u00e0-Bas ...",
+      "htmlTitle":"<b>DFC</b> / Vicky &amp; Elkhaly - Prise 2 Son : <b>Un Autre Monde</b> / L\u00e0-Bas ...",
+      "link":"https://img.discogs.com/PPXzbVmlhqd--wIt5yu4AagabkE=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-7168688-1435250002-3273.jpeg.jpg",
       "displayLink":"www.discogs.com",
-      "snippet":"Phil Collins - In The Air Tonight (1981, CBS Pressing, Vinyl ...",
-      "htmlSnippet":"<b>Phil Collins</b> - <b>In</b> The <b>Air Tonight</b> (1981, CBS Pressing, Vinyl ...",
+      "snippet":"DFC / Vicky & Elkhaly - Prise 2 Son : Un Autre Monde / L\u00e0-Bas ...",
+      "htmlSnippet":"<b>DFC</b> / Vicky &amp; Elkhaly - Prise 2 Son : <b>Un Autre Monde</b> / L\u00e0-Bas ...",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/Phil-Collins-In-The-Air-Tonight/release/1218014",
+        "contextLink":"https://www.discogs.com/DFC-4-Vicky-Elkhaly-Prise-2-Son-Un-Autre-Monde-L%C3%A0-Bas/release/7168688",
         "height":        600,
-        "width":        594,
-        "byteSize":        86988,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBirfWJEiUx9n7xQschpfYQtIB3-ubfiSBgPddFKsMR2G3xdSAP8BxJAs&s",
+        "width":        600,
+        "byteSize":        110628,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzw81WP8lMaE5xanabspwMfrG2aE540pT1zyBZ87VnWdotRdUc6z2oox7A&s",
         "thumbnailHeight":        135,
-        "thumbnailWidth":        134      
+        "thumbnailWidth":        135      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Cover versions of In the Air Tonight by Phil Collins | SecondHandSongs",
-      "htmlTitle":"<b>Cover</b> versions of <b>In</b> the <b>Air Tonight</b> by <b>Phil Collins</b> | SecondHandSongs",
-      "link":"https://img.youtube.com/vi/YkADj0TPrJA/hqdefault.jpg",
-      "displayLink":"secondhandsongs.com",
-      "snippet":"Cover versions of In the Air Tonight by Phil Collins | SecondHandSongs",
-      "htmlSnippet":"<b>Cover</b> versions of <b>In</b> the <b>Air Tonight</b> by <b>Phil Collins</b> | SecondHandSongs",
+      "title":"DFC Tracks & Releases on Beatsource",
+      "htmlTitle":"<b>DFC</b> Tracks &amp; Releases on Beatsource",
+      "link":"https://geo-media.beatsource.com/image_size/500x500/d/c/f/dcf4f63f-36b5-4ab0-a7c7-f7e9c9bb26ae.jpg",
+      "displayLink":"www.beatsource.com",
+      "snippet":"DFC Tracks & Releases on Beatsource",
+      "htmlSnippet":"<b>DFC</b> Tracks &amp; Releases on Beatsource",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://secondhandsongs.com/performance/4158",
+        "contextLink":"https://www.beatsource.com/artist/dfc/191908",
+        "height":        500,
+        "width":        500,
+        "byteSize":        36914,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH471C5k03kDoB7DDenLgTs8KdbwN2dzp8B08XYVTsHabRbeZ_u9Jv3VA&s",
+        "thumbnailHeight":        130,
+        "thumbnailWidth":        130      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Un autre monde - Single by DFC | Spotify",
+      "htmlTitle":"<b>Un autre monde</b> - Single by <b>DFC</b> | Spotify",
+      "link":"https://i.scdn.co/image/ab67616d0000b27387b9547b7cf772eb82f60826",
+      "displayLink":"open.spotify.com",
+      "snippet":"Un autre monde - Single by DFC | Spotify",
+      "htmlSnippet":"<b>Un autre monde</b> - Single by <b>DFC</b> | Spotify",
+      "mime":"image/",
+      "fileFormat":"image/",
+      "image":      
+      {
+        "contextLink":"https://open.spotify.com/album/5m4YYwhE8CKsk4H6770qLR",
+        "height":        640,
+        "width":        640,
+        "byteSize":        93348,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyQe0HyM5EitXts3b438UbLy7qYlZXb1btLE4Vc9h1Y56w4xp5WtbEB53-&s",
+        "thumbnailHeight":        137,
+        "thumbnailWidth":        137      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Un autre monde - DFC - Devil's Food Cake -Un autre monde - video ...",
+      "htmlTitle":"<b>Un autre monde</b> - <b>DFC</b> - Devil&#39;s Food Cake -<b>Un autre monde</b> - video ...",
+      "link":"https://s2.dmcdn.net/v/9wccJ1MQv7SYgFuW_/x480",
+      "displayLink":"www.dailymotion.com",
+      "snippet":"Un autre monde - DFC - Devil's Food Cake -Un autre monde - video ...",
+      "htmlSnippet":"<b>Un autre monde</b> - <b>DFC</b> - Devil&#39;s Food Cake -<b>Un autre monde</b> - video ...",
+      "mime":"image/",
+      "fileFormat":"image/",
+      "image":      
+      {
+        "contextLink":"https://www.dailymotion.com/video/x2r1m6r",
+        "height":        480,
+        "width":        640,
+        "byteSize":        41127,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSIdoLi8eTI8kOhyPthq5H8-4iXQGICwOdJ55XqpXHkgbfF7QIff83RzE&s",
+        "thumbnailHeight":        103,
+        "thumbnailWidth":        137      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"MC Breed & Dfc (Album)",
+      "htmlTitle":"MC Breed &amp; <b>Dfc</b> (Album)",
+      "link":"https://geo-media.beatsource.com/image_size/500x500/6/0/4/6041b39b-d9b7-42fa-acc9-cd539de8a8ea.jpg",
+      "displayLink":"www.beatsource.com",
+      "snippet":"MC Breed & Dfc (Album)",
+      "htmlSnippet":"MC Breed &amp; <b>Dfc</b> (Album)",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.beatsource.com/release/mc-breed-dfc/782875",
+        "height":        500,
+        "width":        500,
+        "byteSize":        48041,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnaKcif_nyjD9D2hZEpB2K-QWXIJRq-O407S0ARqrcMc4lTazmM2jV7o0&s",
+        "thumbnailHeight":        130,
+        "thumbnailWidth":        130      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Un autre monde - DFC - Devil's Food Cake -Un autre monde - video ...",
+      "htmlTitle":"<b>Un autre monde</b> - <b>DFC</b> - Devil&#39;s Food Cake -<b>Un autre monde</b> - video ...",
+      "link":"https://s2.dmcdn.net/v/9wccJ1MQv7SuM0oAU/x360",
+      "displayLink":"www.dailymotion.com",
+      "snippet":"Un autre monde - DFC - Devil's Food Cake -Un autre monde - video ...",
+      "htmlSnippet":"<b>Un autre monde</b> - <b>DFC</b> - Devil&#39;s Food Cake -<b>Un autre monde</b> - video ...",
+      "mime":"image/",
+      "fileFormat":"image/",
+      "image":      
+      {
+        "contextLink":"https://www.dailymotion.com/video/x2r1m6r",
         "height":        360,
         "width":        480,
-        "byteSize":        15579,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTShfxQYL5JFcxbz2q87jU8U-vWATrt3G3y24Pez4M93K3irziaC_bg6s&s",
+        "byteSize":        28094,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsr2PGfvWj9vNmVTd1kvfSr0FubdWjEFVvKIfz-0AOfmfTFezaT7yBkw&s",
         "thumbnailHeight":        97,
         "thumbnailWidth":        129      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Phil Collins - In The Air Tonight (88' Remix) And (Extended ...",
-      "htmlTitle":"<b>Phil Collins</b> - <b>In</b> The <b>Air Tonight</b> (88&#39; Remix) And (Extended ...",
-      "link":"https://img.discogs.com/_g0XxDjN635kF8SF2udd4J5RcUw=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-213406-1509725887-3533.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Phil Collins - In The Air Tonight (88' Remix) And (Extended ...",
-      "htmlSnippet":"<b>Phil Collins</b> - <b>In</b> The <b>Air Tonight</b> (88&#39; Remix) And (Extended ...",
+      "title":"Casemate UK: 2020 Autumn Catalogue by Casemate Publishers Ltd - issuu",
+      "htmlTitle":"Casemate UK: 2020 Autumn Catalogue by Casemate Publishers Ltd - issuu",
+      "link":"https://image.isu.pub/200611142932-1dc32ae67eac679d820fce01c35f45c9/jpg/page_1_thumb_large.jpg",
+      "displayLink":"issuu.com",
+      "snippet":"Casemate UK: 2020 Autumn Catalogue by Casemate Publishers Ltd - issuu",
+      "htmlSnippet":"Casemate UK: 2020 Autumn Catalogue by Casemate Publishers Ltd - issuu",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/Phil-Collins-In-The-Air-Tonight-88-Remix-And-Extended-Version/release/213406",
+        "contextLink":"https://issuu.com/casematepub/docs/atcat20_low_res",
+        "height":        479,
+        "width":        320,
+        "byteSize":        27978,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhcQPZM4fCdurnwcDl3s92FQIyG3jFalFgi6q-9UpMn_VrpRhmgGEXrig&s",
+        "thumbnailHeight":        129,
+        "thumbnailWidth":        86      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Protagonista (feat. Jireh) - Single by DFC on Apple Music",
+      "htmlTitle":"Protagonista (feat. Jireh) - Single by <b>DFC</b> on Apple Music",
+      "link":"https://is3-ssl.mzstatic.com/image/thumb/Music118/v4/e8/25/91/e8259127-144b-7a69-0dfc-9d5f87cc7c4e/0.jpg/600x600bf.png",
+      "displayLink":"music.apple.com",
+      "snippet":"Protagonista (feat. Jireh) - Single by DFC on Apple Music",
+      "htmlSnippet":"Protagonista (feat. Jireh) - Single by <b>DFC</b> on Apple Music",
+      "mime":"image/png",
+      "fileFormat":"image/png",
+      "image":      
+      {
+        "contextLink":"https://music.apple.com/ca/album/protagonista-feat-jireh-single/1281508431",
         "height":        600,
         "width":        600,
-        "byteSize":        109715,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoP1G8FEidshI_pgoG4854_mNXqwOVeiTnyQKfLqqM50tHlaJN47Qf5yg&s",
+        "byteSize":        509989,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9isWiJjkZVKmf-iSlkFvdwo4rDRkJruM35mFvgMbbvPwRrxI8-9Pj834&s",
         "thumbnailHeight":        135,
         "thumbnailWidth":        135      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"In the Air Tonight | Miami Vice Wiki | Fandom",
-      "htmlTitle":"<b>In</b> the <b>Air Tonight</b> | Miami Vice Wiki | Fandom",
-      "link":"https://static.wikia.nocookie.net/miamivice/images/6/64/Intheairtonight.jpg/revision/latest/scale-to-width-down/340?cb=20181207104231",
-      "displayLink":"miamivice.fandom.com",
-      "snippet":"In the Air Tonight | Miami Vice Wiki | Fandom",
-      "htmlSnippet":"<b>In</b> the <b>Air Tonight</b> | Miami Vice Wiki | Fandom",
-      "mime":"image/",
-      "fileFormat":"image/",
-      "image":      
-      {
-        "contextLink":"https://miamivice.fandom.com/wiki/In_the_Air_Tonight",
-        "height":        315,
-        "width":        316,
-        "byteSize":        20204,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyIjy12Xg43QA4iUMK83MdyeHLa7QfTEqXaS5cmmzUGHVumrXpwQLh&s",
-        "thumbnailHeight":        117,
-        "thumbnailWidth":        117      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Who Sang \"In the Air Tonight\"? Phil Collins",
-      "htmlTitle":"Who Sang &quot;<b>In</b> the <b>Air Tonight</b>&quot;? <b>Phil Collins</b>",
-      "link":"https://www.lyrics007.com/images/cover_art/34/107/214.jpg",
-      "displayLink":"www.lyrics007.com",
-      "snippet":"Who Sang \"In the Air Tonight\"? Phil Collins",
-      "htmlSnippet":"Who Sang &quot;<b>In</b> the <b>Air Tonight</b>&quot;? <b>Phil Collins</b>",
+      "title":"Cr\u00e9er et jouer avec les enfants: Tome 2 (PHILIPPE DUVAL EDITIONS ...",
+      "htmlTitle":"Cr\u00e9er et jouer avec les enfants: Tome 2 (PHILIPPE DUVAL EDITIONS ...",
+      "link":"https://images-na.ssl-images-amazon.com/images/I/51DfCTUflNL._SX355_BO1,204,203,200_.jpg",
+      "displayLink":"www.amazon.com",
+      "snippet":"Cr\u00e9er et jouer avec les enfants: Tome 2 (PHILIPPE DUVAL EDITIONS ...",
+      "htmlSnippet":"Cr\u00e9er et jouer avec les enfants: Tome 2 (PHILIPPE DUVAL EDITIONS ...",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.lyrics007.com/Phil%20Collins%20Lyrics/In%20The%20Air%20Tonight%20Lyrics.html",
-        "height":        600,
-        "width":        600,
-        "byteSize":        274381,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1jPZxzotfCsgk3oerJPdaJ4VHkzVc3Ee3H8Z5Y5HnYNlbm94bHnm0lgIR&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
+        "contextLink":"https://www.amazon.com/Cr%C3%A9er-jouer-avec-enfants-2/dp/B01MRSQVPR",
+        "height":        499,
+        "width":        357,
+        "byteSize":        41526,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoVJsTM1-FhlMcT3nIGYLrMxEbGl5KiTe08xqnpHsUJz5DcpcKt1iznzE&s",
+        "thumbnailHeight":        130,
+        "thumbnailWidth":        93      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Phil Collins: In the Air Tonight (Video 1981) - IMDb",
-      "htmlTitle":"<b>Phil Collins</b>: <b>In</b> the <b>Air Tonight</b> (Video 1981) - IMDb",
-      "link":"https://m.media-amazon.com/images/M/MV5BYzZlNGNiNTktZmVmZi00MDI3LWJhYmMtMDczYTgzMzEwNmJhXkEyXkFqcGdeQXVyNDE4OTY5NzI@._V1_.jpg",
-      "displayLink":"www.imdb.com",
-      "snippet":"Phil Collins: In the Air Tonight (Video 1981) - IMDb",
-      "htmlSnippet":"<b>Phil Collins</b>: <b>In</b> the <b>Air Tonight</b> (Video 1981) - IMDb",
+      "title":"Un autre monde (Release)",
+      "htmlTitle":"<b>Un autre monde</b> (Release)",
+      "link":"https://geo-media.beatsource.com/image_size/500x500/c/a/0/ca089906-cf79-4c08-b9df-4e6a05a3efd3.jpg",
+      "displayLink":"www.beatsource.com",
+      "snippet":"Un autre monde (Release)",
+      "htmlSnippet":"<b>Un autre monde</b> (Release)",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.imdb.com/title/tt6666816/",
-        "height":        540,
-        "width":        718,
-        "byteSize":        48575,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4nv-TxnSBGyNKSaUuDMT3_ROPaZ99dajRIgK_641K2QXL9iubNteGLSU&s",
-        "thumbnailHeight":        105,
-        "thumbnailWidth":        140      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Phil Collins - In The Air Tonight (2015, Vinyl) | Discogs",
-      "htmlTitle":"<b>Phil Collins</b> - <b>In</b> The <b>Air Tonight</b> (2015, Vinyl) | Discogs",
-      "link":"https://img.discogs.com/59PenlRxQvu4avVH-nycBCobHpw=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-7781242-1448677728-2632.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Phil Collins - In The Air Tonight (2015, Vinyl) | Discogs",
-      "htmlSnippet":"<b>Phil Collins</b> - <b>In</b> The <b>Air Tonight</b> (2015, Vinyl) | Discogs",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.discogs.com/Phil-Collins-In-The-Air-Tonight/release/7781242",
-        "height":        600,
-        "width":        600,
-        "byteSize":        72717,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOnHWbWbVs_RRlTYM4H3dFKtKtKFLFqWauwgfj2hQcLzszudnVik1HXS0&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"How do you recreate the famous \"In the Air Tonight\" drum fill ...",
-      "htmlTitle":"How do you recreate the famous &quot;<b>In</b> the <b>Air Tonight</b>&quot; drum fill ...",
-      "link":"https://www.ajournalofmusicalthings.com/wp-content/uploads/Phil_Collins_InTheAirTonight-1.jpg",
-      "displayLink":"www.ajournalofmusicalthings.com",
-      "snippet":"How do you recreate the famous \"In the Air Tonight\" drum fill ...",
-      "htmlSnippet":"How do you recreate the famous &quot;<b>In</b> the <b>Air Tonight</b>&quot; drum fill ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.ajournalofmusicalthings.com/how-can-you-create-the-famous-in-the-air-tonight-drum-fill/",
-        "height":        315,
-        "width":        316,
-        "byteSize":        20126,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVUSzTe-C6Ry-z3RdNxRUgO5vrowLrmqM-CIJO_j5PL-zEFg5TdPDr&s",
-        "thumbnailHeight":        117,
-        "thumbnailWidth":        117      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Line(s) of the Day #InTheAirTonight | Alex Raphael",
-      "htmlTitle":"Line(s) of the Day #InTheAirTonight | Alex Raphael",
-      "link":"https://alexraphael.files.wordpress.com/2017/10/in-the-air-tonight-cover.jpg",
-      "displayLink":"alexraphael.wordpress.com",
-      "snippet":"Line(s) of the Day #InTheAirTonight | Alex Raphael",
-      "htmlSnippet":"Line(s) of the Day #InTheAirTonight | Alex Raphael",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://alexraphael.wordpress.com/2017/10/30/lines-of-the-day-intheairtonight/",
-        "height":        600,
-        "width":        600,
-        "byteSize":        72459,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWpH5Zml0V64n9-jXjVav7R9oCAYNdMCPAmmxzm1jlIPIJICJIC_aPpbG-&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
+        "contextLink":"https://www.beatsource.com/release/un-autre-monde/298481",
+        "height":        500,
+        "width":        500,
+        "byteSize":        67749,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCF7o8WDrrBsd6_lue4-rViw9zWf6CitHgY7FqWB33IvIKVSRS-p01ZTU&s",
+        "thumbnailHeight":        130,
+        "thumbnailWidth":        130      
       }    
     }  
   ]
