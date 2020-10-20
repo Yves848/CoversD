@@ -3,7 +3,7 @@ object fMain: TfMain
   Top = 0
   Caption = 'MoP'
   ClientHeight = 1041
-  ClientWidth = 1904
+  ClientWidth = 1760
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -31,21 +31,23 @@ object fMain: TfMain
   object pnBack: TsPanel
     Left = 0
     Top = 0
-    Width = 1904
+    Width = 1760
     Height = 1041
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 1904
     object pnToolbar: TsPanel
       Left = 0
       Top = 0
-      Width = 1904
+      Width = 1760
       Height = 57
       Align = alTop
       BevelInner = bvLowered
       BevelKind = bkFlat
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitWidth = 1904
       object sGauge2: TsGauge
         Left = 1136
         Top = 35
@@ -78,7 +80,7 @@ object fMain: TfMain
         OnClick = btnUtilsClick
       end
       object bsRegister: TsButton
-        Left = 1768
+        Left = 1624
         Top = 1
         Width = 131
         Height = 51
@@ -87,6 +89,7 @@ object fMain: TfMain
         TabOrder = 1
         Visible = False
         OnClick = bsRegisterClick
+        ExplicitLeft = 1768
       end
       object sBitBtn1: TsBitBtn
         Left = 1
@@ -113,30 +116,34 @@ object fMain: TfMain
         TabOrder = 3
         Visible = False
         OnClick = sButton3Click
+        ExplicitLeft = 231
+        ExplicitTop = 3
       end
     end
     object pnStatus: TsPanel
       Left = 0
       Top = 1000
-      Width = 1904
+      Width = 1760
       Height = 41
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 1
+      ExplicitWidth = 1904
       DesignSize = (
-        1904
+        1760
         41)
       object pb1: TsProgressBar
         Left = 1560
         Top = 24
-        Width = 344
+        Width = 200
         Height = 17
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 0
+        ExplicitWidth = 344
       end
     end
     object sROPPlaylist: TsRollOutPanel
-      Left = 1448
+      Left = 1304
       Top = 57
       Width = 456
       Height = 943
@@ -147,6 +154,7 @@ object fMain: TfMain
       Placement = asLeft
       OnAfterCollapse = sROPPlaylistAfterCollapse
       OnAfterExpand = sROPPlaylistAfterExpand
+      ExplicitLeft = 1448
       object sPanel4: TsPanel
         Left = 1
         Top = 416
@@ -2496,25 +2504,27 @@ object fMain: TfMain
     object pnMain: TsPanel
       Left = 0
       Top = 57
-      Width = 1448
+      Width = 1304
       Height = 943
       Align = alClient
       TabOrder = 3
+      ExplicitWidth = 1448
       DesignSize = (
-        1448
+        1304
         943)
       object sPanel1: TsPanel
         Left = 1
         Top = 366
-        Width = 1446
+        Width = 1302
         Height = 576
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 1446
         object sgList: TAdvStringGrid
           Left = 0
           Top = 0
-          Width = 1446
+          Width = 1040
           Height = 576
           Cursor = crDefault
           Align = alClient
@@ -2649,17 +2659,32 @@ object fMain: TfMain
           SortSettings.HeaderMirrorColor = clWhite
           SortSettings.HeaderMirrorColorTo = clWhite
           Version = '8.4.7.0'
+          ExplicitLeft = 5
+          ExplicitTop = 1
+          ExplicitWidth = 1184
+        end
+        object sMemo1: TsMemo
+          Left = 1040
+          Top = 0
+          Width = 262
+          Height = 576
+          Align = alRight
+          TabOrder = 1
+          Visible = False
+          ExplicitLeft = 1179
+          ExplicitTop = -5
         end
       end
       object ropVisual: TsRollOutPanel
         Left = 1
         Top = 1
-        Width = 1446
+        Width = 1302
         Height = 365
         Align = alTop
         TabOrder = 1
+        ExplicitWidth = 1446
         object image1: TsImage
-          Left = 1109
+          Left = 965
           Top = 1
           Width = 336
           Height = 341
@@ -2672,23 +2697,26 @@ object fMain: TfMain
         object sPageControl2: TsPageControl
           Left = 1
           Top = 1
-          Width = 1108
+          Width = 964
           Height = 341
           ActivePage = tsEdit
           Align = alClient
           TabOrder = 0
+          ExplicitWidth = 1108
           object tsVisual: TsTabSheet
             Caption = 'Visual'
+            ExplicitWidth = 1100
             object sPanel2: TsPanel
               Left = 0
               Top = 0
-              Width = 1100
+              Width = 956
               Height = 280
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 0
+              ExplicitWidth = 1100
               DesignSize = (
-                1100
+                956
                 280)
               object sImage2: TsImage
                 Left = 694
@@ -3748,23 +3776,26 @@ object fMain: TfMain
               object sPanel3: TsPanel
                 Left = 0
                 Top = 0
-                Width = 1100
+                Width = 956
                 Height = 280
                 Align = alClient
                 TabOrder = 0
+                ExplicitWidth = 1100
               end
             end
           end
           object tsEdit: TsTabSheet
             Caption = 'Edit'
+            ExplicitWidth = 1100
             object sPageControl1: TsPageControl
               Left = 0
               Top = 0
-              Width = 1100
+              Width = 956
               Height = 313
               ActivePage = sTabSheet1
               Align = alClient
               TabOrder = 0
+              ExplicitWidth = 1100
               object sTabSheet1: TsTabSheet
                 Caption = 'Set Tags'
                 Font.Charset = DEFAULT_CHARSET
@@ -3773,6 +3804,7 @@ object fMain: TfMain
                 Font.Name = 'Tahoma'
                 Font.Style = [fsBold]
                 ParentFont = False
+                ExplicitWidth = 1092
                 object sLabelFX2: TsLabelFX
                   Left = 103
                   Top = 6
@@ -3934,12 +3966,12 @@ object fMain: TfMain
                 end
                 object seRegEx: TsPopupBox
                   Left = 171
-                  Top = 6
+                  Top = 3
                   Width = 566
                   Height = 27
                   AutoSize = False
                   TabOrder = 11
-                  Text = '(.+)\s\-\s\d{1,3}\s\-\s(.+)'
+                  Text = '[ARTIST][-][TITLE]'
                   OnChange = seRegExChange
                   OnKeyUp = seRegExKeyUp
                   Font.Charset = DEFAULT_CHARSET
@@ -4200,6 +4232,7 @@ object fMain: TfMain
               end
               object sTabSheet2: TsTabSheet
                 Caption = 'Set Filenames'
+                ExplicitWidth = 1092
               end
             end
           end

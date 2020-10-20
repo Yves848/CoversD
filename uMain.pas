@@ -124,6 +124,7 @@ type
     sAlphaHints1: TsAlphaHints;
     sILNoCover: TsAlphaImageList;
     sButton3: TsButton;
+    sMemo1: TsMemo;
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
     procedure sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
@@ -245,6 +246,7 @@ type
     procedure RefreshVisuals;
     function RxReplace(const Match: tMatch): String;
     Procedure GetNoCoverImage(aPicture: tPicture);
+    function getExpression: String;
   end;
 
 var
@@ -707,7 +709,6 @@ begin
   end;
 end;
 
-
 procedure TfMain.ExtractTags(iRow: Integer; bPreview: Boolean = false);
 var
   i: Integer;
@@ -727,7 +728,11 @@ begin
 
   i := 0;
   try
-    regexpr := tREgEx.Create(seRegEx.Text, [roIgnoreCase]);
+    // regexpr := tREgEx.Create(seRegEx.Text, [roIgnoreCase]);
+    sBB1.Visible := false;
+    sBB2.Visible := false;
+    sBB3.Visible := false;
+    regexpr := tREgEx.Create(getExpression, [roIgnoreCase]);
 {$REGION 'Tags Preview'}
     if bPreview then
     begin
@@ -736,9 +741,6 @@ begin
         aFile := tpath.GetFileNameWithoutExtension(tMediaFile(sgList.Objects[1, iRow]).Tags.FileName);
       end;
       Match := regexpr.Match(aFile);
-      sBB1.Visible := false;
-      sBB2.Visible := false;
-      sBB3.Visible := false;
 
       while Match.Success do
       begin
@@ -1013,6 +1015,7 @@ begin
   isRegistered := True;
   btnUtils.Visible := True;
   sButton3.Visible := True;
+  sMemo1.Visible := True;
 {$ELSE}
   GetRegistrationInformation(ReleaseCodeString, SerialNumber);
   if not IsReleaseCodeValid(ReleaseCodeString, SerialNumber) then
@@ -1090,6 +1093,45 @@ end;
 procedure TfMain.FormShow(Sender: TObject);
 begin
   PostMessage(self.handle, WM_OPEN_ROLLOUTS, 0, 0);
+end;
+
+function TfMain.getExpression: String;
+var
+  regexpr, regExReplace: tREgEx;
+  iMatch: Integer;
+  Match: tMatch;
+  iGroup: Integer;
+  sKey: String;
+  sExpr: String;
+  pExpr: tExpr;
+begin
+  sExpr := seRegEx.Text;
+  if dExpressions <> Nil then
+  begin
+    if dExpressions.Count > 0 then
+    begin
+      regexpr := tREgEx.Create('\[(.*?)\]');
+
+      Match := regexpr.Match(seRegEx.Text);
+      iMatch := 0;
+      while Match.Success do
+      begin
+        if Match.Groups.Count > 1 then
+        begin
+          for iGroup := 1 to Match.Groups.Count - 1 do
+          begin
+            sKey := '[' + Match.Groups.Item[iGroup].Value + ']';
+            dExpressions.TryGetValue(sKey, pExpr);
+            RegExReplace.Create('\[' + Match.Groups.Item[iGroup].Value + '\]');
+            sExpr := RegExReplace.Replace(sExpr,pExpr.sExpr);
+            //sExpr := sExpr + pExpr.sExpr;
+          end;
+        end;
+        Match := Match.NextMatch;
+      end;
+    end;
+  end;
+  Result := sExpr;
 end;
 
 procedure TfMain.GetImgLink;
@@ -1618,10 +1660,8 @@ end;
 
 procedure TfMain.sButton3Click(Sender: TObject);
 begin
-  if (sPanel1.FindChildControl('FrameFile01') <> Nil) then
-  begin
-    tFrame2(sPanel1.FindChildControl('FrameFile01')).Parent := ropVisual;
-  end;
+  sMemo1.lines.Add(getExpression);
+
 end;
 
 procedure TfMain.btnRegexClick(Sender: TObject);
@@ -1682,8 +1722,8 @@ end;
 
 procedure TfMain.seRegExBeforePopup(Sender: TObject);
 begin
-   //
-   fRegEx.sEdit := seRegEx;
+  //
+  fRegEx.sEdit := seRegEx;
 end;
 
 procedure TfMain.seRegExChange(Sender: TObject);
@@ -1693,11 +1733,63 @@ end;
 
 procedure TfMain.seRegExKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 var
-   iCaret : integer;
-   sString : String;
-begin
-   iCaret := TsPopupBox(sender).SelStart;
+  iCaret: Integer;
+  sString: String;
+  iBracketStart, iBracketEnd: Integer;
+  iLenght: Integer;
 
+  function rpos(Substr: String; S: String; iStart: Integer): Integer;
+  var
+    i: Integer;
+  begin
+    for i := iStart downto 1 do
+      if (Copy(S, i, Length(Substr)) = Substr) then
+      begin
+        Result := i;
+        Exit;
+      end;
+  end;
+
+  function lpos(Substr: String; S: String; iStart: Integer): Integer;
+  var
+    i: Integer;
+  begin
+    for i := iStart to Length(S) do
+      if (Copy(S, i, Length(Substr)) = Substr) then
+      begin
+        Result := i;
+        Exit;
+      end;
+  end;
+
+begin
+//  sString := seRegEx.Text;
+//  iCaret := TsPopupBox(Sender).SelStart;
+//  iBracketStart := rpos('[', sString, iCaret);
+//  iBracketEnd := lpos(']', sString, iBracketStart);
+//  iLenght := (iBracketEnd - iBracketStart) + 1;
+//  sMemo1.lines.Add(format('Caret : %d - BracketStart : %d - BracketEnd : %d', [iCaret, iBracketStart, iBracketEnd]));
+//  if ssCtrl in Shift then
+//  begin
+//    if (Key = VK_LEFT) or (Key = VK_RIGHT) then
+//    begin
+//      TsPopupBox(Sender).SelStart := iBracketStart - 1;
+//      TsPopupBox(Sender).SelLength := iLenght;
+//      removeKeyFromStack;
+//    end;
+//  end;
+//  if Key = VK_DELETE then
+//  begin
+//    if (iCaret in [iBracketStart .. iBracketEnd]) then
+//    begin
+//      removeKeyFromStack;
+//      delete(sString, iBracketStart, iLenght);
+//      TsPopupBox(Sender).Text := sString;
+//      TsPopupBox(Sender).SelStart := iCaret;
+//      TsPopupBox(Sender).SelLength := 0;
+//
+//    end;
+//  end;
 end;
 
 procedure TfMain.setGridRow;
@@ -2088,7 +2180,7 @@ begin
     if slbPlaylist.Items.Objects[index] <> nil then
     begin
       tMediaFile(slbPlaylist.Items.Objects[index]).Destroy;
-      slbPlaylist.Items.Delete(index);
+      slbPlaylist.Items.delete(index);
       if index <= slbPlaylist.Items.Count - 1 then
         slbPlaylist.ItemIndex := index;
     end;

@@ -21,6 +21,10 @@ type
      sCol : Integer;
    end;
 
+  tExpr = class
+    sExpr : String;
+  end;
+
   tMediaFile = class(tPersistent)
   public
     bModified : boolean;
@@ -53,6 +57,7 @@ type
 var
   isRegistered : boolean;
   dTags:TDictionary<String,tTagKey>;
+  dExpressions:tDictionary<String,tExpr>;
 
 implementation
 
@@ -169,6 +174,7 @@ Initialization
 var
   dTagKey : tTagKey;
 begin
+  dExpressions := tDictionary<String,tExpr>.create;
   dTags := TDictionary<String,tTagKey>.create;
   dTagKey := tTagKey.create;
   dTagKey.sTAG := 'ARTIST';
@@ -192,6 +198,8 @@ Finalization
 begin
   dTags.Clear;
   dTags.Free;
+  dExpressions.Clear;
+  dExpressions.Free;
 end;
 
 

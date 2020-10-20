@@ -4,8 +4,8 @@ object fRegEx: TfRegEx
   AlphaBlendValue = 0
   BorderStyle = bsNone
   Caption = 'RegEx'
-  ClientHeight = 166
-  ClientWidth = 370
+  ClientHeight = 138
+  ClientWidth = 367
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,13 +13,14 @@ object fRegEx: TfRegEx
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object sPanel1: TsPanel
     Left = 0
     Top = 0
-    Width = 370
-    Height = 166
+    Width = 367
+    Height = 138
     Align = alClient
     DoubleBuffered = True
     ParentDoubleBuffered = False
@@ -28,38 +29,31 @@ object fRegEx: TfRegEx
     TabOrder = 0
     ExplicitWidth = 387
     ExplicitHeight = 171
-    object sSpeedButton1: TsSpeedButton
+    object sBtnFields: TsSpeedButton
       Left = 327
       Top = 33
       Width = 23
       Height = 22
       Caption = '+'
-      OnClick = sSpeedButton1Click
+      OnClick = sBtnFieldsClick
     end
-    object sSpeedButton2: TsSpeedButton
+    object sBtnSeparators: TsSpeedButton
       Left = 327
       Top = 65
       Width = 23
       Height = 22
       Caption = '+'
-      OnClick = sSpeedButton2Click
+      OnClick = sBtnSeparatorsClick
     end
-    object sSpeedButton3: TsSpeedButton
+    object sBtnCounters: TsSpeedButton
       Left = 327
       Top = 93
       Width = 23
       Height = 22
       Caption = '+'
-      OnClick = sSpeedButton3Click
+      OnClick = sBtnCountersClick
     end
-    object sSpeedButton4: TsSpeedButton
-      Left = 326
-      Top = 124
-      Width = 23
-      Height = 22
-      Caption = '+'
-    end
-    object sComboBox1: TsComboBox
+    object sCBField: TsComboBox
       Left = 72
       Top = 33
       Width = 249
@@ -74,7 +68,7 @@ object fRegEx: TfRegEx
         '[TITLE]'
         '[ALBUM]')
     end
-    object sComboBox2: TsComboBox
+    object sCBSeperators: TsComboBox
       Left = 72
       Top = 63
       Width = 249
@@ -87,7 +81,7 @@ object fRegEx: TfRegEx
       Items.Strings = (
         '[-]')
     end
-    object sComboBox3: TsComboBox
+    object sCBCounters: TsComboBox
       Left = 72
       Top = 93
       Width = 249
@@ -100,16 +94,6 @@ object fRegEx: TfRegEx
       Items.Strings = (
         '[0-00]'
         '[0-000]')
-    end
-    object sComboBox4: TsComboBox
-      Left = 71
-      Top = 124
-      Width = 249
-      Height = 21
-      BoundLabel.Active = True
-      BoundLabel.Caption = 'Free : '
-      ItemIndex = -1
-      TabOrder = 3
     end
   end
 end

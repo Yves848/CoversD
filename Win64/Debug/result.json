@@ -7,14 +7,30 @@
   },
   "queries":  
   {
+    "previousPage":    
+    [
+      {
+        "title":"Google Custom Search - SNOOP DOGG Before Ego Trippin",
+        "totalResults":"2290000",
+        "searchTerms":"SNOOP DOGG Before Ego Trippin",
+        "count":        10,
+        "startIndex":        1,
+        "inputEncoding":"utf8",
+        "outputEncoding":"utf8",
+        "safe":"off",
+        "cx":"007439388879951561867:3ragl0fkhpm",
+        "searchType":"image",
+        "imgSize":"large"      
+      }    
+    ],
     "request":    
     [
       {
-        "title":"Google Custom Search - DFC Un autre monde cover",
-        "totalResults":"377000",
-        "searchTerms":"DFC Un autre monde cover",
+        "title":"Google Custom Search - SNOOP DOGG Before Ego Trippin",
+        "totalResults":"2290000",
+        "searchTerms":"SNOOP DOGG Before Ego Trippin",
         "count":        10,
-        "startIndex":        1,
+        "startIndex":        11,
         "inputEncoding":"utf8",
         "outputEncoding":"utf8",
         "safe":"off",
@@ -26,11 +42,11 @@
     "nextPage":    
     [
       {
-        "title":"Google Custom Search - DFC Un autre monde cover",
-        "totalResults":"377000",
-        "searchTerms":"DFC Un autre monde cover",
+        "title":"Google Custom Search - SNOOP DOGG Before Ego Trippin",
+        "totalResults":"2290000",
+        "searchTerms":"SNOOP DOGG Before Ego Trippin",
         "count":        10,
-        "startIndex":        11,
+        "startIndex":        21,
         "inputEncoding":"utf8",
         "outputEncoding":"utf8",
         "safe":"off",
@@ -46,221 +62,221 @@
   },
   "searchInformation":  
   {
-    "searchTime":0.895982,
-    "formattedSearchTime":"0.90",
-    "totalResults":"377000",
-    "formattedTotalResults":"377,000"  
+    "searchTime":0.352749,
+    "formattedSearchTime":"0.35",
+    "totalResults":"2290000",
+    "formattedTotalResults":"2,290,000"  
   },
   "items":  
   [
     {
       "kind":"customsearch#result",
-      "title":"DFC / Vicky & Elkhaly - Prise 2 Son : Un Autre Monde / L\u00e0-Bas ...",
-      "htmlTitle":"<b>DFC</b> / Vicky &amp; Elkhaly - Prise 2 Son : <b>Un Autre Monde</b> / L\u00e0-Bas ...",
-      "link":"https://img.discogs.com/PPXzbVmlhqd--wIt5yu4AagabkE=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-7168688-1435250002-3273.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"DFC / Vicky & Elkhaly - Prise 2 Son : Un Autre Monde / L\u00e0-Bas ...",
-      "htmlSnippet":"<b>DFC</b> / Vicky &amp; Elkhaly - Prise 2 Son : <b>Un Autre Monde</b> / L\u00e0-Bas ...",
+      "title":"SNOOP DOGG - Ego Trippin - Amazon.com Music",
+      "htmlTitle":"<b>SNOOP DOGG</b> - <b>Ego Trippin</b> - Amazon.com Music",
+      "link":"https://images-na.ssl-images-amazon.com/images/I/81hF4ssvQdL._SX466_.jpg",
+      "displayLink":"www.amazon.com",
+      "snippet":"SNOOP DOGG - Ego Trippin - Amazon.com Music",
+      "htmlSnippet":"<b>SNOOP DOGG</b> - <b>Ego Trippin</b> - Amazon.com Music",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/DFC-4-Vicky-Elkhaly-Prise-2-Son-Un-Autre-Monde-L%C3%A0-Bas/release/7168688",
-        "height":        600,
-        "width":        600,
-        "byteSize":        110628,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzw81WP8lMaE5xanabspwMfrG2aE540pT1zyBZ87VnWdotRdUc6z2oox7A&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
+        "contextLink":"https://www.amazon.com/Ego-Trippin-SNOOP-DOGG/dp/B0013FDTYA",
+        "height":        466,
+        "width":        466,
+        "byteSize":        40231,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhU2JaUcWnDo_swcaxBsXJVWlvEtAiRWo8CpzvWhrEyxTB0l-ccL8hGMU6&s",
+        "thumbnailHeight":        128,
+        "thumbnailWidth":        128      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"DFC Tracks & Releases on Beatsource",
-      "htmlTitle":"<b>DFC</b> Tracks &amp; Releases on Beatsource",
-      "link":"https://geo-media.beatsource.com/image_size/500x500/d/c/f/dcf4f63f-36b5-4ab0-a7c7-f7e9c9bb26ae.jpg",
-      "displayLink":"www.beatsource.com",
-      "snippet":"DFC Tracks & Releases on Beatsource",
-      "htmlSnippet":"<b>DFC</b> Tracks &amp; Releases on Beatsource",
+      "title":"Before Ego Trippin \u2014 Snoop Dogg | Last.fm",
+      "htmlTitle":"<b>Before Ego Trippin</b> \u2014 <b>Snoop Dogg</b> | Last.fm",
+      "link":"https://lastfm.freetls.fastly.net/i/u/ar0/13a3ef5916054e29ae423dd8eece79a8.jpg",
+      "displayLink":"www.last.fm",
+      "snippet":"Before Ego Trippin \u2014 Snoop Dogg | Last.fm",
+      "htmlSnippet":"<b>Before Ego Trippin</b> \u2014 <b>Snoop Dogg</b> | Last.fm",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.beatsource.com/artist/dfc/191908",
+        "contextLink":"https://www.last.fm/music/Snoop+Dogg/Before+Ego+Trippin",
         "height":        500,
         "width":        500,
-        "byteSize":        36914,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH471C5k03kDoB7DDenLgTs8KdbwN2dzp8B08XYVTsHabRbeZ_u9Jv3VA&s",
+        "byteSize":        61669,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuMicFWrqH-wZZBlzjMwhDLATdkTG4bqY15AuQ4v1detWxHEF8fN_s4pQ&s",
         "thumbnailHeight":        130,
         "thumbnailWidth":        130      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Un autre monde - Single by DFC | Spotify",
-      "htmlTitle":"<b>Un autre monde</b> - Single by <b>DFC</b> | Spotify",
-      "link":"https://i.scdn.co/image/ab67616d0000b27387b9547b7cf772eb82f60826",
-      "displayLink":"open.spotify.com",
-      "snippet":"Un autre monde - Single by DFC | Spotify",
-      "htmlSnippet":"<b>Un autre monde</b> - Single by <b>DFC</b> | Spotify",
-      "mime":"image/",
-      "fileFormat":"image/",
+      "title":"SNOOP DOGG - Ego Trippin - Amazon.com Music",
+      "htmlTitle":"<b>SNOOP DOGG</b> - <b>Ego Trippin</b> - Amazon.com Music",
+      "link":"https://images-na.ssl-images-amazon.com/images/I/513eixmqtkL.jpg",
+      "displayLink":"www.amazon.com",
+      "snippet":"SNOOP DOGG - Ego Trippin - Amazon.com Music",
+      "htmlSnippet":"<b>SNOOP DOGG</b> - <b>Ego Trippin</b> - Amazon.com Music",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://open.spotify.com/album/5m4YYwhE8CKsk4H6770qLR",
+        "contextLink":"https://www.amazon.com/Ego-Trippin-SNOOP-DOGG/dp/B0013FDTYA",
+        "height":        435,
+        "width":        500,
+        "byteSize":        54376,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7xI3OGAOi1-A21lXcsI5fQLUbmnV2y57Zl4yHUERA3n_WVyF5pFKGJg&s",
+        "thumbnailHeight":        113,
+        "thumbnailWidth":        130      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Snoop Dogg - Ego Trippin (2008, CD) | Discogs",
+      "htmlTitle":"<b>Snoop Dogg</b> - <b>Ego Trippin</b> (2008, CD) | Discogs",
+      "link":"https://img.discogs.com/HWu4hk3lxfX4ipAdoZxFL5P5_bU=/fit-in/600x586/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-11129048-1510403879-2857.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Snoop Dogg - Ego Trippin (2008, CD) | Discogs",
+      "htmlSnippet":"<b>Snoop Dogg</b> - <b>Ego Trippin</b> (2008, CD) | Discogs",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/Snoop-Dogg-Ego-Trippin/release/11129048",
+        "height":        586,
+        "width":        599,
+        "byteSize":        133872,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-GiXPpb5otvRTlrp_P-RHz2WSZOxqSMAi8DqHR23jVW48h7Rq2bn0sEYS&s",
+        "thumbnailHeight":        132,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Snoop Dogg - Ego Trippin JAPAN CD+Bonus Track W/OBI #128-2 for ...",
+      "htmlTitle":"<b>Snoop Dogg</b> - <b>Ego Trippin</b> JAPAN CD+Bonus Track W/OBI #128-2 for ...",
+      "link":"https://i.ebayimg.com/images/g/S0sAAOSwHxVW7FNz/s-l640.jpg",
+      "displayLink":"www.ebay.com",
+      "snippet":"Snoop Dogg - Ego Trippin JAPAN CD+Bonus Track W/OBI #128-2 for ...",
+      "htmlSnippet":"<b>Snoop Dogg</b> - <b>Ego Trippin</b> JAPAN CD+Bonus Track W/OBI #128-2 for ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.ebay.com/c/1502883221",
         "height":        640,
         "width":        640,
-        "byteSize":        93348,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyQe0HyM5EitXts3b438UbLy7qYlZXb1btLE4Vc9h1Y56w4xp5WtbEB53-&s",
+        "byteSize":        70789,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNVS0gN2fFi80J0s2LE0A3ydqUfGPKso1z2tf4fO1NcQ64iy3YKaUY6G8&s",
         "thumbnailHeight":        137,
         "thumbnailWidth":        137      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Un autre monde - DFC - Devil's Food Cake -Un autre monde - video ...",
-      "htmlTitle":"<b>Un autre monde</b> - <b>DFC</b> - Devil&#39;s Food Cake -<b>Un autre monde</b> - video ...",
-      "link":"https://s2.dmcdn.net/v/9wccJ1MQv7SYgFuW_/x480",
-      "displayLink":"www.dailymotion.com",
-      "snippet":"Un autre monde - DFC - Devil's Food Cake -Un autre monde - video ...",
-      "htmlSnippet":"<b>Un autre monde</b> - <b>DFC</b> - Devil&#39;s Food Cake -<b>Un autre monde</b> - video ...",
-      "mime":"image/",
-      "fileFormat":"image/",
+      "title":"Snoop Dogg Ego Trippin' album photo shoot (at Polytechnic High ...",
+      "htmlTitle":"<b>Snoop Dogg Ego Trippin</b>&#39; album photo shoot (at Polytechnic High ...",
+      "link":"https://i.pinimg.com/564x/d9/5a/3a/d95a3a14ab731e4661ae1f24305bf252.jpg",
+      "displayLink":"www.pinterest.com",
+      "snippet":"Snoop Dogg Ego Trippin' album photo shoot (at Polytechnic High ...",
+      "htmlSnippet":"<b>Snoop Dogg Ego Trippin</b>&#39; album photo shoot (at Polytechnic High ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.dailymotion.com/video/x2r1m6r",
-        "height":        480,
+        "contextLink":"https://www.pinterest.com/pin/156148312068003188/",
+        "height":        612,
+        "width":        499,
+        "byteSize":        49415,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzqkHa7yK4p2_NaUBX-XZWWwKM9cU4QJ1_lztvO91799EPo_5ZQs23U-U&s",
+        "thumbnailHeight":        136,
+        "thumbnailWidth":        111      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Ego Trippin': Amazon.co.uk: Music",
+      "htmlTitle":"<b>Ego Trippin</b>&#39;: Amazon.co.uk: Music",
+      "link":"https://images-na.ssl-images-amazon.com/images/I/51XLyxJZCHL._AC_SY355_.jpg",
+      "displayLink":"www.amazon.co.uk",
+      "snippet":"Ego Trippin': Amazon.co.uk: Music",
+      "htmlSnippet":"<b>Ego Trippin</b>&#39;: Amazon.co.uk: Music",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.amazon.co.uk/Ego-Trippin-Snoop-Dogg/dp/B0013NFMEM",
+        "height":        355,
+        "width":        355,
+        "byteSize":        30436,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRXgxzK2nbEJ9mDqt2uOB-DepOPbBCs-BjDUYR7FqQXXFEF3VTvwl8&s",
+        "thumbnailHeight":        121,
+        "thumbnailWidth":        121      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Snoop Dogg Photos Photos: Snoop Dogg Signs Copies Of \"Ego Trippin ...",
+      "htmlTitle":"<b>Snoop Dogg</b> Photos Photos: <b>Snoop Dogg</b> Signs Copies Of &quot;<b>Ego Trippin</b> ...",
+      "link":"https://i.pinimg.com/474x/2c/6e/54/2c6e54fd6409a6aa10fef9a17492ef06.jpg",
+      "displayLink":"www.pinterest.com",
+      "snippet":"Snoop Dogg Photos Photos: Snoop Dogg Signs Copies Of \"Ego Trippin ...",
+      "htmlSnippet":"<b>Snoop Dogg</b> Photos Photos: <b>Snoop Dogg</b> Signs Copies Of &quot;<b>Ego Trippin</b> ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.pinterest.com/pin/844706473835013088/",
+        "height":        594,
+        "width":        452,
+        "byteSize":        35662,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdw0E9WNNFhqWAdEzkdXZ2Ps3dJLDnXPEmKfRaws2_Y-JoOp7vsIAWGB4&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        103      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Ego Trippin' [PA] [LP] by Snoop Dogg (Vinyl, Mar-2008, Geffen ...",
+      "htmlTitle":"<b>Ego Trippin</b>&#39; [PA] [LP] by <b>Snoop Dogg</b> (Vinyl, Mar-2008, Geffen ...",
+      "link":"https://i.ebayimg.com/images/g/cn0AAOSw~e5ZUYFs/s-l640.jpg",
+      "displayLink":"www.ebay.com",
+      "snippet":"Ego Trippin' [PA] [LP] by Snoop Dogg (Vinyl, Mar-2008, Geffen ...",
+      "htmlSnippet":"<b>Ego Trippin</b>&#39; [PA] [LP] by <b>Snoop Dogg</b> (Vinyl, Mar-2008, Geffen ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.ebay.com/p/78453540",
+        "height":        490,
         "width":        640,
-        "byteSize":        41127,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSIdoLi8eTI8kOhyPthq5H8-4iXQGICwOdJ55XqpXHkgbfF7QIff83RzE&s",
-        "thumbnailHeight":        103,
+        "byteSize":        50054,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE1mBh6A3o3HO_BTX9-ekk4q6-de9Djs4xu7miUrTCQGYffBDDudEWYw&s",
+        "thumbnailHeight":        105,
         "thumbnailWidth":        137      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"MC Breed & Dfc (Album)",
-      "htmlTitle":"MC Breed &amp; <b>Dfc</b> (Album)",
-      "link":"https://geo-media.beatsource.com/image_size/500x500/6/0/4/6041b39b-d9b7-42fa-acc9-cd539de8a8ea.jpg",
-      "displayLink":"www.beatsource.com",
-      "snippet":"MC Breed & Dfc (Album)",
-      "htmlSnippet":"MC Breed &amp; <b>Dfc</b> (Album)",
+      "title":"Snoop Dogg - Ego Trippin (2008, CD) | Discogs",
+      "htmlTitle":"<b>Snoop Dogg</b> - <b>Ego Trippin</b> (2008, CD) | Discogs",
+      "link":"https://img.discogs.com/6pAZKNxPq6ZBE0_P5c4fsLeyc8c=/fit-in/600x580/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1396331-1345869644-6505.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Snoop Dogg - Ego Trippin (2008, CD) | Discogs",
+      "htmlSnippet":"<b>Snoop Dogg</b> - <b>Ego Trippin</b> (2008, CD) | Discogs",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.beatsource.com/release/mc-breed-dfc/782875",
-        "height":        500,
-        "width":        500,
-        "byteSize":        48041,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnaKcif_nyjD9D2hZEpB2K-QWXIJRq-O407S0ARqrcMc4lTazmM2jV7o0&s",
-        "thumbnailHeight":        130,
-        "thumbnailWidth":        130      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Un autre monde - DFC - Devil's Food Cake -Un autre monde - video ...",
-      "htmlTitle":"<b>Un autre monde</b> - <b>DFC</b> - Devil&#39;s Food Cake -<b>Un autre monde</b> - video ...",
-      "link":"https://s2.dmcdn.net/v/9wccJ1MQv7SuM0oAU/x360",
-      "displayLink":"www.dailymotion.com",
-      "snippet":"Un autre monde - DFC - Devil's Food Cake -Un autre monde - video ...",
-      "htmlSnippet":"<b>Un autre monde</b> - <b>DFC</b> - Devil&#39;s Food Cake -<b>Un autre monde</b> - video ...",
-      "mime":"image/",
-      "fileFormat":"image/",
-      "image":      
-      {
-        "contextLink":"https://www.dailymotion.com/video/x2r1m6r",
-        "height":        360,
-        "width":        480,
-        "byteSize":        28094,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsr2PGfvWj9vNmVTd1kvfSr0FubdWjEFVvKIfz-0AOfmfTFezaT7yBkw&s",
-        "thumbnailHeight":        97,
-        "thumbnailWidth":        129      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Casemate UK: 2020 Autumn Catalogue by Casemate Publishers Ltd - issuu",
-      "htmlTitle":"Casemate UK: 2020 Autumn Catalogue by Casemate Publishers Ltd - issuu",
-      "link":"https://image.isu.pub/200611142932-1dc32ae67eac679d820fce01c35f45c9/jpg/page_1_thumb_large.jpg",
-      "displayLink":"issuu.com",
-      "snippet":"Casemate UK: 2020 Autumn Catalogue by Casemate Publishers Ltd - issuu",
-      "htmlSnippet":"Casemate UK: 2020 Autumn Catalogue by Casemate Publishers Ltd - issuu",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://issuu.com/casematepub/docs/atcat20_low_res",
-        "height":        479,
-        "width":        320,
-        "byteSize":        27978,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhcQPZM4fCdurnwcDl3s92FQIyG3jFalFgi6q-9UpMn_VrpRhmgGEXrig&s",
-        "thumbnailHeight":        129,
-        "thumbnailWidth":        86      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Protagonista (feat. Jireh) - Single by DFC on Apple Music",
-      "htmlTitle":"Protagonista (feat. Jireh) - Single by <b>DFC</b> on Apple Music",
-      "link":"https://is3-ssl.mzstatic.com/image/thumb/Music118/v4/e8/25/91/e8259127-144b-7a69-0dfc-9d5f87cc7c4e/0.jpg/600x600bf.png",
-      "displayLink":"music.apple.com",
-      "snippet":"Protagonista (feat. Jireh) - Single by DFC on Apple Music",
-      "htmlSnippet":"Protagonista (feat. Jireh) - Single by <b>DFC</b> on Apple Music",
-      "mime":"image/png",
-      "fileFormat":"image/png",
-      "image":      
-      {
-        "contextLink":"https://music.apple.com/ca/album/protagonista-feat-jireh-single/1281508431",
-        "height":        600,
+        "contextLink":"https://www.discogs.com/Snoop-Dogg-Ego-Trippin/release/1396331",
+        "height":        580,
         "width":        600,
-        "byteSize":        509989,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9isWiJjkZVKmf-iSlkFvdwo4rDRkJruM35mFvgMbbvPwRrxI8-9Pj834&s",
-        "thumbnailHeight":        135,
+        "byteSize":        135220,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy3dyqp4Hu4cYBa8cvQzqgXc3yGOI6KLQFUsCDZjy6RhcuYlm94HUKqGib&s",
+        "thumbnailHeight":        131,
         "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Cr\u00e9er et jouer avec les enfants: Tome 2 (PHILIPPE DUVAL EDITIONS ...",
-      "htmlTitle":"Cr\u00e9er et jouer avec les enfants: Tome 2 (PHILIPPE DUVAL EDITIONS ...",
-      "link":"https://images-na.ssl-images-amazon.com/images/I/51DfCTUflNL._SX355_BO1,204,203,200_.jpg",
-      "displayLink":"www.amazon.com",
-      "snippet":"Cr\u00e9er et jouer avec les enfants: Tome 2 (PHILIPPE DUVAL EDITIONS ...",
-      "htmlSnippet":"Cr\u00e9er et jouer avec les enfants: Tome 2 (PHILIPPE DUVAL EDITIONS ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.amazon.com/Cr%C3%A9er-jouer-avec-enfants-2/dp/B01MRSQVPR",
-        "height":        499,
-        "width":        357,
-        "byteSize":        41526,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoVJsTM1-FhlMcT3nIGYLrMxEbGl5KiTe08xqnpHsUJz5DcpcKt1iznzE&s",
-        "thumbnailHeight":        130,
-        "thumbnailWidth":        93      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Un autre monde (Release)",
-      "htmlTitle":"<b>Un autre monde</b> (Release)",
-      "link":"https://geo-media.beatsource.com/image_size/500x500/c/a/0/ca089906-cf79-4c08-b9df-4e6a05a3efd3.jpg",
-      "displayLink":"www.beatsource.com",
-      "snippet":"Un autre monde (Release)",
-      "htmlSnippet":"<b>Un autre monde</b> (Release)",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.beatsource.com/release/un-autre-monde/298481",
-        "height":        500,
-        "width":        500,
-        "byteSize":        67749,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCF7o8WDrrBsd6_lue4-rViw9zWf6CitHgY7FqWB33IvIKVSRS-p01ZTU&s",
-        "thumbnailHeight":        130,
-        "thumbnailWidth":        130      
       }    
     }  
   ]
