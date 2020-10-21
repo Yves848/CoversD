@@ -13,7 +13,8 @@ uses
   uDM1 in 'uDM1.pas' {DM1: TDataModule},
   uRegExFrame in 'uRegExFrame.pas' {Frame1: TFrame},
   uFileFrame in 'uFileFrame.pas' {Frame2: TFrame},
-  uFrameCover in 'uFrameCover.pas' {FrameCover: TFrame};
+  uFrameCover in 'uFrameCover.pas' {FrameCover: TFrame},
+  uFrmPlayer in 'uFrmPlayer.pas' {frmPlayer: TFrame};
 
 {$R *.res}
 

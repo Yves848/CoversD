@@ -13,7 +13,7 @@ uses
   NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, AdvMemo, acPNG,
   JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister, Vcl.Menus, System.RegularExpressions, sEdit, sComboBox,
   sCheckBox, sPageControl, SynEditHighlighter, SynHighlighterJSON, System.StrUtils, sComboEdit, acPopupCtrls, uDM1, acAlphaHints, BtnListB,
-  sScrollBox;
+  sScrollBox, uFrmPlayer;
 
 type
 
@@ -125,10 +125,10 @@ type
     sILNoCover: TsAlphaImageList;
     sButton3: TsButton;
     sMemo1: TsMemo;
+    sPnPlayer: TsPanel;
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
     procedure sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
-    procedure sTVMediasKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Timer1Timer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure tbVolumeChange(Sender: TObject);
@@ -247,6 +247,7 @@ type
     function RxReplace(const Match: tMatch): String;
     Procedure GetNoCoverImage(aPicture: tPicture);
     function getExpression: String;
+    Procedure OpenPlayer;
   end;
 
 var
@@ -1010,6 +1011,7 @@ begin
   initGrid;
   InitDictionaries;
   fillTagCombos;
+  OpenPlayer;
 
 {$IFDEF DEBUG}
   isRegistered := True;
@@ -1154,7 +1156,6 @@ begin
   end;
   iErr := auxGetVolume(i, Addr(vol));
   Result := vol;
-
 end;
 
 function TfMain.ImageCount(aFile: String): Integer;
@@ -2161,9 +2162,19 @@ begin
   end;
 end;
 
+procedure TfMain.OpenPlayer;
+var
+   fFrmPlayer : tFrmPlayer;
+begin
+    //
+    fFrmPlayer := tFrmPlayer.Create(Self);
+    fFrmPlayer.Parent := sPnPlayer;
+
+end;
+
 procedure TfMain.OpenRollOuts(var m: Tmsg);
 begin
-  sROPPlaylist.ChangeState(false, True);
+  // sROPPlaylist.ChangeState(false, True);
   // sROPMedia.ChangeState(false, True);
   image1.Picture.Assign(Nil);
   image1.Refresh;
@@ -2195,43 +2206,6 @@ begin
     aNode := Node;
     thListMP3.Execute(self);
   end;
-end;
-
-procedure TfMain.sTVMediasKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-var
-  aNode: TTreeNode;
-  index: Integer;
-  aMediaFile: tMediaFile;
-begin
-  // if Key = VK_RETURN then
-  // begin
-  // aNode := sTVMedias.Selected;
-  // if aNode.HasChildren then // The node is a folder
-  // begin
-  // // AddToPlayList(aNode, False);
-  // end
-  // else
-  // begin
-  // if Assigned(aNode.data) then
-  // begin
-  // // index := AddToPlayList(tMediaFile(aNode.data).Tags);
-  // if not(ssCtrl in Shift) then
-  // begin
-  // if (ssShift in Shift) then
-  // BASS_ChannelStop(Channel);
-  // if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
-  // begin
-  // slbPlaylist.ItemIndex := index;
-  // PlayStream(tMediaFile(slbPlaylist.Items.Objects[index]).Tags.FileName);
-  // end;
-  //
-  // end
-  //
-  // end;
-  // end;
-  // removeKeyFromStack;
-  // end;
-
 end;
 
 procedure TfMain.thAddToPlayListExecute(Sender: TObject; Params: Pointer);

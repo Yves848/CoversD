@@ -36,7 +36,6 @@ object fMain: TfMain
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 1904
     object pnToolbar: TsPanel
       Left = 0
       Top = 0
@@ -47,7 +46,6 @@ object fMain: TfMain
       BevelKind = bkFlat
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 1904
       object sGauge2: TsGauge
         Left = 1136
         Top = 35
@@ -89,7 +87,6 @@ object fMain: TfMain
         TabOrder = 1
         Visible = False
         OnClick = bsRegisterClick
-        ExplicitLeft = 1768
       end
       object sBitBtn1: TsBitBtn
         Left = 1
@@ -116,8 +113,6 @@ object fMain: TfMain
         TabOrder = 3
         Visible = False
         OnClick = sButton3Click
-        ExplicitLeft = 231
-        ExplicitTop = 3
       end
     end
     object pnStatus: TsPanel
@@ -128,7 +123,6 @@ object fMain: TfMain
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 1904
       DesignSize = (
         1760
         41)
@@ -139,7 +133,6 @@ object fMain: TfMain
         Height = 17
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 0
-        ExplicitWidth = 344
       end
     end
     object sROPPlaylist: TsRollOutPanel
@@ -154,7 +147,6 @@ object fMain: TfMain
       Placement = asLeft
       OnAfterCollapse = sROPPlaylistAfterCollapse
       OnAfterExpand = sROPPlaylistAfterExpand
-      ExplicitLeft = 1448
       object sPanel4: TsPanel
         Left = 1
         Top = 416
@@ -2504,27 +2496,27 @@ object fMain: TfMain
     object pnMain: TsPanel
       Left = 0
       Top = 57
-      Width = 1304
+      Width = 862
       Height = 943
       Align = alClient
       TabOrder = 3
-      ExplicitWidth = 1448
+      ExplicitWidth = 1304
       DesignSize = (
-        1304
+        862
         943)
       object sPanel1: TsPanel
         Left = 1
         Top = 366
-        Width = 1302
+        Width = 860
         Height = 576
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 1446
+        ExplicitWidth = 1302
         object sgList: TAdvStringGrid
           Left = 0
           Top = 0
-          Width = 1040
+          Width = 598
           Height = 576
           Cursor = crDefault
           Align = alClient
@@ -2659,64 +2651,62 @@ object fMain: TfMain
           SortSettings.HeaderMirrorColor = clWhite
           SortSettings.HeaderMirrorColorTo = clWhite
           Version = '8.4.7.0'
-          ExplicitLeft = 5
-          ExplicitTop = 1
-          ExplicitWidth = 1184
+          ExplicitWidth = 1040
         end
         object sMemo1: TsMemo
-          Left = 1040
+          Left = 598
           Top = 0
           Width = 262
           Height = 576
           Align = alRight
           TabOrder = 1
           Visible = False
-          ExplicitLeft = 1179
+          ExplicitLeft = 604
           ExplicitTop = -5
         end
       end
       object ropVisual: TsRollOutPanel
         Left = 1
         Top = 1
-        Width = 1302
+        Width = 860
         Height = 365
         Align = alTop
         TabOrder = 1
-        ExplicitWidth = 1446
+        ExplicitWidth = 1302
         object image1: TsImage
-          Left = 965
+          Left = 523
           Top = 1
           Width = 336
           Height = 341
           Align = alRight
           Picture.Data = {07544269746D617000000000}
           Stretch = True
-          ExplicitLeft = 1111
+          ExplicitLeft = 521
           ExplicitTop = -4
         end
         object sPageControl2: TsPageControl
           Left = 1
           Top = 1
-          Width = 964
+          Width = 522
           Height = 341
           ActivePage = tsEdit
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 1108
+          ExplicitWidth = 964
           object tsVisual: TsTabSheet
             Caption = 'Visual'
-            ExplicitWidth = 1100
+            ExplicitWidth = 956
             object sPanel2: TsPanel
               Left = 0
               Top = 0
-              Width = 956
+              Width = 514
               Height = 280
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 0
-              ExplicitWidth = 1100
+              ExplicitWidth = 956
               DesignSize = (
-                956
+                514
                 280)
               object sImage2: TsImage
                 Left = 694
@@ -3776,26 +3766,26 @@ object fMain: TfMain
               object sPanel3: TsPanel
                 Left = 0
                 Top = 0
-                Width = 956
+                Width = 514
                 Height = 280
                 Align = alClient
                 TabOrder = 0
-                ExplicitWidth = 1100
+                ExplicitWidth = 956
               end
             end
           end
           object tsEdit: TsTabSheet
             Caption = 'Edit'
-            ExplicitWidth = 1100
+            ExplicitWidth = 956
             object sPageControl1: TsPageControl
               Left = 0
               Top = 0
-              Width = 956
+              Width = 514
               Height = 313
               ActivePage = sTabSheet1
               Align = alClient
               TabOrder = 0
-              ExplicitWidth = 1100
+              ExplicitWidth = 956
               object sTabSheet1: TsTabSheet
                 Caption = 'Set Tags'
                 Font.Charset = DEFAULT_CHARSET
@@ -3804,7 +3794,7 @@ object fMain: TfMain
                 Font.Name = 'Tahoma'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitWidth = 1092
+                ExplicitWidth = 948
                 object sLabelFX2: TsLabelFX
                   Left = 103
                   Top = 6
@@ -4232,7 +4222,7 @@ object fMain: TfMain
               end
               object sTabSheet2: TsTabSheet
                 Caption = 'Set Filenames'
-                ExplicitWidth = 1092
+                ExplicitWidth = 948
               end
             end
           end
@@ -4293,6 +4283,14 @@ object fMain: TfMain
           ShowExt = seSystem
         end
       end
+    end
+    object sPnPlayer: TsPanel
+      Left = 862
+      Top = 57
+      Width = 442
+      Height = 943
+      Align = alRight
+      TabOrder = 4
     end
   end
   object sSkinProvider1: TsSkinProvider
