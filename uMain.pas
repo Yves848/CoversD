@@ -13,7 +13,7 @@ uses
   NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, AdvMemo, acPNG,
   JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister, Vcl.Menus, System.RegularExpressions, sEdit, sComboBox,
   sCheckBox, sPageControl, SynEditHighlighter, SynHighlighterJSON, System.StrUtils, sComboEdit, acPopupCtrls, uDM1, acAlphaHints, BtnListB,
-  sScrollBox, uFrmPlayer;
+  sScrollBox, uFrmPlayer, JvExStdCtrls, JvWinampLabel, uFormPlayer, acFontStore;
 
 type
 
@@ -180,9 +180,9 @@ type
     procedure sBitBtn1Click(Sender: TObject);
     procedure sAlphaHints1ShowHint(var HintStr: string; var CanShow: Boolean; var HintInfo: THintInfo; var Frame: TFrame);
     procedure btnUtilsClick(Sender: TObject);
-    procedure sButton3Click(Sender: TObject);
     procedure seRegExBeforePopup(Sender: TObject);
     procedure seRegExKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure sButton3Click(Sender: TObject);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -264,6 +264,7 @@ var
   Params: TSpectrum3D_CreateParams;
   Settings: TSpectrum3D_Settings;
   fCoverSearch: tfCoverSearch;
+  fFrmPlayer : tFrmPlayer;
 
 implementation
 
@@ -334,6 +335,7 @@ begin
 
     BASS_ChannelStop(Channel);
     PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
+
   end;
 
 end;
@@ -1356,7 +1358,8 @@ begin
           if sgList.Objects[1, sgList.Row] <> Nil then
           begin
             BASS_ChannelStop(Channel);
-            PlayStream(tMediaFile(sgList.Objects[1, sgList.Row]).Tags.FileName);
+            //PlayStream(tMediaFile(sgList.Objects[1, sgList.Row]).Tags.FileName);
+            fFrmPlayer.PlayStream(tMediaFile(sgList.Objects[1, sgList.Row]).Tags.FileName);
           end;
         end
         else
@@ -1661,8 +1664,10 @@ end;
 
 procedure TfMain.sButton3Click(Sender: TObject);
 begin
-  sMemo1.lines.Add(getExpression);
-
+  fFrmPlayer.deInit;
+  fFrmPlayer.Parent := Form1.sPanel1;
+  fFrmPlayer.init;
+  Form1.Show;
 end;
 
 procedure TfMain.btnRegexClick(Sender: TObject);
@@ -2163,12 +2168,12 @@ begin
 end;
 
 procedure TfMain.OpenPlayer;
-var
-   fFrmPlayer : tFrmPlayer;
 begin
-    //
-    fFrmPlayer := tFrmPlayer.Create(Self);
-    fFrmPlayer.Parent := sPnPlayer;
+  // * Never forget to init BASS
+  // GlobalMediaFile := tMediaFile.Create;
+  fFrmPlayer := tFrmPlayer.Create(Self);
+  fFrmPlayer.Parent := sPnPlayer;
+  fFrmPlayer.init;
 
 end;
 

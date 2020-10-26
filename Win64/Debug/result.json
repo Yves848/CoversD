@@ -7,30 +7,14 @@
   },
   "queries":  
   {
-    "previousPage":    
-    [
-      {
-        "title":"Google Custom Search - SNOOP DOGG Before Ego Trippin",
-        "totalResults":"2290000",
-        "searchTerms":"SNOOP DOGG Before Ego Trippin",
-        "count":        10,
-        "startIndex":        1,
-        "inputEncoding":"utf8",
-        "outputEncoding":"utf8",
-        "safe":"off",
-        "cx":"007439388879951561867:3ragl0fkhpm",
-        "searchType":"image",
-        "imgSize":"large"      
-      }    
-    ],
     "request":    
     [
       {
-        "title":"Google Custom Search - SNOOP DOGG Before Ego Trippin",
-        "totalResults":"2290000",
-        "searchTerms":"SNOOP DOGG Before Ego Trippin",
+        "title":"Google Custom Search - The Notorious B.I.G. Juicy (1994) cover",
+        "totalResults":"1120000",
+        "searchTerms":"The Notorious B.I.G. Juicy (1994) cover",
         "count":        10,
-        "startIndex":        11,
+        "startIndex":        1,
         "inputEncoding":"utf8",
         "outputEncoding":"utf8",
         "safe":"off",
@@ -42,11 +26,11 @@
     "nextPage":    
     [
       {
-        "title":"Google Custom Search - SNOOP DOGG Before Ego Trippin",
-        "totalResults":"2290000",
-        "searchTerms":"SNOOP DOGG Before Ego Trippin",
+        "title":"Google Custom Search - The Notorious B.I.G. Juicy (1994) cover",
+        "totalResults":"1120000",
+        "searchTerms":"The Notorious B.I.G. Juicy (1994) cover",
         "count":        10,
-        "startIndex":        21,
+        "startIndex":        11,
         "inputEncoding":"utf8",
         "outputEncoding":"utf8",
         "safe":"off",
@@ -62,221 +46,221 @@
   },
   "searchInformation":  
   {
-    "searchTime":0.352749,
-    "formattedSearchTime":"0.35",
-    "totalResults":"2290000",
-    "formattedTotalResults":"2,290,000"  
+    "searchTime":0.703393,
+    "formattedSearchTime":"0.70",
+    "totalResults":"1120000",
+    "formattedTotalResults":"1,120,000"  
   },
   "items":  
   [
     {
       "kind":"customsearch#result",
-      "title":"SNOOP DOGG - Ego Trippin - Amazon.com Music",
-      "htmlTitle":"<b>SNOOP DOGG</b> - <b>Ego Trippin</b> - Amazon.com Music",
-      "link":"https://images-na.ssl-images-amazon.com/images/I/81hF4ssvQdL._SX466_.jpg",
-      "displayLink":"www.amazon.com",
-      "snippet":"SNOOP DOGG - Ego Trippin - Amazon.com Music",
-      "htmlSnippet":"<b>SNOOP DOGG</b> - <b>Ego Trippin</b> - Amazon.com Music",
+      "title":"The Notorious BIG* - Juicy (1994, Vinyl) | Discogs",
+      "htmlTitle":"<b>The Notorious BIG</b>* - <b>Juicy</b> (<b>1994</b>, Vinyl) | Discogs",
+      "link":"https://img.discogs.com/xmuirPD7NCbesixT-hxBDr9CanU=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-235160-1314703972.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"The Notorious BIG* - Juicy (1994, Vinyl) | Discogs",
+      "htmlSnippet":"<b>The Notorious BIG</b>* - <b>Juicy</b> (<b>1994</b>, Vinyl) | Discogs",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.amazon.com/Ego-Trippin-SNOOP-DOGG/dp/B0013FDTYA",
-        "height":        466,
-        "width":        466,
-        "byteSize":        40231,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhU2JaUcWnDo_swcaxBsXJVWlvEtAiRWo8CpzvWhrEyxTB0l-ccL8hGMU6&s",
-        "thumbnailHeight":        128,
-        "thumbnailWidth":        128      
+        "contextLink":"https://www.discogs.com/The-Notorious-BIG-Juicy/release/235160",
+        "height":        600,
+        "width":        600,
+        "byteSize":        107347,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToAsClfICM9-6q39GCdxGaw5hgPVYokKC6ek7TNuEhj-TRe6m7tRK15r8&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Before Ego Trippin \u2014 Snoop Dogg | Last.fm",
-      "htmlTitle":"<b>Before Ego Trippin</b> \u2014 <b>Snoop Dogg</b> | Last.fm",
-      "link":"https://lastfm.freetls.fastly.net/i/u/ar0/13a3ef5916054e29ae423dd8eece79a8.jpg",
-      "displayLink":"www.last.fm",
-      "snippet":"Before Ego Trippin \u2014 Snoop Dogg | Last.fm",
-      "htmlSnippet":"<b>Before Ego Trippin</b> \u2014 <b>Snoop Dogg</b> | Last.fm",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
+      "title":"The Notorious B.I.G. - Juicy (Vinyl) : Target",
+      "htmlTitle":"<b>The Notorious B.I.G.</b> - <b>Juicy</b> (Vinyl) : Target",
+      "link":"https://target.scene7.com/is/image/Target/GUEST_7f19943d-5f48-40f0-994a-5b80f69ccd5b?wid=488&hei=488&fmt=pjpeg",
+      "displayLink":"www.target.com",
+      "snippet":"The Notorious B.I.G. - Juicy (Vinyl) : Target",
+      "htmlSnippet":"<b>The Notorious B.I.G.</b> - <b>Juicy</b> (Vinyl) : Target",
+      "mime":"image/",
+      "fileFormat":"image/",
       "image":      
       {
-        "contextLink":"https://www.last.fm/music/Snoop+Dogg/Before+Ego+Trippin",
-        "height":        500,
-        "width":        500,
-        "byteSize":        61669,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuMicFWrqH-wZZBlzjMwhDLATdkTG4bqY15AuQ4v1detWxHEF8fN_s4pQ&s",
+        "contextLink":"https://www.target.com/p/the-notorious-b-i-g-juicy-vinyl/-/A-76903581",
+        "height":        488,
+        "width":        488,
+        "byteSize":        44726,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxH5nCdSSuXnCZat7w8zGaW80fq_zaoPeozLqsnHeAYkJJ53RPndynA65K&s",
         "thumbnailHeight":        130,
         "thumbnailWidth":        130      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"SNOOP DOGG - Ego Trippin - Amazon.com Music",
-      "htmlTitle":"<b>SNOOP DOGG</b> - <b>Ego Trippin</b> - Amazon.com Music",
-      "link":"https://images-na.ssl-images-amazon.com/images/I/513eixmqtkL.jpg",
-      "displayLink":"www.amazon.com",
-      "snippet":"SNOOP DOGG - Ego Trippin - Amazon.com Music",
-      "htmlSnippet":"<b>SNOOP DOGG</b> - <b>Ego Trippin</b> - Amazon.com Music",
+      "title":"Did Pete Rock Produce \u201cJuicy?\u201d. Everybody loves \u201cJuicy\u201d. You've ...",
+      "htmlTitle":"Did Pete Rock Produce \u201c<b>Juicy</b>?\u201d. Everybody loves \u201c<b>Juicy</b>\u201d. You&#39;ve ...",
+      "link":"https://miro.medium.com/max/1200/0*1r-p1LDqqOmMAYcw.jpg",
+      "displayLink":"medium.com",
+      "snippet":"Did Pete Rock Produce \u201cJuicy?\u201d. Everybody loves \u201cJuicy\u201d. You've ...",
+      "htmlSnippet":"Did Pete Rock Produce \u201c<b>Juicy</b>?\u201d. Everybody loves \u201c<b>Juicy</b>\u201d. You&#39;ve ...",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.amazon.com/Ego-Trippin-SNOOP-DOGG/dp/B0013FDTYA",
-        "height":        435,
+        "contextLink":"https://medium.com/micro-chop/did-pete-rock-produce-juicy-4c40e2c10cd9",
+        "height":        600,
+        "width":        600,
+        "byteSize":        95426,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzPLWCkwhGUE7YigBEkB6h6E2VID5ZBfYFK_uHg1z8jGAW8P32ykn-QQ_N&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"How Classic Is The Notorious B.I.G.'s Ready To Die? | Reviews ...",
+      "htmlTitle":"How Classic Is <b>The Notorious B.I.G.</b>&#39;s Ready To Die? | Reviews ...",
+      "link":"https://images.squarespace-cdn.com/content/v1/5a4583f1a8b2b077ad949ef7/1525381466965-MIVUQDBUIR9FYM4C064B/ke17ZwdGBToddI8pDm48kN2JNBQlc3ny14fhvOG8oCNZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwTspcQd9KXmUb8yRrQ-x-BahojTVPtyAFvPs3cOba9fw6ffF2n4QhCXOI4ThwQ12w/1994.jpg",
+      "displayLink":"classichiphopmagazine.com",
+      "snippet":"How Classic Is The Notorious B.I.G.'s Ready To Die? | Reviews ...",
+      "htmlSnippet":"How Classic Is <b>The Notorious B.I.G.</b>&#39;s Ready To Die? | Reviews ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://classichiphopmagazine.com/94-9-reviews/2018/2/16/how-classic-is-notorious-bigs-ready-to-die",
+        "height":        595,
+        "width":        600,
+        "byteSize":        21456,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAhHy_ThOFs1KkYEAYSGOhTXwiLoKnYSKd2emS2-ey-2IgWRlhdnMhpqYq&s",
+        "thumbnailHeight":        134,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"The Notorious B.I.G. - Juicy (1994) by Hip Hop Classics on ...",
+      "htmlTitle":"<b>The Notorious B.I.G.</b> - <b>Juicy</b> (<b>1994</b>) by Hip Hop Classics on ...",
+      "link":"https://i1.sndcdn.com/artworks-000168638662-4v9wus-t500x500.jpg",
+      "displayLink":"soundcloud.com",
+      "snippet":"The Notorious B.I.G. - Juicy (1994) by Hip Hop Classics on ...",
+      "htmlSnippet":"<b>The Notorious B.I.G.</b> - <b>Juicy</b> (<b>1994</b>) by Hip Hop Classics on ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://soundcloud.com/hiphop-classics1/notorios-b-i-g-juicy-1994",
+        "height":        500,
         "width":        500,
-        "byteSize":        54376,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7xI3OGAOi1-A21lXcsI5fQLUbmnV2y57Zl4yHUERA3n_WVyF5pFKGJg&s",
-        "thumbnailHeight":        113,
+        "byteSize":        68595,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDf7DBUppMa9ZuSp4m0-VuZ_3DLabBwNdggMId38_Bqa2QJGjlm2mm21I&s",
+        "thumbnailHeight":        130,
         "thumbnailWidth":        130      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"Snoop Dogg - Ego Trippin (2008, CD) | Discogs",
-      "htmlTitle":"<b>Snoop Dogg</b> - <b>Ego Trippin</b> (2008, CD) | Discogs",
-      "link":"https://img.discogs.com/HWu4hk3lxfX4ipAdoZxFL5P5_bU=/fit-in/600x586/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-11129048-1510403879-2857.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Snoop Dogg - Ego Trippin (2008, CD) | Discogs",
-      "htmlSnippet":"<b>Snoop Dogg</b> - <b>Ego Trippin</b> (2008, CD) | Discogs",
+      "title":"15 Things You Need To Know About Notorious B.I.G's 'Ready To Die ...",
+      "htmlTitle":"15 Things You Need To Know About <b>Notorious B.I.G</b>&#39;s &#39;Ready To Die ...",
+      "link":"https://assets.capitalxtra.com/2014/20/the-notorious-big-biggie-smalls--1400684426-view-0.jpg",
+      "displayLink":"www.capitalxtra.com",
+      "snippet":"15 Things You Need To Know About Notorious B.I.G's 'Ready To Die ...",
+      "htmlSnippet":"15 Things You Need To Know About <b>Notorious B.I.G</b>&#39;s &#39;Ready To Die ...",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/Snoop-Dogg-Ego-Trippin/release/11129048",
-        "height":        586,
+        "contextLink":"https://www.capitalxtra.com/features/lists/notorious-big-ready-to-die-facts/",
+        "height":        460,
+        "width":        620,
+        "byteSize":        31905,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEMxS4NWa4M_B8Peqe4cAc4FzdaMHUc6WRgdOzv8OlwrbLmPmyEPm_iMo&s",
+        "thumbnailHeight":        101,
+        "thumbnailWidth":        136      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"The Notorious B.I.G. - Ready to Die Lyrics and Tracklist | Genius",
+      "htmlTitle":"<b>The Notorious B.I.G.</b> - Ready to Die Lyrics and Tracklist | Genius",
+      "link":"https://images.genius.com/dedddf232bd9673a8a4cd718fb92bd4a.599x599x1.jpg",
+      "displayLink":"genius.com",
+      "snippet":"The Notorious B.I.G. - Ready to Die Lyrics and Tracklist | Genius",
+      "htmlSnippet":"<b>The Notorious B.I.G.</b> - Ready to Die Lyrics and Tracklist | Genius",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://genius.com/albums/The-notorious-big/Ready-to-die",
+        "height":        599,
         "width":        599,
-        "byteSize":        133872,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-GiXPpb5otvRTlrp_P-RHz2WSZOxqSMAi8DqHR23jVW48h7Rq2bn0sEYS&s",
-        "thumbnailHeight":        132,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Snoop Dogg - Ego Trippin JAPAN CD+Bonus Track W/OBI #128-2 for ...",
-      "htmlTitle":"<b>Snoop Dogg</b> - <b>Ego Trippin</b> JAPAN CD+Bonus Track W/OBI #128-2 for ...",
-      "link":"https://i.ebayimg.com/images/g/S0sAAOSwHxVW7FNz/s-l640.jpg",
-      "displayLink":"www.ebay.com",
-      "snippet":"Snoop Dogg - Ego Trippin JAPAN CD+Bonus Track W/OBI #128-2 for ...",
-      "htmlSnippet":"<b>Snoop Dogg</b> - <b>Ego Trippin</b> JAPAN CD+Bonus Track W/OBI #128-2 for ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.ebay.com/c/1502883221",
-        "height":        640,
-        "width":        640,
-        "byteSize":        70789,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNVS0gN2fFi80J0s2LE0A3ydqUfGPKso1z2tf4fO1NcQ64iy3YKaUY6G8&s",
-        "thumbnailHeight":        137,
-        "thumbnailWidth":        137      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Snoop Dogg Ego Trippin' album photo shoot (at Polytechnic High ...",
-      "htmlTitle":"<b>Snoop Dogg Ego Trippin</b>&#39; album photo shoot (at Polytechnic High ...",
-      "link":"https://i.pinimg.com/564x/d9/5a/3a/d95a3a14ab731e4661ae1f24305bf252.jpg",
-      "displayLink":"www.pinterest.com",
-      "snippet":"Snoop Dogg Ego Trippin' album photo shoot (at Polytechnic High ...",
-      "htmlSnippet":"<b>Snoop Dogg Ego Trippin</b>&#39; album photo shoot (at Polytechnic High ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.pinterest.com/pin/156148312068003188/",
-        "height":        612,
-        "width":        499,
-        "byteSize":        49415,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzqkHa7yK4p2_NaUBX-XZWWwKM9cU4QJ1_lztvO91799EPo_5ZQs23U-U&s",
-        "thumbnailHeight":        136,
-        "thumbnailWidth":        111      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Ego Trippin': Amazon.co.uk: Music",
-      "htmlTitle":"<b>Ego Trippin</b>&#39;: Amazon.co.uk: Music",
-      "link":"https://images-na.ssl-images-amazon.com/images/I/51XLyxJZCHL._AC_SY355_.jpg",
-      "displayLink":"www.amazon.co.uk",
-      "snippet":"Ego Trippin': Amazon.co.uk: Music",
-      "htmlSnippet":"<b>Ego Trippin</b>&#39;: Amazon.co.uk: Music",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.amazon.co.uk/Ego-Trippin-Snoop-Dogg/dp/B0013NFMEM",
-        "height":        355,
-        "width":        355,
-        "byteSize":        30436,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRXgxzK2nbEJ9mDqt2uOB-DepOPbBCs-BjDUYR7FqQXXFEF3VTvwl8&s",
-        "thumbnailHeight":        121,
-        "thumbnailWidth":        121      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Snoop Dogg Photos Photos: Snoop Dogg Signs Copies Of \"Ego Trippin ...",
-      "htmlTitle":"<b>Snoop Dogg</b> Photos Photos: <b>Snoop Dogg</b> Signs Copies Of &quot;<b>Ego Trippin</b> ...",
-      "link":"https://i.pinimg.com/474x/2c/6e/54/2c6e54fd6409a6aa10fef9a17492ef06.jpg",
-      "displayLink":"www.pinterest.com",
-      "snippet":"Snoop Dogg Photos Photos: Snoop Dogg Signs Copies Of \"Ego Trippin ...",
-      "htmlSnippet":"<b>Snoop Dogg</b> Photos Photos: <b>Snoop Dogg</b> Signs Copies Of &quot;<b>Ego Trippin</b> ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.pinterest.com/pin/844706473835013088/",
-        "height":        594,
-        "width":        452,
-        "byteSize":        35662,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdw0E9WNNFhqWAdEzkdXZ2Ps3dJLDnXPEmKfRaws2_Y-JoOp7vsIAWGB4&s",
+        "byteSize":        113146,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUf2WMS5nJxIrwYNVdnEr5Iktx4SSQ38Glu_zrkPzDvhnvl80KNO_ZU-Y&s",
         "thumbnailHeight":        135,
-        "thumbnailWidth":        103      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Ego Trippin' [PA] [LP] by Snoop Dogg (Vinyl, Mar-2008, Geffen ...",
-      "htmlTitle":"<b>Ego Trippin</b>&#39; [PA] [LP] by <b>Snoop Dogg</b> (Vinyl, Mar-2008, Geffen ...",
-      "link":"https://i.ebayimg.com/images/g/cn0AAOSw~e5ZUYFs/s-l640.jpg",
-      "displayLink":"www.ebay.com",
-      "snippet":"Ego Trippin' [PA] [LP] by Snoop Dogg (Vinyl, Mar-2008, Geffen ...",
-      "htmlSnippet":"<b>Ego Trippin</b>&#39; [PA] [LP] by <b>Snoop Dogg</b> (Vinyl, Mar-2008, Geffen ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.ebay.com/p/78453540",
-        "height":        490,
-        "width":        640,
-        "byteSize":        50054,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE1mBh6A3o3HO_BTX9-ekk4q6-de9Djs4xu7miUrTCQGYffBDDudEWYw&s",
-        "thumbnailHeight":        105,
-        "thumbnailWidth":        137      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Snoop Dogg - Ego Trippin (2008, CD) | Discogs",
-      "htmlTitle":"<b>Snoop Dogg</b> - <b>Ego Trippin</b> (2008, CD) | Discogs",
-      "link":"https://img.discogs.com/6pAZKNxPq6ZBE0_P5c4fsLeyc8c=/fit-in/600x580/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1396331-1345869644-6505.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Snoop Dogg - Ego Trippin (2008, CD) | Discogs",
-      "htmlSnippet":"<b>Snoop Dogg</b> - <b>Ego Trippin</b> (2008, CD) | Discogs",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.discogs.com/Snoop-Dogg-Ego-Trippin/release/1396331",
-        "height":        580,
-        "width":        600,
-        "byteSize":        135220,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy3dyqp4Hu4cYBa8cvQzqgXc3yGOI6KLQFUsCDZjy6RhcuYlm94HUKqGib&s",
-        "thumbnailHeight":        131,
         "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"THE NOTORIOUS B.I.G - 'Juicy' 12\" Single LP Record 45 RPM Bad Boy ...",
+      "htmlTitle":"<b>THE NOTORIOUS B.I.G</b> - &#39;<b>Juicy</b>&#39; 12&quot; Single LP Record 45 RPM Bad Boy ...",
+      "link":"https://i.ebayimg.com/images/g/J9MAAOSw1qhb6LPI/s-l400.jpg",
+      "displayLink":"www.ebay.com.au",
+      "snippet":"THE NOTORIOUS B.I.G - 'Juicy' 12\" Single LP Record 45 RPM Bad Boy ...",
+      "htmlSnippet":"<b>THE NOTORIOUS B.I.G</b> - &#39;<b>Juicy</b>&#39; 12&quot; Single LP Record 45 RPM Bad Boy ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.ebay.com.au/itm/THE-NOTORIOUS-B-I-G-Juicy-12-Single-LP-Record-45-RPM-Bad-Boy-Records-1994-/233002133373",
+        "height":        391,
+        "width":        400,
+        "byteSize":        27035,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd5PqTOCqvH8G6brHMsVQNc-9iIh4m6Dhxm0y1x_rol0dH0j5IG1LK&s",
+        "thumbnailHeight":        121,
+        "thumbnailWidth":        124      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"The Notorious B.I.G.* - Ready To Die (1994, Cassette) | Discogs",
+      "htmlTitle":"<b>The Notorious B.I.G.</b>* - Ready To Die (<b>1994</b>, Cassette) | Discogs",
+      "link":"https://img.discogs.com/I5kRiaCG-gOJxxb6IXcA71_SSHE=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-3090408-1407414760-5489.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"The Notorious B.I.G.* - Ready To Die (1994, Cassette) | Discogs",
+      "htmlSnippet":"<b>The Notorious B.I.G.</b>* - Ready To Die (<b>1994</b>, Cassette) | Discogs",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/The-Notorious-BIG-Ready-To-Die/release/3090408",
+        "height":        600,
+        "width":        600,
+        "byteSize":        81976,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoIAtAEydRHlOULZmbjEFbT-PsuvT9fvjmfuBseht5MFEmt1DY9t7Uzmk&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"The Notorious B.I.G.'s \u201cJuicy\u201d and which rap hits endure.",
+      "htmlTitle":"<b>The Notorious B.I.G.</b>&#39;s \u201c<b>Juicy</b>\u201d and which rap hits endure.",
+      "link":"https://compote.slate.com/images/d10731a2-440b-463b-a5ba-c24e8b9f602b.gif",
+      "displayLink":"slate.com",
+      "snippet":"The Notorious B.I.G.'s \u201cJuicy\u201d and which rap hits endure.",
+      "htmlSnippet":"<b>The Notorious B.I.G.</b>&#39;s \u201c<b>Juicy</b>\u201d and which rap hits endure.",
+      "mime":"image/gif",
+      "fileFormat":"image/gif",
+      "image":      
+      {
+        "contextLink":"https://slate.com/culture/2018/10/notorious-big-juicy-new-american-songbook-what-rap-endures.html",
+        "height":        533,
+        "width":        800,
+        "byteSize":        439493,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWSEtuPmy-n9qFNMex2NAQwnmttRV3bs58-6We8HYRm7vqMqlbvz_QgQo&s",
+        "thumbnailHeight":        95,
+        "thumbnailWidth":        143      
       }    
     }  
   ]

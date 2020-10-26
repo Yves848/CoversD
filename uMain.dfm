@@ -320,7 +320,6 @@ object fMain: TfMain
             Picture.Data = {07544269746D617000000000}
             Stretch = True
             ExplicitTop = 2
-            ExplicitWidth = 288
           end
           object kglArtist: TKryptoGlowLabel
             Left = 6
@@ -343,7 +342,7 @@ object fMain: TfMain
           end
           object kglTitle: TKryptoGlowLabel
             Left = 31
-            Top = 269
+            Top = 273
             Width = 244
             Height = 24
             AutoSize = False
@@ -2500,7 +2499,6 @@ object fMain: TfMain
       Height = 943
       Align = alClient
       TabOrder = 3
-      ExplicitWidth = 1304
       DesignSize = (
         862
         943)
@@ -2512,7 +2510,6 @@ object fMain: TfMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 1302
         object sgList: TAdvStringGrid
           Left = 0
           Top = 0
@@ -2651,7 +2648,6 @@ object fMain: TfMain
           SortSettings.HeaderMirrorColor = clWhite
           SortSettings.HeaderMirrorColorTo = clWhite
           Version = '8.4.7.0'
-          ExplicitWidth = 1040
         end
         object sMemo1: TsMemo
           Left = 598
@@ -2661,8 +2657,6 @@ object fMain: TfMain
           Align = alRight
           TabOrder = 1
           Visible = False
-          ExplicitLeft = 604
-          ExplicitTop = -5
         end
       end
       object ropVisual: TsRollOutPanel
@@ -2672,7 +2666,6 @@ object fMain: TfMain
         Height = 365
         Align = alTop
         TabOrder = 1
-        ExplicitWidth = 1302
         object image1: TsImage
           Left = 523
           Top = 1
@@ -2692,10 +2685,8 @@ object fMain: TfMain
           ActivePage = tsEdit
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 964
           object tsVisual: TsTabSheet
             Caption = 'Visual'
-            ExplicitWidth = 956
             object sPanel2: TsPanel
               Left = 0
               Top = 0
@@ -2704,7 +2695,6 @@ object fMain: TfMain
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 0
-              ExplicitWidth = 956
               DesignSize = (
                 514
                 280)
@@ -3770,13 +3760,11 @@ object fMain: TfMain
                 Height = 280
                 Align = alClient
                 TabOrder = 0
-                ExplicitWidth = 956
               end
             end
           end
           object tsEdit: TsTabSheet
             Caption = 'Edit'
-            ExplicitWidth = 956
             object sPageControl1: TsPageControl
               Left = 0
               Top = 0
@@ -3785,7 +3773,6 @@ object fMain: TfMain
               ActivePage = sTabSheet1
               Align = alClient
               TabOrder = 0
-              ExplicitWidth = 956
               object sTabSheet1: TsTabSheet
                 Caption = 'Set Tags'
                 Font.Charset = DEFAULT_CHARSET
@@ -3794,7 +3781,6 @@ object fMain: TfMain
                 Font.Name = 'Tahoma'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitWidth = 948
                 object sLabelFX2: TsLabelFX
                   Left = 103
                   Top = 6
@@ -4222,7 +4208,6 @@ object fMain: TfMain
               end
               object sTabSheet2: TsTabSheet
                 Caption = 'Set Filenames'
-                ExplicitWidth = 948
               end
             end
           end
@@ -4291,6 +4276,7 @@ object fMain: TfMain
       Height = 943
       Align = alRight
       TabOrder = 4
+      ExplicitLeft = 866
     end
   end
   object sSkinProvider1: TsSkinProvider
@@ -7235,6 +7221,7 @@ object fMain: TfMain
           8C848484843DFE5F8001007FF21F23217044340000000049454E44AE426082}
         OriginName = 'FM.asz'
       end>
+    Fonts.MainMode = fmFromSkin
     SkinDirectory = 
       'C:\Users\yvesg\Documents\Embarcadero\Studio\21.0\CatalogReposito' +
       'ry\acnt_regdx10sydney\Skins'

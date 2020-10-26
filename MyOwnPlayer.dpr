@@ -14,7 +14,8 @@ uses
   uRegExFrame in 'uRegExFrame.pas' {Frame1: TFrame},
   uFileFrame in 'uFileFrame.pas' {Frame2: TFrame},
   uFrameCover in 'uFrameCover.pas' {FrameCover: TFrame},
-  uFrmPlayer in 'uFrmPlayer.pas' {frmPlayer: TFrame};
+  uFrmPlayer in 'uFrmPlayer.pas' {frmPlayer: TFrame},
+  uFormPlayer in 'uFormPlayer.pas' {Form1};
 
 {$R *.res}
 
@@ -24,5 +25,6 @@ begin
   Application.CreateForm(TfMain, fMain);
   Application.CreateForm(TfRegEx, fRegEx);
   Application.CreateForm(TDM1, DM1);
+  Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.
