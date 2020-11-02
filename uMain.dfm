@@ -113,6 +113,8 @@ object fMain: TfMain
         TabOrder = 3
         Visible = False
         OnClick = sButton3Click
+        ExplicitLeft = 231
+        ExplicitTop = 3
       end
     end
     object pnStatus: TsPanel
@@ -4276,7 +4278,6 @@ object fMain: TfMain
       Height = 943
       Align = alRight
       TabOrder = 4
-      ExplicitLeft = 866
     end
   end
   object sSkinProvider1: TsSkinProvider

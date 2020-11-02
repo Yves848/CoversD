@@ -26,9 +26,14 @@ type
   end;
 
   tMediaFile = class(tPersistent)
+  private
+    fFileName : String;
+    fTempFileName : String;
   public
     bModified : boolean;
     tags: TTags;
+    property fileName : String read fFileName write fFileName;
+    property tempFileName : String read fTempFileName write fTempFileName;
     constructor create; overload;
     constructor create(aFileName: string); overload;
     destructor Destroy; overload;

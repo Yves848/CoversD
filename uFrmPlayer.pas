@@ -10,15 +10,19 @@ uses
 
 type
   tUpdatePlayingInfos = procedure of object;
+  tTerminate = procedure of Object;
 
   tPlayingThread = class(TThread)
   private
     fUpdatePlayingInfos : tUpdatePlayingInfos;
   protected
     procedure Execute; override;
+    procedure DoTerminate; override;
   public
     constructor create(updateCallBack : tUpdatePlayingInfos); reintroduce;
+
   end;
+
 
   TfrmPlayer = class(TFrame)
     sFrameAdapter1: TsFrameAdapter;
@@ -39,30 +43,30 @@ type
     sPnCounter: TsPanel;
     sLabel1: TsLabel;
     JvScrollText1: TJvScrollText;
-    sScrollBox1: TsScrollBox;
-    sImage1: TsImage;
-    sImage3: TsImage;
-    sImage7: TsImage;
-    sImage8: TsImage;
-    sImage9: TsImage;
+    sImgNext: TsImage;
+    sImgStop: TsImage;
+    sImgPlay: TsImage;
+    sImgPause: TsImage;
+    sImgPrevious: TsImage;
     sTrackBar1: TsTrackBar;
     sPanel4: TsPanel;
     sPanel5: TsPanel;
     sListBox1: TsListBox;
     sPanel6: TsPanel;
     sIconsButtons: TsCharImageList;
-    sLabel2: TsLabel;
-    sLabel5: TsLabel;
-    procedure sImage9MouseEnter(Sender: TObject);
-    procedure sImage9MouseLeave(Sender: TObject);
-    procedure sImage8MouseEnter(Sender: TObject);
-    procedure sImage8MouseLeave(Sender: TObject);
-    procedure sImage7MouseEnter(Sender: TObject);
-    procedure sImage7MouseLeave(Sender: TObject);
-    procedure sImage3MouseEnter(Sender: TObject);
-    procedure sImage3MouseLeave(Sender: TObject);
-    procedure sImage1MouseEnter(Sender: TObject);
-    procedure sImage1MouseLeave(Sender: TObject);
+    sPanel7: TsPanel;
+    procedure sImgPreviousMouseEnter(Sender: TObject);
+    procedure sImgPreviousMouseLeave(Sender: TObject);
+    procedure sImgPauseMouseEnter(Sender: TObject);
+    procedure sImgPauseMouseLeave(Sender: TObject);
+    procedure sImgPlayMouseEnter(Sender: TObject);
+    procedure sImgPlayMouseLeave(Sender: TObject);
+    procedure sImgStopMouseEnter(Sender: TObject);
+    procedure sImgStopMouseLeave(Sender: TObject);
+    procedure sImgNextMouseEnter(Sender: TObject);
+    procedure sImgNextMouseLeave(Sender: TObject);
+    procedure sImgStopClick(Sender: TObject);
+    procedure sImgPlayClick(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -70,33 +74,52 @@ type
     Channel: HStream;
     pPlayingThread : tPlayingThread;
     procedure init;
-    procedure deInit;
+    function  deInit : integer;
     procedure PlayStream(FileName: String);
     Procedure UpdatePlatingInfos;
+    procedure Stop;
   end;
 
 var
   Sprectrum3D: Pointer;
   Params: TSpectrum3D_CreateParams;
   Settings: TSpectrum3D_Settings;
-
-
+  
 implementation
 
 {$R *.dfm}
 
-{ TfrmPlayer }
+Procedure CopyFile(sFile : String);
+var
+  sTempFileName : String;
+  sFileIn,
+  sFileOut : tFileStream;
+begin
+   sTempFileName := tPath.Combine(tPath.GetTempPath, 'temp.mp3');
+   sFileIn := tFileStream.Create(sFile, fmopenRead+fmShareDenyWrite);
+   sFileOut := tFileStream.Create(sTempFileName,fmOpenReadWrite + fmCreate);
+   sFileOut.CopyFrom(sFileIn,sFileIn.Size);
+   sFileOut.Free;
+   sFileIn.Free;
+end;
+
+
 
 procedure StreamEndCallback(handle: HSYNC; Channel, data: DWORD; user: Pointer); stdcall;
 begin
   //fMain.PlayNextTrack(nil);
 end;
 
-procedure TfrmPlayer.deInit;
+
+function TfrmPlayer.deInit : integer;
 begin
-  ZeroMemory(@Params, SizeOf(TSpectrum3D_CreateParams));
-  //pPlayingThread.Terminate;
+
+  pPlayingThread.Terminate;
+  while not pPlayingThread.Terminated do
+    Application.ProcessMessages;
   //pPlayingThread.Free;
+  ZeroMemory(@Params, SizeOf(TSpectrum3D_CreateParams));
+  result := 0;
 end;
 
 procedure TfrmPlayer.init;
@@ -114,26 +137,39 @@ begin
   Settings.ShowGridLines := false;
   Settings.ShowText := false;
   Spectrum3D_SetParams(Sprectrum3D, @Settings);
-  //pPlayingThread := tPlayingThread.create(UpdatePlatingInfos);
+  pPlayingThread := tPlayingThread.create(UpdatePlatingInfos);
+  pPlayingThread.Start;
+  //sImgPrevious.Images := sIconsButtons;
+  //sImgPrevious.ImageIndex := 2;
+  sImgPrevious.Refresh;
+  sImgNext.Refresh;
+  sImgStop.Refresh;
+  sImgPlay.Refresh;
+  sImgPause.Refresh;
+
 end;
 
 procedure TfrmPlayer.PlayStream(FileName: String);
-
+var
+   sTempFileName : String;
 begin
   BASS_StreamFree(Channel);
 
-  if uppercase(tpath.GetExtension(FileName)) = '.MP3' then
-    Channel := BASS_StreamCreateFile(false, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE)
-  else if (uppercase(tpath.GetExtension(FileName)) = '.M4A') or (uppercase(tpath.GetExtension(FileName)) = '.MP4') then
-    Channel := BASS_AAC_StreamCreateFile(false, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE)
+  CopyFile(FileNAme);
+  sTempFileName := tPath.Combine(tPath.GetTempPath, 'temp.mp3');
+  if uppercase(tpath.GetExtension(sTempFileName)) = '.MP3' then
+    Channel := BASS_StreamCreateFile(false, PChar(sTempFileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE)
+  else if (uppercase(tpath.GetExtension(sTempFileName)) = '.M4A') or (uppercase(tpath.GetExtension(FileName)) = '.MP4') then
+    Channel := BASS_AAC_StreamCreateFile(false, PChar(sTempFileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE)
   else
-    Channel := BASS_FLAC_StreamCreateFile(false, PChar(FileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE);
+    Channel := BASS_FLAC_StreamCreateFile(false, PChar(sTempFileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE);
 
   // * Set an end sync which will be called when playback reaches end to play the next song
   BASS_ChannelSetSync(Channel, BASS_SYNC_END, 0, @StreamEndCallback, 0);
-  //CurrentPlayingFileName := FileName;
   JvScrollText1.Items.Clear;
-  JvScrollText1.Items.Add(Filename+'  ');
+  JvScrollText1.Items.Add(FileName+'  ');
+
+
 
   //TrackBar1.Max := BASS_ChannelGetLength(Channel, BASS_POS_BYTE);
   // * Start playback
@@ -142,60 +178,86 @@ begin
   Spectrum3D_SetChannel(Sprectrum3D, Channel);
   // * Start playing and visualising
   BASS_ChannelPlay(Spectrum3D_GetChannel(Sprectrum3D), True);
-  sLabel5.Caption := inttostr(BASS_ChannelGetLength(Channel, BASS_POS_BYTE));
-  //pPlayingThread.Start;
+  //sLabel5.Caption := inttostr(BASS_ChannelGetLength(Channel, BASS_POS_BYTE));
+  if pPlayingThread.Suspended then
+    pPlayingThread.Start;
 end;
 
 
 
-procedure TfrmPlayer.sImage1MouseEnter(Sender: TObject);
+procedure TfrmPlayer.sImgNextMouseEnter(Sender: TObject);
 begin
-  sImage1.ImageIndex := 8;
+  sImgNext.ImageIndex := 8;
 end;
 
-procedure TfrmPlayer.sImage1MouseLeave(Sender: TObject);
+procedure TfrmPlayer.sImgNextMouseLeave(Sender: TObject);
 begin
-  sImage1.ImageIndex := 3;
+  sImgNext.ImageIndex := 3;
 end;
 
-procedure TfrmPlayer.sImage3MouseEnter(Sender: TObject);
+procedure TfrmPlayer.sImgStopClick(Sender: TObject);
 begin
-  sImage3.ImageIndex := 9;
+   BASS_ChannelStop(Channel);
 end;
 
-procedure TfrmPlayer.sImage3MouseLeave(Sender: TObject);
+procedure TfrmPlayer.sImgStopMouseEnter(Sender: TObject);
 begin
-  sImage3.ImageIndex := 4;
+  sImgStop.ImageIndex := 9;
 end;
 
-procedure TfrmPlayer.sImage7MouseEnter(Sender: TObject);
+procedure TfrmPlayer.sImgStopMouseLeave(Sender: TObject);
 begin
-  sImage7.ImageIndex := 5;
+  sImgStop.ImageIndex := 4;
 end;
 
-procedure TfrmPlayer.sImage7MouseLeave(Sender: TObject);
+
+
+procedure TfrmPlayer.Stop;
 begin
-  sImage7.ImageIndex := 0;
+  BASS_ChannelStop(Channel);
 end;
 
-procedure TfrmPlayer.sImage8MouseEnter(Sender: TObject);
+procedure TfrmPlayer.sImgPlayClick(Sender: TObject);
 begin
-  sImage8.ImageIndex := 6;
+  if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_PLAYING then
+  begin
+     BASS_ChannelPause(channel);
+  end
+  else
+  begin
+     BASS_ChannelPlay(Channel,false);
+  end;
+
 end;
 
-procedure TfrmPlayer.sImage8MouseLeave(Sender: TObject);
+procedure TfrmPlayer.sImgPlayMouseEnter(Sender: TObject);
 begin
-  sImage8.ImageIndex := 1;
+  sImgPlay.ImageIndex := 5;
 end;
 
-procedure TfrmPlayer.sImage9MouseEnter(Sender: TObject);
+procedure TfrmPlayer.sImgPlayMouseLeave(Sender: TObject);
 begin
-  sImage9.ImageIndex := 7;
+  sImgPlay.ImageIndex := 0;
 end;
 
-procedure TfrmPlayer.sImage9MouseLeave(Sender: TObject);
+procedure TfrmPlayer.sImgPauseMouseEnter(Sender: TObject);
 begin
-  sImage9.ImageIndex := 2;
+  sImgPause.ImageIndex := 6;
+end;
+
+procedure TfrmPlayer.sImgPauseMouseLeave(Sender: TObject);
+begin
+  sImgPause.ImageIndex := 1;
+end;
+
+procedure TfrmPlayer.sImgPreviousMouseEnter(Sender: TObject);
+begin
+  sImgPrevious.ImageIndex := 7;
+end;
+
+procedure TfrmPlayer.sImgPreviousMouseLeave(Sender: TObject);
+begin
+  sImgPrevious.ImageIndex := 2;
 end;
 
 procedure TfrmPlayer.UpdatePlatingInfos;
@@ -226,12 +288,9 @@ begin
           minutes := (Seconds div 60);
           seconds := seconds - (Minutes * 60);
         end;
-        sLabel2.Caption := format('%d:%d',[minutes,seconds]);
+        sLabel1.Caption := format('%.2d:%.2d',[minutes,seconds]);
      end;
-
   end;
-
-
 end;
 
 { tPlayingThread }
@@ -242,6 +301,12 @@ begin
     inherited create(true);
     fUpdatePlayingInfos := updateCallBAck;
     FreeOnTerminate := true;
+end;
+
+procedure tPlayingThread.DoTerminate;
+begin
+  //fUpdatePlayingInfos := Nil;
+  inherited;
 end;
 
 procedure tPlayingThread.Execute;

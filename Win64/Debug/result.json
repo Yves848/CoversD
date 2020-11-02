@@ -10,9 +10,9 @@
     "request":    
     [
       {
-        "title":"Google Custom Search - The Notorious B.I.G. Juicy (1994) cover",
-        "totalResults":"1120000",
-        "searchTerms":"The Notorious B.I.G. Juicy (1994) cover",
+        "title":"Google Custom Search - Destiny's Child Survivor cover",
+        "totalResults":"79500000",
+        "searchTerms":"Destiny's Child Survivor cover",
         "count":        10,
         "startIndex":        1,
         "inputEncoding":"utf8",
@@ -26,9 +26,9 @@
     "nextPage":    
     [
       {
-        "title":"Google Custom Search - The Notorious B.I.G. Juicy (1994) cover",
-        "totalResults":"1120000",
-        "searchTerms":"The Notorious B.I.G. Juicy (1994) cover",
+        "title":"Google Custom Search - Destiny's Child Survivor cover",
+        "totalResults":"79500000",
+        "searchTerms":"Destiny's Child Survivor cover",
         "count":        10,
         "startIndex":        11,
         "inputEncoding":"utf8",
@@ -46,221 +46,221 @@
   },
   "searchInformation":  
   {
-    "searchTime":0.703393,
-    "formattedSearchTime":"0.70",
-    "totalResults":"1120000",
-    "formattedTotalResults":"1,120,000"  
+    "searchTime":0.721108,
+    "formattedSearchTime":"0.72",
+    "totalResults":"79500000",
+    "formattedTotalResults":"79,500,000"  
   },
   "items":  
   [
     {
       "kind":"customsearch#result",
-      "title":"The Notorious BIG* - Juicy (1994, Vinyl) | Discogs",
-      "htmlTitle":"<b>The Notorious BIG</b>* - <b>Juicy</b> (<b>1994</b>, Vinyl) | Discogs",
-      "link":"https://img.discogs.com/xmuirPD7NCbesixT-hxBDr9CanU=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-235160-1314703972.jpeg.jpg",
+      "title":"Destiny's Child - Survivor (2001, Vinyl) | Discogs",
+      "htmlTitle":"<b>Destiny&#39;s Child</b> - <b>Survivor</b> (2001, Vinyl) | Discogs",
+      "link":"https://img.discogs.com/1ZhJz352xlS8xM1P8pEZhYh68Yo=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-3840918-1454129562-2639.jpeg.jpg",
       "displayLink":"www.discogs.com",
-      "snippet":"The Notorious BIG* - Juicy (1994, Vinyl) | Discogs",
-      "htmlSnippet":"<b>The Notorious BIG</b>* - <b>Juicy</b> (<b>1994</b>, Vinyl) | Discogs",
+      "snippet":"Destiny's Child - Survivor (2001, Vinyl) | Discogs",
+      "htmlSnippet":"<b>Destiny&#39;s Child</b> - <b>Survivor</b> (2001, Vinyl) | Discogs",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/The-Notorious-BIG-Juicy/release/235160",
+        "contextLink":"https://www.discogs.com/Destinys-Child-Survivor/release/3840918",
         "height":        600,
         "width":        600,
-        "byteSize":        107347,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToAsClfICM9-6q39GCdxGaw5hgPVYokKC6ek7TNuEhj-TRe6m7tRK15r8&s",
+        "byteSize":        132746,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8insRgxYbfiSMLrzrBWiusBnJK4fZZMZ2Q9bC26LvGTHgJpOypMvJ6Uoi&s",
         "thumbnailHeight":        135,
         "thumbnailWidth":        135      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"The Notorious B.I.G. - Juicy (Vinyl) : Target",
-      "htmlTitle":"<b>The Notorious B.I.G.</b> - <b>Juicy</b> (Vinyl) : Target",
-      "link":"https://target.scene7.com/is/image/Target/GUEST_7f19943d-5f48-40f0-994a-5b80f69ccd5b?wid=488&hei=488&fmt=pjpeg",
-      "displayLink":"www.target.com",
-      "snippet":"The Notorious B.I.G. - Juicy (Vinyl) : Target",
-      "htmlSnippet":"<b>The Notorious B.I.G.</b> - <b>Juicy</b> (Vinyl) : Target",
+      "title":"Mathew Knowles on Beyonc\u00e9's involvement in 'Survivor: The ...",
+      "htmlTitle":"Mathew Knowles on Beyonc\u00e9&#39;s involvement in &#39;<b>Survivor</b>: The ...",
+      "link":"https://chicagocrusader.com/wp-content/uploads/sites/2/2019/04/DC-Survivor.jpg",
+      "displayLink":"chicagocrusader.com",
+      "snippet":"Mathew Knowles on Beyonc\u00e9's involvement in 'Survivor: The ...",
+      "htmlSnippet":"Mathew Knowles on Beyonc\u00e9&#39;s involvement in &#39;<b>Survivor</b>: The ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://chicagocrusader.com/mathew-knowles-on-beyonces-involvement-in-survivor-the-destinys-child-musical/",
+        "height":        468,
+        "width":        792,
+        "byteSize":        99455,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIZFuXXPVHRbzZmtNljcq8OabXwo9qiFp6eErzif4LDFgOXNIuvosr8Q&s",
+        "thumbnailHeight":        85,
+        "thumbnailWidth":        143      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Destiny's Child - Survivor (2001, Vinyl) | Discogs",
+      "htmlTitle":"<b>Destiny&#39;s Child</b> - <b>Survivor</b> (2001, Vinyl) | Discogs",
+      "link":"https://img.discogs.com/5WtXhO9jUL9BhZgVi0YAY7I2wWg=/fit-in/600x589/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-430369-1500980004-9071.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Destiny's Child - Survivor (2001, Vinyl) | Discogs",
+      "htmlSnippet":"<b>Destiny&#39;s Child</b> - <b>Survivor</b> (2001, Vinyl) | Discogs",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/Destinys-Child-Survivor/release/430369",
+        "height":        589,
+        "width":        600,
+        "byteSize":        127226,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMHxfc3TXUGPmZhVXmUREn5j0_tHlS6lXrxgmY7HDyZpgaLYbOufjPmwxC&s",
+        "thumbnailHeight":        133,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Survivor by Destiny's Child (Album; Columbia; C2 61063): Reviews ...",
+      "htmlTitle":"<b>Survivor</b> by <b>Destiny&#39;s Child</b> (Album; Columbia; C2 61063): Reviews ...",
+      "link":"https://e.snmc.io/i/600/w/6513639f429e434a1324f79c6154f8ad/2275261",
+      "displayLink":"rateyourmusic.com",
+      "snippet":"Survivor by Destiny's Child (Album; Columbia; C2 61063): Reviews ...",
+      "htmlSnippet":"<b>Survivor</b> by <b>Destiny&#39;s Child</b> (Album; Columbia; C2 61063): Reviews ...",
       "mime":"image/",
       "fileFormat":"image/",
       "image":      
       {
-        "contextLink":"https://www.target.com/p/the-notorious-b-i-g-juicy-vinyl/-/A-76903581",
-        "height":        488,
-        "width":        488,
-        "byteSize":        44726,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxH5nCdSSuXnCZat7w8zGaW80fq_zaoPeozLqsnHeAYkJJ53RPndynA65K&s",
-        "thumbnailHeight":        130,
-        "thumbnailWidth":        130      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Did Pete Rock Produce \u201cJuicy?\u201d. Everybody loves \u201cJuicy\u201d. You've ...",
-      "htmlTitle":"Did Pete Rock Produce \u201c<b>Juicy</b>?\u201d. Everybody loves \u201c<b>Juicy</b>\u201d. You&#39;ve ...",
-      "link":"https://miro.medium.com/max/1200/0*1r-p1LDqqOmMAYcw.jpg",
-      "displayLink":"medium.com",
-      "snippet":"Did Pete Rock Produce \u201cJuicy?\u201d. Everybody loves \u201cJuicy\u201d. You've ...",
-      "htmlSnippet":"Did Pete Rock Produce \u201c<b>Juicy</b>?\u201d. Everybody loves \u201c<b>Juicy</b>\u201d. You&#39;ve ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://medium.com/micro-chop/did-pete-rock-produce-juicy-4c40e2c10cd9",
+        "contextLink":"https://rateyourmusic.com/release/album/destinys_child/survivor_f4/",
         "height":        600,
         "width":        600,
-        "byteSize":        95426,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzPLWCkwhGUE7YigBEkB6h6E2VID5ZBfYFK_uHg1z8jGAW8P32ykn-QQ_N&s",
+        "byteSize":        63318,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0-3GRyCiemWJp8tKN5iG4iCseBMt2h3Do5asY9uaWtqaGPuKrZJyyvYn4&s",
         "thumbnailHeight":        135,
         "thumbnailWidth":        135      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"How Classic Is The Notorious B.I.G.'s Ready To Die? | Reviews ...",
-      "htmlTitle":"How Classic Is <b>The Notorious B.I.G.</b>&#39;s Ready To Die? | Reviews ...",
-      "link":"https://images.squarespace-cdn.com/content/v1/5a4583f1a8b2b077ad949ef7/1525381466965-MIVUQDBUIR9FYM4C064B/ke17ZwdGBToddI8pDm48kN2JNBQlc3ny14fhvOG8oCNZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwTspcQd9KXmUb8yRrQ-x-BahojTVPtyAFvPs3cOba9fw6ffF2n4QhCXOI4ThwQ12w/1994.jpg",
-      "displayLink":"classichiphopmagazine.com",
-      "snippet":"How Classic Is The Notorious B.I.G.'s Ready To Die? | Reviews ...",
-      "htmlSnippet":"How Classic Is <b>The Notorious B.I.G.</b>&#39;s Ready To Die? | Reviews ...",
+      "title":"Destiny's Child - Survivor (2001, CD) | Discogs",
+      "htmlTitle":"<b>Destiny&#39;s Child</b> - <b>Survivor</b> (2001, CD) | Discogs",
+      "link":"https://img.discogs.com/j3XPoneWo_-McVNsLnrQmKIBSFQ=/fit-in/600x528/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1254076-1350135470-5820.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Destiny's Child - Survivor (2001, CD) | Discogs",
+      "htmlSnippet":"<b>Destiny&#39;s Child</b> - <b>Survivor</b> (2001, CD) | Discogs",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://classichiphopmagazine.com/94-9-reviews/2018/2/16/how-classic-is-notorious-bigs-ready-to-die",
-        "height":        595,
+        "contextLink":"https://www.discogs.com/Destinys-Child-Survivor/release/1254076",
+        "height":        528,
         "width":        600,
-        "byteSize":        21456,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAhHy_ThOFs1KkYEAYSGOhTXwiLoKnYSKd2emS2-ey-2IgWRlhdnMhpqYq&s",
-        "thumbnailHeight":        134,
+        "byteSize":        115603,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUY-2-D1tbaHJ7SXHhyQOGPkn5dsrOcey7yOr1xYlv9ZPQ-y-u9vRDpQw&s",
+        "thumbnailHeight":        119,
         "thumbnailWidth":        135      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"The Notorious B.I.G. - Juicy (1994) by Hip Hop Classics on ...",
-      "htmlTitle":"<b>The Notorious B.I.G.</b> - <b>Juicy</b> (<b>1994</b>) by Hip Hop Classics on ...",
-      "link":"https://i1.sndcdn.com/artworks-000168638662-4v9wus-t500x500.jpg",
-      "displayLink":"soundcloud.com",
-      "snippet":"The Notorious B.I.G. - Juicy (1994) by Hip Hop Classics on ...",
-      "htmlSnippet":"<b>The Notorious B.I.G.</b> - <b>Juicy</b> (<b>1994</b>) by Hip Hop Classics on ...",
+      "title":"destiny's child survivor photoshoots - Buscar con Google ...",
+      "htmlTitle":"<b>destiny&#39;s child survivor</b> photoshoots - Buscar con Google ...",
+      "link":"https://i.pinimg.com/originals/60/ac/df/60acdf03137e205c9dcc9afd0bee049e.jpg",
+      "displayLink":"www.pinterest.com",
+      "snippet":"destiny's child survivor photoshoots - Buscar con Google ...",
+      "htmlSnippet":"<b>destiny&#39;s child survivor</b> photoshoots - Buscar con Google ...",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://soundcloud.com/hiphop-classics1/notorios-b-i-g-juicy-1994",
-        "height":        500,
-        "width":        500,
-        "byteSize":        68595,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDf7DBUppMa9ZuSp4m0-VuZ_3DLabBwNdggMId38_Bqa2QJGjlm2mm21I&s",
-        "thumbnailHeight":        130,
-        "thumbnailWidth":        130      
+        "contextLink":"https://www.pinterest.com/pin/505669864394538202/",
+        "height":        360,
+        "width":        480,
+        "byteSize":        27156,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPsvcwA5FYHruW5oIhyyQ5AiYq30Oo2809Q4_eOs5gHb9mJ4BYp1msxK8&s",
+        "thumbnailHeight":        97,
+        "thumbnailWidth":        129      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"15 Things You Need To Know About Notorious B.I.G's 'Ready To Die ...",
-      "htmlTitle":"15 Things You Need To Know About <b>Notorious B.I.G</b>&#39;s &#39;Ready To Die ...",
-      "link":"https://assets.capitalxtra.com/2014/20/the-notorious-big-biggie-smalls--1400684426-view-0.jpg",
-      "displayLink":"www.capitalxtra.com",
-      "snippet":"15 Things You Need To Know About Notorious B.I.G's 'Ready To Die ...",
-      "htmlSnippet":"15 Things You Need To Know About <b>Notorious B.I.G</b>&#39;s &#39;Ready To Die ...",
+      "title":"Destiny's Child - Survivor (2001, CD) | Discogs",
+      "htmlTitle":"<b>Destiny&#39;s Child</b> - <b>Survivor</b> (2001, CD) | Discogs",
+      "link":"https://img.discogs.com/lQXrE8kmBl94qo1lTSeSUBSPsVg=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-3265997-1338334084-6056.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Destiny's Child - Survivor (2001, CD) | Discogs",
+      "htmlSnippet":"<b>Destiny&#39;s Child</b> - <b>Survivor</b> (2001, CD) | Discogs",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.capitalxtra.com/features/lists/notorious-big-ready-to-die-facts/",
-        "height":        460,
+        "contextLink":"https://www.discogs.com/Destinys-Child-Survivor/release/3265997",
+        "height":        600,
+        "width":        600,
+        "byteSize":        126720,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPP67F0-dx1C4_lkiXpNFOVuj3RJ5JQ3i8SmTWTl7KV87QBKD5TysWlp5M&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Destiny's Child - Survivor | Albums | Crownnote",
+      "htmlTitle":"<b>Destiny&#39;s Child</b> - <b>Survivor</b> | Albums | Crownnote",
+      "link":"http://crownnote.com/sites/default/files/tumblr_oedplwYVBP1so2fjho1_1280%20%281%29.jpg",
+      "displayLink":"crownnote.com",
+      "snippet":"Destiny's Child - Survivor | Albums | Crownnote",
+      "htmlSnippet":"<b>Destiny&#39;s Child</b> - <b>Survivor</b> | Albums | Crownnote",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"http://crownnote.com/albums/destinys-child/survivor",
+        "height":        620,
         "width":        620,
-        "byteSize":        31905,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEMxS4NWa4M_B8Peqe4cAc4FzdaMHUc6WRgdOzv8OlwrbLmPmyEPm_iMo&s",
-        "thumbnailHeight":        101,
+        "byteSize":        90266,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGtIPqt4rWVLGoleCWJp6jrCibXA6APZNH7XUTuD2vZha3e4Uhy2YlxYM&s",
+        "thumbnailHeight":        136,
         "thumbnailWidth":        136      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"The Notorious B.I.G. - Ready to Die Lyrics and Tracklist | Genius",
-      "htmlTitle":"<b>The Notorious B.I.G.</b> - Ready to Die Lyrics and Tracklist | Genius",
-      "link":"https://images.genius.com/dedddf232bd9673a8a4cd718fb92bd4a.599x599x1.jpg",
-      "displayLink":"genius.com",
-      "snippet":"The Notorious B.I.G. - Ready to Die Lyrics and Tracklist | Genius",
-      "htmlSnippet":"<b>The Notorious B.I.G.</b> - Ready to Die Lyrics and Tracklist | Genius",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://genius.com/albums/The-notorious-big/Ready-to-die",
-        "height":        599,
-        "width":        599,
-        "byteSize":        113146,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUf2WMS5nJxIrwYNVdnEr5Iktx4SSQ38Glu_zrkPzDvhnvl80KNO_ZU-Y&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"THE NOTORIOUS B.I.G - 'Juicy' 12\" Single LP Record 45 RPM Bad Boy ...",
-      "htmlTitle":"<b>THE NOTORIOUS B.I.G</b> - &#39;<b>Juicy</b>&#39; 12&quot; Single LP Record 45 RPM Bad Boy ...",
-      "link":"https://i.ebayimg.com/images/g/J9MAAOSw1qhb6LPI/s-l400.jpg",
-      "displayLink":"www.ebay.com.au",
-      "snippet":"THE NOTORIOUS B.I.G - 'Juicy' 12\" Single LP Record 45 RPM Bad Boy ...",
-      "htmlSnippet":"<b>THE NOTORIOUS B.I.G</b> - &#39;<b>Juicy</b>&#39; 12&quot; Single LP Record 45 RPM Bad Boy ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.ebay.com.au/itm/THE-NOTORIOUS-B-I-G-Juicy-12-Single-LP-Record-45-RPM-Bad-Boy-Records-1994-/233002133373",
-        "height":        391,
-        "width":        400,
-        "byteSize":        27035,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd5PqTOCqvH8G6brHMsVQNc-9iIh4m6Dhxm0y1x_rol0dH0j5IG1LK&s",
-        "thumbnailHeight":        121,
-        "thumbnailWidth":        124      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"The Notorious B.I.G.* - Ready To Die (1994, Cassette) | Discogs",
-      "htmlTitle":"<b>The Notorious B.I.G.</b>* - Ready To Die (<b>1994</b>, Cassette) | Discogs",
-      "link":"https://img.discogs.com/I5kRiaCG-gOJxxb6IXcA71_SSHE=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-3090408-1407414760-5489.jpeg.jpg",
+      "title":"Destiny's Child - Survivor (2001, Silver Disc, CD) | Discogs",
+      "htmlTitle":"<b>Destiny&#39;s Child</b> - <b>Survivor</b> (2001, Silver Disc, CD) | Discogs",
+      "link":"https://img.discogs.com/04Y1HyDqddu86o79a-qLYqOxT-o=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-357019-1222212955.jpeg.jpg",
       "displayLink":"www.discogs.com",
-      "snippet":"The Notorious B.I.G.* - Ready To Die (1994, Cassette) | Discogs",
-      "htmlSnippet":"<b>The Notorious B.I.G.</b>* - Ready To Die (<b>1994</b>, Cassette) | Discogs",
+      "snippet":"Destiny's Child - Survivor (2001, Silver Disc, CD) | Discogs",
+      "htmlSnippet":"<b>Destiny&#39;s Child</b> - <b>Survivor</b> (2001, Silver Disc, CD) | Discogs",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://www.discogs.com/The-Notorious-BIG-Ready-To-Die/release/3090408",
+        "contextLink":"https://www.discogs.com/Destinys-Child-Survivor/release/357019",
         "height":        600,
         "width":        600,
-        "byteSize":        81976,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoIAtAEydRHlOULZmbjEFbT-PsuvT9fvjmfuBseht5MFEmt1DY9t7Uzmk&s",
+        "byteSize":        95715,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtwo5cnJJcfzsAoR_9Zu-IG9hw_9tDcwH0ytaSTanSg2rVofJoE3IBd7vp&s",
         "thumbnailHeight":        135,
         "thumbnailWidth":        135      
       }    
     },
     {
       "kind":"customsearch#result",
-      "title":"The Notorious B.I.G.'s \u201cJuicy\u201d and which rap hits endure.",
-      "htmlTitle":"<b>The Notorious B.I.G.</b>&#39;s \u201c<b>Juicy</b>\u201d and which rap hits endure.",
-      "link":"https://compote.slate.com/images/d10731a2-440b-463b-a5ba-c24e8b9f602b.gif",
-      "displayLink":"slate.com",
-      "snippet":"The Notorious B.I.G.'s \u201cJuicy\u201d and which rap hits endure.",
-      "htmlSnippet":"<b>The Notorious B.I.G.</b>&#39;s \u201c<b>Juicy</b>\u201d and which rap hits endure.",
-      "mime":"image/gif",
-      "fileFormat":"image/gif",
+      "title":"Survivor - Destiny's Child | Destinys child lyrics, Beyonce album ...",
+      "htmlTitle":"<b>Survivor</b> - <b>Destiny&#39;s Child</b> | <b>Destinys child</b> lyrics, Beyonce album ...",
+      "link":"https://i.pinimg.com/originals/b8/33/2e/b8332e182dbf40f7194ad4d0c585beef.jpg",
+      "displayLink":"www.pinterest.com",
+      "snippet":"Survivor - Destiny's Child | Destinys child lyrics, Beyonce album ...",
+      "htmlSnippet":"<b>Survivor</b> - <b>Destiny&#39;s Child</b> | <b>Destinys child</b> lyrics, Beyonce album ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://slate.com/culture/2018/10/notorious-big-juicy-new-american-songbook-what-rap-endures.html",
-        "height":        533,
-        "width":        800,
-        "byteSize":        439493,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWSEtuPmy-n9qFNMex2NAQwnmttRV3bs58-6We8HYRm7vqMqlbvz_QgQo&s",
-        "thumbnailHeight":        95,
-        "thumbnailWidth":        143      
+        "contextLink":"https://www.pinterest.com/pin/440367669796400274/",
+        "height":        534,
+        "width":        360,
+        "byteSize":        40157,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdkwOiAB8qpzwfJjlZ7cDqRBqAQjKFgDxz1CSp6JNFoyUTkI5-i7RX5UQ&s",
+        "thumbnailHeight":        132,
+        "thumbnailWidth":        89      
       }    
     }  
   ]

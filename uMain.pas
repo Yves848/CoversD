@@ -979,6 +979,10 @@ begin
       Application.ProcessMessages;
   end;
 
+  fFrmPlayer.Stop;
+  fFrmPlayer.deInit;
+
+
   jConfig.S['startFolder'] := sShellTreeView1.SelectedFolder.PathName;
 
   jConfig.SaveTo(TDirectory.GetCurrentDirectory + '\config.json');

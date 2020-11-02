@@ -21,9 +21,5 @@ object Form1: TForm1
     Align = alClient
     Caption = 'sPanel1'
     TabOrder = 0
-    ExplicitLeft = 456
-    ExplicitTop = 40
-    ExplicitWidth = 185
-    ExplicitHeight = 41
   end
 end
