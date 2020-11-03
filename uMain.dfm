@@ -113,8 +113,6 @@ object fMain: TfMain
         TabOrder = 3
         Visible = False
         OnClick = sButton3Click
-        ExplicitLeft = 231
-        ExplicitTop = 3
       end
     end
     object pnStatus: TsPanel
@@ -2515,7 +2513,7 @@ object fMain: TfMain
         object sgList: TAdvStringGrid
           Left = 0
           Top = 0
-          Width = 598
+          Width = 860
           Height = 576
           Cursor = crDefault
           Align = alClient
@@ -2535,7 +2533,6 @@ object fMain: TfMain
           HoverRowCells = [hcNormal, hcSelected]
           OnGetCellColor = sgListGetCellColor
           OnRowChanging = sgListRowChanging
-          OnClickCell = sgListClickCell
           OnRightClickCell = sgListRightClickCell
           ActiveCellFont.Charset = DEFAULT_CHARSET
           ActiveCellFont.Color = 4474440
@@ -2650,15 +2647,6 @@ object fMain: TfMain
           SortSettings.HeaderMirrorColor = clWhite
           SortSettings.HeaderMirrorColorTo = clWhite
           Version = '8.4.7.0'
-        end
-        object sMemo1: TsMemo
-          Left = 598
-          Top = 0
-          Width = 262
-          Height = 576
-          Align = alRight
-          TabOrder = 1
-          Visible = False
         end
       end
       object ropVisual: TsRollOutPanel
@@ -54250,6 +54238,7 @@ object fMain: TfMain
         Name = 'Cartoon Baloon'
       end>
     TemplateName = 'Cartoon Baloon'
+    PauseHide = 1500
     SkinSection = 'HINT'
     OnShowHint = sAlphaHints1ShowHint
     Left = 657

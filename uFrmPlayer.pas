@@ -51,10 +51,13 @@ type
     sTrackBar1: TsTrackBar;
     sPanel4: TsPanel;
     sPanel5: TsPanel;
-    sListBox1: TsListBox;
+    slbPlayList: TsListBox;
     sPanel6: TsPanel;
     sIconsButtons: TsCharImageList;
     sPanel7: TsPanel;
+    sButton1: TsButton;
+    sButton2: TsButton;
+    sButton3: TsButton;
     procedure sImgPreviousMouseEnter(Sender: TObject);
     procedure sImgPreviousMouseLeave(Sender: TObject);
     procedure sImgPauseMouseEnter(Sender: TObject);
@@ -67,6 +70,9 @@ type
     procedure sImgNextMouseLeave(Sender: TObject);
     procedure sImgStopClick(Sender: TObject);
     procedure sImgPlayClick(Sender: TObject);
+    procedure FrameResize(Sender: TObject);
+    procedure FrameAlignPosition(Sender: TWinControl; Control: TControl; var NewLeft, NewTop, NewWidth, NewHeight: Integer; var AlignRect: TRect;
+      AlignInfo: TAlignInfo);
   private
     { Déclarations privées }
   public
@@ -77,6 +83,7 @@ type
     function  deInit : integer;
     procedure PlayStream(FileName: String);
     Procedure UpdatePlatingInfos;
+    procedure resize;
     procedure Stop;
   end;
 
@@ -89,15 +96,15 @@ implementation
 
 {$R *.dfm}
 
-Procedure CopyFile(sFile : String);
+function CopyFile(sFile : String) : string;
 var
-  sTempFileName : String;
+
   sFileIn,
   sFileOut : tFileStream;
 begin
-   sTempFileName := tPath.Combine(tPath.GetTempPath, 'temp.mp3');
+   result := tPath.Combine(tPath.GetTempPath, 'temp.mp3');
    sFileIn := tFileStream.Create(sFile, fmopenRead+fmShareDenyWrite);
-   sFileOut := tFileStream.Create(sTempFileName,fmOpenReadWrite + fmCreate);
+   sFileOut := tFileStream.Create(result,fmOpenReadWrite + fmCreate);
    sFileOut.CopyFrom(sFileIn,sFileIn.Size);
    sFileOut.Free;
    sFileIn.Free;
@@ -122,6 +129,17 @@ begin
   result := 0;
 end;
 
+procedure TfrmPlayer.FrameAlignPosition(Sender: TWinControl; Control: TControl; var NewLeft, NewTop, NewWidth, NewHeight: Integer;
+  var AlignRect: TRect; AlignInfo: TAlignInfo);
+begin
+  slbPlayList.Items.Add('AlignPosition');
+end;
+
+procedure TfrmPlayer.FrameResize(Sender: TObject);
+begin
+  //slbPlayList.Items.Add('resize');
+end;
+
 procedure TfrmPlayer.init;
 var
   Volume: Single;
@@ -139,14 +157,6 @@ begin
   Spectrum3D_SetParams(Sprectrum3D, @Settings);
   pPlayingThread := tPlayingThread.create(UpdatePlatingInfos);
   pPlayingThread.Start;
-  //sImgPrevious.Images := sIconsButtons;
-  //sImgPrevious.ImageIndex := 2;
-  sImgPrevious.Refresh;
-  sImgNext.Refresh;
-  sImgStop.Refresh;
-  sImgPlay.Refresh;
-  sImgPause.Refresh;
-
 end;
 
 procedure TfrmPlayer.PlayStream(FileName: String);
@@ -155,8 +165,7 @@ var
 begin
   BASS_StreamFree(Channel);
 
-  CopyFile(FileNAme);
-  sTempFileName := tPath.Combine(tPath.GetTempPath, 'temp.mp3');
+  sTempFileName := CopyFile(FileNAme);
   if uppercase(tpath.GetExtension(sTempFileName)) = '.MP3' then
     Channel := BASS_StreamCreateFile(false, PChar(sTempFileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE)
   else if (uppercase(tpath.GetExtension(sTempFileName)) = '.M4A') or (uppercase(tpath.GetExtension(FileName)) = '.MP4') then
@@ -169,12 +178,6 @@ begin
   JvScrollText1.Items.Clear;
   JvScrollText1.Items.Add(FileName+'  ');
 
-
-
-  //TrackBar1.Max := BASS_ChannelGetLength(Channel, BASS_POS_BYTE);
-  // * Start playback
-  //updatePlayingInfos(FileName);
-
   Spectrum3D_SetChannel(Sprectrum3D, Channel);
   // * Start playing and visualising
   BASS_ChannelPlay(Spectrum3D_GetChannel(Sprectrum3D), True);
@@ -184,6 +187,11 @@ begin
 end;
 
 
+
+procedure TfrmPlayer.resize;
+begin
+
+end;
 
 procedure TfrmPlayer.sImgNextMouseEnter(Sender: TObject);
 begin
@@ -299,6 +307,7 @@ constructor tPlayingThread.create(updateCallBack : tUpdatePlayingInfos);
 begin
     //
     inherited create(true);
+    self.Priority := TThreadPriority.tpHigher;
     fUpdatePlayingInfos := updateCallBAck;
     FreeOnTerminate := true;
 end;

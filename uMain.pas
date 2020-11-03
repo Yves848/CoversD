@@ -37,7 +37,6 @@ type
     pnMain: TsPanel;
     sPanel1: TsPanel;
     sPanel2: TsPanel;
-    sShellTreeView1: TsShellTreeView;
     sgList: TAdvStringGrid;
     btnUtils: TsButton;
     sButton4: TsButton;
@@ -124,8 +123,8 @@ type
     sAlphaHints1: TsAlphaHints;
     sILNoCover: TsAlphaImageList;
     sButton3: TsButton;
-    sMemo1: TsMemo;
     sPnPlayer: TsPanel;
+    sShellTreeView1: TsShellTreeView;
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasChange(Sender: TObject; Node: TTreeNode);
     procedure sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
@@ -156,7 +155,6 @@ type
     procedure slCoversSliderChange(Sender: TObject);
     procedure PopupMenu21Click(Sender: TObject);
     procedure sgListRightClickCell(Sender: TObject; ARow, ACol: Integer);
-    procedure sgListClickCell(Sender: TObject; ARow, ACol: Integer);
     procedure sgListSetEditText(Sender: TObject; ACol, ARow: Integer; const Value: string);
     procedure btnRegexClick(Sender: TObject);
     procedure sgListKeyPress(Sender: TObject; var Key: Char);
@@ -208,6 +206,7 @@ type
     procedure updateTV;
     procedure initGrid;
     procedure removeKeyFromStack;
+    function AddToPlayList(aMediaFile : tMediaFile) : Integer; overload;
     function AddToPlayList(ARow: Integer): Integer; overload;
     function AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): Integer; overload;
     Procedure AddFolderToGrid(sFolder: String);
@@ -248,6 +247,11 @@ type
     Procedure GetNoCoverImage(aPicture: tPicture);
     function getExpression: String;
     Procedure OpenPlayer;
+    procedure PreviewTrack(aNode : tTreeNode); overload;
+    procedure PreviewTrack(aMediaFile : tMediafile); overload;
+    procedure PreviewTrack(sFileName : String); overload;
+    procedure AddDirectlyToPlayList;
+    Procedure AddToGrid(bReset: Boolean);
   end;
 
 var
@@ -264,7 +268,7 @@ var
   Params: TSpectrum3D_CreateParams;
   Settings: TSpectrum3D_Settings;
   fCoverSearch: tfCoverSearch;
-  fFrmPlayer : tFrmPlayer;
+  fFrmPlayer: tFrmPlayer;
 
 implementation
 
@@ -405,6 +409,27 @@ begin
   fCoverSearch.ShowModal;
 end;
 
+procedure TfMain.PreviewTrack(sFileName: String);
+begin
+  //PlayStream(sFileName);
+  fFrmPlayer.PlayStream(sFilename);
+end;
+
+procedure TfMain.PreviewTrack(aMediaFile: tMediafile);
+begin
+   PreviewTrack(aMediaFile.tags.FileName);
+end;
+
+procedure TfMain.PreviewTrack(aNode : tTreeNode);
+begin
+  if not TacShellFolder(aNode.data).IsFileFolder then
+  begin
+    // ListCoverArts(sImage1,TacShellFolder(aNode.data).PathName);
+    BASS_ChannelStop(Channel);
+    PreviewTrack(TacShellFolder(aNode.data).PathName);
+  end;
+end;
+
 procedure TfMain.RefreshCover(ARow: Integer);
 var
   aFile: String;
@@ -491,6 +516,20 @@ begin
   end;
 end;
 
+procedure TfMain.AddDirectlyToPlayList;
+begin
+  aNode := sShellTreeView1.Selected;
+  if not TacShellFolder(aNode.data).IsFileFolder then
+  begin
+    AddToPlayList(aNode, false);
+  end
+  else
+  begin
+    aPath := TacShellFolder(aNode.data).PathName;
+    thAddToPlayList.Execute(self);
+  end;
+end;
+
 function TfMain.AddFileToGrid(sFile: String): Integer;
 var
   ARow: Integer;
@@ -557,6 +596,40 @@ begin
   //
 end;
 
+function TfMain.AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): Integer;
+var
+  aMediaFile: tMediaFile;
+  sPath, sFile: String;
+  index: Integer;
+begin
+  Result := -1;
+  if not TacShellFolder(aNode.data).IsFileFolder then
+  begin
+    aMediaFile := tMediaFile.Create(TacShellFolder(aNode.data).PathName);
+    if aMediaFile <> Nil then
+      result := AddToPlayList(aMediaFile);
+  end
+end;
+
+function TfMain.AddToPlayList(aMediaFile: tMediaFile): Integer;
+var
+  sPath, sFile: String;
+  index: Integer;
+begin
+  Result := -1;
+  sPath := tpath.GetDirectoryName(aMediaFile.Tags.FileName);
+  sFile := tpath.GetFileNameWithoutExtension(aMediaFile.Tags.FileName);
+
+  index := fFrmPlayer.slbPlaylist.Items.IndexOf(sFile);
+  if index = -1 then
+  begin
+    Result := fFrmPlayer.slbPlaylist.Items.AddObject(sFile, aMediaFile);
+  end
+  else
+    Result := index;
+
+end;
+
 function TfMain.AddToPlayList(ARow: Integer): Integer;
 var
   aMediaFile: tMediaFile;
@@ -565,15 +638,8 @@ var
 begin
   Result := -1;
   aMediaFile := tMediaFile(sgList.Objects[1, ARow]);
-  sPath := tpath.GetDirectoryName(aMediaFile.Tags.FileName);
-  sFile := tpath.GetFileNameWithoutExtension(aMediaFile.Tags.FileName);
-  index := slbPlaylist.Items.IndexOf(sFile);
-  if index = -1 then
-  begin
-    Result := slbPlaylist.Items.AddObject(sFile, aMediaFile);
-  end
-  else
-    Result := index;
+  if aMediaFile <> nil then
+     result := AddToPlayList(aMediaFile);
 end;
 
 procedure TfMain.AddToDictionary(cKey, sValue: string);
@@ -588,28 +654,38 @@ begin
   end;
 end;
 
-function TfMain.AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): Integer;
+procedure TfMain.AddToGrid(bReset: Boolean);
 var
-  aMediaFile: tMediaFile;
-  sPath, sFile: String;
-  index: Integer;
+  NewRow: Integer;
+  GlobalMediaFile: tMediaFile;
 begin
-  Result := -1;
-  if not TacShellFolder(aNode.data).IsFileFolder then
+  if sShellTreeView1.Selected <> nil then
   begin
-
-    aMediaFile := tMediaFile.Create(TacShellFolder(aNode.data).PathName);
-    sPath := tpath.GetDirectoryName(aMediaFile.Tags.FileName);
-    sFile := tpath.GetFileNameWithoutExtension(aMediaFile.Tags.FileName);
-    index := slbPlaylist.Items.IndexOf(sFile);
-    if index = -1 then
+    aNode := sShellTreeView1.Selected;
+    if bReset then
     begin
-      Result := slbPlaylist.Items.AddObject(sFile, aMediaFile);
+      // Clear grid before
+      initGrid;
+    end;
+    if not TacShellFolder(aNode.data).IsFileFolder then
+    begin
+      NewRow := AddFileToGrid(TacShellFolder(aNode.data).PathName);
+      if sgList.Objects[1, NewRow] <> Nil then
+      begin
+        GlobalMediaFile := tMediaFile.Create(TacShellFolder(aNode.data).PathName);
+        ListCoverArts(image1, GlobalMediaFile.Tags);
+        GlobalMediaFile.Destroy;
+      end;
     end
     else
-      Result := index;
-  end
+    begin
+      aPath := TacShellFolder(aNode.data).PathName;
+      thListMP3.Execute(self);
+    end;
+  end;
 end;
+
+
 
 procedure TfMain.AddToPlayListTH;
 var
@@ -982,7 +1058,6 @@ begin
   fFrmPlayer.Stop;
   fFrmPlayer.deInit;
 
-
   jConfig.S['startFolder'] := sShellTreeView1.SelectedFolder.PathName;
 
   jConfig.SaveTo(TDirectory.GetCurrentDirectory + '\config.json');
@@ -1023,7 +1098,6 @@ begin
   isRegistered := True;
   btnUtils.Visible := True;
   sButton3.Visible := True;
-  sMemo1.Visible := True;
 {$ELSE}
   GetRegistrationInformation(ReleaseCodeString, SerialNumber);
   if not IsReleaseCodeValid(ReleaseCodeString, SerialNumber) then
@@ -1105,7 +1179,7 @@ end;
 
 function TfMain.getExpression: String;
 var
-  regexpr, regExReplace: tREgEx;
+  regexpr, RegExReplace: tREgEx;
   iMatch: Integer;
   Match: tMatch;
   iGroup: Integer;
@@ -1131,8 +1205,8 @@ begin
             sKey := '[' + Match.Groups.Item[iGroup].Value + ']';
             dExpressions.TryGetValue(sKey, pExpr);
             RegExReplace.Create('\[' + Match.Groups.Item[iGroup].Value + '\]');
-            sExpr := RegExReplace.Replace(sExpr,pExpr.sExpr);
-            //sExpr := sExpr + pExpr.sExpr;
+            sExpr := RegExReplace.Replace(sExpr, pExpr.sExpr);
+            // sExpr := sExpr + pExpr.sExpr;
           end;
         end;
         Match := Match.NextMatch;
@@ -1205,8 +1279,6 @@ procedure TfMain.initGrid;
   end;
 
 begin
-  //
-
   cleanObjects;
   sgList.clear;
   sgList.RowCount := 2;
@@ -1226,19 +1298,6 @@ begin
   sgList.ColWidths[0] := 20;
   InitDictionaries;
   ExtractTags(1, True);
-end;
-
-procedure TfMain.sgListClickCell(Sender: TObject; ARow, ACol: Integer);
-begin
-  // with sgList do
-  // if ARow = 0 then
-  // begin
-  // Caption := Cells[ACol, 0];
-  // if (GroupColumn <> -1) and (ACol >= GroupColumn) then
-  // inc(ACol);
-  // if (GroupColumn <> ACol) then
-  // GroupColumn := ACol;
-  // end;
 end;
 
 procedure TfMain.sgListGetCellColor(Sender: TObject; ARow, ACol: Integer; AState: TGridDrawState; ABrush: TBrush; AFont: TFont);
@@ -1273,6 +1332,7 @@ var
   pMediaFile: tMediaFile;
   ARow: Integer;
 begin
+
   ARow := sgList.Row;
   if Key = VK_ESCAPE then
   begin
@@ -1313,10 +1373,6 @@ begin
   end
   else
   begin
-    if Key = VK_INSERT then
-    begin
-      PopupMenu21Click(Sender);
-    end;
     if Key = VK_ADD then
     begin
       i := 0;
@@ -1339,7 +1395,6 @@ begin
         else if not(goEditing in sgList.Options) then
         begin
           sgList.Options := [goEditing, goTabs];
-          // sgList.Col := 1;
 
           if trim(sgList.Cells[2, ARow]) <> '' then
             sgList.EditCell(2, sgList.Row)
@@ -1353,7 +1408,6 @@ begin
         begin
           sgList.EditCell(sgList.Col, sgList.Row);
         end;
-        // sgList.EditMode := True;
       end
       else
       begin
@@ -1362,8 +1416,9 @@ begin
           if sgList.Objects[1, sgList.Row] <> Nil then
           begin
             BASS_ChannelStop(Channel);
-            //PlayStream(tMediaFile(sgList.Objects[1, sgList.Row]).Tags.FileName);
-            fFrmPlayer.PlayStream(tMediaFile(sgList.Objects[1, sgList.Row]).Tags.FileName);
+            // PlayStream(tMediaFile(sgList.Objects[1, sgList.Row]).Tags.FileName);
+            //fFrmPlayer.PlayStream(tMediaFile(sgList.Objects[1, sgList.Row]).Tags.FileName);
+            PreviewTrack(tMediaFile(sgList.Objects[1, sgList.Row]));
           end;
         end
         else
@@ -1380,7 +1435,8 @@ begin
               if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
               begin
                 slbPlaylist.ItemIndex := index;
-                PlayStream(tMediaFile(slbPlaylist.Items.Objects[index]).Tags.FileName);
+                //PlayStream(tMediaFile(slbPlaylist.Items.Objects[index]).Tags.FileName);
+                PreviewTrack(tMediaFile(slbPlaylist.Items.Objects[index]));
               end;
             end;
             inc(i);
@@ -1410,6 +1466,10 @@ begin
     begin
       ExtractTags(sgList.Row);
     end;
+  end;
+  if Key = '/' then
+  begin
+    PopupMenu21Click(Sender);
   end;
 end;
 
@@ -1773,33 +1833,33 @@ var
   end;
 
 begin
-//  sString := seRegEx.Text;
-//  iCaret := TsPopupBox(Sender).SelStart;
-//  iBracketStart := rpos('[', sString, iCaret);
-//  iBracketEnd := lpos(']', sString, iBracketStart);
-//  iLenght := (iBracketEnd - iBracketStart) + 1;
-//  sMemo1.lines.Add(format('Caret : %d - BracketStart : %d - BracketEnd : %d', [iCaret, iBracketStart, iBracketEnd]));
-//  if ssCtrl in Shift then
-//  begin
-//    if (Key = VK_LEFT) or (Key = VK_RIGHT) then
-//    begin
-//      TsPopupBox(Sender).SelStart := iBracketStart - 1;
-//      TsPopupBox(Sender).SelLength := iLenght;
-//      removeKeyFromStack;
-//    end;
-//  end;
-//  if Key = VK_DELETE then
-//  begin
-//    if (iCaret in [iBracketStart .. iBracketEnd]) then
-//    begin
-//      removeKeyFromStack;
-//      delete(sString, iBracketStart, iLenght);
-//      TsPopupBox(Sender).Text := sString;
-//      TsPopupBox(Sender).SelStart := iCaret;
-//      TsPopupBox(Sender).SelLength := 0;
-//
-//    end;
-//  end;
+  // sString := seRegEx.Text;
+  // iCaret := TsPopupBox(Sender).SelStart;
+  // iBracketStart := rpos('[', sString, iCaret);
+  // iBracketEnd := lpos(']', sString, iBracketStart);
+  // iLenght := (iBracketEnd - iBracketStart) + 1;
+  // sMemo1.lines.Add(format('Caret : %d - BracketStart : %d - BracketEnd : %d', [iCaret, iBracketStart, iBracketEnd]));
+  // if ssCtrl in Shift then
+  // begin
+  // if (Key = VK_LEFT) or (Key = VK_RIGHT) then
+  // begin
+  // TsPopupBox(Sender).SelStart := iBracketStart - 1;
+  // TsPopupBox(Sender).SelLength := iLenght;
+  // removeKeyFromStack;
+  // end;
+  // end;
+  // if Key = VK_DELETE then
+  // begin
+  // if (iCaret in [iBracketStart .. iBracketEnd]) then
+  // begin
+  // removeKeyFromStack;
+  // delete(sString, iBracketStart, iLenght);
+  // TsPopupBox(Sender).Text := sString;
+  // TsPopupBox(Sender).SelStart := iCaret;
+  // TsPopupBox(Sender).SelLength := 0;
+  //
+  // end;
+  // end;
 end;
 
 procedure TfMain.setGridRow;
@@ -1942,7 +2002,6 @@ begin
 
     if tMediaUtils.isValidExtension2(TacShellFolder(Node.data).PathName) > -1 then
     begin
-      // sMemo1.Lines.add(TacShellFolder(Node.data).PathName);
       GlobalMediaFile := tMediaFile.Create(TacShellFolder(Node.data).PathName);
       if GlobalMediaFile.Tags.CoverArtCount > 0 then
         Node.ImageIndex := 1
@@ -1960,63 +2019,33 @@ begin
 end;
 
 procedure TfMain.sShellTreeView1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-var
-  aNode: TTreeNode;
-  NewRow: Integer;
-  GlobalMediaFile: tMediaFile;
 begin
+
   if Shift = [ssCtrl] then
   begin
-    aNode := sShellTreeView1.Selected;
-    if not TacShellFolder(aNode.data).IsFileFolder then
+
+    if Key = ord('P') then
     begin
-      // ListCoverArts(sImage1,TacShellFolder(aNode.data).PathName);
-      BASS_ChannelStop(Channel);
-      PlayStream(TacShellFolder(aNode.data).PathName);
+      // Preview track
+      removeKeyFromStack;
+      PreviewTrack(sShellTreeView1.Selected);
     end;
-    removeKeyFromStack;
+
+    if Key = VK_ADD then
+    begin
+      // Add directly to playlist
+      removeKeyFromStack;
+      AddDirectlyToPlayList;
+    end;
   end;
-  if Key = VK_ADD then
+
+  if (Key = VK_ADD) and not (ssCtrl in []) then
   begin
-    aNode := sShellTreeView1.Selected;
-    if not TacShellFolder(aNode.data).IsFileFolder then
-    begin
-      AddToPlayList(aNode, false);
-    end
-    else
-    begin
-      aPath := TacShellFolder(aNode.data).PathName;
-      thAddToPlayList.Execute(self);
-    end;
+    // Add to Grid
     removeKeyFromStack;
+    AddToGrid((Shift = [ssShift]));
   end;
-  if Key = VK_RETURN then
-  begin
-    if sShellTreeView1.Selected <> nil then
-    begin
-      aNode := sShellTreeView1.Selected;
-      if Shift = [ssShift] then
-      begin
-        initGrid;
-      end;
-      if not TacShellFolder(aNode.data).IsFileFolder then
-      begin
-        AddFileToGrid(TacShellFolder(aNode.data).PathName);
-        if sgList.Objects[1, NewRow] <> Nil then
-        begin
-          GlobalMediaFile := tMediaFile.Create(TacShellFolder(aNode.data).PathName);
-          ListCoverArts(image1, GlobalMediaFile.Tags);
-          GlobalMediaFile.Destroy;
-        end;
-      end
-      else
-      begin
-        aPath := TacShellFolder(aNode.data).PathName;
-        thListMP3.Execute(self);
-      end;
-    end;
-    removeKeyFromStack;
-  end;
+
 end;
 
 procedure TfMain.sSplitView1Opened(Sender: TObject);
@@ -2159,9 +2188,14 @@ begin
     aPath := jConfig.S['startFolder'];
     if aPath <> '' then
     begin
-      sShellTreeView1.Path := aPath;
-      if sShellTreeView1.Selected <> Nil then
-        sShellTreeView1.Selected.Expand(false);
+      if DirectoryExists(aPath) then
+      begin
+        sShellTreeView1.Path := aPath;
+        if sShellTreeView1.Selected <> Nil then
+          sShellTreeView1.Selected.Expand(false);
+      end
+      else
+        aPath := 'c:\';
     end;
   end
   else
@@ -2175,7 +2209,7 @@ procedure TfMain.OpenPlayer;
 begin
   // * Never forget to init BASS
   // GlobalMediaFile := tMediaFile.Create;
-  fFrmPlayer := tFrmPlayer.Create(Self);
+  fFrmPlayer := tFrmPlayer.Create(self);
   fFrmPlayer.Parent := sPnPlayer;
   fFrmPlayer.init;
 
