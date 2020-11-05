@@ -26,6 +26,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMain, fMain);
   Application.CreateForm(TDM1, DM1);
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TfRegEx, fRegEx);
   Application.Run;
 end.

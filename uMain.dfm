@@ -113,8 +113,6 @@ object fMain: TfMain
         Caption = 'Detach'
         TabOrder = 3
         OnClick = sbDetachClick
-        ExplicitLeft = 1558
-        ExplicitTop = -1
       end
     end
     object pnStatus: TsPanel

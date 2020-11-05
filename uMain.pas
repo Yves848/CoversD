@@ -3,16 +3,24 @@ unit uMain;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, System.IOUtils, System.Types, Vcl.GraphUtil,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uTypes, Vcl.StdCtrls, sPanel, Vcl.ExtCtrls, sSkinManager, sSkinProvider, sButton, Vcl.ComCtrls,
-  sTreeView, acShellCtrls, sListView, sComboBoxes, sSplitter, Vcl.Buttons, sSpeedButton, System.ImageList, Vcl.ImgList, acAlphaImageList,
-  acProgressBar, JvComponentBase, JvThread, sMemo, Vcl.Mask, sMaskEdit, sCustomComboEdit, sToolEdit, acImage, JPEG, PNGImage, GIFImg, TagsLibrary,
-  acNoteBook, sTrackBar, acArcControls, sGauge, BASS, BassFlac, xSuperObject, sListBox, JvExControls, clipbrd, Spectrum3DLibraryDefs, bass_aac,
-  MMSystem, uDeleteCover, JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw, activeX, acWebBrowser, Vcl.Grids, JvExGrids,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, System.IOUtils, System.Types,
+  Vcl.GraphUtil,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uTypes, Vcl.StdCtrls, sPanel, Vcl.ExtCtrls, sSkinManager, sSkinProvider, sButton,
+  Vcl.ComCtrls,
+  sTreeView, acShellCtrls, sListView, sComboBoxes, sSplitter, Vcl.Buttons, sSpeedButton, System.ImageList, Vcl.ImgList,
+  acAlphaImageList,
+  acProgressBar, JvComponentBase, JvThread, sMemo, Vcl.Mask, sMaskEdit, sCustomComboEdit, sToolEdit, acImage, JPEG, PNGImage,
+  GIFImg, TagsLibrary,
+  acNoteBook, sTrackBar, acArcControls, sGauge, BASS, BassFlac, xSuperObject, sListBox, JvExControls, clipbrd,
+  Spectrum3DLibraryDefs, bass_aac,
+  MMSystem, uDeleteCover, JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw, activeX, acWebBrowser, Vcl.Grids,
+  JvExGrids,
   JvStringGrid, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, Generics.collections,
   NetEncoding, Vcl.WinXCtrls, AdvUtil, AdvObj, BaseGrid, AdvGrid, dateutils, uCoverSearch, sDialogs, sLabel, sBevel, AdvMemo, acPNG,
-  JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister, Vcl.Menus, System.RegularExpressions, sEdit, sComboBox,
-  sCheckBox, sPageControl, SynEditHighlighter, SynHighlighterJSON, System.StrUtils, sComboEdit, acPopupCtrls, uDM1, acAlphaHints, BtnListB,
+  JvExComCtrls, JvProgressBar, KryptoGlowLabel, uni_RegCommon, Vcl.onguard, uRegister, Vcl.Menus, System.RegularExpressions, sEdit,
+  sComboBox,
+  sCheckBox, sPageControl, SynEditHighlighter, SynHighlighterJSON, System.StrUtils, sComboEdit, acPopupCtrls, uDM1, acAlphaHints,
+  BtnListB,
   sScrollBox, uFrmPlayer, JvExStdCtrls, JvWinampLabel, uFormPlayer, acFontStore, uLog, ufrmLog;
 
 type
@@ -264,12 +272,12 @@ type
     procedure FillGlobalList(sPAth: String);
     procedure AddLog(sLog: String); overload;
     procedure AddLog(sFunc: String; sLog: String); overload;
-    procedure attach(var Msg : tMsg); Message WM_ATTACH;
+    procedure attach(var msg: Tmsg); Message WM_ATTACH;
   end;
 
 var
   fMain: TfMain;
-  fLog : tfLog;
+  fLog: tfLog;
   Sprectrum3D: Pointer;
   iProgress: integer;
   iMax: integer;
@@ -286,6 +294,7 @@ var
   fFrmPlayer: tFrmPlayer;
   fFrmLog: tFrmLog;
   pThAddToPlayList: thaddToPlayList;
+  Form1 : tForm1;
 
 implementation
 
@@ -536,7 +545,10 @@ begin
   begin
     // g_sPath := TacShellFolder(aNode.data).PathName;
     FillGlobalList(TacShellFolder(aNode.data).PathName);
-    pThAddToPlayList.Start;
+    if pThAddToPlayList.Suspended then
+      pThAddToPlayList.Resume
+    else
+      pThAddToPlayList.Start;
   end;
 end;
 
@@ -640,7 +652,7 @@ var
   index: integer;
 begin
   Result := -1;
-  addLog('AddToPlayList', aMediaFile.Tags.FileName);
+  AddLog('AddToPlayList', aMediaFile.Tags.FileName);
   if fileExists(aMediaFile.Tags.FileName) then
   begin
     sPAth := tpath.GetDirectoryName(aMediaFile.Tags.FileName);
@@ -725,7 +737,7 @@ var
   sPAth: String;
   index: integer;
 begin
-  addLog('AddToPlayListTH', g_sFile);
+  AddLog('AddToPlayListTH', g_sFile);
   aMediaFile := tMediaFile.create(g_sFile);
   index := slbPlaylist.Items.IndexOf(g_sFile);
   if index = -1 then
@@ -764,13 +776,13 @@ begin
 
 end;
 
-procedure TfMain.attach(var Msg: tMsg);
+procedure TfMain.attach(var msg: Tmsg);
 begin
-   //
-   fFrmPlayer.deInit;
-   fFrmPlayer.Parent := sPnPlayer;
-   fFrmPlayer.init;
-   sbDetach.Caption := 'Attach';
+  //
+  fFrmPlayer.deInit;
+  fFrmPlayer.Parent := sPnPlayer;
+  fFrmPlayer.init;
+  sbDetach.Caption := 'Detach';
 end;
 
 procedure TfMain.bsRegisterClick(Sender: TObject);
@@ -940,7 +952,8 @@ begin
                         RegExReplace.create(sEFROM01.Text);
                         sgList.Cells[iColumn, ARow] := RegExReplace.Replace(sgList.Cells[iColumn, ARow], sETO01.Text);
                       end;
-                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag,
+                        sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
                   end;
@@ -955,7 +968,8 @@ begin
                         RegExReplace.create(sEFROM02.Text);
                         sgList.Cells[iColumn, ARow] := RegExReplace.Replace(sgList.Cells[iColumn, ARow], sETO02.Text);
                       end;
-                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag,
+                        sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
                   end;
@@ -970,7 +984,8 @@ begin
                         RegExReplace.create(sEFROM03.Text);
                         sgList.Cells[iColumn, ARow] := RegExReplace.Replace(sgList.Cells[iColumn, ARow], sETO03.Text);
                       end;
-                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag,
+                        sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
                   end;
@@ -985,7 +1000,8 @@ begin
           if iColumn > -1 then
           begin
             sgList.Cells[iColumn, ARow] := sEP01.Text;
-            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag,
+              sgList.Cells[iColumn, ARow]);
             tMediaFile(sgList.Objects[1, ARow]).bModified := True;
           end;
         end;
@@ -996,7 +1012,8 @@ begin
           if iColumn > -1 then
           begin
             sgList.Cells[iColumn, ARow] := sEP02.Text;
-            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag,
+              sgList.Cells[iColumn, ARow]);
             tMediaFile(sgList.Objects[1, ARow]).bModified := True;
           end;
         end;
@@ -1007,7 +1024,8 @@ begin
           if iColumn > -1 then
           begin
             sgList.Cells[iColumn, ARow] := sEP03.Text;
-            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag,
+              sgList.Cells[iColumn, ARow]);
             tMediaFile(sgList.Objects[1, ARow]).bModified := True;
           end;
         end;
@@ -1149,7 +1167,7 @@ var
 begin
   // * Never forget to init BASS
   // GlobalMediaFile := tMediaFile.Create;
-
+  form1 := tForm1.Create(Nil);
   BASS_Init(-1, 44100, 0, self.handle, 0);
 
   ZeroMemory(@Params, SizeOf(TSpectrum3D_CreateParams));
@@ -1175,23 +1193,22 @@ begin
   OpenPlayer;
   isRegistered := True;
 {$IFDEF DEBUG}
-
   btnUtils.Visible := True;
-  sbdetach.Visible := True;
+  sbDetach.Visible := True;
   OpenLogWindow;
 {$ELSE}
-//  GetRegistrationInformation(ReleaseCodeString, SerialNumber);
-//  if not IsReleaseCodeValid(ReleaseCodeString, SerialNumber) then
-//  begin
-//    Caption := Caption + ' Unregistered Demo!';
-//    bsRegister.Visible := True;
-//    isRegistered := false;
-//  end
-//  else
-//  begin
-//    Caption := Caption + ' Registered';
-//    isRegistered := True;
-//  end;
+  // GetRegistrationInformation(ReleaseCodeString, SerialNumber);
+  // if not IsReleaseCodeValid(ReleaseCodeString, SerialNumber) then
+  // begin
+  // Caption := Caption + ' Unregistered Demo!';
+  // bsRegister.Visible := True;
+  // isRegistered := false;
+  // end
+  // else
+  // begin
+  // Caption := Caption + ' Registered';
+  // isRegistered := True;
+  // end;
 {$ENDIF}
   fCoverSearch := tfCoverSearch.create(self);
 end;
@@ -1229,13 +1246,13 @@ begin
     case Key of
       VK_MEDIA_PLAY_PAUSE:
         begin
-          //sButton2Click(Sender);
-          postMessage(fFrmPlayer.Handle,WM_PLAY,0,0);
+          // sButton2Click(Sender);
+          postMessage(fFrmPlayer.handle, WM_PLAY, 0, 0);
         end;
       VK_MEDIA_STOP:
         begin
-          //sButton1Click(Sender);
-          postMessage(fFrmPlayer.Handle,WM_STOP,0,0);
+          // sButton1Click(Sender);
+          postMessage(fFrmPlayer.handle, WM_STOP, 0, 0);
         end;
       VK_MEDIA_PREV_TRACK:
         begin
@@ -1243,8 +1260,8 @@ begin
         end;
       VK_MEDIA_NEXT_TRACK:
         begin
-          //PlayNextTrack(Sender);
-          postMessage(fFrmPlayer.Handle,WM_PLAY_NEXT,0,0);
+          // PlayNextTrack(Sender);
+          postMessage(fFrmPlayer.handle, WM_PLAY_NEXT, 0, 0);
         end;
     end;
   end;
@@ -1254,7 +1271,7 @@ procedure TfMain.FormPaint(Sender: TObject);
 begin
   if fFrmLog <> Nil then
   begin
-    addLog('TfMain.FormPaint');
+    AddLog('TfMain.FormPaint');
     fLog.Top := self.Top;
     fLog.Left := self.Left - fLog.Width;
   end;
@@ -1263,14 +1280,14 @@ end;
 procedure TfMain.FormResize(Sender: TObject);
 begin
   if fFrmLog <> Nil then
-    addLog('TfMain.FormResize');
+    AddLog('TfMain.FormResize');
   Spectrum3D_ReInitialize(Sprectrum3D);
   Spectrum3D_ReAlign(Sprectrum3D, sPanel3.handle);
 end;
 
 procedure TfMain.FormShow(Sender: TObject);
 begin
-  PostMessage(self.handle, WM_OPEN_ROLLOUTS, 0, 0);
+  postMessage(self.handle, WM_OPEN_ROLLOUTS, 0, 0);
 end;
 
 function TfMain.getExpression: String;
@@ -1814,7 +1831,7 @@ begin
   fFrmPlayer.Parent := Form1.sPanel1;
   fFrmPlayer.init;
   Form1.Show;
-  sbDetach.caption := 'Attach';
+  sbDetach.Caption := 'Attach';
 end;
 
 procedure TfMain.btnRegexClick(Sender: TObject);
@@ -1869,7 +1886,7 @@ begin
   begin
     if fFrmLog <> Nil then
     begin
-      addLog('TfMain.SelfMove');
+      AddLog('TfMain.SelfMove');
       fLog.Top := self.Top;
       fLog.Left := self.Left - fLog.Width;
     end;
@@ -2288,7 +2305,7 @@ end;
 
 procedure TfMain.OpenLogWindow;
 begin
-  fLog := tfLog.Create(self);
+  fLog := tfLog.create(self);
   fFrmLog := tFrmLog.create(self);
   fFrmLog.Parent := fLog.sPnMain;
 
@@ -2386,7 +2403,8 @@ begin
   bFirst := True;
   if Length(aFiles) > 1000 then
   begin
-    bConfirm := (MessageDlg(format('Do you confirm adding %d files ?', [Length(aFiles)]), mtConfirmation, [mbYes, mbNo], 0, mbNo) = mrYes);
+    bConfirm := (MessageDlg(format('Do you confirm adding %d files ?', [Length(aFiles)]), mtConfirmation, [mbYes, mbNo], 0,
+      mbNo) = mrYes);
   end;
   if bConfirm then
   begin
@@ -2572,7 +2590,7 @@ end;
 procedure thaddToPlayList.DoTerminate;
 begin
   inherited;
-  fMain.addLog('DoTerminate', 'Terminate');
+  fMain.AddLog('DoTerminate', 'Terminate');
 end;
 
 procedure thaddToPlayList.Execute;

@@ -10,9 +10,9 @@
     "request":    
     [
       {
-        "title":"Google Custom Search - Britney Spears Inside Out cover",
-        "totalResults":"109000000",
-        "searchTerms":"Britney Spears Inside Out cover",
+        "title":"Google Custom Search - Sander Van Doorn And Robbie W Close My Eyes cover",
+        "totalResults":"167000",
+        "searchTerms":"Sander Van Doorn And Robbie W Close My Eyes cover",
         "count":        10,
         "startIndex":        1,
         "inputEncoding":"utf8",
@@ -26,9 +26,9 @@
     "nextPage":    
     [
       {
-        "title":"Google Custom Search - Britney Spears Inside Out cover",
-        "totalResults":"109000000",
-        "searchTerms":"Britney Spears Inside Out cover",
+        "title":"Google Custom Search - Sander Van Doorn And Robbie W Close My Eyes cover",
+        "totalResults":"167000",
+        "searchTerms":"Sander Van Doorn And Robbie W Close My Eyes cover",
         "count":        10,
         "startIndex":        11,
         "inputEncoding":"utf8",
@@ -46,221 +46,221 @@
   },
   "searchInformation":  
   {
-    "searchTime":0.703094,
-    "formattedSearchTime":"0.70",
-    "totalResults":"109000000",
-    "formattedTotalResults":"109,000,000"  
+    "searchTime":0.855577,
+    "formattedSearchTime":"0.86",
+    "totalResults":"167000",
+    "formattedTotalResults":"167,000"  
   },
   "items":  
   [
     {
       "kind":"customsearch#result",
-      "title":"Britney Spears - Inside Out (rock cover) by GRENKy - \u30b0\u30ec\u30f3\u30ad on ...",
-      "htmlTitle":"<b>Britney Spears</b> - <b>Inside Out</b> (rock <b>cover</b>) by GRENKy - \u30b0\u30ec\u30f3\u30ad on ...",
-      "link":"https://i1.sndcdn.com/artworks-000142770389-fw69nm-t500x500.jpg",
-      "displayLink":"soundcloud.com",
-      "snippet":"Britney Spears - Inside Out (rock cover) by GRENKy - \u30b0\u30ec\u30f3\u30ad on ...",
-      "htmlSnippet":"<b>Britney Spears</b> - <b>Inside Out</b> (rock <b>cover</b>) by GRENKy - \u30b0\u30ec\u30f3\u30ad on ...",
+      "title":"Sander van Doorn Vs Robbie Williams - Close My Eyes (2009, CD ...",
+      "htmlTitle":"<b>Sander van Doorn</b> Vs <b>Robbie Williams</b> - <b>Close My Eyes</b> (2009, CD ...",
+      "link":"https://img.discogs.com/lFD195zii5t4vNk837nWV4AJt8Y=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1808425-1368523343-9114.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Sander van Doorn Vs Robbie Williams - Close My Eyes (2009, CD ...",
+      "htmlSnippet":"<b>Sander van Doorn</b> Vs <b>Robbie Williams</b> - <b>Close My Eyes</b> (2009, CD ...",
       "mime":"image/jpeg",
       "fileFormat":"image/jpeg",
       "image":      
       {
-        "contextLink":"https://soundcloud.com/grenky/britney-spears-inside-out-rock-cover",
+        "contextLink":"https://www.discogs.com/Sander-van-Doorn-Vs-Robbie-Williams-Close-My-Eyes/release/1808425",
+        "height":        600,
+        "width":        600,
+        "byteSize":        83857,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYM_fFPK6YBYIWKw-eUF0sgYEMkw23V7uAPBCB2EmGHljoFHjR899Skxfb&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Close My Eyes (Sander van Doorn song) - Wikipedia",
+      "htmlTitle":"<b>Close My Eyes</b> (<b>Sander van Doorn</b> song) - Wikipedia",
+      "link":"https://upload.wikimedia.org/wikipedia/en/a/a5/Close_My_Eyes_%28Sander_van_Doorn%29_single_coverart.jpg",
+      "displayLink":"en.wikipedia.org",
+      "snippet":"Close My Eyes (Sander van Doorn song) - Wikipedia",
+      "htmlSnippet":"<b>Close My Eyes</b> (<b>Sander van Doorn</b> song) - Wikipedia",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://en.wikipedia.org/wiki/Close_My_Eyes_(Sander_van_Doorn_song)",
+        "height":        315,
+        "width":        316,
+        "byteSize":        17143,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNOfz6wHkL8CMITFjHmIjxkK2W9pHFFUOsWXTIrDl6doJSrdTaNsf&s",
+        "thumbnailHeight":        117,
+        "thumbnailWidth":        117      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Sander van Doorn vs Robbie Williams - Close My Eyes (Official ...",
+      "htmlTitle":"<b>Sander van Doorn</b> vs <b>Robbie Williams</b> - <b>Close My Eyes</b> (Official ...",
+      "link":"https://i.ytimg.com/vi/Yxffo69gykk/hqdefault.jpg",
+      "displayLink":"www.youtube.com",
+      "snippet":"Sander van Doorn vs Robbie Williams - Close My Eyes (Official ...",
+      "htmlSnippet":"<b>Sander van Doorn</b> vs <b>Robbie Williams</b> - <b>Close My Eyes</b> (Official ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.youtube.com/watch?v=Yxffo69gykk",
+        "height":        360,
+        "width":        480,
+        "byteSize":        14491,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1stNuaaylxOASa6t7Uw_mEZs0qrCeUZ4LIj94f9q1hMPo0bqz0gRwZA4&s",
+        "thumbnailHeight":        97,
+        "thumbnailWidth":        129      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Sander van Doorn vs Robbie Williams / Richard Grey Presents Golden ...",
+      "htmlTitle":"<b>Sander van Doorn</b> vs <b>Robbie Williams</b> / Richard Grey Presents Golden ...",
+      "link":"https://img.discogs.com/bFGDyHQBkvwkFB5ggcbeCNjiR6M=/fit-in/600x597/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-3255108-1469528323-1345.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Sander van Doorn vs Robbie Williams / Richard Grey Presents Golden ...",
+      "htmlSnippet":"<b>Sander van Doorn</b> vs <b>Robbie Williams</b> / Richard Grey Presents Golden ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/Sander-van-Doorn-vs-Robbie-Williams-Richard-Grey-Presents-Golden-Touch-Close-My-Eyes-Such-A-Shame/release/3255108",
+        "height":        597,
+        "width":        599,
+        "byteSize":        111863,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU90k9fcPMBroTqQLRjDknid6mUjqHXHhOQVENSviGJUkFtE2ZIl0Jk0o&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Robbie Williams Vs Sander Van Doorn's Close My Eyes by JMD ...",
+      "htmlTitle":"<b>Robbie Williams</b> Vs <b>Sander Van Doorn&#39;s Close My Eyes</b> by JMD ...",
+      "link":"https://admin.promonews.tv/sites/default/files/styles/bmvd_content_page/public/directorsmaster5.jpg?itok=0iCIh5bR",
+      "displayLink":"www.promonews.tv",
+      "snippet":"Robbie Williams Vs Sander Van Doorn's Close My Eyes by JMD ...",
+      "htmlSnippet":"<b>Robbie Williams</b> Vs <b>Sander Van Doorn&#39;s Close My Eyes</b> by JMD ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.promonews.tv/videos/2009/01/05/robbie-williams-vs-sander-van-doorn%E2%80%99s-close-my-eyes-jmd/1798",
+        "height":        390,
+        "width":        690,
+        "byteSize":        72165,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9fptmoSipPZqBuNELzbQhVXmbDpUJVc2km9mXmvmK3Um5lLl_QUbP5w&s",
+        "thumbnailHeight":        79,
+        "thumbnailWidth":        139      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Sander van Doorn vs Robbie Williams Close My Eyes - YouTube",
+      "htmlTitle":"<b>Sander van Doorn</b> vs <b>Robbie Williams Close My Eyes</b> - YouTube",
+      "link":"https://i.ytimg.com/vi/S9et16AjG4Y/hqdefault.jpg",
+      "displayLink":"www.youtube.com",
+      "snippet":"Sander van Doorn vs Robbie Williams Close My Eyes - YouTube",
+      "htmlSnippet":"<b>Sander van Doorn</b> vs <b>Robbie Williams Close My Eyes</b> - YouTube",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.youtube.com/watch?v=S9et16AjG4Y",
+        "height":        360,
+        "width":        480,
+        "byteSize":        7884,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTITAfuhqtWznEMGHcPqJkh8PlyK98rD3FWWXJ1D_JgX-LTBX3mM7BBRg&s",
+        "thumbnailHeight":        97,
+        "thumbnailWidth":        129      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Cover art for the Sander van Doorn vs Robbie Williams - Close My ...",
+      "htmlTitle":"<b>Cover</b> art for <b>the Sander van Doorn</b> vs <b>Robbie Williams</b> - <b>Close My</b> ...",
+      "link":"https://www.lololyrics.com/img/cover/8970.jpeg",
+      "displayLink":"www.lololyrics.com",
+      "snippet":"Cover art for the Sander van Doorn vs Robbie Williams - Close My ...",
+      "htmlSnippet":"<b>Cover</b> art for <b>the Sander van Doorn</b> vs <b>Robbie Williams</b> - <b>Close My</b> ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.lololyrics.com/lyrics/8970/cover",
+        "height":        600,
+        "width":        600,
+        "byteSize":        69296,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKj_n0_Vfb5XaEHsL1mXGVa7hHjSK8fmyEZ3_D0UXKPBS7DuK1WvDnuE7V&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Robbie Williams Vs Sander Van Doorn's Close My Eyes by JMD ...",
+      "htmlTitle":"<b>Robbie Williams</b> Vs <b>Sander Van Doorn&#39;s Close My Eyes</b> by JMD ...",
+      "link":"https://admin.promonews.tv/sites/default/files/styles/bmvd_content_page/public/directorsmaster7.jpg?itok=IxuhSbuW",
+      "displayLink":"www.promonews.tv",
+      "snippet":"Robbie Williams Vs Sander Van Doorn's Close My Eyes by JMD ...",
+      "htmlSnippet":"<b>Robbie Williams</b> Vs <b>Sander Van Doorn&#39;s Close My Eyes</b> by JMD ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.promonews.tv/videos/2009/01/05/robbie-williams-vs-sander-van-doorn%E2%80%99s-close-my-eyes-jmd/1798",
+        "height":        390,
+        "width":        690,
+        "byteSize":        157866,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsr-NtH38acI0CpvaZV3HhduX2eKRQ8mjhzSfBbqeCbObzzzLOTfbMn4c&s",
+        "thumbnailHeight":        79,
+        "thumbnailWidth":        139      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"Sander Van Doorn vs. Robbie Williams - Close My Eyes (2009, Vinyl ...",
+      "htmlTitle":"<b>Sander Van Doorn</b> vs. <b>Robbie Williams</b> - <b>Close My Eyes</b> (2009, Vinyl ...",
+      "link":"https://img.discogs.com/-kRrqHHwlO_9-5FB-BdUgHFccXg=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1689992-1276719744.jpeg.jpg",
+      "displayLink":"www.discogs.com",
+      "snippet":"Sander Van Doorn vs. Robbie Williams - Close My Eyes (2009, Vinyl ...",
+      "htmlSnippet":"<b>Sander Van Doorn</b> vs. <b>Robbie Williams</b> - <b>Close My Eyes</b> (2009, Vinyl ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.discogs.com/Sander-Van-Doorn-vs-Robbie-Williams-Close-My-Eyes/release/1689992",
+        "height":        600,
+        "width":        600,
+        "byteSize":        91169,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxHOHqgpBNe8xY8cYEVu7n9gVmANsiskYuBkVbW-ow00atVeuDsQY7TWW8&s",
+        "thumbnailHeight":        135,
+        "thumbnailWidth":        135      
+      }    
+    },
+    {
+      "kind":"customsearch#result",
+      "title":"SANDER VAN DOORN VS ROBBIE WILLIAMS-Close My Eyes-12\" - Amazon.com ...",
+      "htmlTitle":"<b>SANDER VAN DOORN</b> VS <b>ROBBIE WILLIAMS</b>-<b>Close My Eyes</b>-12&quot; - Amazon.com ...",
+      "link":"https://images-na.ssl-images-amazon.com/images/I/51RGkN4-MUL.jpg",
+      "displayLink":"www.amazon.com",
+      "snippet":"SANDER VAN DOORN VS ROBBIE WILLIAMS-Close My Eyes-12\" - Amazon.com ...",
+      "htmlSnippet":"<b>SANDER VAN DOORN</b> VS <b>ROBBIE WILLIAMS</b>-<b>Close My Eyes</b>-12&quot; - Amazon.com ...",
+      "mime":"image/jpeg",
+      "fileFormat":"image/jpeg",
+      "image":      
+      {
+        "contextLink":"https://www.amazon.com/SANDER-DOORN-ROBBIE-WILLIAMS-Close-Eyes-12/dp/B009LJSBZW",
         "height":        500,
         "width":        500,
-        "byteSize":        80381,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOp5bxIVLIQdyU9V33Bg7Rc-chdywJ-ptWHnLxAZlvV-s4tTw1xR7bWnow&s",
+        "byteSize":        54140,
+        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnexXfoXZl_WlrzKL0XdtU287_YNv7gMOKYkzyVvk2aRYN5ekHGqFmQFA&s",
         "thumbnailHeight":        130,
         "thumbnailWidth":        130      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Britney Spears- Inside Out by RemixedHeartbeats on DeviantArt",
-      "htmlTitle":"<b>Britney Spears</b>- <b>Inside Out</b> by RemixedHeartbeats on DeviantArt",
-      "link":"https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c22bcff9-1edc-497a-818f-9fac0f835356/d481bel-65486d74-819d-4312-9042-ed6e71edf998.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvYzIyYmNmZjktMWVkYy00OTdhLTgxOGYtOWZhYzBmODM1MzU2XC9kNDgxYmVsLTY1NDg2ZDc0LTgxOWQtNDMxMi05MDQyLWVkNmU3MWVkZjk5OC5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.cVK5T2Vd9gPzur2zETkMI81dKjCP6ITLBNMtf06paKs",
-      "displayLink":"www.deviantart.com",
-      "snippet":"Britney Spears- Inside Out by RemixedHeartbeats on DeviantArt",
-      "htmlSnippet":"<b>Britney Spears</b>- <b>Inside Out</b> by RemixedHeartbeats on DeviantArt",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.deviantart.com/remixedheartbeats/art/Britney-Spears-Inside-Out-255363069",
-        "height":        450,
-        "width":        450,
-        "byteSize":        78449,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM_PvRD67XXK_hVyf8nqi4NOAeBkh64geECjkBpDJjtyCloC2IQcTO&s",
-        "thumbnailHeight":        127,
-        "thumbnailWidth":        127      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Pin on Studio Acapellas",
-      "htmlTitle":"Pin on Studio Acapellas",
-      "link":"https://i.pinimg.com/originals/76/4f/0c/764f0c8b70bb88b82c2b6ced103aa03e.png",
-      "displayLink":"www.pinterest.co.uk",
-      "snippet":"Pin on Studio Acapellas",
-      "htmlSnippet":"Pin on Studio Acapellas",
-      "mime":"image/png",
-      "fileFormat":"image/png",
-      "image":      
-      {
-        "contextLink":"https://www.pinterest.co.uk/pin/657314508083486893/",
-        "height":        600,
-        "width":        600,
-        "byteSize":        536304,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbdSJbqNEHZc5_Loc8mI6zbrsI8QD11W3aE8rIQNINz-sKvvWCSPJ3ivJR&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Song Of The Day: Britney Spears \u201cInside Out\u201d | Through The Eyes Of ...",
-      "htmlTitle":"Song Of The Day: <b>Britney Spears</b> \u201c<b>Inside Out</b>\u201d | Through The Eyes Of ...",
-      "link":"https://throughtheeyesofteddy.files.wordpress.com/2011/07/britney-spears-inside-out.jpg",
-      "displayLink":"throughtheeyesofteddy.wordpress.com",
-      "snippet":"Song Of The Day: Britney Spears \u201cInside Out\u201d | Through The Eyes Of ...",
-      "htmlSnippet":"Song Of The Day: <b>Britney Spears</b> \u201c<b>Inside Out</b>\u201d | Through The Eyes Of ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://throughtheeyesofteddy.wordpress.com/2011/07/28/song-of-the-day-britney-spears-inside-out/",
-        "height":        500,
-        "width":        500,
-        "byteSize":        198154,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSioduprg03EfsJ93_c-bcJa0MgazT_F6dgRAqmFOghWQzyIJ9pvUii9aRB&s",
-        "thumbnailHeight":        130,
-        "thumbnailWidth":        130      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Pin on RAW: The One That Got Away",
-      "htmlTitle":"Pin on RAW: The One That Got Away",
-      "link":"https://i.pinimg.com/originals/85/63/df/8563dff43452c36ca587d660b9406780.jpg",
-      "displayLink":"www.pinterest.com",
-      "snippet":"Pin on RAW: The One That Got Away",
-      "htmlSnippet":"Pin on RAW: The One That Got Away",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.pinterest.com/pin/464855992760253288/",
-        "height":        450,
-        "width":        450,
-        "byteSize":        36292,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHk0Zx77xFzwd2FFiHyHnPIyeQhh9AdAvvuA2cURAQZbeNluBBgKo5&s",
-        "thumbnailHeight":        127,
-        "thumbnailWidth":        127      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Britney Spears- Inside Out by RemixedHeartbeats on DeviantArt",
-      "htmlTitle":"<b>Britney Spears</b>- <b>Inside Out</b> by RemixedHeartbeats on DeviantArt",
-      "link":"https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c22bcff9-1edc-497a-818f-9fac0f835356/d481bel-65486d74-819d-4312-9042-ed6e71edf998.jpg/v1/fill/w_450,h_450,q_75,strp/britney_spears__inside_out_by_remixedheartbeats_d481bel-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD00NTAiLCJwYXRoIjoiXC9mXC9jMjJiY2ZmOS0xZWRjLTQ5N2EtODE4Zi05ZmFjMGY4MzUzNTZcL2Q0ODFiZWwtNjU0ODZkNzQtODE5ZC00MzEyLTkwNDItZWQ2ZTcxZWRmOTk4LmpwZyIsIndpZHRoIjoiPD00NTAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.JR2aesnV0ttLFV6Q0W8haO4PFgX0xXOWtfa6Z5zhBiU",
-      "displayLink":"www.deviantart.com",
-      "snippet":"Britney Spears- Inside Out by RemixedHeartbeats on DeviantArt",
-      "htmlSnippet":"<b>Britney Spears</b>- <b>Inside Out</b> by RemixedHeartbeats on DeviantArt",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.deviantart.com/remixedheartbeats/art/Britney-Spears-Inside-Out-255363069",
-        "height":        450,
-        "width":        450,
-        "byteSize":        31242,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOlWxYKsIwYdLfKcvJms-TJfReplUHZoSSldeDOT0i05jh4GmmO4fq&s",
-        "thumbnailHeight":        127,
-        "thumbnailWidth":        127      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Coverlandia - The #1 Place for Album & Single Cover's: Britney ...",
-      "htmlTitle":"Coverlandia - The #1 Place for Album &amp; Single <b>Cover&#39;s</b>: <b>Britney</b> ...",
-      "link":"http://4.bp.blogspot.com/-0OxIeclqjLA/TafIdx9jxzI/AAAAAAAAGMI/E4Oim1F3ACw/s1600/Made%2Bby%2B%2524h%2521n.png",
-      "displayLink":"coverlandia.blogspot.com",
-      "snippet":"Coverlandia - The #1 Place for Album & Single Cover's: Britney ...",
-      "htmlSnippet":"Coverlandia - The #1 Place for Album &amp; Single <b>Cover&#39;s</b>: <b>Britney</b> ...",
-      "mime":"image/png",
-      "fileFormat":"image/png",
-      "image":      
-      {
-        "contextLink":"http://coverlandia.blogspot.com/2011/04/britney-spears-femme-fatale-singles-era_14.html",
-        "height":        600,
-        "width":        600,
-        "byteSize":        472372,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzb7gpW02swQcizysYRebeP5Br0goiXi_27yg7-yQwQDhLvO6yk39ED864&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"MR. KAYRELL: Britney Spears - Inside Out Lyrics",
-      "htmlTitle":"MR. KAYRELL: <b>Britney Spears</b> - <b>Inside Out</b> Lyrics",
-      "link":"http://3.bp.blogspot.com/-NDp6oQIFO1Q/Tl51sTF1bLI/AAAAAAAAO-Y/7T6EZGyLPt4/s1600/Britney%2BSpears%2B-%2BInside%2BOut.jpg",
-      "displayLink":"mrkayrell.blogspot.com",
-      "snippet":"MR. KAYRELL: Britney Spears - Inside Out Lyrics",
-      "htmlSnippet":"MR. KAYRELL: <b>Britney Spears</b> - <b>Inside Out</b> Lyrics",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"http://mrkayrell.blogspot.com/2011/08/britney-spears-inside-out-lyrics.html",
-        "height":        600,
-        "width":        600,
-        "byteSize":        145465,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPQ2dMSh0v-LTFzDRd5i28Y_MR2ZkYqhpbzSqf253SvBbcQqLmJ9lsb2Gi&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Pin on Lyrics For The Soul",
-      "htmlTitle":"Pin on Lyrics For The Soul",
-      "link":"https://i.pinimg.com/originals/a6/d9/b6/a6d9b6f3718c970bac4cf6b63ae7f17b.jpg",
-      "displayLink":"www.pinterest.com",
-      "snippet":"Pin on Lyrics For The Soul",
-      "htmlSnippet":"Pin on Lyrics For The Soul",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.pinterest.com/pin/82190761919376532/",
-        "height":        350,
-        "width":        500,
-        "byteSize":        32833,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB-6g7Jysy4B3hZ7-iYFWbkZ_gBi6XL_GNN1yB04MQRhKuUUGWfh62Qw&s",
-        "thumbnailHeight":        91,
-        "thumbnailWidth":        130      
-      }    
-    },
-    {
-      "kind":"customsearch#result",
-      "title":"Britney Spears - Inside Out - Listen on Deezer",
-      "htmlTitle":"<b>Britney Spears</b> - <b>Inside Out</b> - Listen on Deezer",
-      "link":"https://e-cdns-images.dzcdn.net/images/cover/be502f78a0b035b5a8f366d2f26d080c/350x350.jpg",
-      "displayLink":"www.deezer.com",
-      "snippet":"Britney Spears - Inside Out - Listen on Deezer",
-      "htmlSnippet":"<b>Britney Spears</b> - <b>Inside Out</b> - Listen on Deezer",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.deezer.com/en/track/10287261",
-        "height":        350,
-        "width":        350,
-        "byteSize":        24105,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi4MuyLTgEGYQkIPVvidD87KtPJbqdurlQIVpbE7EdLYWiMA1C1sQx&s",
-        "thumbnailHeight":        120,
-        "thumbnailWidth":        120      
       }    
     }  
   ]

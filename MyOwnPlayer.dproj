@@ -199,11 +199,9 @@
         </DCCReference>
         <DCCReference Include="uLog.pas">
             <Form>fLog</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="ufrmLog.pas">
             <Form>frmLog</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <None Include="ModelSupport_MyOwnPlayer\default.txaPackage"/>
@@ -241,9 +239,8 @@
                     <Source Name="MainSource">MyOwnPlayer.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\21.0\bpl\LockBox3FMXDD270.bpl">TurboPack LockBox 3 FMX designtime package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Composants Microsoft Office 2000 Sample Automation Server Wrapper</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Composants Microsoft Office XP Sample Automation Server Wrapper</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Platforms>
