@@ -17,6 +17,7 @@ object fMain: TfMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
+  OnPaint = FormPaint
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
@@ -103,16 +104,17 @@ object fMain: TfMain
         TabOrder = 2
         OnClick = sBitBtn1Click
       end
-      object sButton3: TsButton
-        Left = 225
+      object sbDetach: TsButton
+        Left = 1549
         Top = 1
         Width = 75
         Height = 51
-        Align = alLeft
-        Caption = 'sButton3'
+        Align = alRight
+        Caption = 'Detach'
         TabOrder = 3
-        Visible = False
-        OnClick = sButton3Click
+        OnClick = sbDetachClick
+        ExplicitLeft = 1558
+        ExplicitTop = -1
       end
     end
     object pnStatus: TsPanel
@@ -7274,12 +7276,6 @@ object fMain: TfMain
     ThreadName = 'listMP3'
     OnExecute = thListMP3Execute
     Left = 880
-    Top = 8
-  end
-  object Timer1: TTimer
-    Interval = 33
-    OnTimer = Timer1Timer
-    Left = 656
     Top = 8
   end
   object sSaveDialog1: TsSaveDialog
@@ -52320,15 +52316,6 @@ object fMain: TfMain
     FreeOnTerminate = True
     OnExecute = thDisplayExecute
     Left = 936
-    Top = 8
-  end
-  object thAddToPlayList: TJvThread
-    Exclusive = True
-    MaxCount = 0
-    RunOnCreate = True
-    FreeOnTerminate = True
-    OnExecute = thAddToPlayListExecute
-    Left = 768
     Top = 8
   end
   object PopupMenu1: TPopupMenu

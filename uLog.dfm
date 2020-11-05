@@ -1,0 +1,30 @@
+object fLog: TfLog
+  Left = 0
+  Top = 0
+  Caption = 'Log'
+  ClientHeight = 766
+  ClientWidth = 626
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  PixelsPerInch = 96
+  TextHeight = 13
+  object sPnMain: TsPanel
+    Left = 0
+    Top = 0
+    Width = 626
+    Height = 766
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 0
+    ExplicitLeft = 232
+    ExplicitTop = 384
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+  end
+end

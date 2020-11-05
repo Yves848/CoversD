@@ -11,6 +11,7 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object sPanel1: TsPanel
@@ -21,5 +22,6 @@ object Form1: TForm1
     Align = alClient
     Caption = 'sPanel1'
     TabOrder = 0
+    ExplicitTop = -8
   end
 end

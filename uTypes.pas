@@ -7,8 +7,16 @@ uses
   Generics.Defaults, Generics.collections, XSuperObject;
 
 const
-  WM_REFRESH_COVER = WM_USER + 2000;
-  WM_OPEN_ROLLOUTS = WM_USER + 2001;
+  WM_REFRESH_COVER  = WM_USER + 2000;
+  WM_OPEN_ROLLOUTS  = WM_USER + 2001;
+  WM_ATTACH         = WM_USER + 2002;
+
+  WM_PLAY_PREVIOUS  = WM_USER + 3000;
+  WM_PLAY_NEXT      = WM_USER + 3010;
+  WM_STOP           = WM_USER + 3020;
+  WM_PLAY           = WM_USER + 3030;
+  WM_PAUSE          = WM_USER + 3040;
+
   sValidExtensions = '.MP3.MP4.FLAC.OGG.WAV.M4A';
   aValidExtensions: TArray<string> = ['.MP3', '.MP4', '.FLAC', '.OGG', '.WAV', '.M4A'];
   cArtist = 'Artist';

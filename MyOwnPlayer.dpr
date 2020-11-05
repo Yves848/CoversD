@@ -15,7 +15,9 @@ uses
   uFileFrame in 'uFileFrame.pas' {Frame2: TFrame},
   uFrameCover in 'uFrameCover.pas' {FrameCover: TFrame},
   uFrmPlayer in 'uFrmPlayer.pas' {frmPlayer: TFrame},
-  uFormPlayer in 'uFormPlayer.pas' {Form1};
+  uFormPlayer in 'uFormPlayer.pas' {Form1},
+  uLog in 'uLog.pas' {fLog},
+  ufrmLog in 'ufrmLog.pas' {frmLog: TFrame};
 
 {$R *.res}
 
@@ -23,7 +25,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMain, fMain);
-  Application.CreateForm(TfRegEx, fRegEx);
   Application.CreateForm(TDM1, DM1);
   Application.CreateForm(TForm1, Form1);
   Application.Run;
