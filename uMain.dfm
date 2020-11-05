@@ -4206,12 +4206,11 @@ object fMain: TfMain
       object sSplitView1: TsSplitView
         Left = 0
         Top = 0
-        Width = 0
+        Width = 500
         Height = 943
         BlurData.Opacity = 100
         BlurData.Size = 100
         DisplayMode = svmaOverlay
-        Opened = False
         OpenedSize = 500
         Placement = svpaLeft
         OnOpened = sSplitView1Opened
@@ -4226,16 +4225,17 @@ object fMain: TfMain
         object pnToolbarTreeView: TsPanel
           Left = 5
           Top = 5
-          Width = 479
+          Width = 489
           Height = 49
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
+          ExplicitWidth = 479
         end
         object sShellTreeView1: TsShellTreeView
           Left = 5
           Top = 54
-          Width = 479
+          Width = 489
           Height = 884
           Align = alClient
           BevelInner = bvNone
@@ -4256,6 +4256,7 @@ object fMain: TfMain
           UseShellImages = False
           AutoRefresh = False
           ShowExt = seSystem
+          ExplicitWidth = 479
         end
       end
     end
