@@ -4224,39 +4224,142 @@ object fMain: TfMain
         TabOrder = 2
         object pnToolbarTreeView: TsPanel
           Left = 5
-          Top = 5
+          Top = 37
           Width = 489
-          Height = 49
+          Height = 69
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitWidth = 479
+          object seSearch: TsEdit
+            Left = 0
+            Top = 0
+            Width = 406
+            Height = 31
+            Align = alClient
+            TabOrder = 0
+            OnChange = seSearchChange
+            ExplicitHeight = 21
+          end
+          object sPanel11: TsPanel
+            Left = 0
+            Top = 31
+            Width = 489
+            Height = 38
+            Align = alBottom
+            BevelOuter = bvNone
+            TabOrder = 1
+            object slWholeWord: TsSlider
+              Left = 5
+              Top = 13
+              ParentBackground = False
+              TabOrder = 0
+              BoundLabel.Active = True
+              BoundLabel.Caption = 'Whole Word'
+              BoundLabel.Layout = sclTopCenter
+              SliderOn = False
+            end
+            object slIncDir: TsSlider
+              Left = 79
+              Top = 11
+              ParentBackground = False
+              TabOrder = 1
+              BoundLabel.Active = True
+              BoundLabel.Caption = 'Inc. Dir.'
+              BoundLabel.Layout = sclTopCenter
+              SliderOn = False
+            end
+          end
+          object btnSearch: TsButton
+            Left = 406
+            Top = 0
+            Width = 83
+            Height = 31
+            Align = alRight
+            Caption = 'Search      '
+            Style = bsCommandLink
+            TabOrder = 2
+            OnClick = btnSearchClick
+          end
+          object sSearchBadge: TsBadgeBtn
+            Left = 466
+            Top = 6
+            Width = 18
+            Height = 18
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 55
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -9
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            SkinData.CustomColor = True
+            TabStop = False
+            Caption = '0'
+            PaintOptions.BevelWidth = 1
+            PaintOptions.DataNormal.Color1 = clRed
+            PaintOptions.DataNormal.Color2 = clRed
+            PaintOptions.DataNormal.FontColor = clWhite
+            AttachTo = btnSearch
+            OffsetX = -14
+            OffsetY = 15
+          end
         end
         object sShellTreeView1: TsShellTreeView
           Left = 5
-          Top = 54
+          Top = 106
           Width = 489
-          Height = 884
+          Height = 832
           Align = alClient
           BevelInner = bvNone
           DoubleBuffered = True
+          HideSelection = False
           Images = sILTV
           Indent = 19
           ParentDoubleBuffered = False
           PopupMenu = PopupMenu1
+          RightClickSelect = False
           StateImages = DM1.sILTV
           TabOrder = 1
           OnChange = sShellTreeView1Change
+          OnClick = sShellTreeView1Click
           OnGetImageIndex = sShellTreeView1GetImageIndex
           OnKeyDown = sShellTreeView1KeyDown
           BoundLabel.UseSkinColor = False
+          BoundLabel.Caption = 'sShellTreeView1'
+          BoundLabel.Layout = sclLeftTop
           OnAddFolder = sShellTreeView1AddFolder
           ObjectTypes = [otFolders, otNonFolders]
           Root = 'rfMyComputer'
           UseShellImages = False
           AutoRefresh = False
           ShowExt = seSystem
-          ExplicitWidth = 479
+        end
+        object sPanel12: TsPanel
+          Left = 5
+          Top = 5
+          Width = 489
+          Height = 32
+          Align = alTop
+          BevelOuter = bvNone
+          Ctl3D = False
+          ParentCtl3D = False
+          TabOrder = 2
+          object sDESearch: TsDirectoryEdit
+            Left = 0
+            Top = 0
+            Width = 489
+            Height = 32
+            Align = alClient
+            MaxLength = 255
+            TabOrder = 0
+            Text = ''
+            CheckOnExit = True
+            Root = 'rfDesktop'
+            ExplicitHeight = 19
+          end
         end
       end
     end
@@ -4267,6 +4370,7 @@ object fMain: TfMain
       Height = 943
       Align = alRight
       TabOrder = 4
+      ExplicitLeft = 866
     end
   end
   object sSkinProvider1: TsSkinProvider

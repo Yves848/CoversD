@@ -3,19 +3,19 @@ unit uTypes;
 interface
 
 uses
-  winApi.windows, Winapi.Messages,System.Classes, System.SysUtils, System.IOUtils, System.Types, TagsLibrary, Vcl.Graphics, strUtils,
+  winApi.windows, winApi.Messages, System.Classes, System.SysUtils, System.IOUtils, System.Types, TagsLibrary, Vcl.Graphics, strUtils,
   Generics.Defaults, Generics.collections, XSuperObject;
 
 const
-  WM_REFRESH_COVER  = WM_USER + 2000;
-  WM_OPEN_ROLLOUTS  = WM_USER + 2001;
-  WM_ATTACH         = WM_USER + 2002;
+  WM_REFRESH_COVER = WM_USER + 2000;
+  WM_OPEN_ROLLOUTS = WM_USER + 2001;
+  WM_ATTACH = WM_USER + 2002;
 
-  WM_PLAY_PREVIOUS  = WM_USER + 3000;
-  WM_PLAY_NEXT      = WM_USER + 3010;
-  WM_STOP           = WM_USER + 3020;
-  WM_PLAY           = WM_USER + 3030;
-  WM_PAUSE          = WM_USER + 3040;
+  WM_PLAY_PREVIOUS = WM_USER + 3000;
+  WM_PLAY_NEXT = WM_USER + 3010;
+  WM_STOP = WM_USER + 3020;
+  WM_PLAY = WM_USER + 3030;
+  WM_PAUSE = WM_USER + 3040;
 
   sValidExtensions = '.MP3.MP4.FLAC.OGG.WAV.M4A';
   aValidExtensions: TArray<string> = ['.MP3', '.MP4', '.FLAC', '.OGG', '.WAV', '.M4A'];
@@ -23,30 +23,41 @@ const
   cTitle = 'Title';
   cAlbum = 'Album';
   cFileName = 'Filename';
+
+  col_on = clRed;
+  col_off = clNavy;
+
 type
-   tTagKey = class
-     sTAG : String;
-     sCol : Integer;
-   end;
+  tTagKey = class
+    sTAG: String;
+    sCol: Integer;
+  end;
+
+  tOptionsSearch = class
+  Public
+    class var
+      bWord: Boolean;
+      bDir : Boolean;
+  end;
 
   tExpr = class
-    sExpr : String;
+    sExpr: String;
   end;
 
   tMediaFile = class(tPersistent)
   private
-    fFileName : String;
-    fTempFileName : String;
+    fFileName: String;
+    fTempFileName: String;
   public
-    bModified : boolean;
+    bModified: Boolean;
     tags: TTags;
-    property fileName : String read fFileName write fFileName;
-    property tempFileName : String read fTempFileName write fTempFileName;
+    property fileName: String read fFileName write fFileName;
+    property tempFileName: String read fTempFileName write fTempFileName;
     constructor create; overload;
     constructor create(aFileName: string); overload;
     destructor Destroy; overload;
     procedure SaveTags;
-    Procedure LoadTags(pFile : String);
+    Procedure LoadTags(pFile: String);
   end;
 
   tMediaImg = class(tPersistent)
@@ -60,33 +71,33 @@ type
 
   tMediaUtils = class
   public
-    class function isValidExtension(sFile: String): boolean; static;
-    class function isValidExtension2(sFile: String): integer; static;
-    class function getExtension(sFile : String) : string; static;
+    class function isValidExtension(sFile: String): Boolean; static;
+    class function isValidExtension2(sFile: String): Integer; static;
+    class function getExtension(sFile: String): string; static;
   end;
 
-  function FindTag(iCol : Integer) : String;
+function FindTag(iCol: Integer): String;
 
 var
-  isRegistered : boolean;
-  dTags:TDictionary<String,tTagKey>;
-  dExpressions:tDictionary<String,tExpr>;
+  isRegistered: Boolean;
+  dTags: TDictionary<String, tTagKey>;
+  dExpressions: TDictionary<String, tExpr>;
 
 implementation
 
-function FindTag(iCol : Integer) : String;
+function FindTag(iCol: Integer): String;
 var
-    value : tTagKey;
+  value: tTagKey;
 begin
-    result := '';
-    for value in dTags.Values do
-      begin
-          if value.sCol = iCol then
-          begin
-            result := value.sTAG;
-            break;
-          end;
-      end;
+  result := '';
+  for value in dTags.Values do
+  begin
+    if value.sCol = iCol then
+    begin
+      result := value.sTAG;
+      break;
+    end;
+  end;
 
 end;
 { tMediaFile }
@@ -119,14 +130,14 @@ end;
 procedure tMediaFile.LoadTags(pFile: String);
 begin
   tags.Clear;
-  bModified := False;
-  Tags.LoadFromFile(pFile);
+  bModified := false;
+  tags.LoadFromFile(pFile);
 end;
 
 procedure tMediaFile.SaveTags;
 begin
-  Tags.SaveToFile(tags.FileName);
-  bModified := False;
+  tags.SaveToFile(tags.fileName);
+  bModified := false;
 end;
 
 { tMediaImg }
@@ -148,34 +159,34 @@ end;
 
 class function tMediaUtils.getExtension(sFile: String): string;
 var
-  i : Integer;
+  i: Integer;
 begin
-    result := 'unknown';
-    i := isValidExtension2(sFile);
-    if i > -1 then
-      result := aValidExtensions[i];
+  result := 'unknown';
+  i := isValidExtension2(sFile);
+  if i > -1 then
+    result := aValidExtensions[i];
 
 end;
 
-class function tMediaUtils.isValidExtension(sFile: String): boolean;
+class function tMediaUtils.isValidExtension(sFile: String): Boolean;
 var
   sExt: String;
 begin
-  sExt := tpath.GetExtension(sFile);
+  sExt := tpath.getExtension(sFile);
   result := (pos(uppercase(sExt), sValidExtensions) > 0);
 end;
 
-class function tMediaUtils.isValidExtension2(sFile: String): integer;
+class function tMediaUtils.isValidExtension2(sFile: String): Integer;
 var
   sExt: String;
-  i: integer;
+  i: Integer;
 begin
-  sExt := uppercase(tpath.GetExtension(sFile));
+  sExt := uppercase(tpath.getExtension(sFile));
   i := 0;
   result := -1;
   for i := low(aValidExtensions) to High(aValidExtensions) do
   begin
-    if SameText(aValidExtensions[i],sExt) then
+    if SameText(aValidExtensions[i], sExt) then
     begin
       result := i;
       break;
@@ -184,36 +195,37 @@ begin
 end;
 
 Initialization
+
 var
-  dTagKey : tTagKey;
+  dTagKey: tTagKey;
 begin
-  dExpressions := tDictionary<String,tExpr>.create;
-  dTags := TDictionary<String,tTagKey>.create;
+  dExpressions := TDictionary<String, tExpr>.create;
+  dTags := TDictionary<String, tTagKey>.create;
   dTagKey := tTagKey.create;
   dTagKey.sTAG := 'ARTIST';
   dTagKey.sCol := 2;
-  dTags.Add(cArtist,dTagKey);
+  dTags.Add(cArtist, dTagKey);
   dTagKey := tTagKey.create;
   dTagKey.sTAG := 'TITLE';
   dTagKey.sCol := 3;
-  dTags.Add(cTitle,dTagKey);
+  dTags.Add(cTitle, dTagKey);
   dTagKey := tTagKey.create;
   dTagKey.sTAG := 'ALBUM';
   dTagKey.sCol := 4;
-  dTags.Add(cAlbum,dTagKey);
+  dTags.Add(cAlbum, dTagKey);
   dTagKey := tTagKey.create;
   dTagKey.sTAG := 'NONE';
   dTagKey.sCol := -1;
-  dTags.Add('N/A',dTagKey);
+  dTags.Add('N/A', dTagKey);
 end;
 
 Finalization
+
 begin
   dTags.Clear;
   dTags.Free;
   dExpressions.Clear;
   dExpressions.Free;
 end;
-
 
 end.

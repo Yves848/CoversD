@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'MoP Player'
   ClientHeight = 501
   ClientWidth = 1026
   Color = clBtnFace
@@ -20,8 +20,6 @@ object Form1: TForm1
     Width = 1026
     Height = 501
     Align = alClient
-    Caption = 'sPanel1'
     TabOrder = 0
-    ExplicitTop = -8
   end
 end

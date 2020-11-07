@@ -83,11 +83,13 @@ type
     procedure Timer1Timer(Sender: TObject);
   private
     { Déclarations privées }
+    fCurTrack: String;
   public
     { Déclarations publiques }
     Channel: HStream;
     pPlayingThread: tPlayingThread;
     OldStatus: Integer;
+    property curTrack: String read fCurTrack write fCurTrack;
     procedure init;
     function deInit: Integer;
     procedure PlayStream(FileName: String);
@@ -112,7 +114,8 @@ var
   Sprectrum3D: Pointer;
   Params: TSpectrum3D_CreateParams;
   Settings: TSpectrum3D_Settings;
-  stime : tDateTime;
+  stime: tDateTime;
+
 implementation
 
 {$R *.dfm}
@@ -235,7 +238,7 @@ var
   sTempFileName: String;
 begin
   BASS_StreamFree(Channel);
-
+  curTrack := FileName;
   sTempFileName := CopyFile(FileName);
   if uppercase(tPath.GetExtension(sTempFileName)) = '.MP3' then
     Channel := BASS_StreamCreateFile(false, PChar(sTempFileName), 0, 0, BASS_UNICODE OR BASS_STREAM_AUTOFREE)
@@ -252,10 +255,10 @@ begin
   Spectrum3D_SetChannel(Sprectrum3D, Channel);
   // * Start playing and visualising
   BASS_ChannelPlay(Spectrum3D_GetChannel(Sprectrum3D), True);
-  //BASS_ChannelPlay(Channel, True);
+  // BASS_ChannelPlay(Channel, True);
   // sLabel5.Caption := inttostr(BASS_ChannelGetLength(Channel, BASS_POS_BYTE));
-//  if pPlayingThread.Suspended then
-//    pPlayingThread.Start;
+  // if pPlayingThread.Suspended then
+  // pPlayingThread.Start;
 end;
 
 procedure TfrmPlayer.loadPlaylist;
@@ -384,23 +387,38 @@ end;
 
 procedure TfrmPlayer.Timer1Timer(Sender: TObject);
 begin
-      UpdatePlatingInfos;
-      updatePlayingStatus;
+  UpdatePlatingInfos;
+  updatePlayingStatus;
 end;
 
 procedure TfrmPlayer.sImgPlayClick(Sender: TObject);
+var
+  index: Integer;
+  sSelected: String;
 begin
-  if (Channel = 0) or (BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED) then
+  Index := slbPlayList.ItemIndex;
+  if Index <> -1 then
   begin
-    if slbPlayList.ItemIndex > -1 then
+    sSelected := tMediaFile(slbPlayList.Items.objects[Index]).Tags.FileName;
+    if (Channel = 0) or (BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED) then
     begin
-      PlayStream(tMediaFile(slbPlayList.Items.objects[slbPlayList.ItemIndex]).Tags.FileName);
+      // No Channel assigned or playing is stopped;
+      PlayStream(sSelected);
+    end
+    else
+    begin
+      // Channel already active
+      if curTrack <> sSelected then
+      begin
+        // Not the same Track
+        BASS_ChannelStop(Channel);
+        playStream(sSelected);
+      end
+      else
+      begin
+        BASS_ChannelPlay(Channel, false);
+      end;
     end;
-
-  end
-  else if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_PAUSED then
-  begin
-    BASS_ChannelPlay(Channel, false);
   end;
 
 end;
@@ -544,13 +562,13 @@ end;
 procedure tPlayingThread.Execute;
 begin
   inherited;
-  //and (MilliSecondsBetween(now, stime) >= 1000)
+  // and (MilliSecondsBetween(now, stime) >= 1000)
   while (not Terminated) do
   begin
-      fUpdatePlayingInfos;
-      fUpdatePlayingStatus;
-      Application.ProcessMessages;
-      //stime := now;
+    fUpdatePlayingInfos;
+    fUpdatePlayingStatus;
+    Application.ProcessMessages;
+    // stime := now;
   end;
 end;
 

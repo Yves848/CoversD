@@ -1,9 +1,9 @@
 object Form1: TForm1
   Left = 270
   Top = 198
-  Width = 1203
-  Height = 775
   Caption = 'Fast File Search'
+  ClientHeight = 736
+  ClientWidth = 1187
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -103,7 +103,7 @@ object Form1: TForm1
     Left = 32
     Top = 574
     Width = 190
-    Height = 32
+    Height = 33
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -20
@@ -131,7 +131,7 @@ object Form1: TForm1
   end
   object DirectoryListBox1: TDirectoryListBox
     Left = 32
-    Top = 136
+    Top = 135
     Width = 297
     Height = 305
     ItemHeight = 19
@@ -140,7 +140,7 @@ object Form1: TForm1
   end
   object Memo1: TMemo
     Left = 480
-    Top = 144
+    Top = 145
     Width = 681
     Height = 489
     Font.Charset = DEFAULT_CHARSET
@@ -187,7 +187,7 @@ object Form1: TForm1
     OnDblClick = Memo1DblClick
   end
   object TypeBtn: TButton
-    Left = 40
+    Left = 34
     Top = 640
     Width = 265
     Height = 25
@@ -211,8 +211,8 @@ object Form1: TForm1
   end
   object StaticText1: TStaticText
     Left = 0
-    Top = 705
-    Width = 1185
+    Top = 713
+    Width = 1187
     Height = 23
     Cursor = crHandPoint
     Align = alBottom

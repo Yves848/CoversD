@@ -25,6 +25,8 @@ uses
 
 type
   tAddToPlayListCallback = function(aFile: String): integer of object;
+  tSearchCallback = procedure(aResult: String) of object;
+  tSetBadgeColorCallBack = procedure(bactive: boolean) of object;
 
   thaddToPlayList = class(TThread)
   private
@@ -34,6 +36,27 @@ type
     procedure DoTerminate; override;
   public
     constructor create(addToPlaylistCallback: tAddToPlayListCallback); reintroduce;
+  end;
+
+  thSearchDisk = class(TThread)
+  private
+    returnResult: tSearchCallback;
+    setBadgeColor : tSetBadgeColorCallBack;
+    fRx: String;
+    bOptions: tOptionsSearch;
+    fStartFolder: String;
+    fFirstMatch: string;
+    fMAtches: tStrings;
+    maxcount: integer;
+    tag: integer;
+  protected
+    procedure Execute; override;
+    procedure GetFiles(s: String);
+    Procedure DoTerminate; override;
+    function matchesMask(sString: String; isDirectory: boolean): boolean;
+  public
+    constructor create(StartFolder, sRx: String; aMatches: tStrings; poptions: tOptionsSearch; searchCallBack: tSearchCallback;
+      setBadgeCallBAck: tSetBadgeColorCallBack); reintroduce;
   end;
 
   TfMain = class(TForm)
@@ -142,8 +165,16 @@ type
     sbDetach: TsButton;
     sPnPlayer: TsPanel;
     sShellTreeView1: TsShellTreeView;
+    seSearch: tsEdit;
+    sPanel11: TsPanel;
+    btnSearch: TsButton;
+    sSearchBadge: TsBadgeBtn;
+    sPanel12: TsPanel;
+    sDESearch: TsDirectoryEdit;
+    slWholeWord: TsSlider;
+    slIncDir: TsSlider;
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
-    procedure sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
+    procedure sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: boolean);
     procedure FormCreate(Sender: TObject);
     procedure tbVolumeChange(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
@@ -153,9 +184,9 @@ type
     procedure slbPlaylistItemIndexChanged(Sender: TObject);
     procedure slbPlaylistKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure sShellTreeView1AddFolder(Sender: TObject; AFolder: TacShellFolder; var CanAdd: Boolean);
+    procedure sShellTreeView1AddFolder(Sender: TObject; AFolder: TacShellFolder; var CanAdd: boolean);
     procedure sgListKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure sgListRowChanging(Sender: TObject; OldRow, NewRow: integer; var Allow: Boolean);
+    procedure sgListRowChanging(Sender: TObject; OldRow, NewRow: integer; var Allow: boolean);
     procedure sButton4Click(Sender: TObject);
     procedure sButton5Click(Sender: TObject);
     procedure sShellTreeView1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -190,12 +221,15 @@ type
     procedure sCKReplace03Click(Sender: TObject);
     procedure sSplitView1Opened(Sender: TObject);
     procedure sBitBtn1Click(Sender: TObject);
-    procedure sAlphaHints1ShowHint(var HintStr: string; var CanShow: Boolean; var HintInfo: THintInfo; var Frame: TFrame);
+    procedure sAlphaHints1ShowHint(var HintStr: string; var CanShow: boolean; var HintInfo: THintInfo; var Frame: TFrame);
     procedure btnUtilsClick(Sender: TObject);
     procedure seRegExBeforePopup(Sender: TObject);
     procedure seRegExKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure sbDetachClick(Sender: TObject);
     procedure FormPaint(Sender: TObject);
+    procedure btnSearchClick(Sender: TObject);
+    procedure seSearchChange(Sender: TObject);
+    procedure sShellTreeView1Click(Sender: TObject);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -206,16 +240,17 @@ type
     procedure OpenLogWindow;
     procedure downloadImage(sUrl: string);
     procedure SelfMove(var msg: TWMMove); message WM_MOVE;
+    procedure terminatePreviousSearch;
 
   public
     { Déclarations publiques }
     Channel: HStream;
     ChannelPreview: HStream;
     CurrentPlayingFileName: String;
-    AdjustingPlaybackPosition: Boolean;
+    AdjustingPlaybackPosition: boolean;
     delais: integer;
     momentdown: tDateTime;
-    dMultiChoices: tDictionary<String, TStrings>;
+    dMultiChoices: tDictionary<String, tStrings>;
     procedure PlayStream(FileName: String);
     procedure setPBMax;
     procedure SetPBPosition;
@@ -226,7 +261,7 @@ type
     function AddToPlayList(aFile: String): integer; overload;
     function AddToPlayList(aMediaFile: tMediaFile): integer; overload;
     function AddToPlayList(ARow: integer): integer; overload;
-    function AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): integer; overload;
+    function AddToPlayList(aNode: TTreeNode; bRecurse: boolean): integer; overload;
     Procedure AddFolderToGrid(sFolder: String);
     function AddFileToGrid(sFile: String): integer;
     Procedure AddFileToGridTH;
@@ -247,7 +282,7 @@ type
     function ImageCount(aFile: String): integer;
     Procedure RefreshCover(ARow: integer);
     procedure setGridRow;
-    Procedure ExtractTags(iRow: integer; bPreview: Boolean = false);
+    Procedure ExtractTags(iRow: integer; bPreview: boolean = false);
     Procedure SaveTags(iRow: integer);
     procedure SaveCover(var m: Tmsg); Message WM_REFRESH_COVER;
     Procedure fillTagCombos;
@@ -268,11 +303,13 @@ type
     procedure PreviewTrack(aMediaFile: tMediaFile); overload;
     procedure PreviewTrack(sFileName: String); overload;
     procedure AddDirectlyToPlayList;
-    Procedure AddToGrid(bReset: Boolean);
+    Procedure AddToGrid(bReset: boolean);
     procedure FillGlobalList(sPAth: String);
     procedure AddLog(sLog: String); overload;
     procedure AddLog(sFunc: String; sLog: String); overload;
     procedure attach(var msg: Tmsg); Message WM_ATTACH;
+    procedure SetSearchResult(s: String);
+    procedure SetBadgeColor(bactive: boolean);
   end;
 
 var
@@ -284,7 +321,7 @@ var
   sFileName: String;
   g_sPath: String;
   g_sFile: String;
-  g_tsFiles: TStrings;
+  g_tsFiles: tStrings;
   aNode: TTreeNode;
   iImg: integer;
   sLink: String;
@@ -294,7 +331,10 @@ var
   fFrmPlayer: tFrmPlayer;
   fFrmLog: tFrmLog;
   pThAddToPlayList: thaddToPlayList;
-  Form1 : tForm1;
+  pTHSearch: thSearchDisk;
+  Form1: tForm1;
+  sMatches: tStrings;
+  gSearchFolder: String;
 
 implementation
 
@@ -598,7 +638,7 @@ var
   aFiles: TStringDynArray;
   aFileAttributes: tFileAttributes;
   aSearchOption: tSearchOption;
-  bAdd: Boolean;
+  bAdd: boolean;
   sExt: String;
 begin
   aSearchOption := tSearchOption.soAllDirectories;
@@ -622,8 +662,10 @@ procedure TfMain.AddLog(sFunc, sLog: String);
 var
   sLine: String;
 begin
+{$IFDEF DEBUG}
   sLine := format('[%s] %s', [sFunc, sLog]);
   AddLog(sLine);
+{$ENDIF}
 end;
 
 procedure TfMain.AddLog(sLog: String);
@@ -633,7 +675,7 @@ begin
 {$ENDIF}
 end;
 
-function TfMain.AddToPlayList(aNode: TTreeNode; bRecurse: Boolean): integer;
+function TfMain.AddToPlayList(aNode: TTreeNode; bRecurse: boolean): integer;
 var
   aMediaFile: tMediaFile;
 begin
@@ -682,7 +724,7 @@ end;
 
 procedure TfMain.AddToDictionary(cKey, sValue: string);
 var
-  aList: TStrings;
+  aList: tStrings;
 begin
   if dMultiChoices.TryGetValue(cKey, aList) then
   begin
@@ -692,7 +734,7 @@ begin
   end;
 end;
 
-procedure TfMain.AddToGrid(bReset: Boolean);
+procedure TfMain.AddToGrid(bReset: boolean);
 var
   NewRow: integer;
   GlobalMediaFile: tMediaFile;
@@ -752,7 +794,7 @@ const
   arTags: tArray<String> = ['ALBUM', 'ARTIST'];
 var
   sTag: String;
-  sList: TStrings;
+  sList: tStrings;
   iColumn: integer;
 begin
   //
@@ -842,7 +884,7 @@ begin
   end;
 end;
 
-procedure TfMain.ExtractTags(iRow: integer; bPreview: Boolean = false);
+procedure TfMain.ExtractTags(iRow: integer; bPreview: boolean = false);
 var
   i: integer;
   iGroup: integer;
@@ -952,8 +994,7 @@ begin
                         RegExReplace.create(sEFROM01.Text);
                         sgList.Cells[iColumn, ARow] := RegExReplace.Replace(sgList.Cells[iColumn, ARow], sETO01.Text);
                       end;
-                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag,
-                        sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
                   end;
@@ -968,8 +1009,7 @@ begin
                         RegExReplace.create(sEFROM02.Text);
                         sgList.Cells[iColumn, ARow] := RegExReplace.Replace(sgList.Cells[iColumn, ARow], sETO02.Text);
                       end;
-                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag,
-                        sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
                   end;
@@ -984,8 +1024,7 @@ begin
                         RegExReplace.create(sEFROM03.Text);
                         sgList.Cells[iColumn, ARow] := RegExReplace.Replace(sgList.Cells[iColumn, ARow], sETO03.Text);
                       end;
-                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag,
-                        sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
                   end;
@@ -1000,8 +1039,7 @@ begin
           if iColumn > -1 then
           begin
             sgList.Cells[iColumn, ARow] := sEP01.Text;
-            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag,
-              sgList.Cells[iColumn, ARow]);
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
             tMediaFile(sgList.Objects[1, ARow]).bModified := True;
           end;
         end;
@@ -1012,8 +1050,7 @@ begin
           if iColumn > -1 then
           begin
             sgList.Cells[iColumn, ARow] := sEP02.Text;
-            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag,
-              sgList.Cells[iColumn, ARow]);
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
             tMediaFile(sgList.Objects[1, ARow]).bModified := True;
           end;
         end;
@@ -1024,8 +1061,7 @@ begin
           if iColumn > -1 then
           begin
             sgList.Cells[iColumn, ARow] := sEP03.Text;
-            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag,
-              sgList.Cells[iColumn, ARow]);
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
             tMediaFile(sgList.Objects[1, ARow]).bModified := True;
           end;
         end;
@@ -1057,7 +1093,7 @@ var
   aFiles: TStringDynArray;
   aFileAttributes: tFileAttributes;
   aSearchOption: tSearchOption;
-  bAdd: Boolean;
+  bAdd: boolean;
   sExt: String;
 
 begin
@@ -1085,7 +1121,7 @@ var
   dTagKey: tTagKey;
   Key: String;
 
-  function SetIndex(aList: TStrings; aKey: String): integer;
+  function SetIndex(aList: tStrings; aKey: String): integer;
   begin
     Result := aList.IndexOf(aKey);
   end;
@@ -1135,6 +1171,8 @@ end;
 
 procedure TfMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  terminatePreviousSearch;
+
   if thListMP3 <> Nil then
   begin
     if not thListMP3.Terminated then
@@ -1151,10 +1189,12 @@ begin
       Application.ProcessMessages;
   end;
 
+
+
   fFrmPlayer.Stop;
   fFrmPlayer.deInit;
 
-  jConfig.S['startFolder'] := sShellTreeView1.SelectedFolder.PathName;
+  jConfig.s['startFolder'] := sShellTreeView1.SelectedFolder.PathName;
 
   jConfig.SaveTo(TDirectory.GetCurrentDirectory + '\config.json');
 end;
@@ -1167,7 +1207,7 @@ var
 begin
   // * Never forget to init BASS
   // GlobalMediaFile := tMediaFile.Create;
-  form1 := tForm1.Create(Nil);
+  Form1 := tForm1.create(Nil);
   BASS_Init(-1, 44100, 0, self.handle, 0);
 
   ZeroMemory(@Params, SizeOf(TSpectrum3D_CreateParams));
@@ -1184,7 +1224,9 @@ begin
 
   Volume := BASS_GetVolume;
   tbVolume.Position := 100 - Round(Volume * 100);
-
+  sSearchBadge.Visible := false;
+  sSplitView1.Opened := false;
+  sMatches := tStringList.create;
   initAddToPlayListThread;
   OpenConfig;
   initGrid;
@@ -1218,7 +1260,7 @@ begin
   Spectrum3D_Free(Sprectrum3D);
   BASS_Stop;
   BASS_Free;
-
+  sMatches.Free;
   if fCoverSearch <> Nil then
     fCoverSearch.Free;
 end;
@@ -1351,14 +1393,14 @@ end;
 
 procedure TfMain.InitDictionaries;
 var
-  pList: TStrings;
+  pList: tStrings;
 begin
   if dMultiChoices <> Nil then
   begin
     dMultiChoices.clear;
     dMultiChoices.Free;
   end;
-  dMultiChoices := tDictionary<String, TStrings>.create;
+  dMultiChoices := tDictionary<String, tStrings>.create;
   pList := tStringList.create;
   dMultiChoices.add('ARTIST', pList);
   pList := tStringList.create;
@@ -1585,7 +1627,7 @@ begin
   end;
 end;
 
-procedure TfMain.sgListRowChanging(Sender: TObject; OldRow, NewRow: integer; var Allow: Boolean);
+procedure TfMain.sgListRowChanging(Sender: TObject; OldRow, NewRow: integer; var Allow: boolean);
 var
   pMediaFile: tMediaFile;
 begin
@@ -1657,7 +1699,7 @@ begin
   Result := '';
 end;
 
-procedure TfMain.sAlphaHints1ShowHint(var HintStr: string; var CanShow: Boolean; var HintInfo: THintInfo; var Frame: TFrame);
+procedure TfMain.sAlphaHints1ShowHint(var HintStr: string; var CanShow: boolean; var HintInfo: THintInfo; var Frame: TFrame);
 begin
   if HintInfo.HintControl = sBitBtn1 then
   begin
@@ -1683,7 +1725,7 @@ begin
         pMediaFile := tMediaFile(slbPlaylist.Items.Objects[i]);
         with Json.a['tracks'].O[i] do
         begin
-          S['fileName'] := pMediaFile.Tags.FileName;
+          s['fileName'] := pMediaFile.Tags.FileName;
         end;
       end;
       inc(i);
@@ -1825,6 +1867,39 @@ begin
   end;
 end;
 
+procedure TfMain.btnSearchClick(Sender: TObject);
+var
+  index: integer;
+  bOptions: tOptionsSearch;
+
+begin
+  //
+  if sMatches.Count = 0 then
+  begin
+    sSearchBadge.Visible := false;
+    gSearchFolder := IncludeTrailingBackslash(sDESearch.Text);
+    bOptions.bWord := slWholeWord.SliderOn;
+    bOptions.bDir := slIncDir.SliderOn;
+    pTHSearch := thSearchDisk.create(gSearchFolder, seSearch.Text, sMatches, bOptions, SetSearchResult, SetBadgeColor);
+    pTHSearch.Start;
+  end
+  else
+  begin
+    Index := sMatches.IndexOf(sShellTreeView1.Path);
+    if Index < sMatches.Count - 1 then
+    begin
+      inc(Index);
+    end
+    else
+    begin
+      Index := 0;
+    end;
+    sShellTreeView1.Path := sMatches[index];
+    sShellTreeView1.SetFocus;
+  end;
+
+end;
+
 procedure TfMain.sbDetachClick(Sender: TObject);
 begin
   fFrmPlayer.deInit;
@@ -1921,24 +1996,24 @@ var
   iBracketStart, iBracketEnd: integer;
   iLenght: integer;
 
-  function rpos(Substr: String; S: String; iStart: integer): integer;
+  function rpos(Substr: String; s: String; iStart: integer): integer;
   var
     i: integer;
   begin
     for i := iStart downto 1 do
-      if (Copy(S, i, Length(Substr)) = Substr) then
+      if (Copy(s, i, Length(Substr)) = Substr) then
       begin
         Result := i;
         Exit;
       end;
   end;
 
-  function lpos(Substr: String; S: String; iStart: integer): integer;
+  function lpos(Substr: String; s: String; iStart: integer): integer;
   var
     i: integer;
   begin
-    for i := iStart to Length(S) do
-      if (Copy(S, i, Length(Substr)) = Substr) then
+    for i := iStart to Length(s) do
+      if (Copy(s, i, Length(Substr)) = Substr) then
       begin
         Result := i;
         Exit;
@@ -1975,6 +2050,59 @@ begin
   // end;
 end;
 
+procedure tfMain.terminatePreviousSearch;
+  begin
+    if pTHSearch <> nil then
+    begin
+      if not pTHSearch.Terminated then
+      begin
+        pTHSearch.Terminate;
+        while pTHSearch.Terminated do
+        if Application <> Nil then
+            Application.ProcessMessages;
+
+        FreeAndNil(pThSearch);
+      end;
+    end;
+  end;
+
+procedure TfMain.seSearchChange(Sender: TObject);
+begin
+  btnsearch.Enabled := false;
+  terminatePreviousSearch;
+  sSearchBadge.Visible := false;
+  btnSearch.Caption := 'Search';
+  btnSearch.Enabled := true;
+  sMatches.clear;
+end;
+
+procedure TfMain.SetBadgeColor(bactive: boolean);
+var
+  aColor : tColor;
+begin
+   if bActive  then
+   begin
+      aColor := col_on;
+      sSearchBadge.Caption := '0';
+      sSearchBadge.Visible := true;
+   end
+   else
+      aColor := col_off;
+
+   with sSearchBAdge.PaintOptions do
+   begin
+     DataActive.Color1 := aColor;
+     DataActive.Color2 := aColor;
+     DataNormal.Color1 := aColor;
+     DataNormal.Color2 := aColor;
+     DataPressed.Color1 := aColor;
+     DataPressed.Color2 := aColor;
+   end;
+
+   if not bActive then
+      terminatePreviousSearch;
+end;
+
 procedure TfMain.setGridRow;
 begin
   sgList.Row := 1;
@@ -1993,6 +2121,26 @@ end;
 procedure TfMain.SetPBPosition;
 begin
   pb1.Position := Round(iProgress / iMax * 100);
+end;
+
+procedure TfMain.SetSearchResult(s: String);
+var
+  PathName: String;
+begin
+  PathName := tpath.GetDirectoryName(s);
+  if sMatches.IndexOf(PathName) = -1 then
+  begin
+    sMatches.add(s);
+    if sMatches.Count = 1 then
+    begin
+      sShellTreeView1.Path := s;
+      sShellTreeView1.SetFocus;
+    end;
+  end;
+  sSearchBadge.Visible := sMatches.Count > 0;
+  sSearchBadge.Caption := inttostr(sMatches.Count);
+  btnSearch.Caption := '&Next';
+
 end;
 
 procedure TfMain.slbPlaylistItemIndexChanged(Sender: TObject);
@@ -2058,7 +2206,7 @@ begin
   RefreshVisuals;
 end;
 
-procedure TfMain.sShellTreeView1AddFolder(Sender: TObject; AFolder: TacShellFolder; var CanAdd: Boolean);
+procedure TfMain.sShellTreeView1AddFolder(Sender: TObject; AFolder: TacShellFolder; var CanAdd: boolean);
 var
   sExtension: string;
   aFile: String;
@@ -2103,6 +2251,13 @@ begin
     end;
     pMediaFile.Free;
   end;
+end;
+
+procedure TfMain.sShellTreeView1Click(Sender: TObject);
+begin
+  //
+  if sMatches.Count = 0 then
+    sDESearch.Text := sShellTreeView1.Path;
 end;
 
 procedure TfMain.sShellTreeView1GetImageIndex(Sender: TObject; Node: TTreeNode);
@@ -2265,7 +2420,7 @@ begin
     Json := TSuperObject.ParseFile(sOpenDialog1.FileName);
     while i <= Json.a['tracks'].Length - 1 do
     begin
-      pMediaFile := tMediaFile.create(Json.a['tracks'].O[i].S['filename']);
+      pMediaFile := tMediaFile.create(Json.a['tracks'].O[i].s['filename']);
       slbPlaylist.Items.AddObject(tpath.GetFileNameWithoutExtension(pMediaFile.Tags.FileName), pMediaFile);
       inc(i);
     end;
@@ -2283,7 +2438,7 @@ begin
   if fileExists(g_sPath + '\config.json') then
   begin
     jConfig := TSuperObject.ParseFile(g_sPath + '\config.json');
-    g_sPath := jConfig.S['startFolder'];
+    g_sPath := jConfig.s['startFolder'];
     if g_sPath <> '' then
     begin
       if DirectoryExists(g_sPath) then
@@ -2346,7 +2501,7 @@ begin
   end;
 end;
 
-procedure TfMain.sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: Boolean);
+procedure TfMain.sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: boolean);
 begin
   if Node.Count = 0 then
   begin
@@ -2392,10 +2547,10 @@ var
   aFiles: TStringDynArray;
   aFileAttributes: tFileAttributes;
   aSearchOption: tSearchOption;
-  bAdd: Boolean;
+  bAdd: boolean;
   sExt: String;
-  bConfirm: Boolean;
-  bFirst: Boolean;
+  bConfirm: boolean;
+  bFirst: boolean;
 begin
   aSearchOption := tSearchOption.soAllDirectories;
   aFiles := TDirectory.GetFileSystemEntries(g_sPath, aSearchOption, nil);
@@ -2403,8 +2558,7 @@ begin
   bFirst := True;
   if Length(aFiles) > 1000 then
   begin
-    bConfirm := (MessageDlg(format('Do you confirm adding %d files ?', [Length(aFiles)]), mtConfirmation, [mbYes, mbNo], 0,
-      mbNo) = mrYes);
+    bConfirm := (MessageDlg(format('Do you confirm adding %d files ?', [Length(aFiles)]), mtConfirmation, [mbYes, mbNo], 0, mbNo) = mrYes);
   end;
   if bConfirm then
   begin
@@ -2615,6 +2769,99 @@ begin
         Suspend;
     end;
     Application.ProcessMessages;
+  end;
+end;
+
+{ thSearchDisk }
+
+constructor thSearchDisk.create(StartFolder, sRx: String; aMatches: tStrings; poptions: tOptionsSearch; searchCallBack: tSearchCallback;
+  setBadgeCallBAck: tSetBadgeColorCallBack);
+begin
+  inherited create(True);
+  FreeOnTerminate := False;
+  returnResult := searchCallBack;
+  setBadgeColor := setBadgeCallBAck;
+  fRx := sRx;
+  bOptions := poptions;
+  fStartFolder := StartFolder;
+  fMAtches := tStringList.create;
+  fMAtches.Assign(aMatches);
+end;
+
+procedure thSearchDisk.DoTerminate;
+begin
+  setBadgeColor(false);
+  tag := 1;
+  inherited;
+end;
+
+procedure thSearchDisk.Execute;
+begin
+  inherited;
+  setBadgeColor(true);
+  tag := 0;
+  GetFiles(fStartFolder);
+end;
+
+procedure thSearchDisk.GetFiles(s: String);
+{ recursively read all file names from directory S and add them to FileList }
+var
+  F: TSearchrec;
+  R: integer;
+begin
+  R := FindFirst(s + '*.*', FaAnyFile, F);
+  while (R = 0) and (tag = 0) do
+  begin
+    If (Length(F.Name) > 0 ) and (uppercase(F.Name) <> 'RECYCLED') and (F.Name[1] <> '.') and (F.Name <> '..') and (F.Attr and FAVolumeId = 0) then
+    begin
+      if ((F.Attr and FADirectory) > 0) then
+      begin
+        if bOptions.bDir then
+        begin
+          if matchesMask(s + F.Name, True) then
+          begin
+            returnResult(s + F.Name);
+            Application.ProcessMessages;
+          end;
+        end;
+        GetFiles(s + F.Name + '\')
+      end
+      else if matchesMask(s + F.Name, false) then
+      begin
+        if not bOptions.bDir then
+           returnResult(s + F.Name);
+        Application.ProcessMessages;
+        // tag := 1;
+      end;
+    end;
+    R := Findnext(F);
+  end;
+  FindClose(F);
+end;
+
+function thSearchDisk.matchesMask(sString: String; isDirectory: boolean): boolean;
+var
+  Match: tMatch;
+  regexpr: tREgEx;
+  RO: TRegExOptions;
+  sExtension: string;
+  CanAdd: boolean;
+begin
+  Result := false;
+  CanAdd := True;
+  if not isDirectory then
+  begin
+    sExtension := tpath.GetExtension(sString);
+    CanAdd := (pos(uppercase(sExtension), sValidExtensions) > 0);
+  end;
+  if CanAdd and (fMAtches.IndexOf(sString) = -1) then
+  begin
+    RO := [roIgnoreCase];
+    if bOptions.bWord then
+      fRx := '\b' + fRx + '\b';
+    regexpr := tREgEx.create(fRx, [roIgnoreCase]);
+    Match := regexpr.Match(sString);
+    Result := Match.Success;
   end;
 end;
 
