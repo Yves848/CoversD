@@ -144,6 +144,7 @@ object fMain: TfMain
       Align = alRight
       Caption = 'Playlist'
       TabOrder = 2
+      Visible = False
       Collapsed = True
       Placement = asLeft
       OnAfterCollapse = sROPPlaylistAfterCollapse
@@ -4258,6 +4259,7 @@ object fMain: TfMain
               BoundLabel.Caption = 'Whole Word'
               BoundLabel.Layout = sclTopCenter
               SliderOn = False
+              OnChanging = slWholeWordChanging
             end
             object slIncDir: TsSlider
               Left = 79
@@ -4268,6 +4270,7 @@ object fMain: TfMain
               BoundLabel.Caption = 'Inc. Dir.'
               BoundLabel.Layout = sclTopCenter
               SliderOn = False
+              OnChanging = slIncDirChanging
             end
           end
           object btnSearch: TsButton
@@ -4337,6 +4340,7 @@ object fMain: TfMain
           UseShellImages = False
           AutoRefresh = False
           ShowExt = seSystem
+          ExplicitTop = 105
         end
         object sPanel12: TsPanel
           Left = 5

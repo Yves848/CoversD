@@ -41,7 +41,7 @@ type
   thSearchDisk = class(TThread)
   private
     returnResult: tSearchCallback;
-    setBadgeColor : tSetBadgeColorCallBack;
+    setBadgeColor: tSetBadgeColorCallBack;
     fRx: String;
     bOptions: tOptionsSearch;
     fStartFolder: String;
@@ -102,7 +102,7 @@ type
     kglTitle: TKryptoGlowLabel;
     sImage2: TsImage;
     image1: TsImage;
-    sGauge1 : TsGauge;
+    sGauge1: TsGauge;
     sGauge2: TsGauge;
     sPanel10: TsPanel;
     VuR: TsImage;
@@ -230,7 +230,9 @@ type
     procedure btnSearchClick(Sender: TObject);
     procedure seSearchChange(Sender: TObject);
     procedure sShellTreeView1Click(Sender: TObject);
-    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
+    procedure slWholeWordChanging(Sender: TObject; var CanChange: Boolean);
+    procedure slIncDirChanging(Sender: TObject; var CanChange: Boolean);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -310,8 +312,8 @@ type
     procedure AddLog(sFunc: String; sLog: String); overload;
     procedure attach(var msg: Tmsg); Message WM_ATTACH;
     procedure SetSearchResult(s: String);
-    procedure SetBadgeColor(bactive: boolean);
-    procedure MPlayNext(var Msg: TMessage); Message WM_PLAY_NEXT;
+    procedure setBadgeColor(bactive: boolean);
+    procedure MPlayNext(var msg: TMessage); Message WM_PLAY_NEXT;
   end;
 
 var
@@ -337,6 +339,7 @@ var
   Form1: tForm1;
   sMatches: tStrings;
   gSearchFolder: String;
+  gOldControl : tWinControl;
 
 implementation
 
@@ -1177,7 +1180,7 @@ begin
   Action := caFree;
 end;
 
-procedure TfMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+procedure TfMain.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
   terminatePreviousSearch;
 
@@ -1197,15 +1200,12 @@ begin
       Application.ProcessMessages;
   end;
 
-
-
   fFrmPlayer.Stop;
   fFrmPlayer.deInit;
 
   jConfig.s['startFolder'] := sShellTreeView1.SelectedFolder.PathName;
 
   jConfig.SaveTo(TDirectory.GetCurrentDirectory + '\config.json');
-
 
   CanClose := True;
 
@@ -1278,7 +1278,19 @@ begin
 end;
 
 procedure TfMain.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  sFocused: String;
+  aControl: tWinControl;
 begin
+  try
+    aControl := TForm(self).ActiveControl;
+    AddLog('TfMain.FormKeyDown',aControl.Name);
+  except
+    AddLog('TfMain.FormKeyDown','exception');
+  end;
+
+  // Determine which control is concerned by the key.....
+
   if ssAlt in Shift then
   begin
     case Key of
@@ -1682,11 +1694,13 @@ end;
 
 procedure TfMain.showExplorer;
 begin
+  if not sSplitView1.Opened then
+     gOldControl := TForm(self).ActiveControl;
   sSplitView1.Opened := not sSplitView1.Opened;
   if sSplitView1.Opened then
-    sShellTreeView1.SetFocus
+    tForm(Self).SetFocusedControl(sShellTreeView1)
   else
-    sgList.SetFocus;
+    gOldControl.SetFocus;
 
 end;
 
@@ -1892,7 +1906,7 @@ begin
     gSearchFolder := IncludeTrailingBackslash(sDESearch.Text);
     bOptions.bWord := slWholeWord.SliderOn;
     bOptions.bDir := slIncDir.SliderOn;
-    pTHSearch := thSearchDisk.create(gSearchFolder, seSearch.Text, sMatches, bOptions, SetSearchResult, SetBadgeColor);
+    pTHSearch := thSearchDisk.create(gSearchFolder, seSearch.Text, sMatches, bOptions, SetSearchResult, setBadgeColor);
     pTHSearch.Start;
   end
   else
@@ -2062,57 +2076,57 @@ begin
   // end;
 end;
 
-procedure tfMain.terminatePreviousSearch;
+procedure TfMain.terminatePreviousSearch;
+begin
+  if pTHSearch <> nil then
   begin
-    if pTHSearch <> nil then
+    if not pTHSearch.Terminated then
     begin
-      if not pTHSearch.Terminated then
-      begin
-        pTHSearch.Terminate;
-        while not pTHSearch.Terminated do
+      pTHSearch.Terminate;
+      while not pTHSearch.Terminated do
         if Application <> Nil then
-            Application.ProcessMessages;
+          Application.ProcessMessages;
 
-        FreeAndNil(pThSearch);
-      end;
+      FreeAndNil(pTHSearch);
     end;
   end;
+end;
 
 procedure TfMain.seSearchChange(Sender: TObject);
 begin
-  btnsearch.Enabled := false;
+  btnSearch.Enabled := false;
   terminatePreviousSearch;
   sSearchBadge.Visible := false;
   btnSearch.Caption := 'Search';
-  btnSearch.Enabled := true;
+  btnSearch.Enabled := True;
   sMatches.clear;
 end;
 
-procedure TfMain.SetBadgeColor(bactive: boolean);
+procedure TfMain.setBadgeColor(bactive: boolean);
 var
-  aColor : tColor;
+  aColor: TColor;
 begin
-   if bActive  then
-   begin
-      aColor := col_on;
-      sSearchBadge.Caption := '0';
-      sSearchBadge.Visible := true;
-   end
-   else
-      aColor := col_off;
+  if bactive then
+  begin
+    aColor := col_on;
+    sSearchBadge.Caption := '0';
+    sSearchBadge.Visible := True;
+  end
+  else
+    aColor := col_off;
 
-   with sSearchBAdge.PaintOptions do
-   begin
-     DataActive.Color1 := aColor;
-     DataActive.Color2 := aColor;
-     DataNormal.Color1 := aColor;
-     DataNormal.Color2 := aColor;
-     DataPressed.Color1 := aColor;
-     DataPressed.Color2 := aColor;
-   end;
+  with sSearchBadge.PaintOptions do
+  begin
+    DataActive.Color1 := aColor;
+    DataActive.Color2 := aColor;
+    DataNormal.Color1 := aColor;
+    DataNormal.Color2 := aColor;
+    DataPressed.Color1 := aColor;
+    DataPressed.Color2 := aColor;
+  end;
 
-   if not bActive then
-      terminatePreviousSearch;
+  if not bactive then
+    terminatePreviousSearch;
 end;
 
 procedure TfMain.setGridRow;
@@ -2196,6 +2210,16 @@ begin
     aNode := sShellTreeView1.Items[0];
 
   sShellTreeView1.Refresh(aNode);
+end;
+
+procedure TfMain.slIncDirChanging(Sender: TObject; var CanChange: Boolean);
+begin
+  seSearchChange(nil);
+end;
+
+procedure TfMain.slWholeWordChanging(Sender: TObject; var CanChange: Boolean);
+begin
+  seSearchChange(nil);
 end;
 
 procedure TfMain.sROPMediaAfterCollapse(Sender: TObject);
@@ -2439,9 +2463,9 @@ begin
   end;
 end;
 
-procedure TfMain.MPlayNext(var Msg: TMessage);
+procedure TfMain.MPlayNext(var msg: TMessage);
 begin
-   postMessage(fFrmPlayer.handle, WM_PLAY_NEXT, 1, 0);
+  postMessage(fFrmPlayer.handle, WM_PLAY_NEXT, 1, 0);
 end;
 
 procedure TfMain.ListCoverArts(aImage: TsImage; sFileName: String);
@@ -2795,7 +2819,7 @@ constructor thSearchDisk.create(StartFolder, sRx: String; aMatches: tStrings; po
   setBadgeCallBAck: tSetBadgeColorCallBack);
 begin
   inherited create(True);
-  FreeOnTerminate := False;
+  FreeOnTerminate := false;
   returnResult := searchCallBack;
   setBadgeColor := setBadgeCallBAck;
   fRx := sRx;
@@ -2815,7 +2839,7 @@ end;
 procedure thSearchDisk.Execute;
 begin
   inherited;
-  setBadgeColor(true);
+  setBadgeColor(True);
   tag := 0;
   GetFiles(fStartFolder);
 end;
@@ -2827,9 +2851,9 @@ var
   R: integer;
 begin
   R := FindFirst(s + '*.*', FaAnyFile, F);
-  while (not terminated) and (R = 0) and (tag = 0) do
+  while (not Terminated) and (R = 0) and (tag = 0) do
   begin
-    If (Length(F.Name) > 0 ) and (uppercase(F.Name) <> 'RECYCLED') and (F.Name[1] <> '.') and (F.Name <> '..') and (F.Attr and FAVolumeId = 0) then
+    If (Length(F.Name) > 0) and (uppercase(F.Name) <> 'RECYCLED') and (F.Name[1] <> '.') and (F.Name <> '..') and (F.Attr and FAVolumeId = 0) then
     begin
       if ((F.Attr and FADirectory) > 0) then
       begin
@@ -2846,7 +2870,7 @@ begin
       else if matchesMask(s + F.Name, false) then
       begin
         if not bOptions.bDir then
-           returnResult(s + F.Name);
+          returnResult(s + F.Name);
         Application.ProcessMessages;
         // tag := 1;
       end;
