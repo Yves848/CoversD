@@ -81,11 +81,13 @@ type
     procedure sImgPauseClick(Sender: TObject);
     procedure sButton3Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure sTrackBar1Change(Sender: TObject);
   private
     { Déclarations privées }
     fCurTrack: String;
   public
     { Déclarations publiques }
+    AdjustingPlaybackPosition: boolean;
     Channel: HStream;
     pPlayingThread: tPlayingThread;
     OldStatus: Integer;
@@ -134,7 +136,8 @@ end;
 
 procedure StreamEndCallback(handle: HSYNC; Channel, data: DWORD; user: Pointer); stdcall;
 begin
-  // fMain.PlayNextTrack(nil);
+  // TfrmPlayer.PlayNextTrack(nil);
+  postmessage(Application.MainFormHandle, WM_PLAY_NEXT, 1, 0);
 end;
 
 procedure TfrmPlayer.clearPlaylist;
@@ -254,6 +257,7 @@ begin
 
   Spectrum3D_SetChannel(Sprectrum3D, Channel);
   // * Start playing and visualising
+  sTrackBar1.Max := BASS_ChannelGetLength(Channel, BASS_POS_BYTE);
   BASS_ChannelPlay(Spectrum3D_GetChannel(Sprectrum3D), True);
   // BASS_ChannelPlay(Channel, True);
   // sLabel5.Caption := inttostr(BASS_ChannelGetLength(Channel, BASS_POS_BYTE));
@@ -301,7 +305,10 @@ end;
 
 procedure TfrmPlayer.MPlayNext(var Msg: TMessage);
 begin
-  sImgNextClick(sImgNext);
+  if Msg.WParam = 0 then
+     sImgNextClick(sImgNext)
+  else
+     sImgNextClick(nil);
 end;
 
 procedure TfrmPlayer.MPlayPrevious(var Msg: TMessage);
@@ -385,6 +392,14 @@ begin
   BASS_ChannelStop(Channel);
 end;
 
+procedure TfrmPlayer.sTrackBar1Change(Sender: TObject);
+begin
+  if NOT AdjustingPlaybackPosition then
+  begin
+    BASS_ChannelSetPosition(Channel, sTrackBar1.Position, BASS_POS_BYTE);
+  end;
+end;
+
 procedure TfrmPlayer.Timer1Timer(Sender: TObject);
 begin
   UpdatePlatingInfos;
@@ -412,7 +427,7 @@ begin
       begin
         // Not the same Track
         BASS_ChannelStop(Channel);
-        playStream(sSelected);
+        PlayStream(sSelected);
       end
       else
       begin
@@ -476,6 +491,9 @@ begin
   if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_PLAYING then
   begin
     iPos := BASS_ChannelGetPosition(Channel, BASS_POS_BYTE);
+    AdjustingPlaybackPosition := True;
+    sTrackBar1.Position := iPos;
+    AdjustingPlaybackPosition := false;
     aTime := BASS_ChannelBytes2Seconds(Channel, iPos);
     if BASS_ErrorGetCode = BASS_OK then
     begin
@@ -488,6 +506,7 @@ begin
       sLabel1.Caption := format('%.2d:%.2d', [minutes, seconds]);
     end;
   end;
+
 end;
 
 procedure TfrmPlayer.updatePlayingStatus;

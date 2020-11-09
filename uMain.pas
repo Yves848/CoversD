@@ -102,7 +102,7 @@ type
     kglTitle: TKryptoGlowLabel;
     sImage2: TsImage;
     image1: TsImage;
-    sGauge1: TsGauge;
+    sGauge1 : TsGauge;
     sGauge2: TsGauge;
     sPanel10: TsPanel;
     VuR: TsImage;
@@ -311,6 +311,7 @@ type
     procedure attach(var msg: Tmsg); Message WM_ATTACH;
     procedure SetSearchResult(s: String);
     procedure SetBadgeColor(bactive: boolean);
+    procedure MPlayNext(var Msg: TMessage); Message WM_PLAY_NEXT;
   end;
 
 var
@@ -2436,6 +2437,11 @@ begin
       inc(i);
     end;
   end;
+end;
+
+procedure TfMain.MPlayNext(var Msg: TMessage);
+begin
+   postMessage(fFrmPlayer.handle, WM_PLAY_NEXT, 1, 0);
 end;
 
 procedure TfMain.ListCoverArts(aImage: TsImage; sFileName: String);
