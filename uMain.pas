@@ -230,6 +230,7 @@ type
     procedure btnSearchClick(Sender: TObject);
     procedure seSearchChange(Sender: TObject);
     procedure sShellTreeView1Click(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -1171,6 +1172,12 @@ end;
 
 procedure TfMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+
+  Action := caFree;
+end;
+
+procedure TfMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
   terminatePreviousSearch;
 
   if thListMP3 <> Nil then
@@ -1197,6 +1204,10 @@ begin
   jConfig.s['startFolder'] := sShellTreeView1.SelectedFolder.PathName;
 
   jConfig.SaveTo(TDirectory.GetCurrentDirectory + '\config.json');
+
+
+  CanClose := True;
+
 end;
 
 procedure TfMain.FormCreate(Sender: TObject);
@@ -2057,7 +2068,7 @@ procedure tfMain.terminatePreviousSearch;
       if not pTHSearch.Terminated then
       begin
         pTHSearch.Terminate;
-        while pTHSearch.Terminated do
+        while not pTHSearch.Terminated do
         if Application <> Nil then
             Application.ProcessMessages;
 
@@ -2810,7 +2821,7 @@ var
   R: integer;
 begin
   R := FindFirst(s + '*.*', FaAnyFile, F);
-  while (R = 0) and (tag = 0) do
+  while (not terminated) and (R = 0) and (tag = 0) do
   begin
     If (Length(F.Name) > 0 ) and (uppercase(F.Name) <> 'RECYCLED') and (F.Name[1] <> '.') and (F.Name <> '..') and (F.Attr and FAVolumeId = 0) then
     begin

@@ -14,6 +14,7 @@ object fMain: TfMain
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
@@ -4198,6 +4199,10 @@ object fMain: TfMain
               end
               object sTabSheet2: TsTabSheet
                 Caption = 'Set Filenames'
+                ExplicitLeft = 0
+                ExplicitTop = 0
+                ExplicitWidth = 0
+                ExplicitHeight = 0
               end
             end
           end
@@ -4370,7 +4375,6 @@ object fMain: TfMain
       Height = 943
       Align = alRight
       TabOrder = 4
-      ExplicitLeft = 866
     end
   end
   object sSkinProvider1: TsSkinProvider
