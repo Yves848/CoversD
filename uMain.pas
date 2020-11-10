@@ -52,8 +52,10 @@ type
   protected
     procedure Execute; override;
     procedure GetFiles(s: String);
+    procedure GetFilesFast(s: string);
     Procedure DoTerminate; override;
     function matchesMask(sString: String; isDirectory: boolean): boolean;
+    function _matches(sString: String; isDirectory: boolean; regexpr: tRegEx): boolean;
   public
     constructor create(StartFolder, sRx: String; aMatches: tStrings; poptions: tOptionsSearch; searchCallBack: tSearchCallback;
       setBadgeCallBAck: tSetBadgeColorCallBack); reintroduce;
@@ -231,8 +233,8 @@ type
     procedure seSearchChange(Sender: TObject);
     procedure sShellTreeView1Click(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
-    procedure slWholeWordChanging(Sender: TObject; var CanChange: Boolean);
-    procedure slIncDirChanging(Sender: TObject; var CanChange: Boolean);
+    procedure slWholeWordChanging(Sender: TObject; var CanChange: boolean);
+    procedure slIncDirChanging(Sender: TObject; var CanChange: boolean);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -339,7 +341,7 @@ var
   Form1: tForm1;
   sMatches: tStrings;
   gSearchFolder: String;
-  gOldControl : tWinControl;
+  gOldControl: tWinControl;
 
 implementation
 
@@ -894,8 +896,8 @@ var
   iMatch: integer;
   aFile: String;
   Match: tMatch;
-  regexpr: tREgEx;
-  RegExReplace: tREgEx;
+  regexpr: tRegEx;
+  RegExReplace: tRegEx;
   RO: TRegExOptions;
   ARow: integer;
   iColumn: integer;
@@ -910,7 +912,7 @@ begin
     sBB1.Visible := false;
     sBB2.Visible := false;
     sBB3.Visible := false;
-    regexpr := tREgEx.create(getExpression, [roIgnoreCase]);
+    regexpr := tRegEx.create(getExpression, [roIgnoreCase]);
 {$REGION 'Tags Preview'}
     if bPreview then
     begin
@@ -997,7 +999,8 @@ begin
                         RegExReplace.create(sEFROM01.Text);
                         sgList.Cells[iColumn, ARow] := RegExReplace.Replace(sgList.Cells[iColumn, ARow], sETO01.Text);
                       end;
-                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag,
+                        sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
                   end;
@@ -1012,7 +1015,8 @@ begin
                         RegExReplace.create(sEFROM02.Text);
                         sgList.Cells[iColumn, ARow] := RegExReplace.Replace(sgList.Cells[iColumn, ARow], sETO02.Text);
                       end;
-                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag,
+                        sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
                   end;
@@ -1027,7 +1031,8 @@ begin
                         RegExReplace.create(sEFROM03.Text);
                         sgList.Cells[iColumn, ARow] := RegExReplace.Replace(sgList.Cells[iColumn, ARow], sETO03.Text);
                       end;
-                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
+                      tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag,
+                        sgList.Cells[iColumn, ARow]);
                       tMediaFile(sgList.Objects[1, ARow]).bModified := True;
                     end;
                   end;
@@ -1042,7 +1047,8 @@ begin
           if iColumn > -1 then
           begin
             sgList.Cells[iColumn, ARow] := sEP01.Text;
-            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB1.Items.Objects[sCB1.ItemIndex]).sTag,
+              sgList.Cells[iColumn, ARow]);
             tMediaFile(sgList.Objects[1, ARow]).bModified := True;
           end;
         end;
@@ -1053,7 +1059,8 @@ begin
           if iColumn > -1 then
           begin
             sgList.Cells[iColumn, ARow] := sEP02.Text;
-            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB2.Items.Objects[sCB2.ItemIndex]).sTag,
+              sgList.Cells[iColumn, ARow]);
             tMediaFile(sgList.Objects[1, ARow]).bModified := True;
           end;
         end;
@@ -1064,7 +1071,8 @@ begin
           if iColumn > -1 then
           begin
             sgList.Cells[iColumn, ARow] := sEP03.Text;
-            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag, sgList.Cells[iColumn, ARow]);
+            tMediaFile(sgList.Objects[1, ARow]).Tags.SetTag(tTagKey(sCB3.Items.Objects[sCB3.ItemIndex]).sTag,
+              sgList.Cells[iColumn, ARow]);
             tMediaFile(sgList.Objects[1, ARow]).bModified := True;
           end;
         end;
@@ -1282,9 +1290,9 @@ var
 begin
   try
     aControl := TForm(self).ActiveControl;
-    AddLog('TfMain.FormKeyDown',aControl.Name);
+    AddLog('TfMain.FormKeyDown', aControl.Name);
   except
-    AddLog('TfMain.FormKeyDown','exception');
+    AddLog('TfMain.FormKeyDown', 'exception');
   end;
 
   // Determine which control is concerned by the key.....
@@ -1356,7 +1364,7 @@ end;
 
 function TfMain.getExpression: String;
 var
-  regexpr, RegExReplace: tREgEx;
+  regexpr, RegExReplace: tRegEx;
   iMatch: integer;
   Match: tMatch;
   iGroup: integer;
@@ -1369,7 +1377,7 @@ begin
   begin
     if dExpressions.Count > 0 then
     begin
-      regexpr := tREgEx.create('\[(.*?)\]');
+      regexpr := tRegEx.create('\[(.*?)\]');
 
       Match := regexpr.Match(seRegEx.Text);
       iMatch := 0;
@@ -1693,10 +1701,10 @@ end;
 procedure TfMain.showExplorer;
 begin
   if not sSplitView1.Opened then
-     gOldControl := TForm(self).ActiveControl;
+    gOldControl := TForm(self).ActiveControl;
   sSplitView1.Opened := not sSplitView1.Opened;
   if sSplitView1.Opened then
-    tForm(Self).SetFocusedControl(sShellTreeView1)
+    TForm(self).SetFocusedControl(sShellTreeView1)
   else
     gOldControl.SetFocus;
 
@@ -2210,12 +2218,12 @@ begin
   sShellTreeView1.Refresh(aNode);
 end;
 
-procedure TfMain.slIncDirChanging(Sender: TObject; var CanChange: Boolean);
+procedure TfMain.slIncDirChanging(Sender: TObject; var CanChange: boolean);
 begin
   seSearchChange(nil);
 end;
 
-procedure TfMain.slWholeWordChanging(Sender: TObject; var CanChange: Boolean);
+procedure TfMain.slWholeWordChanging(Sender: TObject; var CanChange: boolean);
 begin
   seSearchChange(nil);
 end;
@@ -2596,7 +2604,8 @@ begin
   bFirst := True;
   if Length(aFiles) > 1000 then
   begin
-    bConfirm := (MessageDlg(format('Do you confirm adding %d files ?', [Length(aFiles)]), mtConfirmation, [mbYes, mbNo], 0, mbNo) = mrYes);
+    bConfirm := (MessageDlg(format('Do you confirm adding %d files ?', [Length(aFiles)]), mtConfirmation, [mbYes, mbNo], 0,
+      mbNo) = mrYes);
   end;
   if bConfirm then
   begin
@@ -2812,8 +2821,8 @@ end;
 
 { thSearchDisk }
 
-constructor thSearchDisk.create(StartFolder, sRx: String; aMatches: tStrings; poptions: tOptionsSearch; searchCallBack: tSearchCallback;
-  setBadgeCallBAck: tSetBadgeColorCallBack);
+constructor thSearchDisk.create(StartFolder, sRx: String; aMatches: tStrings; poptions: tOptionsSearch;
+  searchCallBack: tSearchCallback; setBadgeCallBAck: tSetBadgeColorCallBack);
 begin
   inherited create(True);
   FreeOnTerminate := false;
@@ -2838,7 +2847,7 @@ begin
   inherited;
   setBadgeColor(True);
   tag := 0;
-  GetFiles(fStartFolder);
+  GetFilesFast(fStartFolder);
 end;
 
 procedure thSearchDisk.GetFiles(s: String);
@@ -2850,7 +2859,8 @@ begin
   R := FindFirst(s + '*.*', FaAnyFile, F);
   while (not Terminated) and (R = 0) and (tag = 0) do
   begin
-    If (Length(F.Name) > 0) and (uppercase(F.Name) <> 'RECYCLED') and (F.Name[1] <> '.') and (F.Name <> '..') and (F.Attr and FAVolumeId = 0) then
+    If (Length(F.Name) > 0) and (uppercase(F.Name) <> 'RECYCLED') and (F.Name[1] <> '.') and (F.Name <> '..') and
+      (F.Attr and FAVolumeId = 0) then
     begin
       if ((F.Attr and FADirectory) > 0) then
       begin
@@ -2877,11 +2887,40 @@ begin
   FindClose(F);
 end;
 
-function thSearchDisk.matchesMask(sString: String; isDirectory: boolean): boolean;
+procedure thSearchDisk.GetFilesFast(s: string);
 var
-  Match: tMatch;
-  regexpr: tREgEx;
+  Predicate: TDirectory.TFilterPredicate;
+  tFiles: TStringDynArray;
+  iFile: String;
+  regexpr: tRegEx;
   RO: TRegExOptions;
+
+begin
+  RO := [roIgnoreCase];
+  if bOptions.bWord then
+    fRx := '\b' + fRx + '\b';
+  regexpr := tRegEx.create(fRx, [roIgnoreCase]);
+  Predicate := function(const Path: string; const SearchRec: TSearchrec): boolean
+    begin
+      if _matches(IncludeTrailingBackslash(Path) + SearchRec.Name, (SearchRec.Attr and FADirectory = SearchRec.Attr), regexpr) then
+      begin
+         returnResult(IncludeTrailingBackslash(path)+Searchrec.Name);
+         application.ProcessMessages;
+        Exit(True);
+      end;
+      Exit(false);
+    end;
+  // TDirectory.GetFileSystemEntries('c:\mp3\', Predicate);
+  tFiles := TDirectory.GetFileSystemEntries(s, tSearchOption.soAllDirectories, Predicate);
+//  for iFile in tFiles do
+//  begin
+//    returnResult(iFile);
+//    Application.ProcessMessages;
+//  end;
+end;
+
+function thSearchDisk._matches(sString: String; isDirectory: boolean; regexpr: tRegEx): boolean;
+var
   sExtension: string;
   CanAdd: boolean;
 begin
@@ -2892,12 +2931,35 @@ begin
     sExtension := tpath.GetExtension(sString);
     CanAdd := (pos(uppercase(sExtension), sValidExtensions) > 0);
   end;
-  if CanAdd and (fMAtches.IndexOf(sString) = -1) then
+  // if CanAdd and (fMAtches.IndexOf(sString) = -1) then
+  if CanAdd then
+  begin
+    Result := regexpr.isMatch(sString);
+  end;
+end;
+
+function thSearchDisk.matchesMask(sString: String; isDirectory: boolean): boolean;
+var
+  Match: tMatch;
+  regexpr: tRegEx;
+  RO: TRegExOptions;
+  sExtension: string;
+  CanAdd: boolean;
+begin
+  Result := false;
+  CanAdd := True;
+  // if not isDirectory then
+  // begin
+  // sExtension := tpath.GetExtension(sString);
+  // CanAdd := (pos(uppercase(sExtension), sValidExtensions) > 0);
+  // end;
+  // if CanAdd and (fMAtches.IndexOf(sString) = -1) then
+  if CanAdd then
   begin
     RO := [roIgnoreCase];
     if bOptions.bWord then
       fRx := '\b' + fRx + '\b';
-    regexpr := tREgEx.create(fRx, [roIgnoreCase]);
+    regexpr := tRegEx.create(fRx, [roIgnoreCase]);
     Match := regexpr.Match(sString);
     Result := Match.Success;
   end;
