@@ -569,7 +569,6 @@ begin
     try
       // et un adaptateur IStream
       sa := TStreamAdapter.create(ss); // Ne pas libérer
-
       // On appelle la méthode de chargement du WebBrowser
       (AWebBrowser.Document as IPersistStreamInit).Load(sa);
     finally
@@ -660,7 +659,6 @@ begin
     end;
     inc(i);
   end;
-
 end;
 
 procedure TfMain.AddLog(sFunc, sLog: String);
@@ -2259,7 +2257,6 @@ end;
 
 Procedure TfMain.GetNoCoverImage(aPicture: tPicture);
 begin
-  // sILNoCover.GetBitmap(0,);
   aPicture.BitMap.Assign(sILNoCover.CreateBitmap32(0, 256, 256));
 end;
 

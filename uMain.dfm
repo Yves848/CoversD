@@ -2679,6 +2679,10 @@ object fMain: TfMain
           TabOrder = 0
           object tsVisual: TsTabSheet
             Caption = 'Visual'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object sPanel2: TsPanel
               Left = 0
               Top = 0
@@ -4200,6 +4204,10 @@ object fMain: TfMain
               end
               object sTabSheet2: TsTabSheet
                 Caption = 'Set Filenames'
+                ExplicitLeft = 0
+                ExplicitTop = 0
+                ExplicitWidth = 0
+                ExplicitHeight = 0
               end
             end
           end
@@ -4340,7 +4348,6 @@ object fMain: TfMain
           UseShellImages = False
           AutoRefresh = False
           ShowExt = seSystem
-          ExplicitTop = 105
         end
         object sPanel12: TsPanel
           Left = 5
