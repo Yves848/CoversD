@@ -28,6 +28,8 @@ type
   tSearchCallback = procedure(aResult: String) of object;
   tSetBadgeColorCallBack = procedure(bactive: boolean) of object;
 
+  
+
   thaddToPlayList = class(TThread)
   private
     AddToPlayList: tAddToPlayListCallback;
@@ -71,44 +73,17 @@ type
     sILIcons: TsAlphaImageList;
     pb1: TsProgressBar;
     thListMP3: TJvThread;
-    sImage1: TsImage;
-    sROPPlaylist: TsRollOutPanel;
-    TrackBar1: TsTrackBar;
-    sButton1: TsButton;
-    sButton2: TsButton;
-    slbPlaylist: TsListBox;
     pnMain: TsPanel;
     sPanel1: TsPanel;
-    sPanel2: TsPanel;
     sgList: TAdvStringGrid;
     btnUtils: TsButton;
-    sButton4: TsButton;
-    sButton5: TsButton;
     sSaveDialog1: TsSaveDialog;
     sOpenDialog1: TsOpenDialog;
-    sButton6: TsButton;
     sILButtons: TsAlphaImageList;
-    sButton7: TsButton;
-    sButton8: TsButton;
-    sPanel3: TsPanel;
     thDisplay: TJvThread;
-    sPanel4: TsPanel;
-    sPanel5: TsPanel;
-    sPanel6: TsPanel;
-    sBevel1: TsBevel;
-    sPanel7: TsPanel;
-    sPanel8: TsPanel;
-    sPanel9: TsPanel;
-    tbVolume: TsTrackBar;
-    kglArtist: TKryptoGlowLabel;
-    kglTitle: TKryptoGlowLabel;
-    sImage2: TsImage;
     image1: TsImage;
     sGauge1: TsGauge;
     sGauge2: TsGauge;
-    sPanel10: TsPanel;
-    VuR: TsImage;
-    vuL: TsImage;
     bsRegister: TsButton;
     PopupMenu1: TPopupMenu;
     A1: TMenuItem;
@@ -135,7 +110,6 @@ type
     seRegEx: TsPopupBox;
     sBB1: TsBadgeBtn;
     sPageControl2: TsPageControl;
-    tsVisual: TsTabSheet;
     tsEdit: TsTabSheet;
     sILTV: TsAlphaImageList;
     sBB2: TsBadgeBtn;
@@ -175,11 +149,14 @@ type
     sDESearch: TsDirectoryEdit;
     slWholeWord: TsSlider;
     slIncDir: TsSlider;
+    sPnSearchResults: TsPanel;
+    sPanel13: TsPanel;
+    sButton3: TsButton;
+    sCharImageList1: TsCharImageList;
+    slbSearchResults: TsListBox;
     procedure thListMP3Execute(Sender: TObject; Params: Pointer);
     procedure sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: boolean);
     procedure FormCreate(Sender: TObject);
-    procedure tbVolumeChange(Sender: TObject);
-    procedure TrackBar1Change(Sender: TObject);
     procedure sButton1Click(Sender: TObject);
     procedure sButton2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -189,8 +166,6 @@ type
     procedure sShellTreeView1AddFolder(Sender: TObject; AFolder: TacShellFolder; var CanAdd: boolean);
     procedure sgListKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure sgListRowChanging(Sender: TObject; OldRow, NewRow: integer; var Allow: boolean);
-    procedure sButton4Click(Sender: TObject);
-    procedure sButton5Click(Sender: TObject);
     procedure sShellTreeView1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormDestroy(Sender: TObject);
     procedure thDisplayExecute(Sender: TObject; Params: Pointer);
@@ -235,6 +210,9 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure slWholeWordChanging(Sender: TObject; var CanChange: boolean);
     procedure slIncDirChanging(Sender: TObject; var CanChange: boolean);
+    procedure sButton3Click(Sender: TObject);
+    procedure slbSearchResultsKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure A1Click(Sender: TObject);
   private
     { Déclarations privées }
     jConfig: ISuperObject;
@@ -276,11 +254,9 @@ type
     Procedure PlayPrevTrack;
     Procedure showPlayList;
     Procedure showExplorer;
-    procedure savePlaylist;
     procedure loadPlaylist;
     procedure playlistRemoveItem(index: integer);
     procedure updatePlayingInfos(sFileName: String); overload;
-    procedure updatePlayingInfos(aTags: TTags); overload;
     function FormatTextWithEllipse(aText: string): string;
     procedure DrawTransparentRectangle(Canvas: TCanvas; Rect: TRect; Color: TColor; Transparency: integer);
     procedure UpdateVuMetre(LeftLevel, RightLevel: integer);
@@ -307,7 +283,8 @@ type
     procedure PreviewTrack(aNode: TTreeNode); overload;
     procedure PreviewTrack(aMediaFile: tMediaFile); overload;
     procedure PreviewTrack(sFileName: String); overload;
-    procedure AddDirectlyToPlayList;
+    procedure AddDirectlyToPlayList(aNode : tTreeNode); overload;
+    procedure AddDirectlyToPlayList(sFile : String); overload;
     Procedure AddToGrid(bReset: boolean);
     procedure FillGlobalList(sPAth: String);
     procedure AddLog(sLog: String); overload;
@@ -360,14 +337,14 @@ begin
 
   Result := aText;
   lsText := aText;
-
-  ldTextWidth := kglTitle.Canvas.TextWidth(lsText);
-  if (ldTextWidth > kglTitle.Width) then
-    repeat
-      lsText := Copy(lsText, 1, Length(lsText) - 1);
-      Result := lsText + csEllipses;
-      ldTextWidth := kglTitle.Canvas.TextWidth(Result);
-    until (ldTextWidth < kglTitle.Width);
+//
+//  ldTextWidth := kglTitle.Canvas.TextWidth(lsText);
+//  if (ldTextWidth > kglTitle.Width) then
+//    repeat
+//      lsText := Copy(lsText, 1, Length(lsText) - 1);
+//      Result := lsText + csEllipses;
+//      ldTextWidth := kglTitle.Canvas.TextWidth(Result);
+//    until (ldTextWidth < kglTitle.Width);
 
 end;
 
@@ -377,42 +354,12 @@ begin
 end;
 
 procedure TfMain.PlayNextTrack(Sender: TObject);
-var
-  index: integer;
 begin
-  if (BASS_ChannelIsActive(Channel) = BASS_ACTIVE_PLAYING) or (Sender = nil) then
-  begin
-    if slbPlaylist.Items.Count > 0 then
-    begin
-      index := slbPlaylist.ItemIndex;
-      inc(index);
-      if index > slbPlaylist.Items.Count - 1 then
-        index := 0;
-      slbPlaylist.ItemIndex := index;
-      BASS_ChannelStop(Channel);
-      updatePlayingInfos(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags);
-      PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
-    end;
-  end;
 
 end;
 
 procedure TfMain.PlayPrevTrack;
-var
-  index: integer;
 begin
-  if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_PLAYING then
-  begin
-    index := slbPlaylist.ItemIndex;
-    dec(index);
-    if index < 0 then
-      index := slbPlaylist.Items.Count - 1;
-
-    slbPlaylist.ItemIndex := index;
-
-    BASS_ChannelStop(Channel);
-    PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
-  end;
 end;
 
 procedure TfMain.PlayStream(FileName: String);
@@ -430,7 +377,7 @@ begin
   // * Set an end sync which will be called when playback reaches end to play the next song
   BASS_ChannelSetSync(Channel, BASS_SYNC_END, 0, @StreamEndCallback, 0);
   CurrentPlayingFileName := FileName;
-  TrackBar1.Max := BASS_ChannelGetLength(Channel, BASS_POS_BYTE);
+  //TrackBar1.Max := BASS_ChannelGetLength(Channel, BASS_POS_BYTE);
   // * Start playback
   updatePlayingInfos(FileName);
 
@@ -528,10 +475,10 @@ end;
 
 procedure TfMain.RefreshVisuals;
 begin
-  Spectrum3D_ReInitialize(Sprectrum3D);
-  Spectrum3D_ReAlign(Sprectrum3D, sPanel3.handle);
-  image1.Repaint;
-  Application.ProcessMessages;
+//  Spectrum3D_ReInitialize(Sprectrum3D);
+//  Spectrum3D_ReAlign(Sprectrum3D, sPanel3.handle);
+//  image1.Repaint;
+//  Application.ProcessMessages;
 end;
 
 procedure TfMain.RemoveCovers(aTags: TTags);
@@ -580,9 +527,19 @@ begin
   end;
 end;
 
-procedure TfMain.AddDirectlyToPlayList;
+
+procedure TfMain.AddDirectlyToPlayList(sFile: String);
 begin
-  aNode := sShellTreeView1.Selected;
+   AddToPlayList(sFile);
+end;
+
+procedure TfMain.A1Click(Sender: TObject);
+begin
+  AddToGrid(true);
+end;
+
+procedure TfMain.AddDirectlyToPlayList(aNode: tTreeNode);
+begin
   if not TacShellFolder(aNode.data).IsFileFolder then
   begin
     AddToPlayList(aNode, false);
@@ -786,7 +743,7 @@ var
 begin
   AddLog('AddToPlayListTH', g_sFile);
   aMediaFile := tMediaFile.create(g_sFile);
-  index := slbPlaylist.Items.IndexOf(g_sFile);
+  //index := slbPlaylist.Items.IndexOf(g_sFile);
   if index = -1 then
   begin
     // AddToPlayList(aMediaFile);
@@ -1228,20 +1185,20 @@ begin
   Form1 := tForm1.create(Nil);
   BASS_Init(-1, 44100, 0, self.handle, 0);
 
-  ZeroMemory(@Params, SizeOf(TSpectrum3D_CreateParams));
-  Params.ParentHandle := sPanel3.handle;
-  Params.AntiAliasing := 4;
-  Sprectrum3D := Spectrum3D_Create(@Params);
-  Spectrum3D_GetParams(Sprectrum3D, @Settings);
-  Settings.ShowText := True;
-  Spectrum3D_SetParams(Sprectrum3D, @Settings);
+//  ZeroMemory(@Params, SizeOf(TSpectrum3D_CreateParams));
+//  Params.ParentHandle := sPanel3.handle;
+//  Params.AntiAliasing := 4;
+//  Sprectrum3D := Spectrum3D_Create(@Params);
+//  Spectrum3D_GetParams(Sprectrum3D, @Settings);
+//  Settings.ShowText := True;
+//  Spectrum3D_SetParams(Sprectrum3D, @Settings);
 
   sGauge1.MaxValue := High(Word) div 2 + 1;
   sGauge2.MaxValue := High(Word) div 2 + 1;
   UpdateVuMetre(0, 0);
 
   Volume := BASS_GetVolume;
-  tbVolume.Position := 100 - Round(Volume * 100);
+  //tbVolume.Position := 100 - Round(Volume * 100);
   sSearchBadge.Visible := false;
   sSplitView1.Opened := false;
   sMatches := tStringList.create;
@@ -1252,6 +1209,7 @@ begin
   fillTagCombos;
   OpenPlayer;
   isRegistered := True;
+  {$UNDEF DEBUG}
 {$IFDEF DEBUG}
   btnUtils.Visible := True;
   sbDetach.Visible := True;
@@ -1309,7 +1267,7 @@ begin
       VK_F2:
         sgList.SetFocus;
       VK_F3:
-        slbPlaylist.SetFocus;
+        //slbPlaylist.SetFocus;
     end;
 
   end
@@ -1353,8 +1311,8 @@ procedure TfMain.FormResize(Sender: TObject);
 begin
   if fFrmLog <> Nil then
     AddLog('TfMain.FormResize');
-  Spectrum3D_ReInitialize(Sprectrum3D);
-  Spectrum3D_ReAlign(Sprectrum3D, sPanel3.handle);
+//  Spectrum3D_ReInitialize(Sprectrum3D);
+//  Spectrum3D_ReAlign(Sprectrum3D, sPanel3.handle);
 end;
 
 procedure TfMain.FormShow(Sender: TObject);
@@ -1608,9 +1566,9 @@ begin
               BASS_ChannelStop(Channel);
               if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
               begin
-                slbPlaylist.ItemIndex := index;
+                //slbPlaylist.ItemIndex := index;
                 // PlayStream(tMediaFile(slbPlaylist.Items.Objects[index]).Tags.FileName);
-                PreviewTrack(tMediaFile(slbPlaylist.Items.Objects[index]));
+                //PreviewTrack(tMediaFile(slbPlaylist.Items.Objects[index]));
               end;
             end;
             inc(i);
@@ -1712,13 +1670,13 @@ end;
 
 procedure TfMain.showPlayList;
 begin
-  if sROPPlaylist.Collapsed then
-  begin
-    sROPPlaylist.ChangeState(false, True);
-    slbPlaylist.SetFocus;
-  end
-  else
-    sROPPlaylist.ChangeState(True, True);
+//  if sROPPlaylist.Collapsed then
+//  begin
+//    sROPPlaylist.ChangeState(false, True);
+//    slbPlaylist.SetFocus;
+//  end
+//  else
+//    sROPPlaylist.ChangeState(True, True);
 end;
 
 procedure TfMain.ResetPB;
@@ -1740,32 +1698,6 @@ begin
 
 end;
 
-procedure TfMain.savePlaylist;
-var
-  Json: ISuperObject;
-  i: integer;
-  pMediaFile: tMediaFile;
-begin
-  if sSaveDialog1.Execute then
-  begin
-    i := 0;
-    Json := SO;
-    while i <= slbPlaylist.Items.Count - 1 do
-    begin
-      if slbPlaylist.Items.Objects[i] <> Nil then
-      begin
-        pMediaFile := tMediaFile(slbPlaylist.Items.Objects[i]);
-        with Json.a['tracks'].O[i] do
-        begin
-          s['fileName'] := pMediaFile.Tags.FileName;
-        end;
-      end;
-      inc(i);
-    end;
-    Json.SaveTo(sSaveDialog1.FileName);
-  end;
-
-end;
 
 procedure TfMain.SaveCover(var m: Tmsg);
 var
@@ -1869,34 +1801,40 @@ end;
 procedure TfMain.sButton1Click(Sender: TObject);
 begin
   BASS_ChannelStop(Channel);
-  sButton2.ImageIndex := 2;
+  //sButton2.ImageIndex := 2;
 end;
 
 procedure TfMain.sButton2Click(Sender: TObject);
 begin
-  if Channel = 0 then
-  begin
-    // start playing
-    if slbPlaylist.ItemIndex > -1 then
-    begin
-      BASS_ChannelStop(Channel);
-      PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
-      sButton2.ImageIndex := 3;
-    end;
-  end
-  else
-  begin
-    if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_PLAYING then
-    begin
-      BASS_ChannelPause(Channel);
-      sButton2.ImageIndex := 0;
-    end
-    else
-    begin
-      BASS_ChannelPlay(Channel, false);
-      sButton2.ImageIndex := 3;
-    end;
-  end;
+//  if Channel = 0 then
+//  begin
+//    // start playing
+//    if slbPlaylist.ItemIndex > -1 then
+//    begin
+//      BASS_ChannelStop(Channel);
+//      PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
+//      sButton2.ImageIndex := 3;
+//    end;
+//  end
+//  else
+//  begin
+//    if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_PLAYING then
+//    begin
+//      BASS_ChannelPause(Channel);
+//      sButton2.ImageIndex := 0;
+//    end
+//    else
+//    begin
+//      BASS_ChannelPlay(Channel, false);
+//      sButton2.ImageIndex := 3;
+//    end;
+//  end;
+end;
+
+procedure TfMain.sButton3Click(Sender: TObject);
+begin
+  sPnSearchResults.Visible := False;
+  terminatePreviousSearch;
 end;
 
 procedure TfMain.btnSearchClick(Sender: TObject);
@@ -1909,9 +1847,11 @@ begin
   if sMatches.Count = 0 then
   begin
     sSearchBadge.Visible := false;
+    sPnSearchResults.Visible := true;
     gSearchFolder := IncludeTrailingBackslash(sDESearch.Text);
     bOptions.bWord := slWholeWord.SliderOn;
     bOptions.bDir := slIncDir.SliderOn;
+    slbSearchResults.Clear;
     pTHSearch := thSearchDisk.create(gSearchFolder, seSearch.Text, sMatches, bOptions, SetSearchResult, setBadgeColor);
     pTHSearch.Start;
   end
@@ -1926,8 +1866,6 @@ begin
     begin
       Index := 0;
     end;
-    sShellTreeView1.Path := sMatches[index];
-    sShellTreeView1.SetFocus;
   end;
 
 end;
@@ -1955,16 +1893,6 @@ begin
   fRegExFrame.Top := 64000;
   fRegExFrame.align := alright;
   fRegExFrame.Parent := sPanel1;
-end;
-
-procedure TfMain.sButton4Click(Sender: TObject);
-begin
-  savePlaylist;
-end;
-
-procedure TfMain.sButton5Click(Sender: TObject);
-begin
-  loadPlaylist;
 end;
 
 procedure TfMain.sCB1Change(Sender: TObject);
@@ -2163,10 +2091,13 @@ begin
   if sMatches.IndexOf(PathName) = -1 then
   begin
     sMatches.add(s);
+    slbSearchResults.Items.Add(s);
     if sMatches.Count = 1 then
     begin
-      sShellTreeView1.Path := s;
-      sShellTreeView1.SetFocus;
+      //sShellTreeView1.Path := s;
+      //sShellTreeView1.SetFocus;
+      sPnSearchResults.Visible := True;
+      slbSearchResults.ItemIndex := 0;
     end;
   end;
   sSearchBadge.Visible := sMatches.Count > 0;
@@ -2178,30 +2109,55 @@ end;
 procedure TfMain.slbPlaylistItemIndexChanged(Sender: TObject);
 begin
   //
-  if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
-    updatePlayingInfos(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags);
+//  if BASS_ChannelIsActive(Channel) = BASS_ACTIVE_STOPPED then
+//    updatePlayingInfos(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags);
 end;
 
 procedure TfMain.slbPlaylistKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  if Key = VK_RETURN then
+//  if Key = VK_RETURN then
+//  begin
+//    if slbPlaylist.ItemIndex > -1 then
+//    begin
+//      BASS_ChannelStop(Channel);
+//      PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
+//      sButton2.ImageIndex := 3;
+//    end;
+//    removeKeyFromStack;
+//  end;
+//
+//  if Key = VK_DELETE then
+//  begin
+//    if slbPlaylist.ItemIndex > -1 then
+//    begin
+//      playlistRemoveItem(slbPlaylist.ItemIndex);
+//    end;
+//    removeKeyFromStack;
+//  end;
+end;
+
+procedure TfMain.slbSearchResultsKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if Shift = [ssCtrl] then
   begin
-    if slbPlaylist.ItemIndex > -1 then
+
+    if Key = ord('P') then
     begin
-      BASS_ChannelStop(Channel);
-      PlayStream(tMediaFile(slbPlaylist.Items.Objects[slbPlaylist.ItemIndex]).Tags.FileName);
-      sButton2.ImageIndex := 3;
+      removeKeyFromStack;
+      PreviewTrack(slbSearchResults.Items[slbSearchResults.ItemIndex]);
     end;
-    removeKeyFromStack;
+
+    if Key = VK_ADD then
+    begin
+      removeKeyFromStack;
+      AddDirectlyToPlayList(slbSearchResults.Items[slbSearchResults.ItemIndex]);
+    end;
   end;
 
-  if Key = VK_DELETE then
+  if (Key = VK_ADD) and not(ssCtrl in Shift) then
   begin
-    if slbPlaylist.ItemIndex > -1 then
-    begin
-      playlistRemoveItem(slbPlaylist.ItemIndex);
-    end;
     removeKeyFromStack;
+    AddToGrid((Shift = [ssShift]));
   end;
 end;
 
@@ -2342,7 +2298,7 @@ begin
     if Key = VK_ADD then
     begin
       removeKeyFromStack;
-      AddDirectlyToPlayList;
+      AddDirectlyToPlayList(sShellTreeView1.Selected);
     end;
   end;
 
@@ -2454,18 +2410,18 @@ var
   pMediaFile: tMediaFile;
   Json: ISuperObject;
 begin
-  if sOpenDialog1.Execute then
-  begin
-    slbPlaylist.clear;
-    i := 0;
-    Json := TSuperObject.ParseFile(sOpenDialog1.FileName);
-    while i <= Json.a['tracks'].Length - 1 do
-    begin
-      pMediaFile := tMediaFile.create(Json.a['tracks'].O[i].s['filename']);
-      slbPlaylist.Items.AddObject(tpath.GetFileNameWithoutExtension(pMediaFile.Tags.FileName), pMediaFile);
-      inc(i);
-    end;
-  end;
+//  if sOpenDialog1.Execute then
+//  begin
+//    slbPlaylist.clear;
+//    i := 0;
+//    Json := TSuperObject.ParseFile(sOpenDialog1.FileName);
+//    while i <= Json.a['tracks'].Length - 1 do
+//    begin
+//      pMediaFile := tMediaFile.create(Json.a['tracks'].O[i].s['filename']);
+//      slbPlaylist.Items.AddObject(tpath.GetFileNameWithoutExtension(pMediaFile.Tags.FileName), pMediaFile);
+//      inc(i);
+//    end;
+//  end;
 end;
 
 procedure TfMain.MPlayNext(var msg: TMessage);
@@ -2535,16 +2491,16 @@ end;
 
 procedure TfMain.playlistRemoveItem(index: integer);
 begin
-  if index <= slbPlaylist.Items.Count - 1 then
-  begin
-    if slbPlaylist.Items.Objects[index] <> nil then
-    begin
-      tMediaFile(slbPlaylist.Items.Objects[index]).Destroy;
-      slbPlaylist.Items.delete(index);
-      if index <= slbPlaylist.Items.Count - 1 then
-        slbPlaylist.ItemIndex := index;
-    end;
-  end;
+//  if index <= slbPlaylist.Items.Count - 1 then
+//  begin
+//    if slbPlaylist.Items.Objects[index] <> nil then
+//    begin
+//      tMediaFile(slbPlaylist.Items.Objects[index]).Destroy;
+//      slbPlaylist.Items.delete(index);
+//      if index <= slbPlaylist.Items.Count - 1 then
+//        slbPlaylist.ItemIndex := index;
+//    end;
+//  end;
 end;
 
 procedure TfMain.sTVMediasExpanding(Sender: TObject; Node: TTreeNode; var AllowExpansion: boolean);
@@ -2582,7 +2538,7 @@ begin
   end;
   // * Playing position
   AdjustingPlaybackPosition := True;
-  TrackBar1.Position := BASS_ChannelGetPosition(Channel, BASS_POS_BYTE);
+  //TrackBar1.Position := BASS_ChannelGetPosition(Channel, BASS_POS_BYTE);
   AdjustingPlaybackPosition := false;
 
 end;
@@ -2640,22 +2596,7 @@ begin
 
 end;
 
-procedure TfMain.TrackBar1Change(Sender: TObject);
-begin
-  if NOT AdjustingPlaybackPosition then
-  begin
-    BASS_ChannelSetPosition(Channel, TrackBar1.Position, BASS_POS_BYTE);
-  end;
-end;
 
-procedure TfMain.tbVolumeChange(Sender: TObject);
-var
-  Volume: Double;
-begin
-  Volume := (100 - tbVolume.Position) / tbVolume.Max;
-  BASS_SetVolume(Volume);
-
-end;
 
 procedure TfMain.tbVolumeSkinPaint(Sender: TObject; Canvas: TCanvas);
 var
@@ -2663,43 +2604,22 @@ var
   C: TColor;
   R: TRect;
 begin
-
-  R := tbVolume.ChannelRect;
-  OffsetRect(R, WidthOf(R), 0);
-  InflateRect(R, 0, -HeightOf(tbVolume.ThumbRect) div 2);
-  Points[1] := R.TopLeft;
-  Points[0] := Point(R.Left, R.Bottom);
-  if not tbVolume.Reversed then
-    Points[2] := Point(R.Right, R.Top)
-  else
-    Points[2] := Point(R.Right, R.Bottom);
-  C := acColorToRGB(clBtnText);
-
-  acgpFillPolygon(Canvas.handle, TColor($44000000 or Cardinal(C)), PPoint(@Points[0]), 3);
+//
+//  R := tbVolume.ChannelRect;
+//  OffsetRect(R, WidthOf(R), 0);
+//  InflateRect(R, 0, -HeightOf(tbVolume.ThumbRect) div 2);
+//  Points[1] := R.TopLeft;
+//  Points[0] := Point(R.Left, R.Bottom);
+//  if not tbVolume.Reversed then
+//    Points[2] := Point(R.Right, R.Top)
+//  else
+//    Points[2] := Point(R.Right, R.Bottom);
+//  C := acColorToRGB(clBtnText);
+//
+//  acgpFillPolygon(Canvas.handle, TColor($44000000 or Cardinal(C)), PPoint(@Points[0]), 3);
 
 end;
 
-procedure TfMain.updatePlayingInfos(aTags: TTags);
-var
-  R: TRect;
-  bm2: TBitmap;
-begin
-  kglArtist.Caption := aTags.GetTag('ARTIST');
-  kglTitle.Caption := FormatTextWithEllipse(aTags.GetTag('TITLE'));
-
-  ListCoverArts(sImage1, aTags);
-  with sImage1.Canvas do
-  begin
-    bm2 := TBitmap.create;
-    bm2.SetSize(cliprect.Width, (cliprect.Height div 4));
-    bm2.Canvas.Brush.Color := clTeal;
-    bm2.Canvas.Brush.Style := bsSolid;
-    R := TRect.create(0, 0, bm2.Width, bm2.Height);
-    bm2.Canvas.Fillrect(R);
-    Draw(0, cliprect.Height - (cliprect.Height div 4), bm2, 200);
-    bm2.Free;
-  end;
-end;
 
 procedure TfMain.UpdateTagLists(iCol: integer; sValue: String);
 var
@@ -2738,45 +2658,43 @@ var
   pMediaFile: tMediaFile;
 begin
   pMediaFile := tMediaFile.create(sFileName);
-  updatePlayingInfos(pMediaFile.Tags);
   pMediaFile.Destroy;
 end;
 
 procedure TfMain.UpdateVuMetre(LeftLevel, RightLevel: integer);
-
-  procedure updateMeter(aImage: TsImage; iLevel: integer; iMax: integer);
-  var
-    R: TRect;
-    w: integer;
-    l: integer;
-    barwidth: integer;
-    p, p2: integer;
-    bm2: TBitmap;
-
-  begin
-    aImage.Picture.BitMap.Assign(sImage2.Picture.BitMap);
-    with aImage.Canvas do
-    begin
-      bm2 := TBitmap.create;
-      w := iMax;
-      p := Round(iLevel / w * 100);
-      p2 := 100 - p;
-      barwidth := cliprect.Width;
-      l := Round(barwidth / 100 * p);
-      bm2.SetSize(Round(cliprect.Width / 100 * p2), cliprect.Height);
-      bm2.Canvas.Brush.Color := clGray;
-      bm2.Canvas.Brush.Style := bsSolid;
-      R := TRect.create(0, 0, bm2.Width, bm2.Height);
-      bm2.Canvas.Fillrect(R);
-      Draw(l, 0, bm2, 220);
-      bm2.Free;
-    end;
-  end;
+//  procedure updateMeter(aImage: TsImage; iLevel: integer; iMax: integer);
+//  var
+//    R: TRect;
+//    w: integer;
+//    l: integer;
+//    barwidth: integer;
+//    p, p2: integer;
+//    bm2: TBitmap;
+//
+//  begin
+//    aImage.Picture.BitMap.Assign(sImage2.Picture.BitMap);
+//    with aImage.Canvas do
+//    begin
+//      bm2 := TBitmap.create;
+//      w := iMax;
+//      p := Round(iLevel / w * 100);
+//      p2 := 100 - p;
+//      barwidth := cliprect.Width;
+//      l := Round(barwidth / 100 * p);
+//      bm2.SetSize(Round(cliprect.Width / 100 * p2), cliprect.Height);
+//      bm2.Canvas.Brush.Color := clGray;
+//      bm2.Canvas.Brush.Style := bsSolid;
+//      R := TRect.create(0, 0, bm2.Width, bm2.Height);
+//      bm2.Canvas.Fillrect(R);
+//      Draw(l, 0, bm2, 220);
+//      bm2.Free;
+//    end;
+//  end;
 
 begin
 
-  updateMeter(vuL, LeftLevel, sGauge1.MaxValue);
-  updateMeter(VuR, RightLevel, sGauge2.MaxValue);
+//  updateMeter(vuL, LeftLevel, sGauge1.MaxValue);
+//  updateMeter(VuR, RightLevel, sGauge2.MaxValue);
 end;
 
 { thaddToPlayList }
@@ -2848,6 +2766,7 @@ begin
   setBadgeColor(True);
   tag := 0;
   GetFilesFast(fStartFolder);
+  terminate;
 end;
 
 procedure thSearchDisk.GetFiles(s: String);
@@ -2912,11 +2831,11 @@ begin
     end;
   // TDirectory.GetFileSystemEntries('c:\mp3\', Predicate);
   tFiles := TDirectory.GetFileSystemEntries(s, tSearchOption.soAllDirectories, Predicate);
-//  for iFile in tFiles do
-//  begin
-//    returnResult(iFile);
-//    Application.ProcessMessages;
-//  end;
+  for iFile in tFiles do
+  begin
+    returnResult(iFile);
+    Application.ProcessMessages;
+  end;
 end;
 
 function thSearchDisk._matches(sString: String; isDirectory: boolean; regexpr: tRegEx): boolean;
@@ -2931,7 +2850,6 @@ begin
     sExtension := tpath.GetExtension(sString);
     CanAdd := (pos(uppercase(sExtension), sValidExtensions) > 0);
   end;
-  // if CanAdd and (fMAtches.IndexOf(sString) = -1) then
   if CanAdd then
   begin
     Result := regexpr.isMatch(sString);
@@ -2964,5 +2882,7 @@ begin
     Result := Match.Success;
   end;
 end;
+
+
 
 end.

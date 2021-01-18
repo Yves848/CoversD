@@ -1,267 +1,35 @@
 {
-  "kind":"customsearch#search",
-  "url":  
-  {
-    "type":"application/json",
-    "template":"https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"  
-  },
-  "queries":  
-  {
-    "request":    
-    [
-      {
-        "title":"Google Custom Search - Sander Van Doorn And Robbie W Close My Eyes cover",
-        "totalResults":"167000",
-        "searchTerms":"Sander Van Doorn And Robbie W Close My Eyes cover",
-        "count":        10,
-        "startIndex":        1,
-        "inputEncoding":"utf8",
-        "outputEncoding":"utf8",
-        "safe":"off",
-        "cx":"007439388879951561867:3ragl0fkhpm",
-        "searchType":"image",
-        "imgSize":"large"      
-      }    
-    ],
-    "nextPage":    
-    [
-      {
-        "title":"Google Custom Search - Sander Van Doorn And Robbie W Close My Eyes cover",
-        "totalResults":"167000",
-        "searchTerms":"Sander Van Doorn And Robbie W Close My Eyes cover",
-        "count":        10,
-        "startIndex":        11,
-        "inputEncoding":"utf8",
-        "outputEncoding":"utf8",
-        "safe":"off",
-        "cx":"007439388879951561867:3ragl0fkhpm",
-        "searchType":"image",
-        "imgSize":"large"      
-      }    
-    ]  
-  },
-  "context":  
-  {
-    "title":"Google"  
-  },
-  "searchInformation":  
-  {
-    "searchTime":0.855577,
-    "formattedSearchTime":"0.86",
-    "totalResults":"167000",
-    "formattedTotalResults":"167,000"  
-  },
   "items":  
   [
     {
-      "kind":"customsearch#result",
-      "title":"Sander van Doorn Vs Robbie Williams - Close My Eyes (2009, CD ...",
-      "htmlTitle":"<b>Sander van Doorn</b> Vs <b>Robbie Williams</b> - <b>Close My Eyes</b> (2009, CD ...",
-      "link":"https://img.discogs.com/lFD195zii5t4vNk837nWV4AJt8Y=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1808425-1368523343-9114.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Sander van Doorn Vs Robbie Williams - Close My Eyes (2009, CD ...",
-      "htmlSnippet":"<b>Sander van Doorn</b> Vs <b>Robbie Williams</b> - <b>Close My Eyes</b> (2009, CD ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.discogs.com/Sander-van-Doorn-Vs-Robbie-Williams-Close-My-Eyes/release/1808425",
-        "height":        600,
-        "width":        600,
-        "byteSize":        83857,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYM_fFPK6YBYIWKw-eUF0sgYEMkw23V7uAPBCB2EmGHljoFHjR899Skxfb&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
-      }    
+      "url":"https://e-cdns-images.dzcdn.net/images/cover/0fd8eab9fbfa3865974c785b38158c5e/500x500.jpg"    
     },
     {
-      "kind":"customsearch#result",
-      "title":"Close My Eyes (Sander van Doorn song) - Wikipedia",
-      "htmlTitle":"<b>Close My Eyes</b> (<b>Sander van Doorn</b> song) - Wikipedia",
-      "link":"https://upload.wikimedia.org/wikipedia/en/a/a5/Close_My_Eyes_%28Sander_van_Doorn%29_single_coverart.jpg",
-      "displayLink":"en.wikipedia.org",
-      "snippet":"Close My Eyes (Sander van Doorn song) - Wikipedia",
-      "htmlSnippet":"<b>Close My Eyes</b> (<b>Sander van Doorn</b> song) - Wikipedia",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://en.wikipedia.org/wiki/Close_My_Eyes_(Sander_van_Doorn_song)",
-        "height":        315,
-        "width":        316,
-        "byteSize":        17143,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNOfz6wHkL8CMITFjHmIjxkK2W9pHFFUOsWXTIrDl6doJSrdTaNsf&s",
-        "thumbnailHeight":        117,
-        "thumbnailWidth":        117      
-      }    
+      "url":"https://is2-ssl.mzstatic.com/image/thumb/Music113/v4/65/f6/48/65f648bb-b9f4-98ea-feb2-ec3f9a825d49/cover.jpg/1200x630wp.png"    
     },
     {
-      "kind":"customsearch#result",
-      "title":"Sander van Doorn vs Robbie Williams - Close My Eyes (Official ...",
-      "htmlTitle":"<b>Sander van Doorn</b> vs <b>Robbie Williams</b> - <b>Close My Eyes</b> (Official ...",
-      "link":"https://i.ytimg.com/vi/Yxffo69gykk/hqdefault.jpg",
-      "displayLink":"www.youtube.com",
-      "snippet":"Sander van Doorn vs Robbie Williams - Close My Eyes (Official ...",
-      "htmlSnippet":"<b>Sander van Doorn</b> vs <b>Robbie Williams</b> - <b>Close My Eyes</b> (Official ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.youtube.com/watch?v=Yxffo69gykk",
-        "height":        360,
-        "width":        480,
-        "byteSize":        14491,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1stNuaaylxOASa6t7Uw_mEZs0qrCeUZ4LIj94f9q1hMPo0bqz0gRwZA4&s",
-        "thumbnailHeight":        97,
-        "thumbnailWidth":        129      
-      }    
+      "url":"https://i.ytimg.com/vi/odVGnFNzUQc/hqdefault.jpg"    
     },
     {
-      "kind":"customsearch#result",
-      "title":"Sander van Doorn vs Robbie Williams / Richard Grey Presents Golden ...",
-      "htmlTitle":"<b>Sander van Doorn</b> vs <b>Robbie Williams</b> / Richard Grey Presents Golden ...",
-      "link":"https://img.discogs.com/bFGDyHQBkvwkFB5ggcbeCNjiR6M=/fit-in/600x597/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-3255108-1469528323-1345.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Sander van Doorn vs Robbie Williams / Richard Grey Presents Golden ...",
-      "htmlSnippet":"<b>Sander van Doorn</b> vs <b>Robbie Williams</b> / Richard Grey Presents Golden ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.discogs.com/Sander-van-Doorn-vs-Robbie-Williams-Richard-Grey-Presents-Golden-Touch-Close-My-Eyes-Such-A-Shame/release/3255108",
-        "height":        597,
-        "width":        599,
-        "byteSize":        111863,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU90k9fcPMBroTqQLRjDknid6mUjqHXHhOQVENSviGJUkFtE2ZIl0Jk0o&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
-      }    
+      "url":"http://pianokafe.com/upload/iblock/314/b_pianokafe_eduard_khil_ya_ochen_rad_ved_ya_nakonets_vozvrashchayus_domoy_vokaliz_versiya_2.jpg"    
     },
     {
-      "kind":"customsearch#result",
-      "title":"Robbie Williams Vs Sander Van Doorn's Close My Eyes by JMD ...",
-      "htmlTitle":"<b>Robbie Williams</b> Vs <b>Sander Van Doorn&#39;s Close My Eyes</b> by JMD ...",
-      "link":"https://admin.promonews.tv/sites/default/files/styles/bmvd_content_page/public/directorsmaster5.jpg?itok=0iCIh5bR",
-      "displayLink":"www.promonews.tv",
-      "snippet":"Robbie Williams Vs Sander Van Doorn's Close My Eyes by JMD ...",
-      "htmlSnippet":"<b>Robbie Williams</b> Vs <b>Sander Van Doorn&#39;s Close My Eyes</b> by JMD ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.promonews.tv/videos/2009/01/05/robbie-williams-vs-sander-van-doorn%E2%80%99s-close-my-eyes-jmd/1798",
-        "height":        390,
-        "width":        690,
-        "byteSize":        72165,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9fptmoSipPZqBuNELzbQhVXmbDpUJVc2km9mXmvmK3Um5lLl_QUbP5w&s",
-        "thumbnailHeight":        79,
-        "thumbnailWidth":        139      
-      }    
+      "url":"https://i.ytimg.com/vi/mgnHAybzJ8s/hqdefault.jpg"    
     },
     {
-      "kind":"customsearch#result",
-      "title":"Sander van Doorn vs Robbie Williams Close My Eyes - YouTube",
-      "htmlTitle":"<b>Sander van Doorn</b> vs <b>Robbie Williams Close My Eyes</b> - YouTube",
-      "link":"https://i.ytimg.com/vi/S9et16AjG4Y/hqdefault.jpg",
-      "displayLink":"www.youtube.com",
-      "snippet":"Sander van Doorn vs Robbie Williams Close My Eyes - YouTube",
-      "htmlSnippet":"<b>Sander van Doorn</b> vs <b>Robbie Williams Close My Eyes</b> - YouTube",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.youtube.com/watch?v=S9et16AjG4Y",
-        "height":        360,
-        "width":        480,
-        "byteSize":        7884,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTITAfuhqtWznEMGHcPqJkh8PlyK98rD3FWWXJ1D_JgX-LTBX3mM7BBRg&s",
-        "thumbnailHeight":        97,
-        "thumbnailWidth":        129      
-      }    
+      "url":"http://pianokafe.com/upload/iblock/459/b_pianokafe.com_eduard_khil_ya_ochen_rad_ved_ya_nakonets_vozvrashchayus_domoy_vokaliz.jpg"    
     },
     {
-      "kind":"customsearch#result",
-      "title":"Cover art for the Sander van Doorn vs Robbie Williams - Close My ...",
-      "htmlTitle":"<b>Cover</b> art for <b>the Sander van Doorn</b> vs <b>Robbie Williams</b> - <b>Close My</b> ...",
-      "link":"https://www.lololyrics.com/img/cover/8970.jpeg",
-      "displayLink":"www.lololyrics.com",
-      "snippet":"Cover art for the Sander van Doorn vs Robbie Williams - Close My ...",
-      "htmlSnippet":"<b>Cover</b> art for <b>the Sander van Doorn</b> vs <b>Robbie Williams</b> - <b>Close My</b> ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.lololyrics.com/lyrics/8970/cover",
-        "height":        600,
-        "width":        600,
-        "byteSize":        69296,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKj_n0_Vfb5XaEHsL1mXGVa7hHjSK8fmyEZ3_D0UXKPBS7DuK1WvDnuE7V&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
-      }    
+      "url":"https://i.ytimg.com/vi/nb1B3KI1u-I/hqdefault.jpg"    
     },
     {
-      "kind":"customsearch#result",
-      "title":"Robbie Williams Vs Sander Van Doorn's Close My Eyes by JMD ...",
-      "htmlTitle":"<b>Robbie Williams</b> Vs <b>Sander Van Doorn&#39;s Close My Eyes</b> by JMD ...",
-      "link":"https://admin.promonews.tv/sites/default/files/styles/bmvd_content_page/public/directorsmaster7.jpg?itok=IxuhSbuW",
-      "displayLink":"www.promonews.tv",
-      "snippet":"Robbie Williams Vs Sander Van Doorn's Close My Eyes by JMD ...",
-      "htmlSnippet":"<b>Robbie Williams</b> Vs <b>Sander Van Doorn&#39;s Close My Eyes</b> by JMD ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.promonews.tv/videos/2009/01/05/robbie-williams-vs-sander-van-doorn%E2%80%99s-close-my-eyes-jmd/1798",
-        "height":        390,
-        "width":        690,
-        "byteSize":        157866,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsr-NtH38acI0CpvaZV3HhduX2eKRQ8mjhzSfBbqeCbObzzzLOTfbMn4c&s",
-        "thumbnailHeight":        79,
-        "thumbnailWidth":        139      
-      }    
+      "url":"https://i.scdn.co/image/ab67616d0000b273845aa9e7a9d5177a4cce8601"    
     },
     {
-      "kind":"customsearch#result",
-      "title":"Sander Van Doorn vs. Robbie Williams - Close My Eyes (2009, Vinyl ...",
-      "htmlTitle":"<b>Sander Van Doorn</b> vs. <b>Robbie Williams</b> - <b>Close My Eyes</b> (2009, Vinyl ...",
-      "link":"https://img.discogs.com/-kRrqHHwlO_9-5FB-BdUgHFccXg=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1689992-1276719744.jpeg.jpg",
-      "displayLink":"www.discogs.com",
-      "snippet":"Sander Van Doorn vs. Robbie Williams - Close My Eyes (2009, Vinyl ...",
-      "htmlSnippet":"<b>Sander Van Doorn</b> vs. <b>Robbie Williams</b> - <b>Close My Eyes</b> (2009, Vinyl ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.discogs.com/Sander-Van-Doorn-vs-Robbie-Williams-Close-My-Eyes/release/1689992",
-        "height":        600,
-        "width":        600,
-        "byteSize":        91169,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxHOHqgpBNe8xY8cYEVu7n9gVmANsiskYuBkVbW-ow00atVeuDsQY7TWW8&s",
-        "thumbnailHeight":        135,
-        "thumbnailWidth":        135      
-      }    
+      "url":"https://i.kfs.io/artist/global/3324217,0v10/fit/300x300.jpg"    
     },
     {
-      "kind":"customsearch#result",
-      "title":"SANDER VAN DOORN VS ROBBIE WILLIAMS-Close My Eyes-12\" - Amazon.com ...",
-      "htmlTitle":"<b>SANDER VAN DOORN</b> VS <b>ROBBIE WILLIAMS</b>-<b>Close My Eyes</b>-12&quot; - Amazon.com ...",
-      "link":"https://images-na.ssl-images-amazon.com/images/I/51RGkN4-MUL.jpg",
-      "displayLink":"www.amazon.com",
-      "snippet":"SANDER VAN DOORN VS ROBBIE WILLIAMS-Close My Eyes-12\" - Amazon.com ...",
-      "htmlSnippet":"<b>SANDER VAN DOORN</b> VS <b>ROBBIE WILLIAMS</b>-<b>Close My Eyes</b>-12&quot; - Amazon.com ...",
-      "mime":"image/jpeg",
-      "fileFormat":"image/jpeg",
-      "image":      
-      {
-        "contextLink":"https://www.amazon.com/SANDER-DOORN-ROBBIE-WILLIAMS-Close-Eyes-12/dp/B009LJSBZW",
-        "height":        500,
-        "width":        500,
-        "byteSize":        54140,
-        "thumbnailLink":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnexXfoXZl_WlrzKL0XdtU287_YNv7gMOKYkzyVvk2aRYN5ekHGqFmQFA&s",
-        "thumbnailHeight":        130,
-        "thumbnailWidth":        130      
-      }    
+      "url":"https://m.freelistenonline.com/Content/artists/extralarge/1906905.png"    
     }  
   ]
 }

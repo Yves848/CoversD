@@ -3,7 +3,7 @@ unit uTypes;
 interface
 
 uses
-  winApi.windows, winApi.Messages, System.Classes, System.SysUtils, System.IOUtils, System.Types, TagsLibrary, Vcl.Graphics, strUtils,
+  winApi.windows, winApi.Messages, System.Classes, System.SysUtils, System.IOUtils, System.Types, TagsLibrary, Vcl.Graphics,Vcl.Forms, strUtils,
   Generics.Defaults, Generics.collections, XSuperObject;
 
 const
@@ -28,6 +28,22 @@ const
   col_off = clNavy;
 
 type
+  TacFrame = class of TFrame;
+
+  TCmpData = record
+    Caption,
+    Hint: string;
+    ImgIndex,
+    GroupIndex,
+    ImgListIndex: integer;
+    FrameType: TacFrame;
+  end;
+  PCmpData = ^TCmpData;
+
+
+  TCmpsArray = array [0..1] of TCmpData;
+  PCmpsArray = ^TCmpsArray;
+
   tTagKey = class
     sTAG: String;
     sCol: Integer;
@@ -85,6 +101,7 @@ var
 
 implementation
 
+
 function FindTag(iCol: Integer): String;
 var
   value: tTagKey;
@@ -108,6 +125,7 @@ begin
   // inherited create;
   self.create;
   bModified := false;
+  filename := aFileName;
   tags := TTags.create;
   tags.ParseCoverArts := true;
   tags.LoadFromFile(aFileName);

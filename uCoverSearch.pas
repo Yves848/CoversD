@@ -362,6 +362,7 @@ end;
 procedure TfCoverSearch.StartSearch(const start: Integer);
 var
   aGoogleSearch: tGoogleSearch;
+  aGoogleSearchFree: tGoogleSearchFree;
   jsResult: ISuperObject;
   jsArray: IsuperArray;
   i: Integer;
@@ -423,8 +424,10 @@ begin
   if seTitle.BoundLabel.Caption = 'Title' then
     Key2 := Key2 + ' cover';
 
-  aGoogleSearch := tGoogleSearch.create(seArtist.Text + ' ' + Key2, start);
-  jsResult := aGoogleSearch.getImages;
+  //aGoogleSearch := tGoogleSearch.create(seArtist.Text + ' ' + Key2, start);
+  aGoogleSearchFree := tGoogleSearchFree.create;
+  jsResult := aGoogleSearchFree.getImages(seArtist.Text + ' ' + Key2,10);
+  //jsResult := aGoogleSearch.getImages;
   jsArray := jsResult.A[GS_ITEMS];
 
 {$IFDEF DEBUG}

@@ -17,7 +17,10 @@ uses
   uFrmPlayer in 'uFrmPlayer.pas' {frmPlayer: TFrame},
   uFormPlayer in 'uFormPlayer.pas' {Form1},
   uLog in 'uLog.pas' {fLog},
-  ufrmLog in 'ufrmLog.pas' {frmLog: TFrame};
+  ufrmLog in 'ufrmLog.pas' {frmLog: TFrame},
+  uEditTags in 'uEditTags.pas' {fEditTags},
+  uFrmTagEdit in 'uFrmTagEdit.pas' {FrmTagEdit: TFrame},
+  uFrmPlayList in 'uFrmPlayList.pas' {frmPlayList: TFrame};
 
 {$R *.res}
 
@@ -25,7 +28,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMain, fMain);
-  Application.CreateForm(TDM1, DM1);
-  Application.CreateForm(TfRegEx, fRegEx);
   Application.Run;
 end.

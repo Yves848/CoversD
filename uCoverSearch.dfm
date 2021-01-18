@@ -123,8 +123,6 @@ object fCoverSearch: TfCoverSearch
     Align = alClient
     BorderStyle = bsNone
     TabOrder = 3
-    ExplicitLeft = 0
-    ExplicitWidth = 736
     object sPNRow0: TsPanel
       Left = 0
       Top = 0
@@ -133,8 +131,6 @@ object fCoverSearch: TfCoverSearch
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = -6
-      ExplicitWidth = 686
     end
     object sPnRow1: TsPanel
       Left = 0
@@ -144,8 +140,6 @@ object fCoverSearch: TfCoverSearch
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = -6
-      ExplicitTop = 215
     end
     object sPnRow2: TsPanel
       Left = 0
@@ -155,9 +149,6 @@ object fCoverSearch: TfCoverSearch
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitLeft = -6
-      ExplicitTop = 417
-      ExplicitWidth = 736
     end
   end
   object sBtnNext: TsButton
@@ -169,7 +160,6 @@ object fCoverSearch: TfCoverSearch
     Caption = '&Next 10'
     TabOrder = 4
     OnClick = sBtnNextClick
-    ExplicitLeft = 681
   end
   object sBtnPrev: TsButton
     Left = 0
@@ -180,7 +170,6 @@ object fCoverSearch: TfCoverSearch
     Caption = '&Prev 10'
     TabOrder = 5
     OnClick = sBtnPrevClick
-    ExplicitLeft = 8
   end
   object thGetImages: TJvThread
     Exclusive = True
