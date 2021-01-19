@@ -10,6 +10,7 @@ const
   WM_REFRESH_COVER = WM_USER + 2000;
   WM_OPEN_ROLLOUTS = WM_USER + 2001;
   WM_ATTACH = WM_USER + 2002;
+  WM_STARTSEARCH = WM_USER + 2003;
 
   WM_PLAY_PREVIOUS = WM_USER + 3000;
   WM_PLAY_NEXT = WM_USER + 3010;
@@ -98,6 +99,7 @@ var
   isRegistered: Boolean;
   dTags: TDictionary<String, tTagKey>;
   dExpressions: TDictionary<String, tExpr>;
+  dGoogleSearchResults : tDictionary<Integer, tStrings>;
 
 implementation
 

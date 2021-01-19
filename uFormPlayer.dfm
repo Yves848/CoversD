@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'MoP Player'
-  ClientHeight = 501
-  ClientWidth = 1026
+  ClientHeight = 864
+  ClientWidth = 507
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,9 +17,11 @@ object Form1: TForm1
   object sPanel1: TsPanel
     Left = 0
     Top = 0
-    Width = 1026
-    Height = 501
+    Width = 507
+    Height = 864
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 1026
+    ExplicitHeight = 501
   end
 end

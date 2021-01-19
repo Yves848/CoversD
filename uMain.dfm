@@ -18,6 +18,7 @@ object fMain: TfMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
   OnPaint = FormPaint
   OnResize = FormResize
   OnShow = FormShow
@@ -76,7 +77,6 @@ object fMain: TfMain
         Align = alLeft
         Caption = 'Utils'
         TabOrder = 0
-        Visible = False
         OnClick = btnUtilsClick
       end
       object bsRegister: TsButton
@@ -139,27 +139,25 @@ object fMain: TfMain
     object pnMain: TsPanel
       Left = 0
       Top = 57
-      Width = 1318
+      Width = 1760
       Height = 943
       Align = alClient
       TabOrder = 2
-      ExplicitWidth = 862
       DesignSize = (
-        1318
+        1760
         943)
       object sPanel1: TsPanel
         Left = 1
         Top = 366
-        Width = 1316
+        Width = 1758
         Height = 576
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 860
         object sgList: TAdvStringGrid
           Left = 0
           Top = 0
-          Width = 1316
+          Width = 1758
           Height = 576
           Cursor = crDefault
           Align = alClient
@@ -168,7 +166,7 @@ object fMain: TfMain
           FixedColor = clWhite
           FixedCols = 0
           Options = [goVertLine, goHorzLine, goRangeSelect, goTabs, goRowSelect, goFixedRowDefAlign]
-          PopupMenu = PopupMenu2
+          PopupMenu = pmCovers
           ScrollBars = ssBoth
           TabOrder = 0
           OnKeyDown = sgListKeyDown
@@ -293,489 +291,469 @@ object fMain: TfMain
           SortSettings.HeaderMirrorColor = clWhite
           SortSettings.HeaderMirrorColorTo = clWhite
           Version = '8.4.7.0'
-          ExplicitWidth = 860
         end
       end
       object ropVisual: TsRollOutPanel
         Left = 1
         Top = 1
-        Width = 1316
+        Width = 1758
         Height = 365
         Align = alTop
         TabOrder = 1
-        ExplicitWidth = 860
         object image1: TsImage
-          Left = 979
+          Left = 1421
           Top = 1
           Width = 336
           Height = 341
           Align = alRight
           Picture.Data = {07544269746D617000000000}
           Stretch = True
-          ExplicitLeft = 525
+          ExplicitLeft = 1418
           ExplicitTop = -4
         end
-        object sPageControl2: TsPageControl
+        object sPageControl1: TsPageControl
           Left = 1
           Top = 1
-          Width = 978
+          Width = 1420
           Height = 341
-          ActivePage = tsEdit
+          ActivePage = sTabSheet1
           Align = alClient
           TabOrder = 0
-          object tsEdit: TsTabSheet
-            Caption = 'Edit'
-            ExplicitWidth = 514
-            object sPageControl1: TsPageControl
-              Left = 0
-              Top = 0
-              Width = 970
-              Height = 313
-              ActivePage = sTabSheet1
-              Align = alClient
+          object sTabSheet1: TsTabSheet
+            Caption = 'Set Tags'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+            object sLabelFX2: TsLabelFX
+              Left = 103
+              Top = 6
+              Width = 62
+              Height = 25
+              Caption = 'Pattern'
+              ParentFont = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -19
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              Angle = 0
+              Shadow.OffsetKeeper.LeftTop = 0
+              Shadow.OffsetKeeper.RightBottom = 2
+            end
+            object sCB1: TsComboBox
+              Left = 47
+              Top = 46
+              Width = 121
+              Height = 24
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = 15724527
+              Font.Height = -13
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              BoundLabel.Caption = 'sComboBox1'
+              Style = csDropDownList
+              ItemIndex = -1
               TabOrder = 0
-              ExplicitLeft = -2
-              ExplicitTop = -1
-              ExplicitWidth = 514
-              object sTabSheet1: TsTabSheet
-                Caption = 'Set Tags'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'Tahoma'
-                Font.Style = [fsBold]
-                ParentFont = False
-                ExplicitWidth = 506
-                object sLabelFX2: TsLabelFX
-                  Left = 103
-                  Top = 6
-                  Width = 62
-                  Height = 25
-                  Caption = 'Pattern'
-                  ParentFont = False
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clWindowText
-                  Font.Height = -19
-                  Font.Name = 'Tahoma'
-                  Font.Style = []
-                  Angle = 0
-                  Shadow.OffsetKeeper.LeftTop = 0
-                  Shadow.OffsetKeeper.RightBottom = 2
-                end
-                object sCB1: TsComboBox
-                  Left = 47
-                  Top = 46
-                  Width = 121
-                  Height = 24
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clWhite
-                  Font.Height = -13
-                  Font.Name = 'Tahoma'
-                  Font.Style = []
-                  ParentFont = False
-                  BoundLabel.Caption = 'sComboBox1'
-                  Style = csDropDownList
-                  ItemIndex = -1
-                  TabOrder = 0
-                  OnChange = sCB1Change
-                end
-                object sCB2: TsComboBox
-                  Left = 47
-                  Top = 110
-                  Width = 121
-                  Height = 24
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clWhite
-                  Font.Height = -13
-                  Font.Name = 'Tahoma'
-                  Font.Style = []
-                  ParentFont = False
-                  BoundLabel.Caption = 'sComboBox1'
-                  Style = csDropDownList
-                  ItemIndex = -1
-                  TabOrder = 1
-                  OnChange = sCB2Change
-                end
-                object sCB3: TsComboBox
-                  Left = 47
-                  Top = 177
-                  Width = 121
-                  Height = 24
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clWhite
-                  Font.Height = -13
-                  Font.Name = 'Tahoma'
-                  Font.Style = []
-                  ParentFont = False
-                  BoundLabel.Caption = 'sComboBox1'
-                  Style = csDropDownList
-                  ItemIndex = -1
-                  TabOrder = 2
-                  OnChange = sCB3Change
-                end
-                object ckRegEx01: TsCheckBox
-                  Left = 46
-                  Top = 76
-                  Width = 69
-                  Height = 17
-                  Caption = 'Pattern'
-                  TabOrder = 3
-                  OnClick = ckRegEx01Click
-                end
-                object ckRegEx02: TsCheckBox
-                  Left = 46
-                  Top = 140
-                  Width = 69
-                  Height = 17
-                  Caption = 'Pattern'
-                  TabOrder = 4
-                  OnClick = ckRegEx02Click
-                end
-                object ckRegEx03: TsCheckBox
-                  Left = 46
-                  Top = 209
-                  Width = 69
-                  Height = 17
-                  Caption = 'Pattern'
-                  TabOrder = 5
-                  OnClick = ckRegEx03Click
-                end
-                object btnRegex: TsButton
-                  Left = 563
-                  Top = 216
-                  Width = 177
-                  Height = 47
-                  Caption = 'Apply to Selection'
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clBlue
-                  Font.Height = -16
-                  Font.Name = 'Tahoma'
-                  Font.Style = []
-                  ParentFont = False
-                  TabOrder = 6
-                  OnClick = btnRegexClick
-                end
-                object ckClearCovers: TsCheckBox
-                  Left = 47
-                  Top = 256
-                  Width = 97
-                  Height = 17
-                  Caption = 'Clear Covers'
-                  TabOrder = 7
-                end
-                object sEP03: TsComboBox
-                  Left = 174
-                  Top = 179
-                  Width = 372
-                  Height = 24
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clBlack
-                  Font.Height = -13
-                  Font.Name = 'Tahoma'
-                  Font.Style = []
-                  ParentFont = False
-                  ItemIndex = -1
-                  TabOrder = 8
-                end
-                object sEP01: TsComboBox
-                  Left = 174
-                  Top = 49
-                  Width = 372
-                  Height = 24
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clBlack
-                  Font.Height = -13
-                  Font.Name = 'Tahoma'
-                  Font.Style = []
-                  ParentFont = False
-                  ItemIndex = -1
-                  TabOrder = 9
-                end
-                object sEP02: TsComboBox
-                  Left = 174
-                  Top = 110
-                  Width = 372
-                  Height = 24
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clBlack
-                  Font.Height = -13
-                  Font.Name = 'Tahoma'
-                  Font.Style = []
-                  ParentFont = False
-                  ItemIndex = -1
-                  TabOrder = 10
-                end
-                object seRegEx: TsPopupBox
-                  Left = 171
-                  Top = 3
-                  Width = 566
-                  Height = 27
-                  AutoSize = False
-                  TabOrder = 11
-                  Text = '[ARTIST][-][TITLE]'
-                  OnChange = seRegExChange
-                  OnKeyUp = seRegExKeyUp
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clBlack
-                  Font.Height = -16
-                  Font.Name = 'Tahoma'
-                  Font.Style = []
-                  ParentFont = False
-                  CheckOnExit = True
-                  PopupForm = fRegEx.Owner
-                  OnBeforePopup = seRegExBeforePopup
-                end
-                object sCKReplace02: TsCheckBox
-                  Left = 182
-                  Top = 140
-                  Width = 71
-                  Height = 17
-                  Caption = 'Replace'
-                  TabOrder = 12
-                  OnClick = sCKReplace02Click
-                end
-                object sPnReplace02: TsPanel
-                  Left = 248
-                  Top = 136
-                  Width = 293
-                  Height = 31
-                  BevelOuter = bvNone
-                  TabOrder = 13
-                  Visible = False
-                  object sLabel1: TsLabel
-                    Left = 58
-                    Top = 7
-                    Width = 24
-                    Height = 13
-                    Caption = 'with'
-                  end
-                  object sETO02: TsEdit
-                    Left = 91
-                    Top = 4
-                    Width = 40
-                    Height = 21
-                    TabOrder = 0
-                    OnChange = btnRegexClick
-                  end
-                  object sEFROM02: TsEdit
-                    Left = 9
-                    Top = 4
-                    Width = 40
-                    Height = 21
-                    TabOrder = 1
-                    OnChange = btnRegexClick
-                  end
-                  object sComboBox1: TsComboBox
-                    Left = 177
-                    Top = 4
-                    Width = 109
-                    Height = 21
-                    BoundLabel.Active = True
-                    BoundLabel.Caption = 'Case'
-                    ItemIndex = 0
-                    TabOrder = 2
-                    Text = 'Unchanged'
-                    Visible = False
-                    Items.Strings = (
-                      'Unchanged'
-                      'Lowercase'
-                      'Uppercase'
-                      'First Letter Uppercase')
-                  end
-                end
-                object sCKReplace01: TsCheckBox
-                  Left = 183
-                  Top = 79
-                  Width = 71
-                  Height = 17
-                  Caption = 'Replace'
-                  TabOrder = 14
-                  OnClick = sCKReplace01Click
-                end
-                object sCKReplace03: TsCheckBox
-                  Left = 182
-                  Top = 209
-                  Width = 71
-                  Height = 17
-                  Caption = 'Replace'
-                  TabOrder = 15
-                  OnClick = sCKReplace03Click
-                end
-                object sPNReplace01: TsPanel
-                  Left = 248
-                  Top = 73
-                  Width = 293
-                  Height = 31
-                  BevelOuter = bvNone
-                  TabOrder = 16
-                  Visible = False
-                  object sLabel2: TsLabel
-                    Left = 58
-                    Top = 7
-                    Width = 24
-                    Height = 13
-                    Caption = 'with'
-                  end
-                  object sETO01: TsEdit
-                    Left = 88
-                    Top = 6
-                    Width = 40
-                    Height = 21
-                    TabOrder = 0
-                    OnChange = btnRegexClick
-                  end
-                  object sEFROM01: TsEdit
-                    Left = 9
-                    Top = 4
-                    Width = 40
-                    Height = 21
-                    TabOrder = 1
-                    OnChange = btnRegexClick
-                  end
-                  object sComboBox2: TsComboBox
-                    Left = 177
-                    Top = 4
-                    Width = 109
-                    Height = 21
-                    BoundLabel.Active = True
-                    BoundLabel.Caption = 'Case'
-                    ItemIndex = 0
-                    TabOrder = 2
-                    Text = 'Unchanged'
-                    Visible = False
-                    Items.Strings = (
-                      'Unchanged'
-                      'Lowercase'
-                      'Uppercase'
-                      'First Letter Uppercase')
-                  end
-                end
-                object sPNReplace03: TsPanel
-                  Left = 248
-                  Top = 205
-                  Width = 293
-                  Height = 31
-                  BevelOuter = bvNone
-                  TabOrder = 20
-                  Visible = False
-                  object sLabel4: TsLabel
-                    Left = 58
-                    Top = 7
-                    Width = 24
-                    Height = 13
-                    Caption = 'with'
-                  end
-                  object sETO03: TsEdit
-                    Left = 91
-                    Top = 4
-                    Width = 40
-                    Height = 21
-                    TabOrder = 0
-                    OnChange = btnRegexClick
-                  end
-                  object sEFROM03: TsEdit
-                    Left = 9
-                    Top = 4
-                    Width = 40
-                    Height = 21
-                    TabOrder = 1
-                    OnChange = btnRegexClick
-                  end
-                  object sComboBox4: TsComboBox
-                    Left = 177
-                    Top = 4
-                    Width = 109
-                    Height = 21
-                    BoundLabel.Active = True
-                    BoundLabel.Caption = 'Case'
-                    ItemIndex = 0
-                    TabOrder = 2
-                    Text = 'Unchanged'
-                    Visible = False
-                    Items.Strings = (
-                      'Unchanged'
-                      'Lowercase'
-                      'Uppercase'
-                      'First Letter Uppercase')
-                  end
-                end
-                object sBB1: TsBadgeBtn
-                  Left = 37
-                  Top = 36
-                  UseEllipsis = False
-                  SkinData.CustomColor = True
-                  TabStop = False
-                  WordWrap = False
-                  Caption = '1'
-                  PaintOptions.BevelWidth = 0
-                  PaintOptions.DataActive.Color1 = clBlue
-                  PaintOptions.DataActive.Color2 = clHighlight
-                  PaintOptions.DataActive.FontColor = clWhite
-                  PaintOptions.DataActive.BorderColor = clYellow
-                  PaintOptions.DataNormal.Color1 = clBlue
-                  PaintOptions.DataNormal.Color2 = clHighlight
-                  PaintOptions.DataNormal.FontColor = clWhite
-                  PaintOptions.DataNormal.BorderColor = clYellow
-                  PaintOptions.DataPressed.Color1 = clBlue
-                  PaintOptions.DataPressed.Color2 = clHighlight
-                  PaintOptions.DataPressed.FontColor = clWhite
-                  PaintOptions.DataPressed.BorderColor = clYellow
-                  AlignTo = baTopLeft
-                  AttachTo = sCB1
-                end
-                object sBB2: TsBadgeBtn
-                  Left = 37
-                  Top = 100
-                  UseEllipsis = False
-                  SkinData.CustomColor = True
-                  TabStop = False
-                  WordWrap = False
-                  Caption = '2'
-                  PaintOptions.BevelWidth = 0
-                  PaintOptions.DataActive.Color1 = clNavy
-                  PaintOptions.DataActive.Color2 = clHighlight
-                  PaintOptions.DataActive.BorderColor = clYellow
-                  PaintOptions.DataNormal.Color1 = clNavy
-                  PaintOptions.DataNormal.Color2 = clHighlight
-                  PaintOptions.DataNormal.FontColor = clWhite
-                  PaintOptions.DataNormal.BorderColor = clYellow
-                  PaintOptions.DataPressed.Color1 = clNavy
-                  PaintOptions.DataPressed.Color2 = clHighlight
-                  PaintOptions.DataPressed.FontColor = clWhite
-                  PaintOptions.DataPressed.BorderColor = clYellow
-                  AlignTo = baTopLeft
-                  AttachTo = sCB2
-                end
-                object sBB3: TsBadgeBtn
-                  Left = 37
-                  Top = 167
-                  UseEllipsis = False
-                  SkinData.CustomColor = True
-                  TabStop = False
-                  WordWrap = False
-                  Caption = '3'
-                  PaintOptions.BevelWidth = 0
-                  PaintOptions.DataActive.Color1 = clNavy
-                  PaintOptions.DataActive.Color2 = clHighlight
-                  PaintOptions.DataActive.FontColor = clWhite
-                  PaintOptions.DataActive.BorderColor = clYellow
-                  PaintOptions.DataNormal.Color1 = clNavy
-                  PaintOptions.DataNormal.Color2 = clHighlight
-                  PaintOptions.DataNormal.FontColor = clWhite
-                  PaintOptions.DataNormal.BorderColor = clYellow
-                  PaintOptions.DataPressed.Color1 = clNavy
-                  PaintOptions.DataPressed.Color2 = clHighlight
-                  PaintOptions.DataPressed.FontColor = clWhite
-                  PaintOptions.DataPressed.BorderColor = clYellow
-                  AlignTo = baTopLeft
-                  AttachTo = sCB3
-                end
+              OnChange = sCB1Change
+            end
+            object sCB2: TsComboBox
+              Left = 47
+              Top = 110
+              Width = 121
+              Height = 24
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = 15724527
+              Font.Height = -13
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              BoundLabel.Caption = 'sComboBox1'
+              Style = csDropDownList
+              ItemIndex = -1
+              TabOrder = 1
+              OnChange = sCB2Change
+            end
+            object sCB3: TsComboBox
+              Left = 47
+              Top = 177
+              Width = 121
+              Height = 24
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = 15724527
+              Font.Height = -13
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              BoundLabel.Caption = 'sComboBox1'
+              Style = csDropDownList
+              ItemIndex = -1
+              TabOrder = 2
+              OnChange = sCB3Change
+            end
+            object ckRegEx01: TsCheckBox
+              Left = 46
+              Top = 76
+              Width = 67
+              Height = 17
+              Caption = 'Pattern'
+              TabOrder = 3
+              OnClick = ckRegEx01Click
+            end
+            object ckRegEx02: TsCheckBox
+              Left = 46
+              Top = 140
+              Width = 67
+              Height = 17
+              Caption = 'Pattern'
+              TabOrder = 4
+              OnClick = ckRegEx02Click
+            end
+            object ckRegEx03: TsCheckBox
+              Left = 46
+              Top = 209
+              Width = 67
+              Height = 17
+              Caption = 'Pattern'
+              TabOrder = 5
+              OnClick = ckRegEx03Click
+            end
+            object btnRegex: TsButton
+              Left = 457
+              Top = 242
+              Width = 177
+              Height = 47
+              Caption = 'Apply to Selection'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlue
+              Font.Height = -16
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 6
+              OnClick = btnRegexClick
+            end
+            object ckClearCovers: TsCheckBox
+              Left = 47
+              Top = 256
+              Width = 95
+              Height = 17
+              Caption = 'Clear Covers'
+              TabOrder = 7
+            end
+            object sEP03: TsComboBox
+              Left = 174
+              Top = 179
+              Width = 372
+              Height = 24
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = 15724527
+              Font.Height = -13
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              ItemIndex = -1
+              TabOrder = 8
+            end
+            object sEP01: TsComboBox
+              Left = 174
+              Top = 49
+              Width = 372
+              Height = 24
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = 15724527
+              Font.Height = -13
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              ItemIndex = -1
+              TabOrder = 9
+            end
+            object sEP02: TsComboBox
+              Left = 174
+              Top = 110
+              Width = 372
+              Height = 24
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = 15724527
+              Font.Height = -13
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              ItemIndex = -1
+              TabOrder = 10
+            end
+            object seRegEx: TsPopupBox
+              Left = 171
+              Top = 3
+              Width = 566
+              Height = 27
+              AutoSize = False
+              TabOrder = 11
+              Text = '[ARTIST][-][TITLE]'
+              OnChange = seRegExChange
+              OnKeyUp = seRegExKeyUp
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = 15724527
+              Font.Height = -16
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              CheckOnExit = True
+              PopupForm = fRegEx.Owner
+              OnBeforePopup = seRegExBeforePopup
+            end
+            object sCKReplace02: TsCheckBox
+              Left = 182
+              Top = 140
+              Width = 69
+              Height = 17
+              Caption = 'Replace'
+              TabOrder = 12
+              OnClick = sCKReplace02Click
+            end
+            object sPnReplace02: TsPanel
+              Left = 248
+              Top = 136
+              Width = 293
+              Height = 31
+              BevelOuter = bvNone
+              TabOrder = 13
+              Visible = False
+              object sLabel1: TsLabel
+                Left = 58
+                Top = 7
+                Width = 24
+                Height = 13
+                Caption = 'with'
               end
-              object sTabSheet2: TsTabSheet
-                Caption = 'Set Filenames'
-                ExplicitWidth = 506
+              object sETO02: TsEdit
+                Left = 91
+                Top = 4
+                Width = 40
+                Height = 21
+                TabOrder = 0
+                OnChange = btnRegexClick
+              end
+              object sEFROM02: TsEdit
+                Left = 9
+                Top = 4
+                Width = 40
+                Height = 21
+                TabOrder = 1
+                OnChange = btnRegexClick
+              end
+              object sComboBox1: TsComboBox
+                Left = 177
+                Top = 4
+                Width = 109
+                Height = 21
+                BoundLabel.Active = True
+                BoundLabel.Caption = 'Case'
+                ItemIndex = 0
+                TabOrder = 2
+                Text = 'Unchanged'
+                Visible = False
+                Items.Strings = (
+                  'Unchanged'
+                  'Lowercase'
+                  'Uppercase'
+                  'First Letter Uppercase')
               end
             end
+            object sCKReplace01: TsCheckBox
+              Left = 183
+              Top = 79
+              Width = 69
+              Height = 17
+              Caption = 'Replace'
+              TabOrder = 14
+              OnClick = sCKReplace01Click
+            end
+            object sCKReplace03: TsCheckBox
+              Left = 182
+              Top = 209
+              Width = 69
+              Height = 17
+              Caption = 'Replace'
+              TabOrder = 15
+              OnClick = sCKReplace03Click
+            end
+            object sPNReplace01: TsPanel
+              Left = 248
+              Top = 73
+              Width = 293
+              Height = 31
+              BevelOuter = bvNone
+              TabOrder = 16
+              Visible = False
+              object sLabel2: TsLabel
+                Left = 58
+                Top = 7
+                Width = 24
+                Height = 13
+                Caption = 'with'
+              end
+              object sETO01: TsEdit
+                Left = 88
+                Top = 6
+                Width = 40
+                Height = 21
+                TabOrder = 0
+                OnChange = btnRegexClick
+              end
+              object sEFROM01: TsEdit
+                Left = 9
+                Top = 4
+                Width = 40
+                Height = 21
+                TabOrder = 1
+                OnChange = btnRegexClick
+              end
+              object sComboBox2: TsComboBox
+                Left = 177
+                Top = 4
+                Width = 109
+                Height = 21
+                BoundLabel.Active = True
+                BoundLabel.Caption = 'Case'
+                ItemIndex = 0
+                TabOrder = 2
+                Text = 'Unchanged'
+                Visible = False
+                Items.Strings = (
+                  'Unchanged'
+                  'Lowercase'
+                  'Uppercase'
+                  'First Letter Uppercase')
+              end
+            end
+            object sPNReplace03: TsPanel
+              Left = 248
+              Top = 205
+              Width = 293
+              Height = 31
+              BevelOuter = bvNone
+              TabOrder = 20
+              Visible = False
+              object sLabel4: TsLabel
+                Left = 58
+                Top = 7
+                Width = 24
+                Height = 13
+                Caption = 'with'
+              end
+              object sETO03: TsEdit
+                Left = 91
+                Top = 4
+                Width = 40
+                Height = 21
+                TabOrder = 0
+                OnChange = btnRegexClick
+              end
+              object sEFROM03: TsEdit
+                Left = 9
+                Top = 4
+                Width = 40
+                Height = 21
+                TabOrder = 1
+                OnChange = btnRegexClick
+              end
+              object sComboBox4: TsComboBox
+                Left = 177
+                Top = 4
+                Width = 109
+                Height = 21
+                BoundLabel.Active = True
+                BoundLabel.Caption = 'Case'
+                ItemIndex = 0
+                TabOrder = 2
+                Text = 'Unchanged'
+                Visible = False
+                Items.Strings = (
+                  'Unchanged'
+                  'Lowercase'
+                  'Uppercase'
+                  'First Letter Uppercase')
+              end
+            end
+            object sBB1: TsBadgeBtn
+              Left = 37
+              Top = 36
+              UseEllipsis = False
+              SkinData.CustomColor = True
+              TabStop = False
+              WordWrap = False
+              Caption = '1'
+              PaintOptions.BevelWidth = 0
+              PaintOptions.DataActive.Color1 = clBlue
+              PaintOptions.DataActive.Color2 = clHighlight
+              PaintOptions.DataActive.FontColor = clWhite
+              PaintOptions.DataActive.BorderColor = clYellow
+              PaintOptions.DataNormal.Color1 = clBlue
+              PaintOptions.DataNormal.Color2 = clHighlight
+              PaintOptions.DataNormal.FontColor = clWhite
+              PaintOptions.DataNormal.BorderColor = clYellow
+              PaintOptions.DataPressed.Color1 = clBlue
+              PaintOptions.DataPressed.Color2 = clHighlight
+              PaintOptions.DataPressed.FontColor = clWhite
+              PaintOptions.DataPressed.BorderColor = clYellow
+              AlignTo = baTopLeft
+              AttachTo = sCB1
+            end
+            object sBB2: TsBadgeBtn
+              Left = 37
+              Top = 100
+              UseEllipsis = False
+              SkinData.CustomColor = True
+              TabStop = False
+              WordWrap = False
+              Caption = '2'
+              PaintOptions.BevelWidth = 0
+              PaintOptions.DataActive.Color1 = clNavy
+              PaintOptions.DataActive.Color2 = clHighlight
+              PaintOptions.DataActive.BorderColor = clYellow
+              PaintOptions.DataNormal.Color1 = clNavy
+              PaintOptions.DataNormal.Color2 = clHighlight
+              PaintOptions.DataNormal.FontColor = clWhite
+              PaintOptions.DataNormal.BorderColor = clYellow
+              PaintOptions.DataPressed.Color1 = clNavy
+              PaintOptions.DataPressed.Color2 = clHighlight
+              PaintOptions.DataPressed.FontColor = clWhite
+              PaintOptions.DataPressed.BorderColor = clYellow
+              AlignTo = baTopLeft
+              AttachTo = sCB2
+            end
+            object sBB3: TsBadgeBtn
+              Left = 37
+              Top = 167
+              UseEllipsis = False
+              SkinData.CustomColor = True
+              TabStop = False
+              WordWrap = False
+              Caption = '3'
+              PaintOptions.BevelWidth = 0
+              PaintOptions.DataActive.Color1 = clNavy
+              PaintOptions.DataActive.Color2 = clHighlight
+              PaintOptions.DataActive.FontColor = clWhite
+              PaintOptions.DataActive.BorderColor = clYellow
+              PaintOptions.DataNormal.Color1 = clNavy
+              PaintOptions.DataNormal.Color2 = clHighlight
+              PaintOptions.DataNormal.FontColor = clWhite
+              PaintOptions.DataNormal.BorderColor = clYellow
+              PaintOptions.DataPressed.Color1 = clNavy
+              PaintOptions.DataPressed.Color2 = clHighlight
+              PaintOptions.DataPressed.FontColor = clWhite
+              PaintOptions.DataPressed.BorderColor = clYellow
+              AlignTo = baTopLeft
+              AttachTo = sCB3
+            end
+          end
+          object sTabSheet2: TsTabSheet
+            Caption = 'Set Filenames'
           end
         end
       end
@@ -981,14 +959,44 @@ object fMain: TfMain
         end
       end
     end
-    object sPnPlayer: TsPanel
-      Left = 1318
+    object sSplitView2: TsSplitView
+      Left = 1760
       Top = 57
-      Width = 442
+      Width = 0
       Height = 943
-      Align = alRight
+      Opened = False
+      OpenedSize = 200
+      Placement = svpaRight
       TabOrder = 3
-      ExplicitLeft = 862
+      object sPnPlayer: TsPanel
+        Left = 1
+        Top = 1
+        Width = 414
+        Height = 941
+        Align = alClient
+        TabOrder = 0
+      end
+    end
+    object sSplitCovers: TsSplitView
+      Left = 1760
+      Top = 57
+      Width = 0
+      Height = 943
+      Opened = False
+      OpenedSize = 664
+      Placement = svpaRight
+      OnOpened = sSplitCoversOpened
+      TabOrder = 4
+      object sPnCoverSearch: TsPanel
+        Left = 1
+        Top = 1
+        Width = 662
+        Height = 941
+        Align = alClient
+        AutoSize = True
+        BevelOuter = bvNone
+        TabOrder = 0
+      end
     end
   end
   object sSkinProvider1: TsSkinProvider
@@ -1012,7 +1020,6 @@ object fMain: TfMain
     AnimEffects.Buttons.Events = [beMouseEnter, beMouseLeave, beMouseDown, beMouseUp, beLighting]
     AnimEffects.FormShow.Mode = atFading
     ButtonsOptions.OldGlyphsMode = False
-    IsDefault = False
     InternalSkins = <
       item
         Name = 'FM (internal)'
@@ -49051,13 +49058,10 @@ object fMain: TfMain
       Caption = 'Add "No Covers"'
     end
   end
-  object PopupMenu2: TPopupMenu
+  object pmCovers: TPopupMenu
+    OnPopup = pmCoversPopup
     Left = 824
     Top = 8
-    object PopupMenu21: TMenuItem
-      Caption = 'Search Cover'
-      OnClick = PopupMenu21Click
-    end
   end
   object sAlphaImageList1: TsAlphaImageList
     Height = 24

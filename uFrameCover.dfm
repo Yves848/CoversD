@@ -13,10 +13,6 @@ object FrameCover: TFrameCover
     Align = alClient
     BevelOuter = bvLowered
     TabOrder = 0
-    ExplicitLeft = 96
-    ExplicitTop = 56
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object sImage1: TsImage
       Left = 1
       Top = 1
@@ -54,9 +50,6 @@ object FrameCover: TFrameCover
       Height = 17
       Align = alBottom
       TabOrder = 0
-      ExplicitLeft = 2
-      ExplicitTop = 205
-      ExplicitWidth = 198
     end
   end
   object sFrameAdapter1: TsFrameAdapter
