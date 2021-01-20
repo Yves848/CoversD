@@ -12,7 +12,6 @@ object frmCoverSearch: TfrmCoverSearch
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitTop = -6
     object Image1: TsImage
       Left = 404
       Top = 0
@@ -59,9 +58,6 @@ object frmCoverSearch: TfrmCoverSearch
     Align = alClient
     BorderStyle = bsNone
     TabOrder = 1
-    ExplicitTop = 70
-    ExplicitWidth = 756
-    ExplicitHeight = 815
     object sPNRow0: TsPanel
       Left = 0
       Top = 0
@@ -70,7 +66,6 @@ object frmCoverSearch: TfrmCoverSearch
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitTop = -6
     end
     object sPnRow1: TsPanel
       Left = 0
@@ -80,8 +75,6 @@ object frmCoverSearch: TfrmCoverSearch
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitTop = 203
-      ExplicitWidth = 600
     end
     object sPnRow2: TsPanel
       Left = 0
@@ -91,8 +84,6 @@ object frmCoverSearch: TfrmCoverSearch
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitTop = 419
-      ExplicitWidth = 756
     end
   end
   object IdHTTP1: TIdHTTP

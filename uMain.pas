@@ -28,7 +28,7 @@ type
   tAddToPlayListCallback = function(aFile: String): integer of object;
   tSearchCallback = procedure(aResult: String) of object;
   tSetBadgeColorCallBack = procedure(bactive: boolean) of object;
-  tGoogleSearchEnd = procedure(iGridLine: integer; sJson: String) of object;
+  tGoogleSearchEnd = procedure(iGridLine: integer; pUrls: tStrings) of object;
 
   thaddToPlayList = class(TThread)
   private
@@ -70,8 +70,10 @@ type
     SearchEnd: tGoogleSearchEnd;
 
   protected
+    procedure Execute; override;
   public
     constructor create(sKey: String; pGridLine: integer; pSearchEnd: tGoogleSearchEnd); reintroduce;
+    procedure launch(sKey: String; pGridLine: integer);
   end;
 
   TfMain = class(TForm)
@@ -229,6 +231,8 @@ type
   private
     { Déclarations privées }
     jConfig: ISuperObject;
+    lSearch: tStrings;
+    pGoogleSearch: thGoogleSearch;
     function findNode(sLabel: String): TTreeNode;
     procedure ListCoverArts(aImage: TsImage; Tags: TTags); overload;
     Procedure ListCoverArts(aImage: TsImage; sFileName: String); overload;
@@ -239,6 +243,7 @@ type
     procedure terminatePreviousSearch;
     procedure SearchCover(var msg: TMsg); message WM_STARTSEARCH;
     procedure PrepareSearch;
+    function makeSearchKey(pLine: integer): String;
 
   public
     { Déclarations publiques }
@@ -269,7 +274,6 @@ type
     Procedure PlayPrevTrack;
     Procedure showPlayList;
     Procedure showExplorer;
-    procedure loadPlaylist;
     procedure playlistRemoveItem(index: integer);
     procedure updatePlayingInfos(sFileName: String); overload;
     function FormatTextWithEllipse(aText: string): string;
@@ -308,9 +312,9 @@ type
     procedure SetSearchResult(s: String);
     procedure setBadgeColor(bactive: boolean);
     procedure MPlayNext(var msg: TMessage); Message WM_PLAY_NEXT;
-    procedure GoogleSearchEnd(iGridLine: integer; sJson: String);
+    procedure GoogleSearchEnd(iGridLine: integer; pUrls: tStrings);
     procedure SearchSimple(Sender: TObject);
-    Procedure SearchBatch(sender : tObject);
+    Procedure SearchBatch(Sender: TObject);
   end;
 
 var
@@ -1700,6 +1704,7 @@ end;
 procedure TfMain.sgListRowChanging(Sender: TObject; OldRow, NewRow: integer; var Allow: boolean);
 var
   pMediaFile: tMediaFile;
+  lUrls: tStrings;
 begin
   // Afficher la pochette si elle existe
 
@@ -1718,6 +1723,16 @@ begin
 
     end;
   end;
+
+  if dGoogleSearchResults.TryGetValue(NewRow, lUrls) then
+  begin
+    if not sSplitCovers.Opened then
+    begin
+      sSplitCovers.Open;
+    end;
+    frmCoverSearch.GlobalAddGrid(lUrls);
+  end;
+
 end;
 
 procedure TfMain.sgListSetEditText(Sender: TObject; ACol, ARow: integer; const Value: string);
@@ -1997,8 +2012,31 @@ begin
 end;
 
 procedure TfMain.SearchBatch(Sender: TObject);
+var
+  i: integer;
+  iLine: integer;
+  sKey: string;
 begin
-   AddLog('SearchBatch');
+  AddLog('SearchBatch');
+  dGoogleSearchResults.Clear;
+  if lSearch <> nil then
+    lSearch.Clear
+  else
+    lSearch := tStringList.create;
+  i := 0;
+  while i <= sgList.SelectedRowCount - 1 do
+  begin
+    iLine := sgList.SelectedRow[i];
+    lSearch.Add(inttostr(iLine));
+    inc(i);
+  end;
+  iLine := strtoint(lSearch[0]);
+  lSearch.Delete(0);
+  sKey := makeSearchKey(iLine);
+  pGoogleSearch := thGoogleSearch.create(sKey, iLine, GoogleSearchEnd);
+  pGoogleSearch.FreeOnTerminate := false;
+  pGoogleSearch.Resume;
+
 end;
 
 procedure TfMain.SearchCover(var msg: TMsg);
@@ -2328,14 +2366,32 @@ begin
   aPicture.BitMap.Assign(sILNoCover.CreateBitmap32(0, 256, 256));
 end;
 
-procedure TfMain.GoogleSearchEnd(iGridLine: integer; sJson: String);
+procedure TfMain.GoogleSearchEnd(iGridLine: integer; pUrls: tStrings);
 var
   sList: tStrings;
+  i: integer;
 begin
   //
-  sList := tStringList.create;
-  dGoogleSearchResults.Add(iGridLine, sList);
+  AddLog('GoogleSearchEnd', 'iGridline : ' + inttostr(iGridLine));
+  i := 0;
 
+  while i <= pUrls.Count - 1 do
+  begin
+    AddLog('GoogleSearchEnd', pUrls[i]);
+    inc(i);
+  end;
+  sList := tStringList.create;
+  sList.Assign(pUrls);
+  dGoogleSearchResults.Add(iGridLine, sList);
+  sgList.RowColor[iGridLine] := clRed;
+  if lSearch.Count > 0 then
+  begin
+    i := strtoint(lSearch[0]);
+    lSearch.Delete(0);
+    pGoogleSearch.launch(makeSearchKey(i), i);
+  end
+  else
+    pGoogleSearch.Free;
 end;
 
 procedure TfMain.sShellTreeView1Change(Sender: TObject; Node: TTreeNode);
@@ -2427,7 +2483,7 @@ end;
 procedure TfMain.sSplitCoversOpened(Sender: TObject);
 begin
   PrepareSearch;
-  PostMessage(self.handle, WM_STARTSEARCH, 0, 0);
+  //PostMessage(self.handle, WM_STARTSEARCH, 0, 0);
 end;
 
 procedure TfMain.sSplitView1Opened(Sender: TObject);
@@ -2524,24 +2580,19 @@ begin
   end;
 end;
 
-procedure TfMain.loadPlaylist;
-var
-  i: integer;
-  pMediaFile: tMediaFile;
-  Json: ISuperObject;
+function TfMain.makeSearchKey(pLine: integer): String;
 begin
-  // if sOpenDialog1.Execute then
-  // begin
-  // slbPlaylist.clear;
-  // i := 0;
-  // Json := TSuperObject.ParseFile(sOpenDialog1.FileName);
-  // while i <= Json.a['tracks'].Length - 1 do
-  // begin
-  // pMediaFile := tMediaFile.create(Json.a['tracks'].O[i].s['filename']);
-  // slbPlaylist.Items.AddObject(tpath.GetFileNameWithoutExtension(pMediaFile.Tags.FileName), pMediaFile);
-  // inc(i);
-  // end;
-  // end;
+
+  Result := '';
+  if trim(sgList.Cells[2, pLine]) + trim(sgList.Cells[3, pLine]) = '' then
+    Result := trim(sgList.Cells[1, pLine])
+  else
+  begin
+    Result := sgList.Cells[2, pLine];
+    Result := Result + ' ' + sgList.Cells[3, pLine];
+    Result := Result + ' cover';
+  end;
+
 end;
 
 procedure TfMain.MPlayNext(var msg: TMessage);
@@ -2843,7 +2894,7 @@ begin
       begin
         index := 0;
         sFile := g_tsFiles[index];
-        g_tsFiles.delete(index);
+        g_tsFiles.Delete(index);
         AddToPlayList(sFile);
       end
       else
@@ -3006,6 +3057,37 @@ begin
   fKey := sKey;
   SearchEnd := pSearchEnd;
   fGridLine := pGridLine;
+end;
+
+procedure thGoogleSearch.Execute;
+var
+  aGoogleSearchFree: tGoogleSearchFree;
+  jsResult: ISuperObject;
+  jsArray: IsuperArray;
+  i: integer;
+  sListUrls: tStrings;
+begin
+  inherited;
+  aGoogleSearchFree := tGoogleSearchFree.create;
+  jsResult := aGoogleSearchFree.getImages(fKey, 25);
+  // jsResult := aGoogleSearch.getImages;
+  jsArray := jsResult.A[GS_ITEMS];
+  sListUrls := tStringList.create;
+  i := 0;
+  while (i <= jsArray.Length - 1) do
+  begin
+    sListUrls.Add(jsArray.O[i].s[GS_LINK]);
+    inc(i);
+  end;
+  SearchEnd(fGridLine, sListUrls);
+  sListUrls.Free;
+end;
+
+procedure thGoogleSearch.launch(sKey: String; pGridLine: integer);
+begin
+  fKey := sKey;
+  fGridLine := pGridLine;
+  Execute;
 end;
 
 end.

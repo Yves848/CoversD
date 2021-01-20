@@ -130,7 +130,7 @@ end;
 
 function tGoogleSearchFree.getImages(skey: String; const nbImages: Integer): iSuperObject;
 const
-  baseUrl = 'http://proliant:8080/search/%s';
+  baseUrl = 'http://localhost:8080/search/%s';
 var
    sUrl : String;
    sKey2 : string;
