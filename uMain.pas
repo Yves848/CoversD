@@ -13,7 +13,7 @@ uses
   acProgressBar, JvComponentBase, JvThread, sMemo, Vcl.Mask, sMaskEdit, sCustomComboEdit, sToolEdit, acImage, JPEG, PNGImage,
   GIFImg, TagsLibrary,
   acNoteBook, sTrackBar, acArcControls, sGauge, BASS, BassFlac, xSuperObject, sListBox, JvExControls, clipbrd,
-  Spectrum3DLibraryDefs, bass_aac,
+  Spectrum3DLibraryDefs, Bass_AAC,
   MMSystem, uDeleteCover, JvaScrollText, acSlider, uSearchImage, sBitBtn, Vcl.OleCtrls, SHDocVw, activeX, acWebBrowser, Vcl.Grids,
   JvExGrids,
   JvStringGrid, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, Generics.collections,
@@ -22,7 +22,7 @@ uses
   sComboBox,
   sCheckBox, sPageControl, SynEditHighlighter, SynHighlighterJSON, System.StrUtils, sComboEdit, acPopupCtrls, uDM1, acAlphaHints,
   BtnListB,
-  sScrollBox, uFrmPlayer, JvExStdCtrls, JvWinampLabel, uFormPlayer, acFontStore, uLog, ufrmLog, uFrmCoverSearch;
+  sScrollBox, uFrmPlayer, JvExStdCtrls, JvWinampLabel, uFormPlayer, acFontStore, uLog, ufrmLog, uFrmCoverSearch,  MSHTML;
 
 type
   tAddToPlayListCallback = function(aFile: String): integer of object;
@@ -242,7 +242,7 @@ type
     procedure SelfMove(var msg: TWMMove); message WM_MOVE;
     procedure terminatePreviousSearch;
     procedure SearchCover(var msg: TMsg); message WM_STARTSEARCH;
-    procedure PrepareSearch;
+    procedure PrepareSearch(iRow : Integer);
     function makeSearchKey(pLine: integer): String;
 
   public
@@ -440,36 +440,36 @@ begin
 
 end;
 
-procedure TfMain.PrepareSearch;
+procedure TfMain.PrepareSearch(iRow : Integer);
 var
   GlobalMediaFile: tMediaFile;
 begin
   frmCoverSearch.Parent := sPnCoverSearch;
-  if sgList.Objects[1, sgList.Row] <> Nil then
-    GlobalMediaFile := tMediaFile(sgList.Objects[1, sgList.Row]);
+  if sgList.Objects[1, iRow] <> Nil then
+    GlobalMediaFile := tMediaFile(sgList.Objects[1, iRow]);
 
   if sgList.RowSelectCount > 1 then
   begin
     frmCoverSearch.seTitle.BoundLabel.Caption := 'Album';
-    if trim(sgList.Cells[2, sgList.Row]) + trim(sgList.Cells[4, sgList.Row]) = '' then
+    if trim(sgList.Cells[2, iRow]) + trim(sgList.Cells[4, iRow]) = '' then
       frmCoverSearch.Title := GlobalMediaFile.Tags.FileName
     else
     begin
       frmCoverSearch.sFile := GlobalMediaFile.Tags.FileName;
-      frmCoverSearch.Artist := sgList.Cells[2, sgList.Row];
-      frmCoverSearch.Title := sgList.Cells[4, sgList.Row];
+      frmCoverSearch.Artist := sgList.Cells[2, iRow];
+      frmCoverSearch.Title := sgList.Cells[4, iRow];
     end;
   end
   else
   begin
     frmCoverSearch.seTitle.BoundLabel.Caption := 'Title';
-    if trim(sgList.Cells[2, sgList.Row]) + trim(sgList.Cells[3, sgList.Row]) = '' then
+    if trim(sgList.Cells[2, iRow]) + trim(sgList.Cells[3, iRow]) = '' then
       frmCoverSearch.Title := GlobalMediaFile.Tags.FileName
     else
     begin
       frmCoverSearch.sFile := GlobalMediaFile.Tags.FileName;
-      frmCoverSearch.Artist := sgList.Cells[2, sgList.Row];
-      frmCoverSearch.Title := sgList.Cells[3, sgList.Row];
+      frmCoverSearch.Artist := sgList.Cells[2, iRow];
+      frmCoverSearch.Title := sgList.Cells[3, iRow];
     end;
   end;
 
@@ -1509,8 +1509,15 @@ end;
 procedure TfMain.sgListGetCellColor(Sender: TObject; ARow, ACol: integer; AState: TGridDrawState; ABrush: TBrush; AFont: TFont);
 var
   pMediaFile: tMediaFile;
+  sUrls : tStrings;
 begin
   //
+  if (acol = 0) and dGoogleSearchResults.TryGetValue(aRow,sUrls) then
+  begin
+     aBrush.color := clGreen;
+  end
+  else
+
   if sgList.Objects[1, ARow] <> Nil then
   begin
     pMediaFile := tMediaFile(sgList.Objects[1, ARow]);
@@ -1729,7 +1736,9 @@ begin
     if not sSplitCovers.Opened then
     begin
       sSplitCovers.Open;
-    end;
+    end
+    else
+       PrepareSearch(NewRow);
     frmCoverSearch.GlobalAddGrid(lUrls);
   end;
 
@@ -2041,7 +2050,7 @@ end;
 
 procedure TfMain.SearchCover(var msg: TMsg);
 begin
-  frmCoverSearch.StartSearch;
+  frmCoverSearch.StartSearch2;
 end;
 
 procedure TfMain.SearchSimple(Sender: TObject);
@@ -2052,7 +2061,7 @@ begin
   end
   else
   begin
-    PrepareSearch;
+    PrepareSearch(sgList.Row);
     PostMessage(self.handle, WM_STARTSEARCH, 0, 0);
   end;
 end;
@@ -2482,8 +2491,12 @@ end;
 
 procedure TfMain.sSplitCoversOpened(Sender: TObject);
 begin
-  PrepareSearch;
-  //PostMessage(self.handle, WM_STARTSEARCH, 0, 0);
+
+  if pGoogleSearch = nil then
+  begin
+     PrepareSearch(sgList.Row);
+     PostMessage(self.handle, WM_STARTSEARCH, 0, 0);
+  end;
 end;
 
 procedure TfMain.sSplitView1Opened(Sender: TObject);

@@ -308,8 +308,7 @@ object fMain: TfMain
           Align = alRight
           Picture.Data = {07544269746D617000000000}
           Stretch = True
-          ExplicitLeft = 1418
-          ExplicitTop = -4
+          ExplicitLeft = 1357
         end
         object sPageControl1: TsPageControl
           Left = 1

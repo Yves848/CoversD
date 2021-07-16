@@ -41,13 +41,30 @@ object frmCoverSearch: TfrmCoverSearch
       BoundLabel.Caption = 'Title'
     end
     object sButton1: TsButton
-      Left = 50
+      Left = 230
       Top = 70
       Width = 75
       Height = 25
       Caption = 'Refresh'
       TabOrder = 2
       OnClick = sButton1Click
+    end
+    object Edit1: TEdit
+      Left = 50
+      Top = 101
+      Width = 503
+      Height = 21
+      TabOrder = 3
+      Text = 'Edit1'
+    end
+    object sButton2: TsButton
+      Left = 50
+      Top = 70
+      Width = 75
+      Height = 25
+      Caption = 'sButton2'
+      TabOrder = 4
+      OnClick = sButton2Click
     end
   end
   object sSBCovers: TsScrollBox
@@ -85,6 +102,21 @@ object frmCoverSearch: TfrmCoverSearch
       BevelOuter = bvNone
       TabOrder = 2
     end
+  end
+  object WebBrowser1: TWebBrowser
+    Left = -312
+    Top = 0
+    Width = 201
+    Height = 150
+    TabOrder = 2
+    SelectedEngine = EdgeIfAvailable
+    OnDocumentComplete = WebBrowser1DocumentComplete
+    ControlData = {
+      4C000000C6140000810F00000000000000000000000000000000000000000000
+      000000004C000000000000000000000001000000E0D057007335CF11AE690800
+      2B2E126208000000000000004C0000000114020000000000C000000000000046
+      8000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000100000000000000000000000000000000000000}
   end
   object IdHTTP1: TIdHTTP
     ProxyParams.BasicAuthentication = False
