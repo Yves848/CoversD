@@ -21,14 +21,14 @@ uses
   uEditTags in 'uEditTags.pas' {fEditTags},
   uFrmTagEdit in 'uFrmTagEdit.pas' {FrmTagEdit: TFrame},
   uFrmPlayList in 'uFrmPlayList.pas' {frmPlayList: TFrame},
-  uFrmCoverSearch in 'uFrmCoverSearch.pas' {frmCoverSearch: TFrame};
+  uFrmCoverSearch in 'uFrmCoverSearch.pas' {frmCoverSearch: TFrame},
+  uTagEdit in 'uTagEdit.pas' {Form2};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TfMain, fMain);
-  Application.CreateForm(TfRegEx, fRegEx);
+  Application.CreateForm(TForm2, Form2);
   Application.Run;
 end.

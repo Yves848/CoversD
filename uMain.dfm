@@ -348,7 +348,7 @@ object fMain: TfMain
               Width = 121
               Height = 24
               Font.Charset = DEFAULT_CHARSET
-              Font.Color = 15724527
+              Font.Color = 15789037
               Font.Height = -13
               Font.Name = 'Tahoma'
               Font.Style = []
@@ -365,7 +365,7 @@ object fMain: TfMain
               Width = 121
               Height = 24
               Font.Charset = DEFAULT_CHARSET
-              Font.Color = 15724527
+              Font.Color = 15789037
               Font.Height = -13
               Font.Name = 'Tahoma'
               Font.Style = []
@@ -382,7 +382,7 @@ object fMain: TfMain
               Width = 121
               Height = 24
               Font.Charset = DEFAULT_CHARSET
-              Font.Color = 15724527
+              Font.Color = 15789037
               Font.Height = -13
               Font.Name = 'Tahoma'
               Font.Style = []
@@ -449,7 +449,7 @@ object fMain: TfMain
               Width = 372
               Height = 24
               Font.Charset = DEFAULT_CHARSET
-              Font.Color = 15724527
+              Font.Color = 1447447
               Font.Height = -13
               Font.Name = 'Tahoma'
               Font.Style = []
@@ -463,7 +463,7 @@ object fMain: TfMain
               Width = 372
               Height = 24
               Font.Charset = DEFAULT_CHARSET
-              Font.Color = 15724527
+              Font.Color = 1447447
               Font.Height = -13
               Font.Name = 'Tahoma'
               Font.Style = []
@@ -477,7 +477,7 @@ object fMain: TfMain
               Width = 372
               Height = 24
               Font.Charset = DEFAULT_CHARSET
-              Font.Color = 15724527
+              Font.Color = 1447447
               Font.Height = -13
               Font.Name = 'Tahoma'
               Font.Style = []
@@ -496,7 +496,7 @@ object fMain: TfMain
               OnChange = seRegExChange
               OnKeyUp = seRegExKeyUp
               Font.Charset = DEFAULT_CHARSET
-              Font.Color = 15724527
+              Font.Color = 1447447
               Font.Height = -16
               Font.Name = 'Tahoma'
               Font.Style = []
@@ -986,6 +986,7 @@ object fMain: TfMain
       Placement = svpaRight
       OnOpened = sSplitCoversOpened
       TabOrder = 4
+      ExplicitLeft = 1096
       object sPnCoverSearch: TsPanel
         Left = 1
         Top = 1
@@ -995,6 +996,8 @@ object fMain: TfMain
         AutoSize = True
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitLeft = 4
+        ExplicitTop = 3
       end
     end
   end
@@ -1019,6 +1022,7 @@ object fMain: TfMain
     AnimEffects.Buttons.Events = [beMouseEnter, beMouseLeave, beMouseDown, beMouseUp, beLighting]
     AnimEffects.FormShow.Mode = atFading
     ButtonsOptions.OldGlyphsMode = False
+    IsDefault = False
     InternalSkins = <
       item
         Name = 'FM (internal)'

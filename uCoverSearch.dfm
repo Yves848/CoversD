@@ -65,7 +65,6 @@ object fCoverSearch: TfCoverSearch
       ModalResult = 2
       TabOrder = 3
       OnClick = sButton2Click
-      ExplicitTop = -3
     end
   end
   object sPanel1: TsPanel
@@ -132,7 +131,6 @@ object fCoverSearch: TfCoverSearch
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = -6
     end
     object sPnRow1: TsPanel
       Left = 0
@@ -142,8 +140,6 @@ object fCoverSearch: TfCoverSearch
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = 6
-      ExplicitTop = 203
     end
     object sPnRow2: TsPanel
       Left = 0
@@ -153,8 +149,6 @@ object fCoverSearch: TfCoverSearch
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitLeft = 6
-      ExplicitTop = 415
     end
   end
   object sBtnNext: TsButton

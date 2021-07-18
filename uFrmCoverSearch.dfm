@@ -52,7 +52,7 @@ object frmCoverSearch: TfrmCoverSearch
     object Edit1: TEdit
       Left = 50
       Top = 101
-      Width = 503
+      Width = 335
       Height = 21
       TabOrder = 3
       Text = 'Edit1'
@@ -83,6 +83,7 @@ object frmCoverSearch: TfrmCoverSearch
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitTop = 6
     end
     object sPnRow1: TsPanel
       Left = 0
@@ -101,22 +102,8 @@ object frmCoverSearch: TfrmCoverSearch
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
+      ExplicitTop = 424
     end
-  end
-  object WebBrowser1: TWebBrowser
-    Left = -312
-    Top = 0
-    Width = 201
-    Height = 150
-    TabOrder = 2
-    SelectedEngine = EdgeIfAvailable
-    OnDocumentComplete = WebBrowser1DocumentComplete
-    ControlData = {
-      4C000000C6140000810F00000000000000000000000000000000000000000000
-      000000004C000000000000000000000001000000E0D057007335CF11AE690800
-      2B2E126208000000000000004C0000000114020000000000C000000000000046
-      8000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000100000000000000000000000000000000000000}
   end
   object IdHTTP1: TIdHTTP
     ProxyParams.BasicAuthentication = False
@@ -131,7 +118,7 @@ object frmCoverSearch: TfrmCoverSearch
     Request.Ranges.Units = 'bytes'
     Request.Ranges = <>
     HTTPOptions = [hoForceEncodeParams]
-    Left = 616
-    Top = 417
+    Left = 488
+    Top = 369
   end
 end

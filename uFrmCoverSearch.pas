@@ -27,15 +27,13 @@ type
     IdHTTP1: TIdHTTP;
     Image1: TsImage;
     sButton1: TsButton;
-    WebBrowser1: TWebBrowser;
     Edit1: TEdit;
     sButton2: TsButton;
     procedure sButton1Click(Sender: TObject);
-    procedure WebBrowser1DocumentComplete(ASender: TObject; const pDisp: IDispatch; const URL: OleVariant);
     procedure sButton2Click(Sender: TObject);
   private
     { Déclarations privées }
-    sListUrls: tStrings;
+
   public
     { Déclarations publiques }
     gCol, gRow: Integer;
@@ -44,6 +42,7 @@ type
     pHandle: tHandle;
     iStart: Integer;
     fAddLog: tAddLog;
+    sListUrls: tStrings;
     procedure removeframes;
     procedure GetImage(sNum: String);
     procedure ImageClick(Sender: TObject);
@@ -78,7 +77,7 @@ procedure TfrmCoverSearch.GlobalAddGrid(sUrls: tStrings);
 const
   sPanelName = 'sPnRow%d';
 var
-  thDownload: tDownloadThread;
+  //thDownload: tDownloadThread;
   aFrameCover: tFrameCover;
   aParentPanel: TsPanel;
   iPanelNumber: Integer;
@@ -192,6 +191,7 @@ var
   nbPass: Integer;
   Key2: String;
   sKey2: String;
+  limit : integer;
   aFrameCover: tFrameCover;
   aParentPanel: TsPanel;
   iPanelNumber: Integer;
@@ -239,20 +239,23 @@ begin
   nbPass := 0;
 
   Key2 := seTitle.Text;
-  if seTitle.BoundLabel.Caption = 'Title' then
-    Key2 := Key2 + ' cover';
-
-  // aGoogleSearch := tGoogleSearch.create(seArtist.Text + ' ' + Key2, start);
-
-   aGoogleSearchFree := tGoogleSearchFree.create;
-   jsResult := aGoogleSearchFree.getImages(seArtist.Text + ' ' + Key2, 10);
+//  //if seTitle.BoundLabel.Caption = 'Title' then
+//  //  Key2 := Key2 + ' cover';
+//
+//  // aGoogleSearch := tGoogleSearch.create(seArtist.Text + ' ' + Key2, start);
+//
+//   aGoogleSearchFree := tGoogleSearchFree.create;
+//   jsResult := aGoogleSearchFree.getImages(seArtist.Text + ' ' + Key2, 10);
 
   // jsResult := aGoogleSearch.getImages;
-
   jsArray := jsResult.A[GS_ITEMS];
 
   sListUrls := tStringList.Create;
   i := 0;
+  limit := 9;
+  if jsArray.Length < 9  then
+     limit := jsArray.Length;
+
   while (i <= jsArray.length - 1) do
   begin
     sListUrls.Add(jsArray.O[i].S[GS_LINK]);
@@ -280,9 +283,10 @@ var
   aParentPanel: TsPanel;
   iPanelNumber: Integer;
   lResults: tStrings;
+  aGoogleSearchFree : tGoogleSearchFree;
 
 begin
-  WebBrowser1.Navigate('about:blank');
+
   removeframes;
   // sBtnPrev.Enabled := (start > 1);
   Col := 0;
@@ -291,96 +295,19 @@ begin
   nbPass := 0;
 
   Key2 := seTitle.Text;
-//  if seTitle.BoundLabel.Caption = 'Title' then
-//    Key2 := Key2 + ' cover';
+  if seTitle.BoundLabel.Caption = 'Title' then
+    Key2 := Key2 + ' cover';
+//
+   //aGoogleSearch := tGoogleSearch.create(seArtist.Text + ' ' + Key2, start);
+//
+   aGoogleSearchFree := tGoogleSearchFree.create;
+   jsResult := aGoogleSearchFree.getImages(seArtist.Text + ' ' + Key2, 10);
+//
+   //jsResult := aGoogleSearch.getImages;
 
-  // aGoogleSearch := tGoogleSearch.create(seArtist.Text + ' ' + Key2, start);
-
-  // aGoogleSearchFree := tGoogleSearchFree.create;
-  // jsResult := aGoogleSearchFree.getImages(seArtist.Text + ' ' + Key2, 10);
-
-  // jsResult := aGoogleSearch.getImages;
-  sKey2 := format(sUrl, [TNetEncoding.URL.Encode(seArtist.Text + ' ' + Key2)]);
-  skey2 := StringReplace(sKey2,'+','%2B',[rfReplaceAll]);
-  edit1.Text := sKey2;
-  WebBrowser1.Navigate('about:blank');
-  WebBrowser1.Navigate(sKey2);
 
 end;
 
-procedure TfrmCoverSearch.WebBrowser1DocumentComplete(ASender: TObject; const pDisp: IDispatch; const URL: OleVariant);
-var
-  currentBrowser: IWebBrowser;
-  topBrowser: IWebBrowser;
-  document: OleVariant;
-  windowName: string;
-  jsResult: ISuperObject;
-  jsArray: IsuperArray;
-  i: Integer;
-  webResult: String;
-  pMediaImg: tMediaImg;
-  Col, Row: Integer;
-  nbPass: Integer;
-  Key2: String;
-  sKey2: String;
-  aFrameCover: tFrameCover;
-  aParentPanel: TsPanel;
-  iPanelNumber: Integer;
-  lResults: tStrings;
-
-  procedure addToGrid;
-  const
-    sPanelName = 'sPnRow%d';
-  var
-    thDownload: tDownloadThread;
-  begin
-    i := 0;
-
-    while (sListUrls.count > 0) and (i < 9) do
-    begin
-      sSBCovers.SkinData.BeginUpdate;
-
-      iPanelNumber := round(i div 3);
-      aParentPanel := TsPanel(self.FindComponent(format(sPanelName, [iPanelNumber])));
-      aFrameCover := tFrameCover.Create(sSBCovers);
-      aFrameCover.addLog := fAddLog;
-      aFrameCover.Name := 'aFrameCover' + inttostr(i + 1);
-      aFrameCover.sUrl := sListUrls[0];
-      aFrameCover.sLabel1.Caption := inttostr(i + 1);
-      aFrameCover.sImage1.OnClick := ImageClick;
-      aFrameCover.Left := 1000;
-      aFrameCover.parent := aParentPanel;
-      // TODO: Implémenter un callback pour le retour de résultat.
-      aFrameCover.SearchTerminated := SearchTerminated;
-      aFrameCover.StartDownload;
-      Inc(i);
-      sListUrls.Delete(0);
-      sSBCovers.SkinData.EndUpdate(true);
-    end;
-
-  end;
-
-begin
-  currentBrowser := pDisp as IWebBrowser;
-  topBrowser := (ASender as TWebBrowser).DefaultInterface;
-  if currentBrowser = topBrowser then
-  begin
-    // ShowMessage('Complete document was loaded')
-    lResults := getLinks;
-    jsResult := parseResult(lResults);
-
-    jsArray := jsResult.A[GS_ITEMS];
-
-    sListUrls := tStringList.Create;
-    i := 0;
-    while (i <= jsArray.length - 1) do
-    begin
-      sListUrls.Add(jsArray.O[i].S[GS_LINK]);
-      Inc(i);
-    end;
-    AddToGrid;
-  end;
-end;
 
 function TfrmCoverSearch.parseResult(aList: tStrings): ISuperObject;
 var
@@ -415,18 +342,6 @@ var
   document: IHTMLDocument2;
 begin
 
-  result := tStringList.Create;
-  document := WebBrowser1.document as IHTMLDocument2;
-
-  regexpr := tRegEx.Create('(http(s?):)([\/|.|\w|\s|-])*\.(?:jpg|gif|png)');
-
-  Match := regexpr.Match(document.body.innerHTML);
-  iMatch := 0;
-  while Match.Success do
-  begin
-    result.Add(Match.Value);
-    Match := Match.NextMatch;
-  end;
 
 end;
 

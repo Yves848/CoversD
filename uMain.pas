@@ -2050,7 +2050,7 @@ end;
 
 procedure TfMain.SearchCover(var msg: TMsg);
 begin
-  frmCoverSearch.StartSearch2;
+  frmCoverSearch.StartSearch;
 end;
 
 procedure TfMain.SearchSimple(Sender: TObject);

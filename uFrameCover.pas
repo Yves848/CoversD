@@ -41,7 +41,7 @@ type
     sPB1: TsProgressBar;
     sImage1: tsImage;
     sFrameAdapter1: TsFrameAdapter;
-    sLabel1: TKryptoGlowLabel;
+    sLabel1: TsLabel;
   private
     { Déclarations privées }
     iResult : Integer;
@@ -85,10 +85,9 @@ begin
   IdHTTP1 := TIdHTTP.create;
   IdHTTP1.ReadTimeout := 5000;
   IdHTTP1.IOHandler := IdSSL;
-  IdHTTP1.Request.Accept := 'text/html, image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, */*';
+  IdHTTP1.Request.Accept := 'text/html, image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, image/png, */*';
   IdHTTP1.Request.AcceptEncoding := 'gzip, deflate';
   IdHTTP1.Request.UserAgent := 'Mozilla/5.0';
-  //IdHTTP1.request.AcceptEncoding := 'gzip,deflate';
   IdHTTP1.onWork := onWork;
   IdHTTP1.onWorkBegin := onWorkBegin;
   IdHTTP1.onWorkEnd := onWorkEnd;

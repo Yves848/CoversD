@@ -21,27 +21,15 @@ object FrameCover: TFrameCover
       Align = alClient
       Picture.Data = {07544269746D617000000000}
       Stretch = True
+      ExplicitLeft = 0
       ExplicitTop = -5
     end
-    object sLabel1: TKryptoGlowLabel
-      Left = 24
-      Top = 18
-      Width = 25
-      Height = 39
-      AutoSize = False
-      Caption = '1'
-      Color = 8454143
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clYellow
-      Font.Height = -32
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      GlowSize = 1
-      ParentColor = False
-      ParentFont = False
-      Transparent = True
-      GlowColor = clBlack
-      Glowing = True
+    object sLabel1: TsLabel
+      Left = 16
+      Top = 16
+      Width = 36
+      Height = 13
+      Caption = 'sLabel1'
     end
     object sPB1: TsProgressBar
       Left = 1

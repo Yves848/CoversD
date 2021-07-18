@@ -34,6 +34,7 @@ uses
         destructor destroy;
      published
         function getImages(skey : String; const nbImages : Integer = 10) : iSuperObject;
+        function getImages2(skey: String; const nbImages: Integer): string;
   end;
 implementation
 
@@ -63,9 +64,9 @@ begin
    IdSSL := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
 
    IdHttp1 := TIdHTTP.Create;
-   idHTTP1.ReadTimeout := 5000;
+   idHTTP1.ReadTimeout := 10000;
    IdHTTP1.IOHandler := idSSL;
-   //IdHttp1.request.AcceptEncoding:= 'gzip,deflate';
+   IdHttp1.request.AcceptEncoding:= 'gzip,deflate';
    idSSL.SSLOptions.Method:= sslvTLSv1;
    idSSL.SSLOptions.Mode := sslmUnassigned;
    sJson := IdHTTP1.Get(path);
@@ -84,7 +85,7 @@ var
 begin
     Json := TSuperObject.Create(sJson);
     {$IFDEF DEBUG}
-    json.SaveTo('result.json',true);
+    //json.SaveTo('result.json',true);
     {$ENDIF}
     result := SO;
    // result.I[GS_STARTINDEX] := strtoint(json.S[GS_STARTINDEX]);
@@ -114,7 +115,7 @@ begin
    inherited create;
    IdSSL := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
    IdHttp1 := TIdHTTP.Create;
-   idHTTP1.ReadTimeout := 10000;
+   idHTTP1.ReadTimeout := 60000;
    IdHTTP1.IOHandler := idSSL;
    //IdHttp1.request.AcceptEncoding:= 'gzip,deflate';
    idSSL.SSLOptions.Method:= sslvTLSv1;
@@ -138,6 +139,19 @@ begin
    skey2 := TNetEncoding.URL.Encode(skey);
    sUrl := format(baseUrl,[sKey2]);
    result := ParseResult('{"items":'+IdHTTP1.Get(sUrl)+'}');
+end;
+
+
+function tGoogleSearchFree.getImages2(skey: String; const nbImages: Integer): string;
+const
+  baseUrl = 'http://localhost:8080/search/%s';
+var
+   sUrl : String;
+   sKey2 : string;
+begin
+   skey2 := TNetEncoding.URL.Encode(skey);
+   sUrl := format(baseUrl,[sKey2]);
+   result :=IdHTTP1.Get(sUrl);
 end;
 
 function tGoogleSearchFree.parseResult(sJson: String): ISuperObject;
