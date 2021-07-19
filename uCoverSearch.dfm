@@ -140,6 +140,8 @@ object fCoverSearch: TfCoverSearch
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
+      ExplicitLeft = 6
+      ExplicitTop = 203
     end
     object sPnRow2: TsPanel
       Left = 0
@@ -149,6 +151,8 @@ object fCoverSearch: TfCoverSearch
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
+      ExplicitLeft = 6
+      ExplicitTop = 415
     end
   end
   object sBtnNext: TsButton

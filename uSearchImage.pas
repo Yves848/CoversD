@@ -49,7 +49,7 @@ begin
   parameters := parameters + '&imgSize=large';
   parameters := parameters + '&searchType=image';
   parameters := parameters + '&key=' + CSE_ID;
-  parameters := parameters + '&filetype=png;jpeg';
+  parameters := parameters + '&filetype=jpeg';
 //  parameters := parameters + '&lr=lang_fr';
   //parameters := parameters + '&imgSize=xxlarge';
   parameters := parameters + format('&start=%d',[start]);
@@ -164,7 +164,7 @@ var
 begin
     Json := TSuperObject.Create(sJson);
     {$IFDEF DEBUG}
-    json.SaveTo('result.json',true);
+    //json.SaveTo('result.json',true);
     {$ENDIF}
     result := SO;
     i := 0;

@@ -10,27 +10,31 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uTypes, uSearchImage, Vcl.StdCtrls,
   xSuperObject,
   sListBox, sButton, AdvUtil, Vcl.Grids, AdvObj, BaseGrid, AdvGrid, sMemo,
-  Vcl.ExtCtrls, sPanel, sSkinProvider, sSkinManager, acPathDialog, System.ImageList, Vcl.ImgList, acAlphaImageList,uFrmCoverSearch, sSplitter;
+  IdComponent, JPEG, PNGImage, GIFImg,
+  Vcl.ExtCtrls, sPanel, sSkinProvider, sSkinManager, acPathDialog,
+  System.ImageList, Vcl.ImgList, acAlphaImageList, uFrmCoverSearch, sSplitter,
+  IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding;
 
 type
 
-   (*
+  (*
     *
     * Search callbacks
     *
-    *)
+  *)
 
   tSearchCallback = procedure(iRow: integer) of object;
   tDisplayStatus = procedure(iCol, iRow: integer; sStatus: integer) of object;
   tGetKey = function(iRow: integer): String of object;
   tSetResults = procedure(iRow: integer; sResults: string) of object;
 
-   (*
+  (*
     *
     * Download images callbacks
     *
-    *)
-  tUpdateprogress = procedure(iCol, iRow, percent : integer) of object;
+  *)
+  tUpdateprogress = procedure(iCol, iRow, percent: integer) of object;
+  tDisplayPicture = procedure(iCol, iRow: integer; picture: tpicture) of object;
 
   tSearchThread = class(tThread)
   private
@@ -39,8 +43,8 @@ type
     fOnGetKey: tGetKey;
     fOnSetResults: tSetResults;
     row: integer;
-    GS: tGoogleSearchFree;
-    //GS: tGoogleSearch;
+    // GS: tGoogleSearchFree;
+    GS: tGoogleSearch;
     results: string;
   protected
     procedure Execute; override;
@@ -54,16 +58,30 @@ type
   end;
 
   tDownloadThread = class(tThread)
-    fCol : Integer;
-    fRow : Integer;
-    fProgressCol : Integer;
-    fProgressRow : Integer;
+    fCol: integer;
+    fRow: integer;
+    fMax: integer;
+    fPos: integer;
+    fProgressCol: integer;
+    fProgressRow: integer;
+    fUpdateProgress: tUpdateprogress;
+    fDisplayPicture: tDisplayPicture;
+    fUrl: String;
 
-    protected
-      procedure execute; override;
-      procedure doTerminate; override;
-    public
-      constructor create; reintroduce;
+  protected
+    procedure Execute; override;
+    procedure DoTerminate; override;
+  public
+    procedure onWork(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
+    procedure onWorkBegin(ASender: TObject; AWorkMode: TWorkMode;
+      AWorkCountMax: Int64);
+    procedure onWorkEnd(ASender: TObject; AWorkMode: TWorkMode);
+    constructor create(iCol, iRow: integer; pUrl: string); reintroduce;
+    property UpdateProgress: tUpdateprogress read fUpdateProgress
+      write fUpdateProgress;
+    property displayPicture: tDisplayPicture read fDisplayPicture
+      write fDisplayPicture;
+    procedure downloadImage(sUrl: string);
   end;
 
   tListObj = class(tPersistent)
@@ -78,7 +96,7 @@ type
     sButton1: TsButton;
     sg1: TAdvStringGrid;
     btSearch: TsButton;
-    sButton3: TsButton;
+    btnLoadResults: TsButton;
     sMemo1: TsMemo;
     sPanel1: TsPanel;
     sSkinManager1: TsSkinManager;
@@ -88,25 +106,27 @@ type
     sPnVariable: TsPanel;
     sPanel2: TsPanel;
     sSplitter1: TsSplitter;
-    AdvStringGrid1: TAdvStringGrid;
+    sgImg: TAdvStringGrid;
     procedure sButton1Click(Sender: TObject);
     procedure btSearchClick(Sender: TObject);
-    procedure sButton3Click(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
+    procedure btnLoadResultsClick(Sender: TObject);
     procedure sSplitter1Resize(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Déclarations privées }
     procedure addToGrid(pkey: String; pObj: tListObj);
     procedure clearGrid;
     procedure AddFolderToGrid(sFolder: String);
     function AddFileToGrid(sFile: String): integer;
+    procedure clearImgGrid;
   public
     { Déclarations publiques }
     procedure endOfSearch(iRow: integer);
     procedure displayStatus(iCol, iRow: integer; sStatus: integer);
     function getKey(iRow: integer): String;
     procedure SetResults(iRow: integer; results: string);
+    Procedure UpdateProgress(iCol, iRow, percent: integer);
+    procedure displayPicture(iCol, iRow: integer; aPicture: tpicture);
   end;
 
 var
@@ -167,10 +187,40 @@ begin
 
 end;
 
+procedure TForm2.clearImgGrid;
+var
+  r, c: integer;
+begin
+  r := 0;
+  while r <= sgImg.RowCount - 1 do
+  begin
+    c := 0;
+    while c <= sgImg.colCount - 1 do
+    begin
+      sgImg.cells[c, r] := '';
+      if sgImg.HasPicture(c, r) then
+        sgImg.RemovePicture(c, r);
+      if sgImg.HasProgress(c, r) then
+        sgImg.RemoveProgress(c, r);
+      inc(c);
+    end;
+    inc(r);
+  end;
+  sgImg.RowCount := 1;
+
+end;
+
+procedure TForm2.displayPicture(iCol, iRow: integer; aPicture: tpicture);
+begin
+  sgImg.RemoveProgress(iCol, iRow);
+  sgImg.AddPicture(iCol, iRow, aPicture, false, tStretchMode.Shrink, 2,
+    haCenter, vaCenter);
+end;
+
 procedure TForm2.displayStatus(iCol, iRow: integer; sStatus: integer);
 begin
   // update status
-  //sg1.cells[iCol, iRow] := sStatus;
+  // sg1.cells[iCol, iRow] := sStatus;
   sg1.AddImageIdx(iCol, iRow, sStatus, haCenter, vaCenter);
   application.ProcessMessages;
 end;
@@ -180,14 +230,9 @@ begin
   sg1.cells[4, iRow] := 'terminé';
 end;
 
-procedure TForm2.FormCreate(Sender: TObject);
-begin
-  frmCoverSearch := TfrmCoverSearch.create(Application);
-end;
-
 procedure TForm2.FormShow(Sender: TObject);
 begin
-  frmCoverSearch.Parent := sPnVariable;
+  sPanel2.Width := self.ClientWidth div 2;
 end;
 
 function TForm2.getKey(iRow: integer): String;
@@ -285,19 +330,63 @@ begin
 
 end;
 
-procedure TForm2.sButton3Click(Sender: TObject);
+procedure TForm2.btnLoadResultsClick(Sender: TObject);
 var
   GlobalMediaFile: tMediaFile;
-  iRow : Integer;
+  iRow: integer;
+  pDownloadThread: tDownloadThread;
+  i: integer;
+  r, c: integer;
+  sUrl: String;
+
+  procedure getRowCol;
+  var
+    cellNotEmpty: boolean;
+  begin
+    cellNotEmpty := (sgImg.HasPicture(c, r) or sgImg.HasProgress(c, r));
+    if cellNotEmpty then
+    begin
+      inc(c);
+      if c > 2 then
+      begin
+        inc(r);
+        sgImg.RowCount := sgImg.RowCount + 1;
+        c := 0;
+      end;
+    end;
+  end;
+
 begin
-  frmCoverSearch.Parent := sPnVariable;
   iRow := sg1.row;
   if sg1.Objects[1, iRow] <> Nil then
     GlobalMediaFile := tMediaFile(sg1.Objects[1, iRow]);
-    sMemo1.Clear;
-    sMemo1.Lines.Assign(tListObj(sg1.Objects[0, sg1.row]).sResults);
+  sMemo1.Clear;
+  sMemo1.Lines.Assign(tListObj(sg1.Objects[0, sg1.row]).sResults);
 
-   
+  (*
+    * Create & launch download threads.
+  *)
+
+  // Clear grid;
+  clearImgGrid;
+  i := 0; // init url counter
+  c := 0; // init column
+  r := 0; // init row;
+  while (i <= tListObj(sg1.Objects[0, sg1.row]).sResults.count - 1) and
+    (i <= 9) do
+  begin
+    // Create new cell(img)
+    getRowCol;
+    sUrl := tListObj(sg1.Objects[0, sg1.row]).sResults[i];
+    sgImg.Ints[c, r] := 0;
+    sgImg.AddProgress(c, r, clNavy, clWhite);
+    pDownloadThread := tDownloadThread.create(c, r, sUrl);
+    pDownloadThread.fUpdateProgress := UpdateProgress;
+    pDownloadThread.displayPicture := displayPicture;
+    pDownloadThread.Start;
+    inc(i);
+  end;
+
 end;
 
 procedure TForm2.SetResults(iRow: integer; results: string);
@@ -309,8 +398,25 @@ begin
 end;
 
 procedure TForm2.sSplitter1Resize(Sender: TObject);
+var
+  c, ColWidth: integer;
+  cliWidth: integer;
 begin
-    // resize de cells in grid
+  // resize de cells in grid
+  cliWidth := ClientWidth - sg1.Width - sSplitter1.Width;
+  ColWidth := (cliWidth - 36) div 3;
+  c := 0;
+  sgImg.DefaultRowHeight := (sgImg.Height - 36) div 3;
+  while c <= sgImg.colCount - 1 do
+  begin
+    sgImg.ColWidths[c] := ColWidth;
+    inc(c);
+  end;
+end;
+
+procedure TForm2.UpdateProgress(iCol, iRow, percent: integer);
+begin
+  sgImg.Ints[iCol, iRow] := percent;
 end;
 
 { tSearchThread }
@@ -327,7 +433,6 @@ end;
 procedure tSearchThread.DoTerminate;
 begin
   fOnDisplayStatus(4, row, 0);
-  GS.Free;
   inherited;
 end;
 
@@ -337,46 +442,132 @@ var
   xResult: ISuperObject;
   jsResult: ISuperObject;
   jsArray: IsuperArray;
-  i: Integer;
+  i: integer;
   lResults: tStrings;
+  nStart: integer;
 begin
   inherited;
+  lResults := tStringList.create;
   fOnDisplayStatus(4, row, 2);
   sKey := fOnGetKey(row);
-  //GS := tGoogleSearch.create(sKey, 1);
-  GS := tGoogleSearchfree.create;
-  fOnDisplayStatus(4, row, 1);
-  xResult := GS.getImages(skey);
-  jsArray := xResult.A[GS_ITEMS];
-
-  lResults := tStringList.Create;
-   while (i <= jsArray.length - 1) do
+  nStart := 1;
+  while lResults.count < 10 do
   begin
-    lResults.Add(jsArray.O[i].S[GS_LINK]);
-    Inc(i);
-  end;
+    GS := tGoogleSearch.create(sKey, nStart);
+    // GS := tGoogleSearchFree.create;
+    fOnDisplayStatus(4, row, 1);
+    // xResult := GS.getImages(sKey);
+    xResult := GS.getImages;
+    jsArray := xResult.A[GS_ITEMS];
 
+    while (i <= jsArray.Length - 1) do
+    begin
+      lResults.Add(jsArray.O[i].S[GS_LINK]);
+      inc(i);
+    end;
+    GS.Free;
+    inc(nStart,10);
+  end;
   fOnSetResults(row, lResults.Text);
   terminate;
 end;
 
 { tDownloadThread }
 
-constructor tDownloadThread.create;
+constructor tDownloadThread.create(iCol, iRow: integer; pUrl: string);
 begin
+  inherited create(true);
+  FreeOnTerminate := true;
+  fCol := iCol;
+  fRow := iRow;
+  fUrl := pUrl;
 
 end;
 
-procedure tDownloadThread.doTerminate;
+procedure tDownloadThread.DoTerminate;
 begin
   inherited;
 
 end;
 
-procedure tDownloadThread.execute;
+procedure tDownloadThread.downloadImage(sUrl: string);
+var
+  IdSSL: TIdSSLIOHandlerSocketOpenSSL;
+  IdHTTP1: TIdHTTP;
+  MS: tMemoryStream;
+  jpgImg: TJPEGImage;
+  picture: tpicture;
+begin
+
+  IdSSL := TIdSSLIOHandlerSocketOpenSSL.create(nil);
+  IdHTTP1 := TIdHTTP.create;
+  IdHTTP1.ReadTimeout := 5000;
+  IdHTTP1.IOHandler := IdSSL;
+  IdHTTP1.request.AcceptEncoding := 'gzip,deflate';
+  IdHTTP1.onWork := onWork;
+  IdHTTP1.onWorkBegin := onWorkBegin;
+  IdHTTP1.onWorkEnd := onWorkEnd;
+  IdSSL.SSLOptions.Method := sslvTLSv1_2;
+  IdSSL.SSLOptions.Mode := sslmUnassigned;
+  try
+    MS := tMemoryStream.create;
+    jpgImg := TJPEGImage.create;
+    try
+      IdHTTP1.Get(sUrl, MS);
+      application.ProcessMessages;
+      MS.Seek(0, soFromBeginning);
+      jpgImg.LoadFromStream(MS);
+      picture := tpicture.create;
+      picture.Bitmap.Assign(jpgImg);
+      // fGrid.AddPicture(fCol, fRow, Picture, false, tStretchMode.Shrink, 2, haCenter, vaCenter);
+      displayPicture(fCol, fRow, picture);
+    except
+      on e: exception do
+      begin
+        // Memo1.Lines.Add('erreur '+e.Message);
+      end;
+    end;
+  finally
+    FreeAndNil(MS);
+    FreeAndNil(jpgImg);
+    IdHTTP1.Free;
+    IdSSL.Free;
+    if not terminated then
+      terminate;
+  end;
+
+end;
+
+procedure tDownloadThread.Execute;
 begin
   inherited;
+  downloadImage(fUrl);
+  while not terminated do
+  begin
+    application.ProcessMessages;
+  end;
+end;
 
+procedure tDownloadThread.onWork(ASender: TObject; AWorkMode: TWorkMode;
+  AWorkCount: Int64);
+
+begin
+  fPos := round(AWorkCount / fMax * 100);
+  fUpdateProgress(fCol, fRow, fPos);
+
+end;
+
+procedure tDownloadThread.onWorkBegin(ASender: TObject; AWorkMode: TWorkMode;
+  AWorkCountMax: Int64);
+begin
+  fMax := AWorkCountMax;
+  fPos := 0;
+  fUpdateProgress(fCol, fRow, fPos);
+end;
+
+procedure tDownloadThread.onWorkEnd(ASender: TObject; AWorkMode: TWorkMode);
+begin
+  fUpdateProgress(fCol, fRow, 0);
 end;
 
 end.

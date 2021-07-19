@@ -13,7 +13,6 @@ object Form2: TForm2
   OldCreateOrder = False
   Position = poScreenCenter
   WindowState = wsMaximized
-  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -22,7 +21,7 @@ object Form2: TForm2
     Top = 65
     Height = 765
     OnResize = sSplitter1Resize
-    ExplicitLeft = 788
+    ExplicitLeft = 789
     ExplicitTop = 71
   end
   object sg1: TAdvStringGrid
@@ -137,6 +136,7 @@ object Form2: TForm2
     ShowDesignHelper = False
     SortSettings.DefaultFormat = ssAutomatic
     Version = '8.4.7.0'
+    ExplicitTop = 56
     ColWidths = (
       233
       234
@@ -171,14 +171,14 @@ object Form2: TForm2
       OnClick = sButton1Click
     end
   end
-  object sButton3: TsButton
+  object btnLoadResults: TsButton
     Left = 264
     Top = 8
     Width = 106
     Height = 42
     Caption = 'Load Results'
     TabOrder = 2
-    OnClick = sButton3Click
+    OnClick = btnLoadResultsClick
   end
   object sPanel2: TsPanel
     Left = 799
@@ -188,8 +188,6 @@ object Form2: TForm2
     Align = alClient
     Caption = 'sPanel2'
     TabOrder = 3
-    ExplicitLeft = 1129
-    ExplicitWidth = 137
     object sPnVariable: TsPanel
       Left = 1
       Top = 1
@@ -197,21 +195,24 @@ object Form2: TForm2
       Height = 447
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 135
-      object AdvStringGrid1: TAdvStringGrid
+      object sgImg: TAdvStringGrid
         Left = 1
         Top = 1
         Width = 463
         Height = 445
         Cursor = crDefault
         Align = alClient
+        Color = clWhite
         ColCount = 3
         DrawingStyle = gdsClassic
         FixedCols = 0
         RowCount = 1
         FixedRows = 0
+        Options = [goVertLine, goHorzLine, goRangeSelect, goFixedRowDefAlign]
         ScrollBars = ssBoth
         TabOrder = 0
+        GridLineColor = 15987699
+        GridFixedLineColor = 15987699
         HoverRowCells = [hcNormal, hcSelected]
         ActiveCellFont.Charset = DEFAULT_CHARSET
         ActiveCellFont.Color = clWindowText
@@ -257,7 +258,7 @@ object Form2: TForm2
           'Clear')
         FixedRowHeight = 22
         FixedFont.Charset = DEFAULT_CHARSET
-        FixedFont.Color = clWindowText
+        FixedFont.Color = clBlack
         FixedFont.Height = -11
         FixedFont.Name = 'Tahoma'
         FixedFont.Style = [fsBold]
@@ -288,6 +289,7 @@ object Form2: TForm2
         PrintSettings.FooterFont.Name = 'Tahoma'
         PrintSettings.FooterFont.Style = []
         PrintSettings.PageNumSep = '/'
+        SearchFooter.ColorTo = clWhite
         SearchFooter.FindNextCaption = 'Find &next'
         SearchFooter.FindPrevCaption = 'Find &previous'
         SearchFooter.Font.Charset = DEFAULT_CHARSET
@@ -305,8 +307,6 @@ object Form2: TForm2
         ShowDesignHelper = False
         SortSettings.DefaultFormat = ssAutomatic
         Version = '8.4.7.0'
-        ExplicitLeft = -1
-        ExplicitTop = -4
       end
     end
     object sMemo1: TsMemo
@@ -319,7 +319,6 @@ object Form2: TForm2
         'sMemo1')
       TabOrder = 1
       Text = 'sMemo1'
-      ExplicitWidth = 135
     end
   end
   object sSkinManager1: TsSkinManager
