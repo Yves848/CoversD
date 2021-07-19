@@ -324,6 +324,7 @@ object Form2: TForm2
           Align = alLeft
           Caption = 'Previous'
           TabOrder = 0
+          OnClick = sButton2Click
           ExplicitLeft = 4
           ExplicitTop = 6
         end

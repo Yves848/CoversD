@@ -27,7 +27,7 @@ type
   tDisplayStatus = procedure(iCol, iRow: integer; sStatus: integer) of object;
   tGetKey = function(iRow: integer): String of object;
   tSetResults = procedure(iRow: integer; sResults: string) of object;
-  tPostAction = procedure(sender : tobject) of object;
+  tPostAction = procedure(sender: tobject) of object;
 
   (*
     *
@@ -43,8 +43,8 @@ type
     fOnDisplayStatus: tDisplayStatus;
     fOnGetKey: tGetKey;
     fOnSetResults: tSetResults;
-    fPostAction : tPostAction;
-    fStart : Integer;
+    fPostAction: tPostAction;
+    fStart: integer;
     row: integer;
     // GS: tGoogleSearchFree;
     GS: tGoogleSearch;
@@ -59,8 +59,8 @@ type
       write fOnDisplayStatus;
     property onGeyKey: tGetKey read fOnGetKey write fOnGetKey;
     property onSetResults: tSetResults read fOnSetResults write fOnSetResults;
-    property postAction : tPostAction read fPostAction write fPostAction;
-    property startPage : integer read fStart write fStart;
+    property postAction: tPostAction read fPostAction write fPostAction;
+    property startPage: integer read fStart write fStart;
   end;
 
   tDownloadThread = class(tThread)
@@ -78,10 +78,10 @@ type
     procedure Execute; override;
     procedure DoTerminate; override;
   public
-    procedure onWork(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
-    procedure onWorkBegin(ASender: TObject; AWorkMode: TWorkMode;
+    procedure onWork(ASender: tobject; AWorkMode: TWorkMode; AWorkCount: Int64);
+    procedure onWorkBegin(ASender: tobject; AWorkMode: TWorkMode;
       AWorkCountMax: Int64);
-    procedure onWorkEnd(ASender: TObject; AWorkMode: TWorkMode);
+    procedure onWorkEnd(ASender: tobject; AWorkMode: TWorkMode);
     constructor create(iCol, iRow: integer; pUrl: string); reintroduce;
     property UpdateProgress: tUpdateprogress read fUpdateProgress
       write fUpdateProgress;
@@ -94,7 +94,7 @@ type
   public
     sKey: String;
     sResults: tStrings;
-    page : integer;
+    page: integer;
     constructor create(pkey: String);
     destructor destroy;
   end;
@@ -116,12 +116,13 @@ type
     pnOptionsImages: TsPanel;
     sButton2: TsButton;
     sButton3: TsButton;
-    procedure sButton1Click(Sender: TObject);
-    procedure btSearchClick(Sender: TObject);
-    procedure btnLoadResultsClick(Sender: TObject);
-    procedure sSplitter1Resize(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure sButton3Click(Sender: TObject);
+    procedure sButton1Click(sender: tobject);
+    procedure btSearchClick(sender: tobject);
+    procedure btnLoadResultsClick(sender: tobject);
+    procedure sSplitter1Resize(sender: tobject);
+    procedure FormShow(sender: tobject);
+    procedure sButton3Click(sender: tobject);
+    procedure sButton2Click(sender: tobject);
   private
     { Déclarations privées }
     procedure addToGrid(pkey: String; pObj: tListObj);
@@ -129,7 +130,8 @@ type
     procedure AddFolderToGrid(sFolder: String);
     function AddFileToGrid(sFile: String): integer;
     procedure clearImgGrid;
-    procedure launchSearch(nRow : Integer; nStartPage : Integer);
+    procedure launchSearch(nRow: integer; nStartPage: integer;
+      const bPostAction: boolean = false);
   public
     { Déclarations publiques }
     procedure endOfSearch(iRow: integer);
@@ -241,7 +243,7 @@ begin
   sg1.cells[4, iRow] := 'terminé';
 end;
 
-procedure TForm2.FormShow(Sender: TObject);
+procedure TForm2.FormShow(sender: tobject);
 begin
   sPanel2.Width := self.ClientWidth div 2;
 end;
@@ -253,20 +255,22 @@ begin
     result := sg1.cells[0, iRow];
 end;
 
-procedure TForm2.launchSearch(nRow, nStartPage: Integer);
+procedure TForm2.launchSearch(nRow, nStartPage: integer;
+  const bPostAction: boolean = false);
 var
-   pSearchThread : tSearchThread;
+  pSearchThread: tSearchThread;
 begin
-    pSearchThread := tSearchThread.create(nRow);
-    pSearchThread.fOnDisplayStatus := displayStatus;
-    pSearchThread.fOnGetKey := getKey;
-    pSearchThread.fOnSetResults := SetResults;
+  pSearchThread := tSearchThread.create(nRow);
+  pSearchThread.fOnDisplayStatus := displayStatus;
+  pSearchThread.fOnGetKey := getKey;
+  pSearchThread.fOnSetResults := SetResults;
+  if bPostAction then
     pSearchThread.postAction := btnLoadResultsClick;
-    pSearchThread.startPage := nStartPage;
-    pSearchThread.Start;
+  pSearchThread.startPage := nStartPage;
+  pSearchThread.Start;
 end;
 
-procedure TForm2.sButton1Click(Sender: TObject);
+procedure TForm2.sButton1Click(sender: tobject);
 var
   pListObj: tListObj;
 begin
@@ -277,17 +281,34 @@ begin
   end;
 end;
 
-procedure TForm2.sButton3Click(Sender: TObject);
+procedure TForm2.sButton2Click(sender: tobject);
 var
-   iRow : Integer;
-   nStart : Integer;
+  iRow: integer;
+  nStart: integer;
 begin
-    // load 10 next images
-    iRow := sg1.row;
-    nStart := tListObj(sg1.objects[0,iRow]).page;
-    inc(nStart,10);
-    tListObj(sg1.objects[0,iRow]).page := nStart;
-    launchSearch(iRow,nStart);
+  // load 10 next images
+  iRow := sg1.row;
+  nStart := tListObj(sg1.Objects[0, iRow]).page;
+  if nStart > 1 then
+  begin
+    dec(nStart, 10);
+    tListObj(sg1.Objects[0, iRow]).page := nStart;
+    launchSearch(iRow, nStart, true);
+  end;
+
+end;
+
+procedure TForm2.sButton3Click(sender: tobject);
+var
+  iRow: integer;
+  nStart: integer;
+begin
+  // load 10 next images
+  iRow := sg1.row;
+  nStart := tListObj(sg1.Objects[0, iRow]).page;
+  inc(nStart, 10);
+  tListObj(sg1.Objects[0, iRow]).page := nStart;
+  launchSearch(iRow, nStart, true);
 end;
 
 procedure TForm2.AddFolderToGrid(sFolder: String);
@@ -348,7 +369,7 @@ begin
   application.ProcessMessages;
 end;
 
-procedure TForm2.btSearchClick(Sender: TObject);
+procedure TForm2.btSearchClick(sender: tobject);
 var
   r: integer;
   pSearchThread: tSearchThread;
@@ -357,18 +378,13 @@ begin
   r := 0;
   while r <= sg1.RowCount - 1 do
   begin
-    pSearchThread := tSearchThread.create(r);
-    pSearchThread.fOnDisplayStatus := displayStatus;
-    pSearchThread.fOnGetKey := getKey;
-    pSearchThread.fOnSetResults := SetResults;
-    pSearchThread.startPage := 1;
-    pSearchThread.Start;
+    launchSearch(r, 1);
     inc(r);
   end;
 
 end;
 
-procedure TForm2.btnLoadResultsClick(Sender: TObject);
+procedure TForm2.btnLoadResultsClick(sender: tobject);
 var
   GlobalMediaFile: tMediaFile;
   iRow: integer;
@@ -432,7 +448,7 @@ begin
   pListObj.sResults.Text := results;
 end;
 
-procedure TForm2.sSplitter1Resize(Sender: TObject);
+procedure TForm2.sSplitter1Resize(sender: tobject);
 var
   c, ColWidth: integer;
   cliWidth: integer;
@@ -468,8 +484,8 @@ end;
 procedure tSearchThread.DoTerminate;
 begin
   fOnDisplayStatus(4, row, 0);
-  if assigned(PostAction) then
-     PostAction(nil);
+  if assigned(postAction) then
+    postAction(nil);
 
   inherited;
 end;
@@ -488,7 +504,7 @@ begin
   lResults := tStringList.create;
   fOnDisplayStatus(4, row, 2);
   sKey := fOnGetKey(row);
-  skey := skey + ' cover';
+  sKey := sKey + ' disk cover';
 
   GS := tGoogleSearch.create(sKey, startPage);
   // GS := tGoogleSearchFree.create;
@@ -539,7 +555,8 @@ begin
   IdHTTP1 := TIdHTTP.create;
   IdHTTP1.ReadTimeout := 5000;
   IdHTTP1.IOHandler := IdSSL;
-  IdHTTP1.Request.Accept := 'text/html, image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, image/png, */*';
+  IdHTTP1.Request.Accept :=
+    'text/html, image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, image/png, */*';
   IdHTTP1.Request.AcceptEncoding := 'gzip, deflate';
   IdHTTP1.Request.UserAgent := 'Mozilla/5.0';
   IdHTTP1.onWork := onWork;
@@ -586,7 +603,7 @@ begin
   end;
 end;
 
-procedure tDownloadThread.onWork(ASender: TObject; AWorkMode: TWorkMode;
+procedure tDownloadThread.onWork(ASender: tobject; AWorkMode: TWorkMode;
   AWorkCount: Int64);
 
 begin
@@ -595,7 +612,7 @@ begin
 
 end;
 
-procedure tDownloadThread.onWorkBegin(ASender: TObject; AWorkMode: TWorkMode;
+procedure tDownloadThread.onWorkBegin(ASender: tobject; AWorkMode: TWorkMode;
   AWorkCountMax: Int64);
 begin
   fMax := AWorkCountMax;
@@ -603,7 +620,7 @@ begin
   fUpdateProgress(fCol, fRow, fPos);
 end;
 
-procedure tDownloadThread.onWorkEnd(ASender: TObject; AWorkMode: TWorkMode);
+procedure tDownloadThread.onWorkEnd(ASender: tobject; AWorkMode: TWorkMode);
 begin
   fUpdateProgress(fCol, fRow, 0);
 end;
