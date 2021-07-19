@@ -41,7 +41,6 @@ implementation
 { googleSearch }
 
 constructor tGoogleSearch.create(key: string; start : integer);
-
 begin
   inherited create;
   parameters := '?q=' + TNetEncoding.URL.Encode(key);
@@ -50,9 +49,8 @@ begin
   parameters := parameters + '&searchType=image';
   parameters := parameters + '&key=' + CSE_ID;
   parameters := parameters + '&filetype=jpeg';
-//  parameters := parameters + '&lr=lang_fr';
-  //parameters := parameters + '&imgSize=xxlarge';
-  parameters := parameters + format('&start=%d',[start]);
+  parameters := parameters + '&imgSize=xxlarge';
+  parameters := parameters + format('&start=%d',[Start]);
   path := 'https://www.googleapis.com/customsearch/v1' + parameters;
 end;
 

@@ -136,7 +136,6 @@ object Form2: TForm2
     ShowDesignHelper = False
     SortSettings.DefaultFormat = ssAutomatic
     Version = '8.4.7.0'
-    ExplicitTop = 56
     ColWidths = (
       233
       234
@@ -192,14 +191,15 @@ object Form2: TForm2
       Left = 1
       Top = 1
       Width = 465
-      Height = 447
+      Height = 763
       Align = alClient
       TabOrder = 0
+      ExplicitHeight = 447
       object sgImg: TAdvStringGrid
         Left = 1
         Top = 1
         Width = 463
-        Height = 445
+        Height = 671
         Cursor = crDefault
         Align = alClient
         Color = clWhite
@@ -307,18 +307,38 @@ object Form2: TForm2
         ShowDesignHelper = False
         SortSettings.DefaultFormat = ssAutomatic
         Version = '8.4.7.0'
+        ExplicitHeight = 445
       end
-    end
-    object sMemo1: TsMemo
-      Left = 1
-      Top = 448
-      Width = 465
-      Height = 316
-      Align = alBottom
-      Lines.Strings = (
-        'sMemo1')
-      TabOrder = 1
-      Text = 'sMemo1'
+      object pnOptionsImages: TsPanel
+        Left = 1
+        Top = 672
+        Width = 463
+        Height = 90
+        Align = alBottom
+        TabOrder = 1
+        object sButton2: TsButton
+          Left = 1
+          Top = 1
+          Width = 112
+          Height = 88
+          Align = alLeft
+          Caption = 'Previous'
+          TabOrder = 0
+          ExplicitLeft = 4
+          ExplicitTop = 6
+        end
+        object sButton3: TsButton
+          Left = 350
+          Top = 1
+          Width = 112
+          Height = 88
+          Align = alRight
+          Caption = 'Next'
+          TabOrder = 1
+          OnClick = sButton3Click
+          ExplicitTop = 6
+        end
+      end
     end
   end
   object sSkinManager1: TsSkinManager

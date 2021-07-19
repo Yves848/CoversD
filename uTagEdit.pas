@@ -27,6 +27,7 @@ type
   tDisplayStatus = procedure(iCol, iRow: integer; sStatus: integer) of object;
   tGetKey = function(iRow: integer): String of object;
   tSetResults = procedure(iRow: integer; sResults: string) of object;
+  tPostAction = procedure(sender : tobject) of object;
 
   (*
     *
@@ -42,10 +43,13 @@ type
     fOnDisplayStatus: tDisplayStatus;
     fOnGetKey: tGetKey;
     fOnSetResults: tSetResults;
+    fPostAction : tPostAction;
+    fStart : Integer;
     row: integer;
     // GS: tGoogleSearchFree;
     GS: tGoogleSearch;
     results: string;
+
   protected
     procedure Execute; override;
     procedure DoTerminate; override;
@@ -55,6 +59,8 @@ type
       write fOnDisplayStatus;
     property onGeyKey: tGetKey read fOnGetKey write fOnGetKey;
     property onSetResults: tSetResults read fOnSetResults write fOnSetResults;
+    property postAction : tPostAction read fPostAction write fPostAction;
+    property startPage : integer read fStart write fStart;
   end;
 
   tDownloadThread = class(tThread)
@@ -88,6 +94,7 @@ type
   public
     sKey: String;
     sResults: tStrings;
+    page : integer;
     constructor create(pkey: String);
     destructor destroy;
   end;
@@ -97,7 +104,6 @@ type
     sg1: TAdvStringGrid;
     btSearch: TsButton;
     btnLoadResults: TsButton;
-    sMemo1: TsMemo;
     sPanel1: TsPanel;
     sSkinManager1: TsSkinManager;
     sSkinProvider1: TsSkinProvider;
@@ -107,11 +113,15 @@ type
     sPanel2: TsPanel;
     sSplitter1: TsSplitter;
     sgImg: TAdvStringGrid;
+    pnOptionsImages: TsPanel;
+    sButton2: TsButton;
+    sButton3: TsButton;
     procedure sButton1Click(Sender: TObject);
     procedure btSearchClick(Sender: TObject);
     procedure btnLoadResultsClick(Sender: TObject);
     procedure sSplitter1Resize(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure sButton3Click(Sender: TObject);
   private
     { Déclarations privées }
     procedure addToGrid(pkey: String; pObj: tListObj);
@@ -119,6 +129,7 @@ type
     procedure AddFolderToGrid(sFolder: String);
     function AddFileToGrid(sFile: String): integer;
     procedure clearImgGrid;
+    procedure launchSearch(nRow : Integer; nStartPage : Integer);
   public
     { Déclarations publiques }
     procedure endOfSearch(iRow: integer);
@@ -143,7 +154,7 @@ begin
   inherited create;
   sKey := pkey;
   sResults := tStringList.create;
-
+  page := 1;
 end;
 
 destructor tListObj.destroy;
@@ -242,6 +253,19 @@ begin
     result := sg1.cells[0, iRow];
 end;
 
+procedure TForm2.launchSearch(nRow, nStartPage: Integer);
+var
+   pSearchThread : tSearchThread;
+begin
+    pSearchThread := tSearchThread.create(nRow);
+    pSearchThread.fOnDisplayStatus := displayStatus;
+    pSearchThread.fOnGetKey := getKey;
+    pSearchThread.fOnSetResults := SetResults;
+    pSearchThread.postAction := btnLoadResultsClick;
+    pSearchThread.startPage := nStartPage;
+    pSearchThread.Start;
+end;
+
 procedure TForm2.sButton1Click(Sender: TObject);
 var
   pListObj: tListObj;
@@ -251,6 +275,19 @@ begin
     clearGrid;
     AddFolderToGrid(sPathDialog1.Path);
   end;
+end;
+
+procedure TForm2.sButton3Click(Sender: TObject);
+var
+   iRow : Integer;
+   nStart : Integer;
+begin
+    // load 10 next images
+    iRow := sg1.row;
+    nStart := tListObj(sg1.objects[0,iRow]).page;
+    inc(nStart,10);
+    tListObj(sg1.objects[0,iRow]).page := nStart;
+    launchSearch(iRow,nStart);
 end;
 
 procedure TForm2.AddFolderToGrid(sFolder: String);
@@ -324,6 +361,7 @@ begin
     pSearchThread.fOnDisplayStatus := displayStatus;
     pSearchThread.fOnGetKey := getKey;
     pSearchThread.fOnSetResults := SetResults;
+    pSearchThread.startPage := 1;
     pSearchThread.Start;
     inc(r);
   end;
@@ -360,9 +398,6 @@ begin
   iRow := sg1.row;
   if sg1.Objects[1, iRow] <> Nil then
     GlobalMediaFile := tMediaFile(sg1.Objects[1, iRow]);
-  sMemo1.Clear;
-  sMemo1.Lines.Assign(tListObj(sg1.Objects[0, sg1.row]).sResults);
-
   (*
     * Create & launch download threads.
   *)
@@ -433,6 +468,9 @@ end;
 procedure tSearchThread.DoTerminate;
 begin
   fOnDisplayStatus(4, row, 0);
+  if assigned(PostAction) then
+     PostAction(nil);
+
   inherited;
 end;
 
@@ -444,30 +482,28 @@ var
   jsArray: IsuperArray;
   i: integer;
   lResults: tStrings;
-  nStart: integer;
+
 begin
   inherited;
   lResults := tStringList.create;
   fOnDisplayStatus(4, row, 2);
   sKey := fOnGetKey(row);
-  nStart := 1;
-  while lResults.count < 10 do
-  begin
-    GS := tGoogleSearch.create(sKey, nStart);
-    // GS := tGoogleSearchFree.create;
-    fOnDisplayStatus(4, row, 1);
-    // xResult := GS.getImages(sKey);
-    xResult := GS.getImages;
-    jsArray := xResult.A[GS_ITEMS];
+  skey := skey + ' cover';
 
-    while (i <= jsArray.Length - 1) do
-    begin
-      lResults.Add(jsArray.O[i].S[GS_LINK]);
-      inc(i);
-    end;
-    GS.Free;
-    inc(nStart,10);
+  GS := tGoogleSearch.create(sKey, startPage);
+  // GS := tGoogleSearchFree.create;
+  fOnDisplayStatus(4, row, 1);
+  // xResult := GS.getImages(sKey);
+  xResult := GS.getImages;
+  jsArray := xResult.A[GS_ITEMS];
+
+  while (i <= jsArray.Length - 1) do
+  begin
+    lResults.Add(jsArray.O[i].S[GS_LINK]);
+    inc(i);
   end;
+  GS.Free;
+  sleep(1000);
   fOnSetResults(row, lResults.Text);
   terminate;
 end;
@@ -503,7 +539,9 @@ begin
   IdHTTP1 := TIdHTTP.create;
   IdHTTP1.ReadTimeout := 5000;
   IdHTTP1.IOHandler := IdSSL;
-  IdHTTP1.request.AcceptEncoding := 'gzip,deflate';
+  IdHTTP1.Request.Accept := 'text/html, image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, image/png, */*';
+  IdHTTP1.Request.AcceptEncoding := 'gzip, deflate';
+  IdHTTP1.Request.UserAgent := 'Mozilla/5.0';
   IdHTTP1.onWork := onWork;
   IdHTTP1.onWorkBegin := onWorkBegin;
   IdHTTP1.onWorkEnd := onWorkEnd;
