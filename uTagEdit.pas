@@ -15,6 +15,9 @@ uses
   System.ImageList, Vcl.ImgList, acAlphaImageList, uFrmCoverSearch, sSplitter,
   IdTCPConnection, IdTCPClient, IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding;
 
+const
+  WM_RESIZE_GRID = WM_USER + 1001;
+
 type
 
   (*
@@ -36,6 +39,7 @@ type
   *)
   tUpdateprogress = procedure(iCol, iRow, percent: integer) of object;
   tDisplayPicture = procedure(iCol, iRow: integer; picture: tpicture) of object;
+  tTerminate = procedure of object;
 
   tSearchThread = class(tThread)
   private
@@ -46,6 +50,7 @@ type
     fPostAction: tPostAction;
     fStart: integer;
     row: integer;
+    fRowProgress : integer;
     // GS: tGoogleSearchFree;
     GS: tGoogleSearch;
     results: string;
@@ -72,6 +77,7 @@ type
     fProgressRow: integer;
     fUpdateProgress: tUpdateprogress;
     fDisplayPicture: tDisplayPicture;
+    fTerminate : tTerminate;
     fUrl: String;
 
   protected
@@ -87,6 +93,8 @@ type
       write fUpdateProgress;
     property displayPicture: tDisplayPicture read fDisplayPicture
       write fDisplayPicture;
+    property updateRow : Integer read fProgressRow write fProgressRow;
+    property onTerminate : tTerminate read fTerminate write fTerminate;
     procedure downloadImage(sUrl: string);
   end;
 
@@ -116,6 +124,8 @@ type
     pnOptionsImages: TsPanel;
     sButton2: TsButton;
     sButton3: TsButton;
+    sButton4: TsButton;
+    sgProgress: TAdvStringGrid;
     procedure sButton1Click(sender: tobject);
     procedure btSearchClick(sender: tobject);
     procedure btnLoadResultsClick(sender: tobject);
@@ -123,6 +133,8 @@ type
     procedure FormShow(sender: tobject);
     procedure sButton3Click(sender: tobject);
     procedure sButton2Click(sender: tobject);
+    procedure sButton4Click(Sender: TObject);
+    procedure FormResize(Sender: TObject);
   private
     { Déclarations privées }
     procedure addToGrid(pkey: String; pObj: tListObj);
@@ -140,11 +152,14 @@ type
     procedure SetResults(iRow: integer; results: string);
     Procedure UpdateProgress(iCol, iRow, percent: integer);
     procedure displayPicture(iCol, iRow: integer; aPicture: tpicture);
+    procedure terminateDownloadThread;
+    procedure resizeGrid(var m : tMessage); Message WM_RESIZE_GRID;
   end;
 
 var
   Form2: TForm2;
   frmCoverSearch: TfrmCoverSearch;
+  nbThreads : Integer;
 
 implementation
 
@@ -221,6 +236,17 @@ begin
   end;
   sgImg.RowCount := 1;
 
+  r := 0;
+  while r <= sgProgress.rowCount -1 do
+  begin
+     if sgProgress.HasProgress(1, r) then
+        sgProgress.RemoveProgress(1, r);
+     sgProgress.Cells[0,r] := '';
+    inc(r)
+  end;
+
+  sgProgress.rowCount := 1;
+
 end;
 
 procedure TForm2.displayPicture(iCol, iRow: integer; aPicture: tpicture);
@@ -243,9 +269,14 @@ begin
   sg1.cells[4, iRow] := 'terminé';
 end;
 
+procedure TForm2.FormResize(Sender: TObject);
+begin
+  postmessage(self.handle,WM_RESIZE_GRID,0,0);
+end;
+
 procedure TForm2.FormShow(sender: tobject);
 begin
-  sPanel2.Width := self.ClientWidth div 2;
+  postmessage(self.handle,WM_RESIZE_GRID,0,0);
 end;
 
 function TForm2.getKey(iRow: integer): String;
@@ -268,6 +299,11 @@ begin
     pSearchThread.postAction := btnLoadResultsClick;
   pSearchThread.startPage := nStartPage;
   pSearchThread.Start;
+end;
+
+procedure TForm2.resizeGrid(var m: tMessage);
+begin
+  sg1.Width := clientWidth div 2;
 end;
 
 procedure TForm2.sButton1Click(sender: tobject);
@@ -309,6 +345,12 @@ begin
   inc(nStart, 10);
   tListObj(sg1.Objects[0, iRow]).page := nStart;
   launchSearch(iRow, nStart, true);
+end;
+
+procedure TForm2.sButton4Click(Sender: TObject);
+begin
+  // test resize
+  sgProgress.visible := not sgProgress.visible;
 end;
 
 procedure TForm2.AddFolderToGrid(sFolder: String);
@@ -391,7 +433,20 @@ var
   pDownloadThread: tDownloadThread;
   i: integer;
   r, c: integer;
+  rp : Integer;
   sUrl: String;
+
+  procedure getRowProgress;
+  var
+    cellNotEmpty: boolean;
+  begin
+     cellNotEmpty := (sgProgress.cells[0,rp] <> '');
+     if cellNotEmpty then
+     begin
+        inc(rp);
+        sgProgress.RowCount := sgProgress.rowCount + 1;
+     end;
+  end;
 
   procedure getRowCol;
   var
@@ -415,25 +470,34 @@ begin
   if sg1.Objects[1, iRow] <> Nil then
     GlobalMediaFile := tMediaFile(sg1.Objects[1, iRow]);
   (*
-    * Create & launch download threads.
-  *)
+   * Create & launch download threads.
+   *)
 
   // Clear grid;
   clearImgGrid;
+  sgProgress.Visible := true;
   i := 0; // init url counter
   c := 0; // init column
   r := 0; // init row;
+  rp := 0; // init row Progress;
+  nbThreads := 0;
   while (i <= tListObj(sg1.Objects[0, sg1.row]).sResults.count - 1) and
     (i <= 9) do
   begin
     // Create new cell(img)
+    inc(nbThreads);
     getRowCol;
+    getRowProgress;
     sUrl := tListObj(sg1.Objects[0, sg1.row]).sResults[i];
     sgImg.Ints[c, r] := 0;
     sgImg.AddProgress(c, r, clNavy, clWhite);
+    sgProgress.AddProgress(1,rp,clNavy, clwhite);
+    sgProgress.Cells[0,rp] := 'Image '+inttostr(i+1);
     pDownloadThread := tDownloadThread.create(c, r, sUrl);
     pDownloadThread.fUpdateProgress := UpdateProgress;
     pDownloadThread.displayPicture := displayPicture;
+    pDownloadThread.updateRow := rp;
+    pDownloadThread.onTerminate := terminateDownloadThread;
     pDownloadThread.Start;
     inc(i);
   end;
@@ -465,9 +529,16 @@ begin
   end;
 end;
 
+procedure TForm2.terminateDownloadThread;
+begin
+  dec(nbThreads);
+  sgProgress.Visible := (nbThreads > 0);
+end;
+
 procedure TForm2.UpdateProgress(iCol, iRow, percent: integer);
 begin
-  sgImg.Ints[iCol, iRow] := percent;
+  //sgImg.Ints[iCol, iRow] := percent;
+  sgProgress.ints[iCol,iRow] := percent;
 end;
 
 { tSearchThread }
@@ -539,7 +610,8 @@ end;
 procedure tDownloadThread.DoTerminate;
 begin
   inherited;
-
+  if assigned(fTerminate) then
+    fTerminate;
 end;
 
 procedure tDownloadThread.downloadImage(sUrl: string);
@@ -596,6 +668,7 @@ end;
 procedure tDownloadThread.Execute;
 begin
   inherited;
+  fUpdateProgress(1,updateRow,0);
   downloadImage(fUrl);
   while not terminated do
   begin
@@ -608,8 +681,8 @@ procedure tDownloadThread.onWork(ASender: tobject; AWorkMode: TWorkMode;
 
 begin
   fPos := round(AWorkCount / fMax * 100);
-  fUpdateProgress(fCol, fRow, fPos);
-
+  //fUpdateProgress(fCol, fRow, fPos);
+  fUpdateProgress(1,updateRow,fPos);
 end;
 
 procedure tDownloadThread.onWorkBegin(ASender: tobject; AWorkMode: TWorkMode;
@@ -617,12 +690,12 @@ procedure tDownloadThread.onWorkBegin(ASender: tobject; AWorkMode: TWorkMode;
 begin
   fMax := AWorkCountMax;
   fPos := 0;
-  fUpdateProgress(fCol, fRow, fPos);
+  fUpdateProgress(1, fRow, fPos);
 end;
 
 procedure tDownloadThread.onWorkEnd(ASender: tobject; AWorkMode: TWorkMode);
 begin
-  fUpdateProgress(fCol, fRow, 0);
+  //fUpdateProgress(1, fRow, 0);
 end;
 
 end.

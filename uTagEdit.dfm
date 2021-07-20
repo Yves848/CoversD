@@ -13,6 +13,7 @@ object Form2: TForm2
   OldCreateOrder = False
   Position = poScreenCenter
   WindowState = wsMaximized
+  OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -83,7 +84,7 @@ object Form2: TForm2
       'Larger than'
       'Smaller than'
       'Clear')
-    FixedColWidth = 233
+    FixedColWidth = 186
     FixedRowHeight = 22
     FixedFont.Charset = DEFAULT_CHARSET
     FixedFont.Color = clBlack
@@ -137,11 +138,11 @@ object Form2: TForm2
     SortSettings.DefaultFormat = ssAutomatic
     Version = '8.4.7.0'
     ColWidths = (
-      233
-      234
-      231
-      198
-      90)
+      186
+      173
+      170
+      193
+      25)
   end
   object sPanel1: TsPanel
     Left = 0
@@ -149,35 +150,51 @@ object Form2: TForm2
     Width = 1266
     Height = 65
     Align = alTop
-    Caption = 'sPanel1'
     TabOrder = 1
     object btSearch: TsButton
-      Left = 136
-      Top = 7
+      Left = 123
+      Top = 1
       Width = 122
-      Height = 42
+      Height = 63
+      Align = alLeft
       Caption = 'Launch Search'
       TabOrder = 0
       OnClick = btSearchClick
+      ExplicitLeft = 129
+      ExplicitTop = -4
     end
     object sButton1: TsButton
-      Left = 8
-      Top = 7
+      Left = 1
+      Top = 1
       Width = 122
-      Height = 42
-      Caption = 'FillList'
+      Height = 63
+      Align = alLeft
+      Caption = 'Load Folder'
       TabOrder = 1
       OnClick = sButton1Click
     end
-  end
-  object btnLoadResults: TsButton
-    Left = 264
-    Top = 8
-    Width = 106
-    Height = 42
-    Caption = 'Load Results'
-    TabOrder = 2
-    OnClick = btnLoadResultsClick
+    object sButton4: TsButton
+      Left = 1151
+      Top = 1
+      Width = 114
+      Height = 63
+      Align = alRight
+      Caption = 'sButton4'
+      TabOrder = 2
+      OnClick = sButton4Click
+    end
+    object btnLoadResults: TsButton
+      Left = 245
+      Top = 1
+      Width = 106
+      Height = 63
+      Align = alLeft
+      Caption = 'Load Results'
+      TabOrder = 3
+      OnClick = btnLoadResultsClick
+      ExplicitLeft = 251
+      ExplicitTop = -4
+    end
   end
   object sPanel2: TsPanel
     Left = 799
@@ -186,7 +203,7 @@ object Form2: TForm2
     Height = 765
     Align = alClient
     Caption = 'sPanel2'
-    TabOrder = 3
+    TabOrder = 2
     object sPnVariable: TsPanel
       Left = 1
       Top = 1
@@ -194,7 +211,6 @@ object Form2: TForm2
       Height = 763
       Align = alClient
       TabOrder = 0
-      ExplicitHeight = 447
       object sgImg: TAdvStringGrid
         Left = 1
         Top = 1
@@ -307,7 +323,6 @@ object Form2: TForm2
         ShowDesignHelper = False
         SortSettings.DefaultFormat = ssAutomatic
         Version = '8.4.7.0'
-        ExplicitHeight = 445
       end
       object pnOptionsImages: TsPanel
         Left = 1
@@ -325,8 +340,6 @@ object Form2: TForm2
           Caption = 'Previous'
           TabOrder = 0
           OnClick = sButton2Click
-          ExplicitLeft = 4
-          ExplicitTop = 6
         end
         object sButton3: TsButton
           Left = 350
@@ -337,8 +350,120 @@ object Form2: TForm2
           Caption = 'Next'
           TabOrder = 1
           OnClick = sButton3Click
-          ExplicitTop = 6
         end
+      end
+      object sgProgress: TAdvStringGrid
+        Left = 1
+        Top = 1
+        Width = 463
+        Height = 671
+        Cursor = crDefault
+        Align = alClient
+        ColCount = 2
+        DrawingStyle = gdsClassic
+        FixedCols = 0
+        RowCount = 1
+        FixedRows = 0
+        ScrollBars = ssBoth
+        TabOrder = 2
+        Visible = False
+        HoverRowCells = [hcNormal, hcSelected]
+        ActiveCellFont.Charset = DEFAULT_CHARSET
+        ActiveCellFont.Color = clWindowText
+        ActiveCellFont.Height = -11
+        ActiveCellFont.Name = 'Tahoma'
+        ActiveCellFont.Style = [fsBold]
+        ControlLook.FixedGradientHoverFrom = clGray
+        ControlLook.FixedGradientHoverTo = clWhite
+        ControlLook.FixedGradientDownFrom = clGray
+        ControlLook.FixedGradientDownTo = clSilver
+        ControlLook.DropDownHeader.Font.Charset = DEFAULT_CHARSET
+        ControlLook.DropDownHeader.Font.Color = clWindowText
+        ControlLook.DropDownHeader.Font.Height = -11
+        ControlLook.DropDownHeader.Font.Name = 'Tahoma'
+        ControlLook.DropDownHeader.Font.Style = []
+        ControlLook.DropDownHeader.Visible = True
+        ControlLook.DropDownHeader.Buttons = <>
+        ControlLook.DropDownFooter.Font.Charset = DEFAULT_CHARSET
+        ControlLook.DropDownFooter.Font.Color = clWindowText
+        ControlLook.DropDownFooter.Font.Height = -11
+        ControlLook.DropDownFooter.Font.Name = 'Tahoma'
+        ControlLook.DropDownFooter.Font.Style = []
+        ControlLook.DropDownFooter.Visible = True
+        ControlLook.DropDownFooter.Buttons = <>
+        Filter = <>
+        FilterDropDown.Font.Charset = DEFAULT_CHARSET
+        FilterDropDown.Font.Color = clWindowText
+        FilterDropDown.Font.Height = -11
+        FilterDropDown.Font.Name = 'Tahoma'
+        FilterDropDown.Font.Style = []
+        FilterDropDown.TextChecked = 'Checked'
+        FilterDropDown.TextUnChecked = 'Unchecked'
+        FilterDropDownClear = '(All)'
+        FilterEdit.TypeNames.Strings = (
+          'Starts with'
+          'Ends with'
+          'Contains'
+          'Not contains'
+          'Equal'
+          'Not equal'
+          'Larger than'
+          'Smaller than'
+          'Clear')
+        FixedColWidth = 94
+        FixedRowHeight = 22
+        FixedFont.Charset = DEFAULT_CHARSET
+        FixedFont.Color = clWindowText
+        FixedFont.Height = -11
+        FixedFont.Name = 'Tahoma'
+        FixedFont.Style = [fsBold]
+        FloatFormat = '%.2f'
+        HoverButtons.Buttons = <>
+        HoverButtons.Position = hbLeftFromColumnLeft
+        HTMLSettings.ImageFolder = 'images'
+        HTMLSettings.ImageBaseName = 'img'
+        PrintSettings.DateFormat = 'dd/mm/yyyy'
+        PrintSettings.Font.Charset = DEFAULT_CHARSET
+        PrintSettings.Font.Color = clWindowText
+        PrintSettings.Font.Height = -11
+        PrintSettings.Font.Name = 'Tahoma'
+        PrintSettings.Font.Style = []
+        PrintSettings.FixedFont.Charset = DEFAULT_CHARSET
+        PrintSettings.FixedFont.Color = clWindowText
+        PrintSettings.FixedFont.Height = -11
+        PrintSettings.FixedFont.Name = 'Tahoma'
+        PrintSettings.FixedFont.Style = []
+        PrintSettings.HeaderFont.Charset = DEFAULT_CHARSET
+        PrintSettings.HeaderFont.Color = clWindowText
+        PrintSettings.HeaderFont.Height = -11
+        PrintSettings.HeaderFont.Name = 'Tahoma'
+        PrintSettings.HeaderFont.Style = []
+        PrintSettings.FooterFont.Charset = DEFAULT_CHARSET
+        PrintSettings.FooterFont.Color = clWindowText
+        PrintSettings.FooterFont.Height = -11
+        PrintSettings.FooterFont.Name = 'Tahoma'
+        PrintSettings.FooterFont.Style = []
+        PrintSettings.PageNumSep = '/'
+        SearchFooter.FindNextCaption = 'Find &next'
+        SearchFooter.FindPrevCaption = 'Find &previous'
+        SearchFooter.Font.Charset = DEFAULT_CHARSET
+        SearchFooter.Font.Color = clWindowText
+        SearchFooter.Font.Height = -11
+        SearchFooter.Font.Name = 'Tahoma'
+        SearchFooter.Font.Style = []
+        SearchFooter.HighLightCaption = 'Highlight'
+        SearchFooter.HintClose = 'Close'
+        SearchFooter.HintFindNext = 'Find next occurrence'
+        SearchFooter.HintFindPrev = 'Find previous occurrence'
+        SearchFooter.HintHighlight = 'Highlight occurrences'
+        SearchFooter.MatchCaseCaption = 'Match case'
+        SearchFooter.ResultFormat = '(%d of %d)'
+        ShowDesignHelper = False
+        SortSettings.DefaultFormat = ssAutomatic
+        Version = '8.4.7.0'
+        ColWidths = (
+          94
+          317)
       end
     end
   end
