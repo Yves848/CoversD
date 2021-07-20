@@ -137,6 +137,8 @@ object Form2: TForm2
     ShowDesignHelper = False
     SortSettings.DefaultFormat = ssAutomatic
     Version = '8.4.7.0'
+    ExplicitLeft = 1
+    ExplicitTop = 70
     ColWidths = (
       186
       173
@@ -172,6 +174,8 @@ object Form2: TForm2
       Caption = 'Load Folder'
       TabOrder = 1
       OnClick = sButton1Click
+      ExplicitLeft = 0
+      ExplicitTop = -4
     end
     object sButton4: TsButton
       Left = 1151
@@ -182,6 +186,8 @@ object Form2: TForm2
       Caption = 'sButton4'
       TabOrder = 2
       OnClick = sButton4Click
+      ExplicitLeft = 1152
+      ExplicitTop = -2
     end
     object btnLoadResults: TsButton
       Left = 245
