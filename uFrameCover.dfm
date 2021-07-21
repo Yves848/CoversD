@@ -38,6 +38,8 @@ object FrameCover: TFrameCover
       Height = 17
       Align = alBottom
       TabOrder = 0
+      ExplicitLeft = 2
+      ExplicitTop = 205
     end
   end
   object sFrameAdapter1: TsFrameAdapter

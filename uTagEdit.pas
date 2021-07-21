@@ -28,6 +28,7 @@ type
   tGetKey = function(iRow: integer): String of object;
   tSetResults = procedure(iRow: integer; sResults: string) of object;
   tPostAction = procedure(sender: tobject) of object;
+  tAddToMemo = procedure(sLine : String) of object;
 
   (*
     *
@@ -45,6 +46,7 @@ type
     fOnGetKey: tGetKey;
     fOnSetResults: tSetResults;
     fPostAction: tPostAction;
+    fAddToMemo: tAddToMemo;
     fStart: integer;
     row: integer;
     fRowProgress: integer;
@@ -110,8 +112,6 @@ type
     btSearch: TsButton;
     btnLoadResults: TsButton;
     sPanel1: TsPanel;
-    sSkinManager1: TsSkinManager;
-    sSkinProvider1: TsSkinProvider;
     sPathDialog1: TsPathDialog;
     sAlphaImageList1: TsAlphaImageList;
     sPnVariable: TsPanel;
@@ -123,6 +123,10 @@ type
     sButton3: TsButton;
     sButton4: TsButton;
     sgProgress: TAdvStringGrid;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
+    sButton5: TsButton;
+    sMemo1: TsMemo;
     procedure sButton1Click(sender: tobject);
     procedure btSearchClick(sender: tobject);
     procedure btnLoadResultsClick(sender: tobject);
@@ -132,6 +136,7 @@ type
     procedure sButton2Click(sender: tobject);
     procedure sButton4Click(sender: tobject);
     procedure FormResize(sender: tobject);
+    procedure sButton5Click(Sender: TObject);
   private
     { Déclarations privées }
     procedure addToGrid(pkey: String; pObj: tListObj);
@@ -163,6 +168,8 @@ implementation
 
 {$R *.dfm}
 { tListObj }
+uses
+  uTestGrid;
 
 constructor tListObj.create(pkey: String);
 begin
@@ -353,6 +360,15 @@ begin
 
 end;
 
+procedure TForm2.sButton5Click(Sender: TObject);
+var
+  pTestGrid : tfTestGrid;
+begin
+   pTestGrid := tfTestGrid.create(self);
+   pTestGrid.ShowModal;
+   pTestGrid.Free;
+end;
+
 procedure TForm2.setGridTitles;
 begin
   sg1.cells[0, 0] := 'File Name';
@@ -424,7 +440,7 @@ var
   r: integer;
   pSearchThread: tSearchThread;
 begin
-
+  smemo1.Clear;
   r := 1;
   while r <= sg1.RowCount - 1 do
   begin

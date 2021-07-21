@@ -3,7 +3,7 @@ object Form2: TForm2
   Top = 0
   Caption = 'Form2'
   ClientHeight = 830
-  ClientWidth = 1266
+  ClientWidth = 1265
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -137,19 +137,27 @@ object Form2: TForm2
     ShowDesignHelper = False
     SortSettings.DefaultFormat = ssAutomatic
     Version = '8.4.7.0'
-    ExplicitLeft = 1
-    ExplicitTop = 70
     ColWidths = (
       186
       173
       170
       193
       25)
+    object sMemo1: TsMemo
+      Left = 73
+      Top = 144
+      Width = 512
+      Height = 527
+      Lines.Strings = (
+        'sMemo1')
+      TabOrder = 4
+      Text = 'sMemo1'
+    end
   end
   object sPanel1: TsPanel
     Left = 0
     Top = 0
-    Width = 1266
+    Width = 1265
     Height = 65
     Align = alTop
     TabOrder = 1
@@ -162,8 +170,6 @@ object Form2: TForm2
       Caption = 'Launch Search'
       TabOrder = 0
       OnClick = btSearchClick
-      ExplicitLeft = 129
-      ExplicitTop = -4
     end
     object sButton1: TsButton
       Left = 1
@@ -174,11 +180,9 @@ object Form2: TForm2
       Caption = 'Load Folder'
       TabOrder = 1
       OnClick = sButton1Click
-      ExplicitLeft = 0
-      ExplicitTop = -4
     end
     object sButton4: TsButton
-      Left = 1151
+      Left = 1150
       Top = 1
       Width = 114
       Height = 63
@@ -186,7 +190,7 @@ object Form2: TForm2
       Caption = 'sButton4'
       TabOrder = 2
       OnClick = sButton4Click
-      ExplicitLeft = 1152
+      ExplicitLeft = 1149
       ExplicitTop = -2
     end
     object btnLoadResults: TsButton
@@ -198,14 +202,23 @@ object Form2: TForm2
       Caption = 'Load Results'
       TabOrder = 3
       OnClick = btnLoadResultsClick
-      ExplicitLeft = 251
-      ExplicitTop = -4
+    end
+    object sButton5: TsButton
+      Left = 1036
+      Top = 1
+      Width = 114
+      Height = 63
+      Align = alRight
+      Caption = 'Test Grid'
+      TabOrder = 4
+      OnClick = sButton5Click
+      ExplicitLeft = 1075
     end
   end
   object sPanel2: TsPanel
     Left = 799
     Top = 65
-    Width = 467
+    Width = 466
     Height = 765
     Align = alClient
     Caption = 'sPanel2'
@@ -213,14 +226,14 @@ object Form2: TForm2
     object sPnVariable: TsPanel
       Left = 1
       Top = 1
-      Width = 465
+      Width = 464
       Height = 763
       Align = alClient
       TabOrder = 0
       object sgImg: TAdvStringGrid
         Left = 1
         Top = 1
-        Width = 463
+        Width = 462
         Height = 671
         Cursor = crDefault
         Align = alClient
@@ -333,7 +346,7 @@ object Form2: TForm2
       object pnOptionsImages: TsPanel
         Left = 1
         Top = 672
-        Width = 463
+        Width = 462
         Height = 90
         Align = alBottom
         TabOrder = 1
@@ -348,7 +361,7 @@ object Form2: TForm2
           OnClick = sButton2Click
         end
         object sButton3: TsButton
-          Left = 350
+          Left = 349
           Top = 1
           Width = 112
           Height = 88
@@ -361,18 +374,22 @@ object Form2: TForm2
       object sgProgress: TAdvStringGrid
         Left = 1
         Top = 1
-        Width = 463
+        Width = 462
         Height = 671
         Cursor = crDefault
         Align = alClient
+        Color = clWhite
         ColCount = 2
         DrawingStyle = gdsClassic
         FixedCols = 0
         RowCount = 1
         FixedRows = 0
+        Options = [goVertLine, goHorzLine, goRangeSelect, goFixedRowDefAlign]
         ScrollBars = ssBoth
         TabOrder = 2
         Visible = False
+        GridLineColor = 15987699
+        GridFixedLineColor = 15987699
         HoverRowCells = [hcNormal, hcSelected]
         ActiveCellFont.Charset = DEFAULT_CHARSET
         ActiveCellFont.Color = clWindowText
@@ -419,7 +436,7 @@ object Form2: TForm2
         FixedColWidth = 94
         FixedRowHeight = 22
         FixedFont.Charset = DEFAULT_CHARSET
-        FixedFont.Color = clWindowText
+        FixedFont.Color = clBlack
         FixedFont.Height = -11
         FixedFont.Name = 'Tahoma'
         FixedFont.Style = [fsBold]
@@ -450,6 +467,7 @@ object Form2: TForm2
         PrintSettings.FooterFont.Name = 'Tahoma'
         PrintSettings.FooterFont.Style = []
         PrintSettings.PageNumSep = '/'
+        SearchFooter.ColorTo = clWhite
         SearchFooter.FindNextCaption = 'Find &next'
         SearchFooter.FindPrevCaption = 'Find &previous'
         SearchFooter.Font.Charset = DEFAULT_CHARSET
@@ -472,49 +490,6 @@ object Form2: TForm2
           317)
       end
     end
-  end
-  object sSkinManager1: TsSkinManager
-    ButtonsOptions.OldGlyphsMode = False
-    InternalSkins = <>
-    SkinDirectory = 'C:\Users\yvesg\git\Components\acnt_regdx10sydney\Skins'
-    SkinName = 'Black Box'
-    SkinInfo = '15'
-    ThirdParty.ThirdEdits = ' '
-    ThirdParty.ThirdButtons = 'TButton'
-    ThirdParty.ThirdBitBtns = ' '
-    ThirdParty.ThirdCheckBoxes = ' '
-    ThirdParty.ThirdGroupBoxes = ' '
-    ThirdParty.ThirdListViews = ' '
-    ThirdParty.ThirdPanels = ' '
-    ThirdParty.ThirdGrids = ' '
-    ThirdParty.ThirdTreeViews = ' '
-    ThirdParty.ThirdComboBoxes = ' '
-    ThirdParty.ThirdWWEdits = ' '
-    ThirdParty.ThirdVirtualTrees = ' '
-    ThirdParty.ThirdGridEh = ' '
-    ThirdParty.ThirdPageControl = ' '
-    ThirdParty.ThirdTabControl = ' '
-    ThirdParty.ThirdToolBar = ' '
-    ThirdParty.ThirdStatusBar = ' '
-    ThirdParty.ThirdSpeedButton = ' '
-    ThirdParty.ThirdScrollControl = ' '
-    ThirdParty.ThirdUpDown = ' '
-    ThirdParty.ThirdScrollBar = ' '
-    ThirdParty.ThirdStaticText = ' '
-    ThirdParty.ThirdNativePaint = ' '
-    Left = 1184
-    Top = 512
-  end
-  object sSkinProvider1: TsSkinProvider
-    AddedTitle.Font.Charset = DEFAULT_CHARSET
-    AddedTitle.Font.Color = clNone
-    AddedTitle.Font.Height = -11
-    AddedTitle.Font.Name = 'Tahoma'
-    AddedTitle.Font.Style = []
-    SkinData.SkinSection = 'FORM'
-    TitleButtons = <>
-    Left = 1192
-    Top = 576
   end
   object sPathDialog1: TsPathDialog
     Root = 'rfDesktop'
@@ -630,5 +605,48 @@ object Form2: TForm2
     Left = 736
     Top = 193
     Bitmap = {}
+  end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'Black Box'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 993
+    Top = 331
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 1001
+    Top = 408
   end
 end

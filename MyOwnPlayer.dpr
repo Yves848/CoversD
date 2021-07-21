@@ -22,7 +22,9 @@ uses
   uFrmTagEdit in 'uFrmTagEdit.pas' {FrmTagEdit: TFrame},
   uFrmPlayList in 'uFrmPlayList.pas' {frmPlayList: TFrame},
   uFrmCoverSearch in 'uFrmCoverSearch.pas' {frmCoverSearch: TFrame},
-  uTagEdit in 'uTagEdit.pas' {Form2};
+  uTagEdit in 'uTagEdit.pas' {Form2},
+  uTestGrid in 'uTestGrid.pas' {fTestGrid},
+  uGridFrame in 'uGridFrame.pas' {fGridFrame: TFrame};
 
 {$R *.res}
 
