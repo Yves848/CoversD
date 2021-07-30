@@ -10,7 +10,8 @@ uses
   AdvGrid, sMemo, IdComponent, JPEG, PNGImage, GIFImg, Vcl.ExtCtrls, sPanel,
   sSkinProvider, sSkinManager, acPathDialog, System.ImageList, Vcl.ImgList,
   acAlphaImageList, uFrmCoverSearch, sSplitter, IdTCPConnection, IdTCPClient,
-  IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding;
+  IdHTTP, IdSSL, IdSSLOpenSSL, IdURI, NetEncoding, sCheckBox, acSlider,
+  CurvyControls;
 
 const
   WM_RESIZE_GRID = WM_USER + 1001;
@@ -114,9 +115,6 @@ type
     sPanel1: TsPanel;
     sPathDialog1: TsPathDialog;
     sAlphaImageList1: TsAlphaImageList;
-    sPnVariable: TsPanel;
-    sPanel2: TsPanel;
-    sSplitter1: TsSplitter;
     sgImg: TAdvStringGrid;
     pnOptionsImages: TsPanel;
     sButton2: TsButton;
@@ -126,7 +124,9 @@ type
     sSkinManager1: TsSkinManager;
     sSkinProvider1: TsSkinProvider;
     sButton5: TsButton;
-    sMemo1: TsMemo;
+    sRollOutPanel1: TsRollOutPanel;
+    sCheckBox1: TsCheckBox;
+    pnCovers: TsPanel;
     procedure sButton1Click(sender: tobject);
     procedure btSearchClick(sender: tobject);
     procedure btnLoadResultsClick(sender: tobject);
@@ -137,6 +137,10 @@ type
     procedure sButton4Click(sender: tobject);
     procedure FormResize(sender: tobject);
     procedure sButton5Click(Sender: TObject);
+    procedure sg1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure sg1CanEditCell(Sender: TObject; ARow, ACol: Integer;
+      var CanEdit: Boolean);
+    procedure sRollOutPanel2AfterExpand(Sender: TObject);
   private
     { Déclarations privées }
     procedure addToGrid(pkey: String; pObj: tListObj);
@@ -157,6 +161,7 @@ type
     procedure displayPicture(iCol, iRow: integer; aPicture: tpicture);
     procedure terminateDownloadThread;
     procedure resizeGrid(var m: tMessage); Message WM_RESIZE_GRID;
+    procedure removeKeyFromStack;
   end;
 
 var
@@ -308,7 +313,9 @@ end;
 
 procedure TForm2.resizeGrid(var m: tMessage);
 begin
-  sg1.Width := clientWidth div 2;
+  //sg1.Width := clientWidth div 2;
+  pnCovers.Width := clientWidth div 2;
+  sSplitter1Resize(Nil);
 end;
 
 procedure TForm2.sButton1Click(sender: tobject);
@@ -440,7 +447,7 @@ var
   r: integer;
   pSearchThread: tSearchThread;
 begin
-  smemo1.Clear;
+  //smemo1.Clear;
   r := 1;
   while r <= sg1.RowCount - 1 do
   begin
@@ -536,13 +543,59 @@ begin
   pListObj.sResults.Text := results;
 end;
 
+procedure TForm2.sg1CanEditCell(Sender: TObject; ARow, ACol: Integer;
+  var CanEdit: Boolean);
+begin
+  CanEdit := aCol > 0;
+end;
+
+procedure TForm2.sg1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+
+begin
+  if key = VK_RETURN then
+  begin
+    if not (goEditing in sg1.Options) then
+    begin
+       removeKeyFromStack;
+       sg1.Options := sg1.Options - [goRowSelect];
+       sg1.Options := sg1.Options + [goEditing];
+       sg1.Col := 1;
+       sg1.EditMode := true;
+       sg1.EditorMode := true;
+    end;
+  end;
+  if key = VK_ESCAPE then
+  begin
+    if(goEditing in sg1.Options) then
+    begin
+       removeKeyFromStack;
+       sg1.EditMode := false;
+       sg1.EditorMode := false;
+       sg1.Options := sg1.Options + [goRowSelect];
+       sg1.Options := sg1.Options - [goEditing];
+    end;
+  end;
+end;
+
+procedure TForm2.sRollOutPanel2AfterExpand(Sender: TObject);
+begin
+  sSplitter1Resize(Sender);
+end;
+
+procedure TForm2.removeKeyFromStack;
+var
+  Mgs: TMsg;
+begin
+  PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
+end;
+
 procedure TForm2.sSplitter1Resize(sender: tobject);
 var
   c, ColWidth: integer;
   cliWidth: integer;
 begin
   // resize de cells in grid
-  cliWidth := clientWidth - sg1.Width - sSplitter1.Width;
+  cliWidth := clientWidth - sg1.Width;
   ColWidth := (cliWidth - 36) div 3;
   c := 0;
   sgImg.DefaultRowHeight := (sgImg.Height - 36) div 3;

@@ -112,7 +112,7 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <DCC_UnitSearchPath>C:\Users\yvesg\git\BASS\Delphi;C:\Users\yvesg\git\Components\x-superobject-master;C:\Users\yvesg\git\Components\acnt_regdx10sydney_x64\DX10Sydney_x64;C:\Users\yvesg\git\Components\TMS Component Pack v9.2.4.0 Full Source;C:\Users\yvesg\git\Components\KryptoLabel;C:\Users\yvesg\git\OnGuard-1.4-Sydney\source;C:\Users\yvesg\git\SynEdit-1.5-Sydney\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>C:\git\BASS\Delphi;C:\git\Components\x-superobject-master;C:\git\Components\acnt_regdx10sydney_x64\DX10Sydney_x64;C:\git\Components\TMS Component Pack v9.2.4.0 Full Source;C:\git\Components\OnGuard-1.4-Sydney\source;C:\git\Components\SynEdit-1.5-Sydney\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -272,8 +272,8 @@
                     <Source Name="MainSource">MyOwnPlayer.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Composants Microsoft Office 2000 Sample Automation Server Wrapper</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Composants Microsoft Office XP Sample Automation Server Wrapper</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Platforms>
